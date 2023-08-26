@@ -1,0 +1,16 @@
+.header {
+  width: 1920px;
+  height: 88px;
+
+  background-color: #1c1c21;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  width: 1240px;
+  height: 88px;
+
+  margin: 0 auto;
+}
