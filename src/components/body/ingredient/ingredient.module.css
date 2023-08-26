@@ -1,6 +1,7 @@
 .card {
   width: 272px;
   height: 208px;
+  position: absolute;
 }
 
 .image {
@@ -22,4 +23,10 @@
   width: 272px;
   height: 48px;
   text-align: center;
+}
+
+.counter {
+  position: absolue;
+  top: 0;
+  right: 0;
 }
