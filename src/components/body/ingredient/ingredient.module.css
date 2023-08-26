@@ -1,22 +1,25 @@
 .card {
   width: 272px;
   height: 208px;
-  background-color: aqua;
 }
 
 .image {
   width: 240px;
   height: 120px;
-  background-color: brown;
+  margin: 0 auto;
 }
 
 .costRow {
   width: 62px;
   height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 6px auto 6px auto;
 }
 
 .description {
   width: 272px;
   height: 48px;
-  background-color: chartreuse;
+  text-align: center;
 }

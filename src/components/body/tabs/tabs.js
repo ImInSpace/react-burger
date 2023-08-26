@@ -6,7 +6,7 @@ function Tabs(props) {
   const { ingredients } = props;
   return (
     <div style={{ display: "flex" }}>
-      {ingredients.map((ingredient) => {
+      {ingredients.map((ingredient, index) => {
         return (
           <>
             <Tab
