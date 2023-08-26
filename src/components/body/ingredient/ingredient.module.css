@@ -1,0 +1,22 @@
+.card {
+  width: 272px;
+  height: 208px;
+  background-color: aqua;
+}
+
+.image {
+  width: 240px;
+  height: 120px;
+  background-color: brown;
+}
+
+.costRow {
+  width: 62px;
+  height: 24px;
+}
+
+.description {
+  width: 272px;
+  height: 48px;
+  background-color: chartreuse;
+}
