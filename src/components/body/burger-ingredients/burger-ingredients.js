@@ -44,6 +44,7 @@ function GroupedIngredients(props) {
               price={ingredient.price}
               image={ingredient.image}
               name={ingredient.name}
+              count={1}
             />
           );
         })}
