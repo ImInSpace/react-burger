@@ -4,19 +4,14 @@ import styles from "./burger-ingredients.module.css";
 import { ApiData } from "../../../utils/data";
 
 function BurgerIngredients() {
-  const titles = ["Булки", "Соусы", "Начинки"];
-
   const buns = ApiData.filter((element) => element.type === "bun");
   const sauces = ApiData.filter((element) => element.type === "sauce");
   const mains = ApiData.filter((element) => element.type === "main");
 
   return (
     <div>
-      <a href="#mains-anchor">Click me!</a>
-      <a href="#sauces-anchor">Click me!</a>
-      <a href="#buns-anchor">Click me!</a>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
-      <Tabs ingredients={titles} />
+      <Tabs />
 
       <div className={styles.scrollContainer + " custom-scroll mb-10"}>
         <p id="buns-anchor" className="text text_type_main-medium mt-10">

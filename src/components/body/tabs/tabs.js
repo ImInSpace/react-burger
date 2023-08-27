@@ -4,24 +4,23 @@ import styles from "./tabs.module.css";
 
 function Tabs(props) {
   const [current, setCurrent] = useState("Булки");
-  const { ingredients } = props;
   return (
     <div style={{ display: "flex" }}>
-      {ingredients.map((ingredient, index) => {
-        return (
-          <>
-            <Tab
-              value={ingredient}
-              active={current === ingredient}
-              onClick={setCurrent}
-            >
-              <a className={styles.link} href="#mains-anchor">
-                {ingredient}
-              </a>
-            </Tab>
-          </>
-        );
-      })}
+      <Tab value="Булки" active={current === "Булки"} onClick={setCurrent}>
+        <a className={styles.link} href="#buns-anchor">
+          Булки
+        </a>
+      </Tab>
+      <Tab value="Соусы" active={current === "Соусы"} onClick={setCurrent}>
+        <a className={styles.link} href="#sauces-anchor">
+          Соусы
+        </a>
+      </Tab>
+      <Tab value="Начинки" active={current === "Начинки"} onClick={setCurrent}>
+        <a className={styles.link} href="#mains-anchor">
+          Начинки
+        </a>
+      </Tab>
     </div>
   );
 }
