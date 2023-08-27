@@ -20,4 +20,5 @@ export { MenuItem };
 
 MenuItem.propTypes = {
   text: PropTypes.string,
+  icon: PropTypes.element.isRequired,
 };
