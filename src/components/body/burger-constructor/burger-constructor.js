@@ -19,7 +19,7 @@ function ContrustorSection(props) {
             <ConstructorRow showDragIcon={false}>
               <ConstructorElement
                 type="top"
-                text={data.name}
+                text={data.name + " (верх)"}
                 price={data.price}
                 thumbnail={data.image}
               />
@@ -30,7 +30,7 @@ function ContrustorSection(props) {
             <ConstructorRow showDragIcon={false}>
               <ConstructorElement
                 type="bottom"
-                text={data.name}
+                text={data.name + " (низ)"}
                 price={data.price}
                 thumbnail={data.image}
               />
