@@ -5,7 +5,7 @@ import { Price } from "../price/price";
 function CreateOrder(props) {
   return (
     <div className={styles.container + " mt-10 mr-4"}>
-      <div>
+      <div className="mr-5">
         <Price price={710} textSize="medium" />
       </div>
       <Button htmlType="button" type="primary" size="large">

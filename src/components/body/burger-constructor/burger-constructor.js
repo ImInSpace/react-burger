@@ -11,7 +11,7 @@ function BurgerConstructor() {
 
 function ContrustorSection(props) {
   return (
-    <div className="mt-25">
+    <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
       {ApiData.map((data, index, arr) => {
         console.log();
         if (index === 0) {
