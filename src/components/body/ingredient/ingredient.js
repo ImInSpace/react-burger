@@ -3,7 +3,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import PropTypes from "prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Ingredient({ image, cost, description, count }) {
+function Ingredient({ image, price, name, count }) {
   return (
     <div className={styles.card}>
       {count && (
@@ -12,14 +12,14 @@ function Ingredient({ image, cost, description, count }) {
         </div>
       )}
       <div className={styles.image}>
-        <img src={image} alt="preview" />
+        <img src={image} alt={"Изображение для " + name} />
       </div>
       <div className={styles.costRow}>
-        <span className="text text_type_digits-default">{cost}</span>
+        <span className="text text_type_digits-default">{price}</span>
         <CurrencyIcon />
       </div>
       <div className={styles.description}>
-        <p className="text text_type_main-default">{description}</p>
+        <p className="text text_type_main-default">{name}</p>
       </div>
     </div>
   );
@@ -29,7 +29,7 @@ export { Ingredient };
 
 Ingredient.propTypes = {
   image: PropTypes.string,
-  cost: PropTypes.number,
-  description: PropTypes.string,
+  price: PropTypes.number,
+  name: PropTypes.string,
   count: PropTypes.number,
 };

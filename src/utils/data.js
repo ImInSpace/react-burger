@@ -1,4 +1,4 @@
-const dummyData = [
+const ApiData = [
   {
     _id: "60666c42cc7b410027a1a9b1",
     name: "Краторная булка N-200i",
@@ -213,4 +213,4 @@ const dummyData = [
   },
 ];
 
-export { dummyData };
+export { ApiData };

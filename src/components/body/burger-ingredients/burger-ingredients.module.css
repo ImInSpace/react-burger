@@ -3,3 +3,14 @@
   font-size: 36px;
   font-weight: 700;
 }
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.table {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}

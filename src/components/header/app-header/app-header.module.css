@@ -1,16 +1,18 @@
 .header {
-  width: 1920px;
   height: 88px;
 
   background-color: #1c1c21;
 }
 
 .container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 
   width: 1240px;
   height: 88px;
+
+  justify-items: center;
+  align-items: center;
 
   margin: 0 auto;
 }
