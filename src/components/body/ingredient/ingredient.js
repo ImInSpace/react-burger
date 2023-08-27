@@ -1,7 +1,7 @@
 import styles from "./ingredient.module.css";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import PropTypes from "prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Price } from "../price/price";
 
 function Ingredient({ image, price, name, count }) {
   return (
@@ -15,8 +15,7 @@ function Ingredient({ image, price, name, count }) {
         <img src={image} alt={"Изображение для " + name} />
       </div>
       <div className={styles.costRow}>
-        <span className="text text_type_digits-default">{price}</span>
-        <CurrencyIcon />
+        <Price price={price} className={styles.costRow} />
       </div>
       <div className={styles.description}>
         <p className="text text_type_main-default">{name}</p>
