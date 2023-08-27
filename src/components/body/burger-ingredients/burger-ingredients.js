@@ -37,13 +37,14 @@ function GroupedIngredients(props) {
   return (
     <>
       <div className={styles.table}>
-        {props.ingredients.map((ingredient) => {
+        {props.ingredients.map((ingredient, index) => {
           return (
             <Ingredient
               price={ingredient.price}
               image={ingredient.image}
               name={ingredient.name}
               count={1}
+              key={"ingredient_" + ingredient._id}
             />
           );
         })}

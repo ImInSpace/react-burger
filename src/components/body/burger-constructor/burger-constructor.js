@@ -13,10 +13,12 @@ function ContrustorSection(props) {
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
       {ApiData.map((data, index, arr) => {
-        console.log();
         if (index === 0) {
           return (
-            <ConstructorRow showDragIcon={false}>
+            <ConstructorRow
+              showDragIcon={false}
+              key={"constructor_row_" + data._id}
+            >
               <ConstructorElement
                 type="top"
                 text={data.name + " (верх)"}
@@ -27,7 +29,10 @@ function ContrustorSection(props) {
           );
         } else if (index === arr.length - 1) {
           return (
-            <ConstructorRow showDragIcon={false}>
+            <ConstructorRow
+              showDragIcon={false}
+              key={"constructor_row_" + data._id}
+            >
               <ConstructorElement
                 type="bottom"
                 text={data.name + " (низ)"}
@@ -38,7 +43,10 @@ function ContrustorSection(props) {
           );
         } else {
           return (
-            <ConstructorRow showDragIcon={true}>
+            <ConstructorRow
+              showDragIcon={true}
+              key={"constructor_row_" + data._id}
+            >
               <ConstructorElement
                 text={data.name}
                 price={data.price}
