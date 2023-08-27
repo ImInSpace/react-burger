@@ -15,16 +15,18 @@ function BurgerIngredients() {
   console.log("Соусы", mains);
 
   return (
-    <div style={{ height: "600px" }}>
+    <div>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <Tabs ingredients={titles} />
 
-      <p className="text text_type_main-medium mt-10">Булки</p>
-      <Table ingredients={buns} />
-      <p className="text text_type_main-medium mt-10">Соусы</p>
-      <Table ingredients={sauces} />
-      <p className="text text_type_main-medium mt-10">Начинки</p>
-      <Table ingredients={mains} />
+      <div className={styles.scrollContainer + " custom-scroll"}>
+        <p className="text text_type_main-medium mt-10">Булки</p>
+        <Table ingredients={buns} />
+        <p className="text text_type_main-medium mt-10">Соусы</p>
+        <Table ingredients={sauces} />
+        <p className="text text_type_main-medium mt-10">Начинки</p>
+        <Table ingredients={mains} />
+      </div>
     </div>
   );
 }
