@@ -7,12 +7,12 @@ import PropTypes from "prop-types";
 function BurgerIngredients() {
   const groupType = {
     bun: "bun",
-    sause: "sause",
+    sauce: "sauce",
     main: "main",
   };
 
   const buns = ApiData.filter((element) => element.type === groupType.bun); // Булки.
-  const sauces = ApiData.filter((element) => element.type === groupType.sause); // Соусы.
+  const sauces = ApiData.filter((element) => element.type === groupType.sauce); // Соусы.
   const mains = ApiData.filter((element) => element.type === groupType.main); // Начинки.
 
   return (
