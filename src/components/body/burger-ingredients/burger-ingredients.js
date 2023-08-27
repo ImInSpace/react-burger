@@ -38,7 +38,6 @@ function GroupedIngredients(props) {
     <>
       <div className={styles.table}>
         {props.ingredients.map((ingredient) => {
-          console.log(ingredient);
           return (
             <Ingredient
               price={ingredient.price}
