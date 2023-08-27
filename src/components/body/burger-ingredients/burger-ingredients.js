@@ -10,28 +10,35 @@ function BurgerIngredients() {
   const sauces = ApiData.filter((element) => element.type === "sauce");
   const mains = ApiData.filter((element) => element.type === "main");
 
-  console.log("Булки", buns);
-  console.log("Соусы", sauces);
-  console.log("Соусы", mains);
-
   return (
     <div>
+      <a href="#mains-anchor">Click me!</a>
+      <a href="#sauces-anchor">Click me!</a>
+      <a href="#buns-anchor">Click me!</a>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <Tabs ingredients={titles} />
 
       <div className={styles.scrollContainer + " custom-scroll mb-10"}>
-        <p className="text text_type_main-medium mt-10">Булки</p>
-        <Table ingredients={buns} />
-        <p className="text text_type_main-medium mt-10">Соусы</p>
-        <Table ingredients={sauces} />
-        <p className="text text_type_main-medium mt-10">Начинки</p>
-        <Table ingredients={mains} />
+        <p id="buns-anchor" className="text text_type_main-medium mt-10">
+          Булки
+        </p>
+        <GroupedIngredients ingredients={buns} />
+
+        <p id="sauces-anchor" className="text text_type_main-medium mt-10">
+          Соусы
+        </p>
+        <GroupedIngredients ingredients={sauces} />
+
+        <p id="mains-anchor" className="text text_type_main-medium mt-10">
+          Начинки
+        </p>
+        <GroupedIngredients ingredients={mains} />
       </div>
     </div>
   );
 }
 
-function Table(props) {
+function GroupedIngredients(props) {
   return (
     <>
       <div className={styles.table}>

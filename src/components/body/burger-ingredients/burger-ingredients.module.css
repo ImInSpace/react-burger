@@ -1,6 +1,7 @@
 .scrollContainer {
   height: 680px;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .buildBurgerText {
