@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { ApiData } from "../../../utils/data";
 import styles from "./burger-constructor.module.css";
 import {
@@ -9,7 +10,7 @@ function BurgerConstructor() {
   return <ContrustorSection ingredient={ApiData} />;
 }
 
-function ContrustorSection(props) {
+function ContrustorSection() {
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
       {ApiData.map((data, index, arr) => {
@@ -68,5 +69,10 @@ function ConstructorRow({ children, showDragIcon }) {
     </div>
   );
 }
+
+ConstructorRow.propTypes = {
+  children: PropTypes.element,
+  showDragIcon: PropTypes.bool,
+};
 
 export { BurgerConstructor };

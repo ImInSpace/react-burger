@@ -2,11 +2,18 @@ import { Ingredient } from "../ingredient/ingredient";
 import { Tabs } from "../tabs/tabs";
 import styles from "./burger-ingredients.module.css";
 import { ApiData } from "../../../utils/data";
+import PropTypes from "prop-types";
 
 function BurgerIngredients() {
-  const buns = ApiData.filter((element) => element.type === "bun");
-  const sauces = ApiData.filter((element) => element.type === "sauce");
-  const mains = ApiData.filter((element) => element.type === "main");
+  const groupType = {
+    bun: "bun",
+    sause: "sause",
+    main: "main",
+  };
+
+  const buns = ApiData.filter((element) => element.type === groupType.bun); // Булки.
+  const sauces = ApiData.filter((element) => element.type === groupType.sause); // Соусы.
+  const mains = ApiData.filter((element) => element.type === groupType.main); // Начинки.
 
   return (
     <div>
@@ -37,7 +44,7 @@ function GroupedIngredients(props) {
   return (
     <>
       <div className={styles.table}>
-        {props.ingredients.map((ingredient, index) => {
+        {props.ingredients.map((ingredient) => {
           return (
             <Ingredient
               price={ingredient.price}
@@ -52,5 +59,16 @@ function GroupedIngredients(props) {
     </>
   );
 }
+
+const ingredientDataShape = PropTypes.shape({
+  _id: PropTypes.string,
+  name: PropTypes.string,
+  price: PropTypes.number,
+  image: PropTypes.string,
+});
+
+GroupedIngredients.propTypes = {
+  ingredient: ingredientDataShape,
+};
 
 export { BurgerIngredients };

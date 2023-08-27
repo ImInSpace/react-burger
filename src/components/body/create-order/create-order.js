@@ -2,7 +2,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./create-order.module.css";
 import { Price } from "../price/price";
 
-function CreateOrder(props) {
+function CreateOrder() {
   return (
     <div className={styles.container + " mt-10 mr-4"}>
       <div className="mr-5">
