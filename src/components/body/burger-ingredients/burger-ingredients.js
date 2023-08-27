@@ -19,7 +19,7 @@ function BurgerIngredients() {
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <Tabs ingredients={titles} />
 
-      <div className={styles.scrollContainer + " custom-scroll"}>
+      <div className={styles.scrollContainer + " custom-scroll mb-10"}>
         <p className="text text_type_main-medium mt-10">Булки</p>
         <Table ingredients={buns} />
         <p className="text text_type_main-medium mt-10">Соусы</p>
