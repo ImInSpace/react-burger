@@ -20,10 +20,10 @@ function IngredientDetails() {
           Биокотлета из марсианской Магнолии
         </p>
         <div className={styles.macronutrients + " mt-8"}>
-          <Macronutrient title="Калории,ккал" value="244,4" />
-          <Macronutrient title="Белки, г" value="12,2" />
-          <Macronutrient title="Жиры, г" value="17,2" />
-          <Macronutrient title="Углеводы, г" value="10,2" />
+          <Macronutrient title="Калории,ккал" value={244.4} />
+          <Macronutrient title="Белки, г" value={12.2} />
+          <Macronutrient title="Жиры, г" value={17.2} />
+          <Macronutrient title="Углеводы, г" value={10.2} />
         </div>
       </div>
     </div>
