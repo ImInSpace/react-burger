@@ -16,3 +16,24 @@
 
   margin: 0 auto;
 }
+
+.leftMenu {
+  justify-self: start;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 27px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.rightMenu {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+}
