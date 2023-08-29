@@ -1,8 +1,7 @@
-import { Ingredient } from "../ingredient/ingredient";
 import { Tabs } from "../tabs/tabs";
 import styles from "./burger-ingredients.module.css";
 import { ApiData } from "../../../utils/data";
-import PropTypes from "prop-types";
+import { GroupedIngredients } from "../grouped-ingredients/grouped-ingredients";
 
 function BurgerIngredients() {
   const groupType = {
@@ -39,34 +38,5 @@ function BurgerIngredients() {
     </div>
   );
 }
-
-function GroupedIngredients(props) {
-  return (
-    <div className={styles.table}>
-      {props.ingredients.map((ingredient) => {
-        return (
-          <Ingredient
-            price={ingredient.price}
-            image={ingredient.image}
-            name={ingredient.name}
-            count={1}
-            key={"ingredient_" + ingredient._id}
-          />
-        );
-      })}
-    </div>
-  );
-}
-
-const ingredientDataShape = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
-});
-
-GroupedIngredients.propTypes = {
-  ingredient: ingredientDataShape,
-};
 
 export { BurgerIngredients };

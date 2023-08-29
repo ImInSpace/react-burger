@@ -15,8 +15,3 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
 }
-
-.table {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-}
