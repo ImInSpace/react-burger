@@ -5,7 +5,7 @@ import styles from "./login-btn.module.css";
 function LoginBtn() {
   return (
     <div className={styles.btn}>
-      <MenuItem text="Личный кабинет" icon={<ProfileIcon />} />
+      <MenuItem text="Личный кабинет" url={"#"} icon={<ProfileIcon />} />
     </div>
   );
 }

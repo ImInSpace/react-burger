@@ -6,8 +6,8 @@ import styles from "./header-menu.module.css";
 function HeaderMenu() {
   return (
     <div className={styles.menu}>
-      <MenuItem text="Конструктор" icon={<BurgerIcon />} />
-      <MenuItem text="Лента заказов" icon={<ListIcon />} />
+      <MenuItem text="Конструктор" url={"#"} icon={<BurgerIcon />} />
+      <MenuItem text="Лента заказов" url={"#"} icon={<ListIcon />} />
     </div>
   );
 }
