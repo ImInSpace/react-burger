@@ -1,0 +1,7 @@
+.container {
+  width: 120px;
+  height: 56px;
+
+  color: var(--text-dark-grey-secondary-text, #8585ad);
+  text-align: center;
+}

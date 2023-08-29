@@ -4,7 +4,7 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 function OrderInfo() {
   return (
-    <div class={styles.container}>
+    <div className={styles.container}>
       <div className={styles.shadow}>
         <CloseIcon />
       </div>
