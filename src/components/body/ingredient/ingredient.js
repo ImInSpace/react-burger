@@ -5,7 +5,7 @@ import { Price } from "../price/price";
 
 function Ingredient({ image, price, name, count }) {
   return (
-    <div className={styles.card} key={crypto.randomUUID()}>
+    <div className={styles.card}>
       {count && (
         <div className={styles.counter}>
           <Counter count={count} size="default" extraClass="mr-5" />
