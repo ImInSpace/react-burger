@@ -1,6 +1,6 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./create-order.module.css";
-import { Price } from "../price/price";
+import { Price } from "../../price/price";
 
 function CreateOrder() {
   return (

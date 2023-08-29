@@ -1,11 +1,22 @@
-import { AppBody } from "../body/app-body/app-body";
-import { AppHeader } from "../header/app-header/app-header";
+import { AppHeader } from "../app-header/app-header";
+import styles from "./app.module.css";
+import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
+import { BurgerConstructor } from "../burger-constructor/burger-constructor";
+import { CreateOrder } from "../burger-constructor/create-order/create-order";
 
 function App() {
   return (
     <>
       <AppHeader />
-      <AppBody />
+      <div className={styles.container}>
+        <div className={styles.halfContainer}>
+          <BurgerIngredients />
+        </div>
+        <div className={styles.halfContainer}>
+          <BurgerConstructor />
+          <CreateOrder />
+        </div>
+      </div>
     </>
   );
 }

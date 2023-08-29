@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { ApiData } from "../../../utils/data";
+import { ApiData } from "../../utils/data";
 import styles from "./burger-constructor.module.css";
 import {
   ConstructorElement,

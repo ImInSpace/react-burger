@@ -1,7 +1,7 @@
-import { Tabs } from "../tabs/tabs";
+import { Tabs } from "./tabs/tabs";
 import styles from "./burger-ingredients.module.css";
-import { ApiData } from "../../../utils/data";
-import { GroupedIngredients } from "../grouped-ingredients/grouped-ingredients";
+import { ApiData } from "../../utils/data";
+import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 
 function BurgerIngredients() {
   const groupType = {
