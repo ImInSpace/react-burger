@@ -4,8 +4,10 @@ import { BurgerIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { getIngredientsData } from "../../utils/request-handler";
 
 function AppHeader() {
+  getIngredientsData("https://norma.nomoreparties.space/api/ingredients");
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -16,7 +18,7 @@ function AppHeader() {
         <div className={styles.logo}>
           <Logo />
         </div>
-        <div className={styles.btn}>
+        <div className={styles.rightMenu}>
           <MenuItem text="Личный кабинет" url={"#"} icon={<ProfileIcon />} />
         </div>
       </div>
