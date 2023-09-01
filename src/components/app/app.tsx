@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <AppHeader />
+      <IngredientDetails />
       <div className={styles.container}>
         <div className={styles.halfContainer}>
           <BurgerIngredients />

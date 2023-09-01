@@ -2,6 +2,7 @@ import { Tabs } from "./tabs/tabs";
 import styles from "./burger-ingredients.module.css";
 import { ApiData } from "../../utils/data";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
+import * as Constants from "../../constants";
 
 function BurgerIngredients() {
   const groupType = {
@@ -21,18 +22,18 @@ function BurgerIngredients() {
       <div className={styles.scrollContainer + " custom-scroll mb-10"}>
         <GroupedIngredients
           ingredients={buns}
-          groupName={"Булки"}
-          anchor={"buns-anchor"}
+          groupName={Constants.BUNS_GROUP_NAME}
+          anchor={Constants.BUNS_ANCHOR}
         />
         <GroupedIngredients
           ingredients={sauces}
-          groupName={"Соусы"}
-          anchor={"sauces-anchor"}
+          groupName={Constants.SAUCES_GROUP_NAME}
+          anchor={Constants.SAUCES_ANCHOR}
         />
         <GroupedIngredients
           ingredients={mains}
-          groupName={"Начинки"}
-          anchor={"mains-anchor"}
+          groupName={Constants.MAINS_GROUP_NAME}
+          anchor={Constants.MAINS_ANCHOR}
         />
       </div>
     </div>
