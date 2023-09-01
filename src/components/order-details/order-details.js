@@ -2,7 +2,7 @@ import styles from "./order-info.module.css";
 import doneIcon from "../../images/done.png";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function OrderInfo() {
+function OrderDetails() {
   return (
     <div className={styles.container}>
       <div className={styles.shadow}>
@@ -23,4 +23,4 @@ function OrderInfo() {
   );
 }
 
-export { OrderInfo };
+export { OrderDetails };
