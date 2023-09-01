@@ -18,22 +18,22 @@ function BurgerIngredients() {
     <div>
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <Tabs />
-
       <div className={styles.scrollContainer + " custom-scroll mb-10"}>
-        <p id="buns-anchor" className="text text_type_main-medium mt-10">
-          Булки
-        </p>
-        <GroupedIngredients ingredients={buns} />
-
-        <p id="sauces-anchor" className="text text_type_main-medium mt-10">
-          Соусы
-        </p>
-        <GroupedIngredients ingredients={sauces} />
-
-        <p id="mains-anchor" className="text text_type_main-medium mt-10">
-          Начинки
-        </p>
-        <GroupedIngredients ingredients={mains} />
+        <GroupedIngredients
+          ingredients={buns}
+          groupName={"Булки"}
+          anchor={"buns-anchor"}
+        />
+        <GroupedIngredients
+          ingredients={sauces}
+          groupName={"Соусы"}
+          anchor={"sauces-anchor"}
+        />
+        <GroupedIngredients
+          ingredients={mains}
+          groupName={"Начинки"}
+          anchor={"mains-anchor"}
+        />
       </div>
     </div>
   );

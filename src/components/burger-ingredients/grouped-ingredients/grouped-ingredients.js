@@ -4,19 +4,24 @@ import styles from "./grouped-ingredients.module.css";
 
 function GroupedIngredients(props) {
   return (
-    <div className={styles.table}>
-      {props.ingredients.map((ingredient) => {
-        return (
-          <Ingredient
-            price={ingredient.price}
-            image={ingredient.image}
-            name={ingredient.name}
-            count={1}
-            key={"ingredient_" + ingredient._id}
-          />
-        );
-      })}
-    </div>
+    <>
+      <p id={props.anchor} className="text text_type_main-medium mt-10">
+        {props.groupName}
+      </p>
+      <div className={styles.table}>
+        {props.ingredients.map((ingredient) => {
+          return (
+            <Ingredient
+              price={ingredient.price}
+              image={ingredient.image}
+              name={ingredient.name}
+              count={1}
+              key={"ingredient_" + ingredient._id}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
 
@@ -31,4 +36,6 @@ const ingredientDataShape = PropTypes.shape({
 
 GroupedIngredients.propTypes = {
   ingredient: ingredientDataShape,
+  groupName: PropTypes.string,
+  anchor: PropTypes.string,
 };
