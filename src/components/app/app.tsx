@@ -8,7 +8,7 @@ import { OrderDetails } from "../order-details/order-details";
 
 function App() {
   return (
-    <>
+    <div className={styles.app}>
       <AppHeader />
       <IngredientDetails />
       <div className={styles.container}>
@@ -20,7 +20,7 @@ function App() {
           <CreateOrder />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

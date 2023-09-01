@@ -1,16 +1,15 @@
+.app {
+  position: relative;
+}
+
 .container {
   width: 1240px;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0 auto;
 }
 
 .halfContainer {
   width: 600px;
-}
-
-.tmp {
-  background-color: aqua;
-  height: 50px;
 }
