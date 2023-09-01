@@ -3,11 +3,13 @@ import styles from "./app.module.css";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { CreateOrder } from "../burger-constructor/create-order/create-order";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 function App() {
   return (
     <>
       <AppHeader />
+      <IngredientDetails />
       <div className={styles.container}>
         <div className={styles.halfContainer}>
           <BurgerIngredients />

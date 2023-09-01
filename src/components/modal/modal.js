@@ -2,15 +2,19 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal.module.css";
 import PropTypes from "prop-types";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
+import ReactDOM from "react-dom";
 
 function Modal(props) {
-  return (
+  const portal = document.getElementById("react-modals");
+
+  return ReactDOM.createPortal(
     <ModalOverlay>
       <div className={styles.modal}>
         <ModalHeader caption={props.caption} />
         {props.children}
       </div>
-    </ModalOverlay>
+    </ModalOverlay>,
+    portal
   );
 }
 
