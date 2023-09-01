@@ -1,5 +1,5 @@
 .scrollContainer {
-  height: 640px;
+  height: 620px;
   overflow-y: auto;
   scroll-behavior: smooth;
 }
