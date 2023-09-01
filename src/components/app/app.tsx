@@ -3,9 +3,6 @@ import styles from "./app.module.css";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { CreateOrder } from "../burger-constructor/create-order/create-order";
-import { Modal } from "../modal/modal";
-import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { OrderDetails } from "../order-details/order-details";
 
 function App() {
   return (

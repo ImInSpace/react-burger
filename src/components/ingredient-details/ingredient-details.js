@@ -29,7 +29,7 @@ function IngredientTitle({ text }) {
 
 function Macronutrients() {
   return (
-    <div className={styles.macronutrients + " mt-8 mb-15"}>
+    <div className={styles.macronutrients + " mt-8 mb-10"}>
       <Macronutrient title="Калории,ккал" value={244.4} />
       <Macronutrient title="Белки, г" value={12.2} />
       <Macronutrient title="Жиры, г" value={17.2} />

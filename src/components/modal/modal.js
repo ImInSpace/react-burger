@@ -7,20 +7,20 @@ function Modal(props) {
   return (
     <ModalOverlay>
       <div className={styles.modal}>
-        <div className={styles.caption + " mt-10 ml-10 mr-10"}>
-          <p className="text text_type_main-large">{props.caption}</p>
-          <CloseBtn />
-        </div>
+        <ModalHeader caption={props.caption} />
         {props.children}
       </div>
     </ModalOverlay>
   );
 }
 
-function CloseBtn() {
+function ModalHeader({ caption }) {
   return (
-    <div className={styles.closeBtn}>
-      <CloseIcon />
+    <div className={styles.caption + " mt-10 ml-10 mr-10"}>
+      <p className="text text_type_main-large">{caption}</p>
+      <div className={styles.closeBtn}>
+        <CloseIcon />
+      </div>
     </div>
   );
 }
