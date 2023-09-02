@@ -7,9 +7,8 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useState } from "react";
 import { Modal } from "../modal/modal";
-import { fetchData as loadIngredientsData } from "../../utils/request-handler";
 import * as Constants from "../../constants";
-import { log } from "console";
+import { fetchData } from "../../utils/request-handler";
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -17,10 +16,10 @@ function App() {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
   useEffect(() => {
-    loadIngredientsData(Constants.INGREDIENTS_URL)
+    fetchData(Constants.INGREDIENTS_URL)
       .then((json) => setIngredientsData(json.data))
       .catch((err) => {
-        console.error("Ошибка при получении данных.", err);
+        console.error("Ошибка при извлечении данных из API.", err);
       });
   }, []);
 

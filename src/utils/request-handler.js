@@ -10,7 +10,7 @@ function fetchData(url) {
       }
     })
     .catch((err) => {
-      console.log("Не удалось извлечь данные. ", err);
+      console.error("Не удалось извлечь данные. ", err);
     });
 }
 
