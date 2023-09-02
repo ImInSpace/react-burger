@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     fetchData(Constants.INGREDIENTS_URL).then((json) =>
-      setIngredientsData(json)
+      setIngredientsData(json.data)
     );
   }, []);
 
@@ -31,7 +31,7 @@ function App() {
   };
 
   function ingredientClickHandler(ingredientId) {
-    const selected = ingredientsData.data.find(
+    const selected = ingredientsData.find(
       (ingredient) => ingredient._id === ingredientId
     );
 
@@ -41,7 +41,7 @@ function App() {
     }
 
     setSelectedIngredient(
-      ingredientsData.data.find((ingredient) => ingredient._id === ingredientId)
+      ingredientsData.find((ingredient) => ingredient._id === ingredientId)
     );
   }
 
@@ -56,7 +56,7 @@ function App() {
           />
         </div>
         <div className={styles.halfContainer}>
-          <BurgerConstructor data={ingredientsData.data} />
+          <BurgerConstructor data={ingredientsData} />
           <CreateOrder clickHandler={openModalHandler} />
         </div>
       </div>

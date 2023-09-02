@@ -11,9 +11,9 @@ function BurgerIngredients({ data, handler }) {
     main: "main",
   };
 
-  const buns = data.data?.filter((element) => element.type === groupType.bun);
-  const sauces = data.data?.filter((element) => element.type === groupType.sauce); // prettier-ignore
-  const mains = data.data?.filter((element) => element.type === groupType.main);
+  const buns = data?.filter((element) => element.type === groupType.bun);
+  const sauces = data?.filter((element) => element.type === groupType.sauce); // prettier-ignore
+  const mains = data?.filter((element) => element.type === groupType.main);
 
   return (
     <div>
