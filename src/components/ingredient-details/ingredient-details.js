@@ -12,9 +12,20 @@ function IngredientDetails({ data }) {
   );
 }
 
-IngredientDetails.propTypes = {
-  image: PropTypes.string,
+const ingredientDataShape = PropTypes.shape({
+  _id: PropTypes.string,
   name: PropTypes.string,
+  type: PropTypes.string,
+  proteins: PropTypes.number,
+  fat: PropTypes.number,
+  carbohydrates: PropTypes.number,
+  calories: PropTypes.number,
+  price: PropTypes.number,
+  image: PropTypes.string,
+});
+
+IngredientDetails.propTypes = {
+  data: ingredientDataShape,
 };
 
 function IngredientImage({ img }) {
