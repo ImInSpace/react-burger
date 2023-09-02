@@ -1,4 +1,3 @@
-import { formatPrice } from "../../../utils/formatter";
 import styles from "./macronutrient.module.css";
 import PropTypes from "prop-types";
 
@@ -9,7 +8,7 @@ function Macronutrient(props) {
         {props.title}
       </p>
       <p className="text text_type_digits-default text_color_inactive">
-        {formatPrice(props.value)}
+        {props.value}
       </p>
     </div>
   );

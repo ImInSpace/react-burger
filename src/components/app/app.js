@@ -13,6 +13,8 @@ import PropTypes from "prop-types";
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState([]);
+  const [isModalShown, setIsModalShown] = useState(false);
+  const [selectedIngredient, setSelectedIngredient] = useState(null);
 
   useEffect(() => {
     fetchData(Constants.INGREDIENTS_URL).then((json) =>
@@ -20,27 +22,32 @@ function App() {
     );
   }, []);
 
-  const [isOrderModalShown, setIsOrderModalShown] = useState(false);
-  const [isIngredientModalShown, setIsIngredientModalShown] = useState(false);
-
   const openModalHandler = () => {
-    setIsIngredientModalShown(true);
+    setIsModalShown(true);
   };
 
   const closeModalHandler = () => {
-    setIsIngredientModalShown(false);
+    setIsModalShown(false);
+    setSelectedIngredient(null);
   };
 
-  const ingredientClickHandler = () => {
-    // fetchData(Constants.INGREDIENTS_URL).then((json) =>
-    //   console.log("Hell, yeah!", json)
-    // );
-  };
+  function ingredientClickHandler(ingredientId) {
+    const selected = ingredientsData.data.find(
+      (ingredient) => ingredient._id === ingredientId
+    );
 
-  ingredientClickHandler();
+    if (selected == null) {
+      console.error("Ингредиент не обнаружен. {id}: ", ingredientId);
+    }
+
+    setSelectedIngredient(
+      ingredientsData.data.find((ingredient) => ingredient._id === ingredientId)
+    );
+    openModalHandler();
+  }
 
   ingredientClickHandler.propTypes = {
-    ingredientId: PropTypes.string,
+    ingredientId: PropTypes.number,
   };
 
   return (
@@ -48,7 +55,10 @@ function App() {
       <AppHeader />
       <div className={styles.container}>
         <div className={styles.halfContainer}>
-          <BurgerIngredients data={ingredientsData} />
+          <BurgerIngredients
+            data={ingredientsData}
+            handler={ingredientClickHandler}
+          />
         </div>
         <div className={styles.halfContainer}>
           <BurgerConstructor data={ingredientsData} />
@@ -56,16 +66,16 @@ function App() {
         </div>
       </div>
 
-      {isIngredientModalShown && (
-        <Modal
-          closeHandler={closeModalHandler}
-          content={<IngredientDetails />}
-          caption={"Детали ингредиента"}
-        />
+      {isModalShown && (
+        <Modal closeHandler={closeModalHandler} content={<OrderDetails />} />
       )}
 
-      {isOrderModalShown && (
-        <Modal closeHandler={closeModalHandler} content={<OrderDetails />} />
+      {isModalShown && selectedIngredient && (
+        <Modal
+          caption={"Детали инредиента"}
+          closeHandler={closeModalHandler}
+          content={<IngredientDetails data={selectedIngredient} />}
+        />
       )}
     </div>
   );

@@ -2,12 +2,13 @@ import styles from "./ingredient-details.module.css";
 import { Macronutrient } from "./macronutrient/macronutrient";
 import PropTypes from "prop-types";
 
-function IngredientDetails(props) {
+function IngredientDetails({ data }) {
+  console.log("props: ", data);
   return (
     <div className={styles.container}>
-      <IngredientImage img={props.image} />
-      <IngredientTitle text={props.name} />
-      <Macronutrients {...props} />
+      <IngredientImage img={data.image} />
+      <IngredientTitle text={data.name} />
+      <Macronutrients {...data} />
     </div>
   );
 }
@@ -29,12 +30,12 @@ function IngredientTitle({ text }) {
   return <p className="text text_type_main-medium mt-4">{text}</p>;
 }
 
-function Macronutrients({ calories, proteins, fats, carbohydrates }) {
+function Macronutrients({ calories, proteins, fat, carbohydrates }) {
   return (
     <div className={styles.macronutrients + " mt-8 mb-10"}>
       <Macronutrient title="Калории,ккал" value={calories} />
       <Macronutrient title="Белки, г" value={proteins} />
-      <Macronutrient title="Жиры, г" value={fats} />
+      <Macronutrient title="Жиры, г" value={fat} />
       <Macronutrient title="Углеводы, г" value={carbohydrates} />
     </div>
   );
@@ -43,7 +44,7 @@ function Macronutrients({ calories, proteins, fats, carbohydrates }) {
 Macronutrients.propTypes = {
   calories: PropTypes.number,
   proteins: PropTypes.number,
-  fats: PropTypes.number,
+  fat: PropTypes.number,
   carbohydrates: PropTypes.number,
 };
 

@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../price/price";
 
-function Ingredient({ image, price, name, count }) {
+function Ingredient({ id, image, price, name, count, handler }) {
   return (
-    <div className={styles.card}>
+    <div className={styles.card} onClick={() => handler(id)}>
       {count && (
         <div className={styles.counter}>
           <Counter count={count} size="default" extraClass="mr-5" />
@@ -27,8 +27,10 @@ function Ingredient({ image, price, name, count }) {
 export { Ingredient };
 
 Ingredient.propTypes = {
+  id: PropTypes.string,
   image: PropTypes.string,
   price: PropTypes.number,
   name: PropTypes.string,
   count: PropTypes.number,
+  handler: PropTypes.func,
 };

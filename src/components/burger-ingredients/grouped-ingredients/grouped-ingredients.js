@@ -12,11 +12,13 @@ function GroupedIngredients(props) {
         {props.ingredients?.map((ingredient) => {
           return (
             <Ingredient
+              id={ingredient._id}
               price={ingredient.price}
               image={ingredient.image}
               name={ingredient.name}
               count={undefined}
               key={"ingredient_" + ingredient._id}
+              handler={props.handler}
             />
           );
         })}
@@ -38,4 +40,5 @@ GroupedIngredients.propTypes = {
   ingredient: ingredientDataShape,
   groupName: PropTypes.string,
   anchor: PropTypes.string,
+  handler: PropTypes.func,
 };
