@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import { Modal } from "../modal/modal";
 import { fetchData } from "../../utils/request-handler";
 import * as Constants from "../../constants";
-import PropTypes from "prop-types";
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -38,17 +37,13 @@ function App() {
 
     if (selected == null) {
       console.error("Ингредиент не обнаружен. {id}: ", ingredientId);
+      return;
     }
 
     setSelectedIngredient(
       ingredientsData.data.find((ingredient) => ingredient._id === ingredientId)
     );
-    openModalHandler();
   }
-
-  ingredientClickHandler.propTypes = {
-    ingredientId: PropTypes.number,
-  };
 
   return (
     <div className={styles.app}>
@@ -70,7 +65,7 @@ function App() {
         <Modal closeHandler={closeModalHandler} content={<OrderDetails />} />
       )}
 
-      {isModalShown && selectedIngredient && (
+      {selectedIngredient && (
         <Modal
           caption={"Детали инредиента"}
           closeHandler={closeModalHandler}

@@ -3,7 +3,6 @@ import { Macronutrient } from "./macronutrient/macronutrient";
 import PropTypes from "prop-types";
 
 function IngredientDetails({ data }) {
-  console.log("props: ", data);
   return (
     <div className={styles.container}>
       <IngredientImage img={data.image} />
