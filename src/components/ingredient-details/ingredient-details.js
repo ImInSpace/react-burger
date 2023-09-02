@@ -2,10 +2,11 @@ import styles from "./ingredient-details.module.css";
 import { Macronutrient } from "./macronutrient/macronutrient";
 import meat from "../../images/meat.png";
 import { Modal } from "../modal/modal";
+import PropTypes from "prop-types";
 
-function IngredientDetails() {
+function IngredientDetails(props) {
   return (
-    <Modal caption="Детали ингредиента">
+    <Modal caption="Детали ингредиента" {...props}>
       <div className={styles.container}>
         <IngredientImage />
         <IngredientTitle text="Биокотлета из марсианской Магнолии" />
@@ -15,7 +16,11 @@ function IngredientDetails() {
   );
 }
 
-function IngredientImage() {
+IngredientDetails.propTypes = {
+  closeHandler: PropTypes.func,
+};
+
+function IngredientImage(props) {
   return (
     <div className={styles.imageContainer}>
       <img src={meat} alt="Изображение ингредиента"></img>

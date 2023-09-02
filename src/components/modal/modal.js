@@ -6,11 +6,18 @@ import ReactDOM from "react-dom";
 
 function Modal(props) {
   const portal = document.getElementById("react-modals");
+  console.log(props);
 
+  const handleKeyDown = (event) => {
+    console.log(event.key);
+  };
   return ReactDOM.createPortal(
-    <ModalOverlay>
-      <div className={styles.modal}>
-        <ModalHeader caption={props.caption} />
+    <ModalOverlay closeHandler={props.closeHandler}>
+      <div className={styles.modal} tabIndex={0} onKeyDown={handleKeyDown}>
+        <ModalHeader
+          caption={props.caption}
+          closeHandler={props.closeHandler}
+        />
         {props.children}
       </div>
     </ModalOverlay>,
@@ -18,20 +25,21 @@ function Modal(props) {
   );
 }
 
-function ModalHeader({ caption }) {
+Modal.propTypes = {
+  caption: PropTypes.string,
+  closeHandler: PropTypes.func,
+  children: PropTypes.element,
+};
+
+function ModalHeader({ caption, closeHandler }) {
   return (
     <div className={styles.caption + " mt-10 ml-10 mr-10"}>
       <p className="text text_type_main-large">{caption}</p>
-      <div className={styles.closeBtn}>
+      <div className={styles.closeBtn} onClick={closeHandler}>
         <CloseIcon />
       </div>
     </div>
   );
 }
-
-Modal.propTypes = {
-  caption: PropTypes.string,
-  children: PropTypes.element,
-};
 
 export { Modal };
