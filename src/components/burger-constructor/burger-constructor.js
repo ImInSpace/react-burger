@@ -8,7 +8,7 @@ import {
 function BurgerConstructor({ data }) {
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      {data.data?.map((details, index, arr) => {
+      {data?.map((details, index, arr) => {
         if (index === 0) {
           return (
             <ConstructorRow
@@ -55,6 +55,22 @@ function BurgerConstructor({ data }) {
     </div>
   );
 }
+
+const ingredientDataShape = PropTypes.shape({
+  _id: PropTypes.string,
+  name: PropTypes.string,
+  type: PropTypes.string,
+  proteins: PropTypes.number,
+  fat: PropTypes.number,
+  carbohydrates: PropTypes.number,
+  calories: PropTypes.number,
+  price: PropTypes.number,
+  image: PropTypes.string,
+});
+
+BurgerConstructor.propTypes = {
+  data: PropTypes.arrayOf(ingredientDataShape),
+};
 
 function ConstructorRow({ children, showDragIcon }) {
   return (

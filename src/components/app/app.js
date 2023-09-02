@@ -56,7 +56,7 @@ function App() {
           />
         </div>
         <div className={styles.halfContainer}>
-          <BurgerConstructor data={ingredientsData} />
+          <BurgerConstructor data={ingredientsData.data} />
           <CreateOrder clickHandler={openModalHandler} />
         </div>
       </div>
