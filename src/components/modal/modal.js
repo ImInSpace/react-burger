@@ -6,14 +6,10 @@ import ReactDOM from "react-dom";
 
 function Modal(props) {
   const portal = document.getElementById("react-modals");
-  console.log(props);
 
-  const handleKeyDown = (event) => {
-    console.log(event.key);
-  };
   return ReactDOM.createPortal(
     <ModalOverlay closeHandler={props.closeHandler}>
-      <div className={styles.modal} tabIndex={0} onKeyDown={handleKeyDown}>
+      <div className={styles.modal}>
         <ModalHeader
           caption={props.caption}
           closeHandler={props.closeHandler}

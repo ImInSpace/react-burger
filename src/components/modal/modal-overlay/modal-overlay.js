@@ -2,14 +2,19 @@ import styles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
 
 function ModalOverlay(props) {
+  function closeModal() {
+    props.closeHandler();
+  }
+
   const handleKeyDown = (event) => {
-    console.log(event.key);
+    if (event.key === "Escape") {
+      closeModal();
+    }
   };
 
   const closeHandler = (e) => {
-    console.log("current target id: ", e.target.id);
     if (e.target.id === "modal-overlay") {
-      props.closeHandler();
+      closeModal();
     }
   };
 
@@ -18,8 +23,8 @@ function ModalOverlay(props) {
       id="modal-overlay"
       className={styles.overlay}
       onClickCapture={closeHandler}
-      tabIndex={0}
       onKeyDown={handleKeyDown}
+      tabIndex={1}
     >
       {props.children}
     </div>
