@@ -1,16 +1,13 @@
 import styles from "./order-details.module.css";
 import iconDone from "../../images/done.png";
-import { Modal } from "../modal/modal";
 
 function OrderDetails() {
   return (
-    <Modal>
-      <div className={styles.container}>
-        <OrderNumber />
-        <img className="mt-15" src={iconDone} alt="order icon" />
-        <OrderStatus />
-      </div>
-    </Modal>
+    <div className={styles.container}>
+      <OrderNumber />
+      <img className="mt-15" src={iconDone} alt="order icon" />
+      <OrderStatus />
+    </div>
   );
 }
 

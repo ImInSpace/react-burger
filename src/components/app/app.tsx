@@ -6,16 +6,18 @@ import { CreateOrder } from "../burger-constructor/create-order/create-order";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
 import { useState } from "react";
+import { Modal } from "../modal/modal";
 
 function App() {
-  const [isModalShown, setIsModalShown] = useState(true);
+  const [isOrderModalShown, setIsOrderModalShown] = useState(false);
+  const [isIngredientModalShown, setIsIngredientModalShown] = useState(false);
 
   const openModalHandler = () => {
-    setIsModalShown(true);
+    setIsOrderModalShown(true);
   };
 
   const closeModalHandler = () => {
-    setIsModalShown(false);
+    setIsOrderModalShown(false);
   };
 
   return (
@@ -31,7 +33,17 @@ function App() {
         </div>
       </div>
 
-      {isModalShown && <IngredientDetails closeHandler={closeModalHandler} />}
+      {isIngredientModalShown && (
+        <Modal
+          closeHandler={closeModalHandler}
+          content={<IngredientDetails />}
+          caption={"Детали ингредиента"}
+        />
+      )}
+
+      {isOrderModalShown && (
+        <Modal closeHandler={closeModalHandler} content={<OrderDetails />} />
+      )}
     </div>
   );
 }
