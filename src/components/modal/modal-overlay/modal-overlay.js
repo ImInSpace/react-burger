@@ -1,7 +1,14 @@
 import styles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
+import { useEffect, useRef } from "react";
 
 function ModalOverlay(props) {
+  const modalRootDivRef = useRef(null);
+
+  useEffect(() => {
+    modalRootDivRef.current.focus();
+  });
+
   function closeModal() {
     props.closeHandler();
   }
@@ -25,6 +32,7 @@ function ModalOverlay(props) {
       onClickCapture={closeHandler}
       onKeyDown={handleKeyDown}
       tabIndex={1}
+      ref={modalRootDivRef}
     >
       {props.children}
     </div>

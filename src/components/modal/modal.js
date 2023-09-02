@@ -21,12 +21,6 @@ function Modal(props) {
   );
 }
 
-Modal.propTypes = {
-  caption: PropTypes.string,
-  closeHandler: PropTypes.func,
-  children: PropTypes.element,
-};
-
 function ModalHeader({ caption, closeHandler }) {
   return (
     <div className={styles.caption + " mt-10 ml-10 mr-10"}>
@@ -37,5 +31,11 @@ function ModalHeader({ caption, closeHandler }) {
     </div>
   );
 }
+
+Modal.propTypes = {
+  caption: PropTypes.string,
+  closeHandler: PropTypes.func,
+  children: PropTypes.element,
+};
 
 export { Modal };
