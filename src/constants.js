@@ -1,4 +1,4 @@
-export const INGREDIENT_URL =
+export const INGREDIENTS_URL =
   "https://norma.nomoreparties.space/api/ingredients";
 
 export const BUNS_GROUP_NAME = "Булки";

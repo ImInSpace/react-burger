@@ -1,19 +1,18 @@
 import { Tabs } from "./tabs/tabs";
 import styles from "./burger-ingredients.module.css";
-import { ApiData } from "../../utils/data";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 
-function BurgerIngredients() {
+function BurgerIngredients({ data }) {
   const groupType = {
     bun: "bun",
     sauce: "sauce",
     main: "main",
   };
 
-  const buns = ApiData.filter((element) => element.type === groupType.bun); // Булки.
-  const sauces = ApiData.filter((element) => element.type === groupType.sauce); // Соусы.
-  const mains = ApiData.filter((element) => element.type === groupType.main); // Начинки.
+  const buns = data.data?.filter((element) => element.type === groupType.bun);
+  const sauces = data.data?.filter((element) => element.type === groupType.sauce); // prettier-ignore
+  const mains = data.data?.filter((element) => element.type === groupType.main);
 
   return (
     <div>

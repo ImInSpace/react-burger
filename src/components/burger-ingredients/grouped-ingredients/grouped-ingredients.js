@@ -9,7 +9,7 @@ function GroupedIngredients(props) {
         {props.groupName}
       </p>
       <div className={styles.table}>
-        {props.ingredients.map((ingredient) => {
+        {props.ingredients?.map((ingredient) => {
           return (
             <Ingredient
               price={ingredient.price}
