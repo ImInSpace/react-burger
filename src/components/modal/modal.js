@@ -3,14 +3,33 @@ import styles from "./modal.module.css";
 import PropTypes from "prop-types";
 import { ModalOverlay } from "./modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
+import { useEffect, useRef } from "react";
 
 function Modal(props) {
   const portal = document.getElementById("react-modals");
+  const modalDivRef = useRef(null);
+
+  useEffect(() => {
+    window.addEventListener("keydown", keyDownHandler);
+    return () => {
+      window.removeEventListener("keydown", keyDownHandler);
+    };
+  });
+
+  const keyDownHandler = (args) => {
+    if (args.key === "Escape") {
+      close();
+    }
+  };
+
+  const close = () => {
+    props.closeHandler();
+  };
 
   return ReactDOM.createPortal(
     <>
-      <ModalOverlay closeHandler={props.closeHandler} />
-      <div className={styles.modal}>
+      <ModalOverlay closeHandler={close} />
+      <div className={styles.modal} onKeyDown={close} ref={modalDivRef}>
         <ModalHeader
           caption={props.caption}
           closeHandler={props.closeHandler}
