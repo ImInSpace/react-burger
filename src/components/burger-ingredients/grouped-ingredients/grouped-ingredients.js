@@ -1,6 +1,7 @@
 import { Ingredient } from "../ingredient/ingredient";
 import PropTypes from "prop-types";
 import styles from "./grouped-ingredients.module.css";
+import { ingredientDataShape } from "../../../utils/prop-types";
 
 function GroupedIngredients(props) {
   return (
@@ -28,13 +29,6 @@ function GroupedIngredients(props) {
 }
 
 export { GroupedIngredients };
-
-const ingredientDataShape = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  price: PropTypes.number,
-  image: PropTypes.string,
-});
 
 GroupedIngredients.propTypes = {
   ingredient: ingredientDataShape,

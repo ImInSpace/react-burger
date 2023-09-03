@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
+import { ingredientDataShape } from "../../utils/prop-types";
 import {
   ConstructorElement,
   DragIcon,
@@ -55,18 +56,6 @@ function BurgerConstructor({ data }) {
     </div>
   );
 }
-
-const ingredientDataShape = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-});
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(ingredientDataShape),

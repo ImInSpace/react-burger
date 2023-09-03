@@ -3,6 +3,7 @@ import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
+import { ingredientDataShape } from "../../utils/prop-types";
 
 function BurgerIngredients({ data, handler }) {
   const groupType = {
@@ -42,18 +43,6 @@ function BurgerIngredients({ data, handler }) {
     </div>
   );
 }
-
-const ingredientDataShape = PropTypes.shape({
-  _id: PropTypes.string,
-  name: PropTypes.string,
-  type: PropTypes.string,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number,
-  image: PropTypes.string,
-});
 
 BurgerIngredients.propTypes = {
   data: PropTypes.arrayOf(ingredientDataShape),
