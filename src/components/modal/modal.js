@@ -8,7 +8,8 @@ function Modal(props) {
   const portal = document.getElementById("react-modals");
 
   return ReactDOM.createPortal(
-    <ModalOverlay closeHandler={props.closeHandler}>
+    <>
+      <ModalOverlay closeHandler={props.closeHandler} />
       <div className={styles.modal}>
         <ModalHeader
           caption={props.caption}
@@ -16,7 +17,7 @@ function Modal(props) {
         />
         {props.content}
       </div>
-    </ModalOverlay>,
+    </>,
     portal
   );
 }
