@@ -38,4 +38,9 @@ Modal.propTypes = {
   content: PropTypes.element.isRequired,
 };
 
+ModalHeader.propTypes = {
+  caption: PropTypes.string,
+  closeHandler: PropTypes.func,
+};
+
 export { Modal };
