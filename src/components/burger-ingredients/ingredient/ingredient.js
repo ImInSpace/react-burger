@@ -1,7 +1,7 @@
 import styles from "./ingredient.module.css";
 import PropTypes from "prop-types";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Price } from "../../price/price";
+import { Price } from "../../common/price/price";
 
 function Ingredient({ id, image, price, name, count, handler }) {
   return (

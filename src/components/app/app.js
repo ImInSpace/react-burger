@@ -2,11 +2,11 @@ import { AppHeader } from "../app-header/app-header";
 import styles from "./app.module.css";
 import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../burger-constructor/burger-constructor";
-import { CreateOrder } from "../burger-constructor/create-order/create-order";
+import { CreateOrder } from "../ui/create-order/create-order";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useState } from "react";
-import { Modal } from "../modal/modal";
+import { Modal } from "../ui/modal/modal";
 import * as Constants from "../../constants";
 import { fetchData } from "../../utils/request-handler";
 

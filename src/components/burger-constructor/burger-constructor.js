@@ -1,10 +1,8 @@
 import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
 import { ingredientDataShape } from "../../utils/prop-types";
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorRow } from "./constructor-row/constructor-row";
 
 function BurgerConstructor({ data }) {
   return (
@@ -59,20 +57,6 @@ function BurgerConstructor({ data }) {
 
 BurgerConstructor.propTypes = {
   data: PropTypes.arrayOf(ingredientDataShape),
-};
-
-function ConstructorRow({ children, showDragIcon }) {
-  return (
-    <div className={styles.row + " mt-4"}>
-      <div className="icon">{showDragIcon && <DragIcon />}</div>
-      {children}
-    </div>
-  );
-}
-
-ConstructorRow.propTypes = {
-  children: PropTypes.element,
-  showDragIcon: PropTypes.bool,
 };
 
 export { BurgerConstructor };
