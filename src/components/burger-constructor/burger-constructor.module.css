@@ -1,0 +1,15 @@
+.scrollContainer {
+  height: 600px;
+  overflow-y: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 0.1fr 0.9fr;
+  justify-items: center;
+  align-items: center;
+}
+
+.icon {
+  display: inline-block;
+}

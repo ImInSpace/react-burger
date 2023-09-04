@@ -1,0 +1,39 @@
+.header {
+  height: 88px;
+
+  background-color: #1c1c21;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  width: 1240px;
+  height: 88px;
+
+  justify-items: center;
+  align-items: center;
+
+  margin: 0 auto;
+}
+
+.leftMenu {
+  justify-self: start;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 27px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.rightMenu {
+  justify-self: end;
+
+  display: flex;
+  align-items: center;
+}

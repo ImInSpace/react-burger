@@ -1,0 +1,19 @@
+.container {
+  width: 520px;
+  margin: 0px auto;
+
+  text-align: center;
+}
+
+.imageContainer {
+  width: 100%;
+  height: 240px;
+
+  display: flex;
+  justify-content: center;
+}
+
+.macronutrients {
+  display: flex;
+  justify-content: space-between;
+}

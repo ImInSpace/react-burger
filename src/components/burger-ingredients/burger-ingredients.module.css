@@ -1,0 +1,17 @@
+.scrollContainer {
+  height: 620px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.buildBurgerText {
+  line-height: 40px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.row {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}

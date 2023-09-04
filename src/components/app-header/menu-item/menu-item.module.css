@@ -1,0 +1,15 @@
+.container {
+  height: 56px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  cursor: pointer;
+}
+
+.link {
+  text-decoration: none;
+  color: white;
+}
