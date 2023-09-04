@@ -34,7 +34,7 @@ function Modal(props) {
           caption={props.caption}
           closeHandler={props.closeHandler}
         />
-        {props.content}
+        {props.children}
       </div>
     </>,
     portal
@@ -55,7 +55,7 @@ function ModalHeader({ caption, closeHandler }) {
 Modal.propTypes = {
   caption: PropTypes.string,
   closeHandler: PropTypes.func,
-  content: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 ModalHeader.propTypes = {

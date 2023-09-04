@@ -64,15 +64,15 @@ function App() {
       </div>
 
       {isModalShown && (
-        <Modal closeHandler={closeModalHandler} content={<OrderDetails />} />
+        <Modal closeHandler={closeModalHandler}>
+          <OrderDetails />
+        </Modal>
       )}
 
       {selectedIngredient && (
-        <Modal
-          caption={"Детали инредиента"}
-          closeHandler={closeModalHandler}
-          content={<IngredientDetails data={selectedIngredient} />}
-        />
+        <Modal caption={"Детали инредиента"} closeHandler={closeModalHandler}>
+          <IngredientDetails data={selectedIngredient} />
+        </Modal>
       )}
     </div>
   );
