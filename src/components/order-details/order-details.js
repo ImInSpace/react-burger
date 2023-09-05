@@ -1,7 +1,7 @@
 import styles from "./order-details.module.css";
 import iconDone from "../../images/done.png";
 import { OrderNumber } from "./order-number/order-number";
-import { OrderStatus } from "./components/order-status/order-status";
+import { OrderStatus } from "./order-status/order-status";
 
 function OrderDetails() {
   return (
