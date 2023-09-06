@@ -20,7 +20,7 @@ function App() {
     getIngredients().then((json) => setIngredientsData(json.data));
   }, []);
 
-  const selectedIngredientsInitialState = { bun: null, ingredients: [] };
+  const reducerInitialState = { bun: null, ingredients: [] };
 
   function ingredientsReducer(state, action) {
     console.log("ingredients reducer. state:", state);
@@ -28,8 +28,11 @@ function App() {
 
     switch (action.type) {
       case "add":
-        console.log("add ingredient to constructor");
-        return null;
+        console.log("add ingredient to constructor:", action.ingredient);
+        return {
+          bun: null,
+          ingredients: [...state.ingredients, action.ingredient],
+        };
       case "remove":
         console.log("remove ingredient from constructor");
         return null;
@@ -40,7 +43,7 @@ function App() {
 
   const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(
     ingredientsReducer,
-    selectedIngredientsInitialState,
+    reducerInitialState,
     undefined
   );
 
@@ -71,7 +74,7 @@ function App() {
     // Список ингредиентов для конструктора.
     selectedIngredientsDispatcher({
       type: "add",
-      ingredient: selectedIngredient,
+      ingredient: selected,
     });
   }
 
@@ -81,7 +84,7 @@ function App() {
       <div className={styles.container}>
         <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
           {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={{ ingredients: selectedIngredients }}>
+          <BurgerConstructorContext.Provider value={{ ingredients: selectedIngredients.ingredients }}>
             <div className={styles.halfContainer}>
               <BurgerIngredients handler={ingredientClickHandler} />
             </div>
