@@ -50,17 +50,18 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
-        <div className={styles.halfContainer}>
-          <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
-            <BurgerIngredients handler={ingredientClickHandler} />
-          </IngredientsContext.Provider>
-        </div>
-        <div className={styles.halfContainer}>
+        <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
+          {/* prettier-ignore */}
           <BurgerConstructorContext.Provider value={{ ingredients: ingredientsData }}>
-            <BurgerConstructor />
-            <CreateOrder clickHandler={openModalHandler} />
+            <div className={styles.halfContainer}>
+              <BurgerIngredients handler={ingredientClickHandler} />
+            </div>
+            <div className={styles.halfContainer}>
+              <BurgerConstructor />
+              <CreateOrder clickHandler={openModalHandler} />
+            </div>
           </BurgerConstructorContext.Provider>
-        </div>
+        </IngredientsContext.Provider>
       </div>
 
       {isModalShown && (
