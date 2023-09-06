@@ -3,8 +3,7 @@ import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
-import { ingredientDataShape } from "../../utils/prop-types";
-import { IngredientsContext } from "../../ingredients-context";
+import { IngredientsContext } from "../../context/ingredients-context";
 import { useContext } from "react";
 
 function BurgerIngredients({ handler }) {

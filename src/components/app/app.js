@@ -8,7 +8,8 @@ import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useState } from "react";
 import { Modal } from "../ui/modal/modal";
 import { getIngredients } from "../../utils/api";
-import { IngredientsContext } from "../../ingredients-context";
+import { IngredientsContext } from "../../context/ingredients-context";
+import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState([]);
@@ -55,8 +56,10 @@ function App() {
           </IngredientsContext.Provider>
         </div>
         <div className={styles.halfContainer}>
-          <BurgerConstructor data={ingredientsData} />
-          <CreateOrder clickHandler={openModalHandler} />
+          <BurgerConstructorContext.Provider value={{ ingredients: ingredientsData }}>
+            <BurgerConstructor />
+            <CreateOrder clickHandler={openModalHandler} />
+          </BurgerConstructorContext.Provider>
         </div>
       </div>
 

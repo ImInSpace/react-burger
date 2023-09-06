@@ -1,13 +1,15 @@
-import PropTypes from "prop-types";
 import styles from "./burger-constructor.module.css";
-import { ingredientDataShape } from "../../utils/prop-types";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ConstructorRow } from "./constructor-row/constructor-row";
+import { useContext } from "react";
+import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 
-function BurgerConstructor({ data }) {
+function BurgerConstructor() {
+  const { ingredients } = useContext(BurgerConstructorContext);
+
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      {data?.map((details, index, arr) => {
+      {ingredients?.map((details, index, arr) => {
         if (index === 0) {
           return (
             <ConstructorRow
@@ -54,9 +56,5 @@ function BurgerConstructor({ data }) {
     </div>
   );
 }
-
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientDataShape),
-};
 
 export { BurgerConstructor };
