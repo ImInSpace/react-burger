@@ -23,13 +23,8 @@ function App() {
   const reducerInitialState = { bun: null, ingredients: [] };
 
   function ingredientsReducer(state, action) {
-    console.log("ingredients reducer. state:", state);
-    console.log("ingredients reducer. action:", action);
-
     switch (action.type) {
       case "add":
-        console.log("add ingredient to constructor:", action.ingredient);
-        console.log("add bun to constructor:", action.bun);
         if (action.ingredient.type === "bun") {
           return {
             bun: action.ingredient,

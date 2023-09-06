@@ -10,7 +10,7 @@ function Bun({ bunInfo, bunPosition }) {
     <ConstructorRow showDragIcon={false} key={"constructor_row_" + bunInfo._id}>
       <ConstructorElement
         type="top"
-        text={bunInfo.name + " (" + bunPosition + " )"}
+        text={bunInfo.name + " (" + bunPosition + ")"}
         price={bunInfo.price}
         thumbnail={bunInfo.image}
       />
