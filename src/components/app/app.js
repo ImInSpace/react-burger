@@ -5,7 +5,7 @@ import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { CreateOrder } from "../ui/create-order/create-order";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
 import { getIngredients } from "../../utils/api";
 import { IngredientsContext } from "../../context/ingredients-context";
@@ -19,6 +19,30 @@ function App() {
   useEffect(() => {
     getIngredients().then((json) => setIngredientsData(json.data));
   }, []);
+
+  const selectedIngredientsInitialState = { bun: null, ingredients: [] };
+
+  function ingredientsReducer(state, action) {
+    console.log("ingredients reducer. state:", state);
+    console.log("ingredients reducer. action:", action);
+
+    switch (action.type) {
+      case "add":
+        console.log("add ingredient to constructor");
+        return null;
+      case "remove":
+        console.log("remove ingredient from constructor");
+        return null;
+      default:
+        console.error("unknown action type: ", action.type);
+    }
+  }
+
+  const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(
+    ingredientsReducer,
+    selectedIngredientsInitialState,
+    undefined
+  );
 
   const openModalHandler = () => {
     setIsModalShown(true);
@@ -39,12 +63,17 @@ function App() {
       return;
     }
 
+    // Ингредиент, для модального окна.
     setSelectedIngredient(
       ingredientsData.find((ingredient) => ingredient._id === ingredientId)
     );
-  }
 
-  console.log(ingredientsData);
+    // Список ингредиентов для конструктора.
+    selectedIngredientsDispatcher({
+      type: "add",
+      ingredient: selectedIngredient,
+    });
+  }
 
   return (
     <div className={styles.app}>
@@ -52,7 +81,7 @@ function App() {
       <div className={styles.container}>
         <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
           {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={{ ingredients: ingredientsData }}>
+          <BurgerConstructorContext.Provider value={{ ingredients: selectedIngredients }}>
             <div className={styles.halfContainer}>
               <BurgerIngredients handler={ingredientClickHandler} />
             </div>
