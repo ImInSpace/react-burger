@@ -29,10 +29,18 @@ function App() {
     switch (action.type) {
       case "add":
         console.log("add ingredient to constructor:", action.ingredient);
-        return {
-          bun: null,
-          ingredients: [...state.ingredients, action.ingredient],
-        };
+        console.log("add bun to constructor:", action.bun);
+        if (action.ingredient.type === "bun") {
+          return {
+            bun: action.ingredient,
+            ingredients: [...state.ingredients],
+          };
+        } else {
+          return {
+            bun: state.bun,
+            ingredients: [...state.ingredients, action.ingredient],
+          };
+        }
       case "remove":
         console.log("remove ingredient from constructor");
         return null;
@@ -84,7 +92,7 @@ function App() {
       <div className={styles.container}>
         <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
           {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={{ ingredients: selectedIngredients.ingredients }}>
+          <BurgerConstructorContext.Provider value={selectedIngredients}>
             <div className={styles.halfContainer}>
               <BurgerIngredients handler={ingredientClickHandler} />
             </div>

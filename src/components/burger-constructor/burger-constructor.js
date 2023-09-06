@@ -3,56 +3,29 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 import { ConstructorRow } from "./constructor-row/constructor-row";
 import { useContext } from "react";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
+import { Bun } from "./bun/bun";
 
 function BurgerConstructor() {
-  const { ingredients } = useContext(BurgerConstructorContext);
+  const { ingredients, bun } = useContext(BurgerConstructorContext);
 
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      {ingredients?.map((details, index, arr) => {
-        if (index === 0) {
-          return (
-            <ConstructorRow
-              showDragIcon={false}
-              key={"constructor_row_" + details._id}
-            >
-              <ConstructorElement
-                type="top"
-                text={details.name + " (верх)"}
-                price={details.price}
-                thumbnail={details.image}
-              />
-            </ConstructorRow>
-          );
-        } else if (index === arr.length - 1) {
-          return (
-            <ConstructorRow
-              showDragIcon={false}
-              key={"constructor_row_" + details._id}
-            >
-              <ConstructorElement
-                type="bottom"
-                text={details.name + " (низ)"}
-                price={details.price}
-                thumbnail={details.image}
-              />
-            </ConstructorRow>
-          );
-        } else {
-          return (
-            <ConstructorRow
-              showDragIcon={true}
-              key={"constructor_row_" + details._id}
-            >
-              <ConstructorElement
-                text={details.name}
-                price={details.price}
-                thumbnail={details.image}
-              />
-            </ConstructorRow>
-          );
-        }
+      <Bun bunInfo={bun} bunPosition={"верх"} />
+      {ingredients?.map((ingredientInfo) => {
+        return (
+          <ConstructorRow
+            showDragIcon={true}
+            key={"constructor_row_" + ingredientInfo._id}
+          >
+            <ConstructorElement
+              text={ingredientInfo.name}
+              price={ingredientInfo.price}
+              thumbnail={ingredientInfo.image}
+            />
+          </ConstructorRow>
+        );
       })}
+      <Bun bunInfo={bun} bunPosition={"низ"} />
     </div>
   );
 }
