@@ -1,5 +1,5 @@
-export const INGREDIENTS_URL =
-  "https://norma.nomoreparties.space/api/ingredients";
+export const INGREDIENTS_URL = "https://norma.nomoreparties.space/api/ingredients"; // prettier-ignore
+export const CREATE_ORDER_URL = "https://norma.nomoreparties.space/api/orders";
 
 export const BUNS_GROUP_NAME = "Булки";
 export const SAUCES_GROUP_NAME = "Соусы";

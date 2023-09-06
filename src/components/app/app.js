@@ -7,7 +7,7 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
-import { getIngredients } from "../../utils/api";
+import { getIngredients, createOrderPOST } from "../../utils/api";
 import { IngredientsContext } from "../../context/ingredients-context";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 
@@ -49,6 +49,29 @@ function App() {
     reducerInitialState,
     undefined
   );
+
+  const createOrder = () => {
+    let ids = [];
+
+    if (selectedIngredients.ingredients.length > 0) {
+      ids = selectedIngredients.ingredients.map((ingredient) => {
+        return ingredient._id;
+      });
+    }
+
+    if (selectedIngredients.bun !== null) {
+      ids.push(selectedIngredients.bun._id);
+      ids.push(selectedIngredients.bun._id);
+    }
+
+    if (ids.length > 0) {
+      createOrderPOST({ ingredients: ids }).then((json) => {
+        console.log(json);
+      });
+    }
+
+    openModalHandler();
+  };
 
   const openModalHandler = () => {
     setIsModalShown(true);
@@ -93,7 +116,7 @@ function App() {
             </div>
             <div className={styles.halfContainer}>
               <BurgerConstructor />
-              <CreateOrder clickHandler={openModalHandler} />
+              <CreateOrder clickHandler={createOrder} />
             </div>
           </BurgerConstructorContext.Provider>
         </IngredientsContext.Provider>
