@@ -10,11 +10,13 @@ import { Modal } from "../ui/modal/modal";
 import { getIngredients, createOrderPOST } from "../../utils/api";
 import { IngredientsContext } from "../../context/ingredients-context";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
+import { CreateOrderContext } from "../../context/create-order-context";
 
 function App() {
   const [ingredientsData, setIngredientsData] = useState([]);
-  const [isModalShown, setIsModalShown] = useState(false);
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const [isOrderModalShown, setIsOrderModalShown] = useState(false);
+  const [ingredientInfo, setSelectedIngredient] = useState(null);
+  const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
     getIngredients().then((json) => setIngredientsData(json.data));
@@ -66,7 +68,9 @@ function App() {
 
     if (ids.length > 0) {
       createOrderPOST({ ingredients: ids }).then((json) => {
-        console.log(json);
+        setOrderNumber(json.order.number);
+        // console.log("json number:", json.order.number);
+        // console.log(json);
       });
     }
 
@@ -74,11 +78,11 @@ function App() {
   };
 
   const openModalHandler = () => {
-    setIsModalShown(true);
+    setIsOrderModalShown(true);
   };
 
   const closeModalHandler = () => {
-    setIsModalShown(false);
+    setIsOrderModalShown(false);
     setSelectedIngredient(null);
   };
 
@@ -122,15 +126,17 @@ function App() {
         </IngredientsContext.Provider>
       </div>
 
-      {isModalShown && (
+      {isOrderModalShown && (
         <Modal closeHandler={closeModalHandler}>
-          <OrderDetails />
+          <CreateOrderContext.Provider value={{ orderNumber }}>
+            <OrderDetails />
+          </CreateOrderContext.Provider>
         </Modal>
       )}
 
-      {selectedIngredient && (
+      {ingredientInfo && (
         <Modal caption={"Детали инредиента"} closeHandler={closeModalHandler}>
-          <IngredientDetails data={selectedIngredient} />
+          <IngredientDetails data={ingredientInfo} />
         </Modal>
       )}
     </div>
