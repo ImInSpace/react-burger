@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
+import { v4 as uuid } from "uuid";
 
 function BurgerConstructor() {
   const { selectedIngredients, selectedIngredientsDispatcher } = useContext(
@@ -21,6 +22,8 @@ function BurgerConstructor() {
           <Ingredient
             ingredientInfo={ingredientInfo}
             onDeleteHandler={deleteIngredient}
+            // Два одинаковых ингредиента, могут быть добавлены в конструктор бургеров.
+            key={"ingredient_" + uuid()}
           />
         );
       })}
