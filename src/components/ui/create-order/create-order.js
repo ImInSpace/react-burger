@@ -7,7 +7,8 @@ import { useContext } from "react";
 
 function CreateOrder(props) {
   const { clickHandler } = props;
-  const { ingredients, bun } = useContext(BurgerConstructorContext);
+  const { selectedIngredients } = useContext(BurgerConstructorContext);
+  const { ingredients, bun } = selectedIngredients;
 
   let sum = bun == null ? 0 : bun.price * 2;
   ingredients?.forEach((ingredient) => {

@@ -13,7 +13,7 @@ function Ingredient({ ingredientInfo, onDeleteHandler }) {
         text={ingredientInfo.name}
         price={ingredientInfo.price}
         thumbnail={ingredientInfo.image}
-        handleClose={onDeleteHandler}
+        handleClose={() => onDeleteHandler(ingredientInfo)}
       />
     </ConstructorRow>
   );

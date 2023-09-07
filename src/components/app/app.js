@@ -39,8 +39,15 @@ function App() {
           };
         }
       case "remove":
-        console.log("remove ingredient from constructor");
-        return null;
+        console.log("-- remove ingredient from constructor --");
+        const newArr = state.ingredients.filter(
+          (ingredient) => ingredient._id != action.ingredient._id
+        );
+        console.log("new array after element deltion:", newArr);
+        return {
+          bun: state.bun,
+          ingredients: newArr,
+        };
       default:
         console.error("unknown action type: ", action.type);
     }
@@ -114,7 +121,7 @@ function App() {
       <div className={styles.container}>
         <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
           {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={selectedIngredients}>
+          <BurgerConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
             <div className={styles.halfContainer}>
               <BurgerIngredients handler={ingredientClickHandler} />
             </div>

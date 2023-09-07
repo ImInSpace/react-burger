@@ -5,19 +5,29 @@ import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
 
 function BurgerConstructor() {
-  const { ingredients, bun } = useContext(BurgerConstructorContext);
+  const { selectedIngredients, selectedIngredientsDispatcher } = useContext(
+    BurgerConstructorContext
+  );
 
-  const deleteElement = () => {
-    console.log("on delete click!");
+  console.log("selected ingredients: :", selectedIngredients.bun);
+
+  const deleteIngredient = (ingredient) => {
+    console.log("on delete click!", ingredient);
+    selectedIngredientsDispatcher({ type: "remove", ingredient: ingredient });
   };
 
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      <Bun bunInfo={bun} bunPosition={"верх"} />
-      {ingredients?.map((ingredientInfo) => {
-        return <Ingredient ingredientInfo={ingredientInfo} />;
+      <Bun bunInfo={selectedIngredients.bun} bunPosition={"верх"} />
+      {selectedIngredients.ingredients?.map((ingredientInfo) => {
+        return (
+          <Ingredient
+            ingredientInfo={ingredientInfo}
+            onDeleteHandler={deleteIngredient}
+          />
+        );
       })}
-      <Bun bunInfo={bun} bunPosition={"низ"} />
+      <Bun bunInfo={selectedIngredients.bun} bunPosition={"низ"} />
     </div>
   );
 }
