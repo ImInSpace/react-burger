@@ -13,13 +13,10 @@ function GroupedIngredients(props) {
         {props.ingredients?.map((ingredient) => {
           return (
             <Ingredient
-              id={ingredient._id}
-              price={ingredient.price}
-              image={ingredient.image}
-              name={ingredient.name}
+              ingredientInfo={ingredient}
               count={undefined}
+              onClickHandler={props.handler}
               key={"ingredient_" + ingredient._id}
-              handler={props.handler}
             />
           );
         })}
@@ -32,7 +29,7 @@ export { GroupedIngredients };
 
 GroupedIngredients.propTypes = {
   ingredient: ingredientDataShape,
-  groupName: PropTypes.string,
-  anchor: PropTypes.string,
-  handler: PropTypes.func,
+  groupName: PropTypes.string.isRequired,
+  anchor: PropTypes.string.isRequired,
+  handler: PropTypes.func.isRequired,
 };

@@ -12,7 +12,7 @@ function Price({ price, textSize = "default" }) {
 }
 
 Price.propTypes = {
-  price: PropTypes.number,
+  price: PropTypes.number.isRequired,
   textSize: PropTypes.oneOf(["default", "medium", "large"]),
 };
 

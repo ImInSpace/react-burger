@@ -22,8 +22,7 @@ function BurgerConstructor() {
           <Ingredient
             ingredientInfo={ingredientInfo}
             onDeleteHandler={deleteIngredient}
-            // Два одинаковых ингредиента, могут быть добавлены в конструктор бургеров.
-            key={"ingredient_" + uuid()}
+            key={"ingredient_" + uuid()} // могут быть добавлены два одинаковых ингредиента.
           />
         );
       })}

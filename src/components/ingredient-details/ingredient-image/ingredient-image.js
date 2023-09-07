@@ -10,7 +10,7 @@ function IngredientImage({ img }) {
 }
 
 IngredientImage.propTypes = {
-  img: PropTypes.string,
+  img: PropTypes.string.isRequired,
 };
 
 export { IngredientImage };

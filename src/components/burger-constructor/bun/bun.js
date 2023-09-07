@@ -21,7 +21,7 @@ function Bun({ bunInfo, bunPosition }) {
 
 Bun.propTypes = {
   bunInfo: ingredientDataShape,
-  bunPosition: PropTypes.oneOf(["top", "bottom"]),
+  bunPosition: PropTypes.oneOf(["top", "bottom"]).isRequired,
 };
 
 export { Bun };
