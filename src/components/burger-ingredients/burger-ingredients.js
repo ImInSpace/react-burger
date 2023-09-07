@@ -3,18 +3,21 @@ import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
-import { ingredientDataShape } from "../../utils/prop-types";
+import { IngredientsContext } from "../../context/ingredients-context";
+import { useContext } from "react";
 
-function BurgerIngredients({ data, handler }) {
+function BurgerIngredients({ handler }) {
+  const { ingredients } = useContext(IngredientsContext);
+
   const groupType = {
     bun: "bun",
     sauce: "sauce",
     main: "main",
   };
 
-  const buns = data?.filter((element) => element.type === groupType.bun);
-  const sauces = data?.filter((element) => element.type === groupType.sauce); // prettier-ignore
-  const mains = data?.filter((element) => element.type === groupType.main);
+  const buns = ingredients?.filter((element) => element.type === groupType.bun);
+  const sauces = ingredients?.filter((element) => element.type === groupType.sauce); // prettier-ignore
+  const mains = ingredients?.filter((element) => element.type === groupType.main); // prettier-ignore
 
   return (
     <div>
@@ -45,7 +48,6 @@ function BurgerIngredients({ data, handler }) {
 }
 
 BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientDataShape),
   handler: PropTypes.func,
 };
 

@@ -1,5 +1,7 @@
 import styles from "./order-details.module.css";
 import iconDone from "../../images/done.png";
+import { OrderNumber } from "./order-number/order-number";
+import { OrderStatus } from "./order-status/order-status";
 
 function OrderDetails() {
   return (
@@ -8,34 +10,6 @@ function OrderDetails() {
       <img className="mt-15" src={iconDone} alt="order icon" />
       <OrderStatus />
     </div>
-  );
-}
-
-function OrderNumber() {
-  return (
-    <>
-      <p className={styles.orderNumber + " text text_type_digits-large mt-20"}>
-        034536
-      </p>
-      <p className="text text_type_main-medium mt-8">Идентификатор заказа</p>
-    </>
-  );
-}
-
-function OrderStatus() {
-  return (
-    <>
-      <p className="text text_type_main-default mt-15">
-        Ваш заказ начали готовить
-      </p>
-      <p
-        className={
-          styles.orderStatus + " text text_type_main-default mt-2 mb-20"
-        }
-      >
-        Дождитесь готовности на орбитальной станции
-      </p>
-    </>
   );
 }
 

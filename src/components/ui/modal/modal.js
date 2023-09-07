@@ -1,7 +1,7 @@
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal.module.css";
 import PropTypes from "prop-types";
-import { ModalOverlay } from "./modal-overlay/modal-overlay";
+import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
 import { useEffect, useRef } from "react";
 
@@ -34,7 +34,7 @@ function Modal(props) {
           caption={props.caption}
           closeHandler={props.closeHandler}
         />
-        {props.content}
+        {props.children}
       </div>
     </>,
     portal
@@ -55,7 +55,7 @@ function ModalHeader({ caption, closeHandler }) {
 Modal.propTypes = {
   caption: PropTypes.string,
   closeHandler: PropTypes.func,
-  content: PropTypes.element.isRequired,
+  children: PropTypes.element.isRequired,
 };
 
 ModalHeader.propTypes = {
