@@ -8,19 +8,25 @@ import { Bun } from "./bun/bun";
 function BurgerConstructor() {
   const { ingredients, bun } = useContext(BurgerConstructorContext);
 
+  const deleteElement = () => {
+    console.log('on delete click!');
+  }
+
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
       <Bun bunInfo={bun} bunPosition={"верх"} />
       {ingredients?.map((ingredientInfo) => {
         return (
           <ConstructorRow
-            showDragIcon={true}
-            key={"constructor_row_" + ingredientInfo._id}
+            showDragIcon={true}            
+             // Два одинаковых ингредиента, могут быть добавлены в конструктор бургеров.               
+            key={"constructor_row_" + crypto.randomUUID()}
           >
             <ConstructorElement
-              text={ingredientInfo.name}
+              text={ingredientInfo.name} 
               price={ingredientInfo.price}
               thumbnail={ingredientInfo.image}
+              handleClose={deleteElement}
             />
           </ConstructorRow>
         );
