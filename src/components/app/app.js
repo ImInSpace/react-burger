@@ -39,7 +39,6 @@ function App() {
           };
         }
       case "remove":
-        console.log("-- remove ingredient from constructor --");
         const newArr = state.ingredients.filter(
           (ingredient) => ingredient._id != action.ingredient._id
         );
@@ -75,8 +74,6 @@ function App() {
     if (ids.length > 0) {
       createOrderPOST({ ingredients: ids }).then((json) => {
         setOrderNumber(json.order.number);
-        // console.log("json number:", json.order.number);
-        // console.log(json);
       });
     }
 
