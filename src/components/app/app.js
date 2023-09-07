@@ -39,12 +39,11 @@ function App() {
           };
         }
       case "remove":
-        const newArr = state.ingredients.filter(
-          (ingredient) => ingredient._id != action.ingredient._id
-        );
         return {
           bun: state.bun,
-          ingredients: newArr,
+          ingredients: state.ingredients.filter(
+            (ingredient) => ingredient._id != action.ingredient._id
+          ),
         };
       default:
         console.error("unknown action type: ", action.type);
