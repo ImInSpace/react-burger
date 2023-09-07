@@ -9,8 +9,6 @@ function BurgerConstructor() {
     BurgerConstructorContext
   );
 
-  console.log("selected ingredients: :", selectedIngredients.bun);
-
   const deleteIngredient = (ingredient) => {
     selectedIngredientsDispatcher({ type: "remove", ingredient: ingredient });
   };
