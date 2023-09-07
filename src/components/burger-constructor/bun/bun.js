@@ -9,8 +9,8 @@ function Bun({ bunInfo, bunPosition }) {
   return (
     <ConstructorRow showDragIcon={false} key={"constructor_row_" + bunInfo._id}>
       <ConstructorElement
-        type="top"
-        text={bunInfo.name + " (" + bunPosition + ")"}
+        type={bunPosition}
+        text={bunInfo.name + (bunPosition === "top" ? "верх" : "низ")}
         price={bunInfo.price}
         thumbnail={bunInfo.image}
         isLocked={true}
@@ -21,7 +21,7 @@ function Bun({ bunInfo, bunPosition }) {
 
 Bun.propTypes = {
   bunInfo: ingredientDataShape,
-  bunPosition: PropTypes.oneOf(["верх", "низ"]),
+  bunPosition: PropTypes.oneOf(["top", "bottom"]),
 };
 
 export { Bun };

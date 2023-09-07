@@ -12,13 +12,12 @@ function BurgerConstructor() {
   console.log("selected ingredients: :", selectedIngredients.bun);
 
   const deleteIngredient = (ingredient) => {
-    console.log("on delete click!", ingredient);
     selectedIngredientsDispatcher({ type: "remove", ingredient: ingredient });
   };
 
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"верх"} />
+      <Bun bunInfo={selectedIngredients.bun} bunPosition={"top"} />
       {selectedIngredients.ingredients?.map((ingredientInfo) => {
         return (
           <Ingredient
@@ -27,7 +26,7 @@ function BurgerConstructor() {
           />
         );
       })}
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"низ"} />
+      <Bun bunInfo={selectedIngredients.bun} bunPosition={"bottom"} />
     </div>
   );
 }

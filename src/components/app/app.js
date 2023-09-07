@@ -43,7 +43,6 @@ function App() {
         const newArr = state.ingredients.filter(
           (ingredient) => ingredient._id != action.ingredient._id
         );
-        console.log("new array after element deltion:", newArr);
         return {
           bun: state.bun,
           ingredients: newArr,
