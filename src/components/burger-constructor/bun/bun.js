@@ -13,6 +13,7 @@ function Bun({ bunInfo, bunPosition }) {
         text={bunInfo.name + " (" + bunPosition + ")"}
         price={bunInfo.price}
         thumbnail={bunInfo.image}
+        isLocked={true}
       />
     </ConstructorRow>
   );
