@@ -1,5 +1,11 @@
+import {
+  GET_INGREDIENTS_FAILED,
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+} from "../actions/ingredients";
+
 const initialIngredientsState = {
-  ingredients: [],
+  items: [],
   builderIngredients: [],
   selectedIngredient: null,
 
@@ -7,11 +13,31 @@ const initialIngredientsState = {
   ingredientsRequestError: false,
 };
 
-const ingredientReducer = (state = initialIngredientsState, action) => {
+const ingredientsReducer = (state = initialIngredientsState, action) => {
   switch (action.type) {
+    case GET_INGREDIENTS_REQUEST: {
+      console.log("Выполняется запрос на получение ингредиентов...");
+      return { ...state, ingredientsRequest: true };
+    }
+    case GET_INGREDIENTS_SUCCESS: {
+      console.log("Запрос на получение инредиентов успешно выполнен.");
+      return {
+        ...state,
+        ingredientsRequest: false,
+        ingredientsRequestError: false,
+      };
+    }
+    case GET_INGREDIENTS_FAILED: {
+      console.log("Не удалось выполнить запрос на получение ингредиентов.");
+      return {
+        ...state,
+        ingredientsRequest: false,
+        ingredientsRequestError: true,
+      };
+    }
     default:
       return state;
   }
 };
 
-export { ingredientReducer };
+export { ingredientsReducer };

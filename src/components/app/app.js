@@ -11,16 +11,21 @@ import { getIngredients, createOrderPOST } from "../../utils/api";
 import { IngredientsContext } from "../../context/ingredients-context";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 import { CreateOrderContext } from "../../context/create-order-context";
+import { useDispatch, useSelector } from "react-redux";
+import { loadIngredients } from "../../services/actions/ingredients";
 
 function App() {
-  const [ingredientsData, setIngredientsData] = useState([]);
+  const dispatch = useDispatch();
+
+  const [ingredientsData, setIngredientsData] = useState();
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
   const [ingredientInfo, setSelectedIngredient] = useState(null);
   const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
+    dispatch(loadIngredients());
     getIngredients().then((json) => setIngredientsData(json.data));
-  }, []);
+  }, [dispatch]);
 
   const reducerInitialState = { bun: null, ingredients: [] };
 
