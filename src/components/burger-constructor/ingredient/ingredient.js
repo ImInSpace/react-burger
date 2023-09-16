@@ -23,7 +23,6 @@ function Ingredient({ ingredientInfo }) {
 
 Ingredient.propTypes = {
   ingredientInfo: ingredientDataShape.isRequired,
-  // onDeleteHandler: PropTypes.func.isRequired,
 };
 
 export { Ingredient };

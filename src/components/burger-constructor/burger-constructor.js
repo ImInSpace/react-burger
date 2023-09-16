@@ -9,8 +9,6 @@ function BurgerConstructor() {
     (store) => store.ingredients.constructorIngredients
   );
 
-  console.log("constructor ingredients: ", constructorIngredients);
-
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />

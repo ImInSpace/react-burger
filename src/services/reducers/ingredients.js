@@ -20,11 +20,9 @@ const initialIngredientsState = {
 const ingredientsReducer = (state = initialIngredientsState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
-      console.log("Выполняется запрос на получение ингредиентов...");
       return { ...state, ingredientsRequest: true };
     }
     case GET_INGREDIENTS_SUCCESS: {
-      console.log("Запрос на получение инредиентов успешно выполнен.");
       return {
         ...state,
         ingredients: action.items,
@@ -33,7 +31,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case GET_INGREDIENTS_FAILED: {
-      console.log("Не удалось выполнить запрос на получение ингредиентов.");
       return {
         ...state,
         ingredientsRequest: false,
@@ -41,14 +38,9 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case ADD_INGREDIENT: {
-      console.log("Добавление инредиента.");
-
       const ingredient = state.ingredients.find(
         (ingredient) => ingredient._id === action.id
       );
-
-      console.log("Добавляемый ингредиент", ingredient);
-      console.log("Тип добавляемого ингредиента: ", ingredient.type);
 
       if (ingredient.type === "bun") {
         return {
@@ -72,7 +64,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       }
     }
     case REMOVE_INGREDIENT: {
-      console.log("Удаление ингредиента.");
       return {
         ...state,
         constructorIngredients: state.constructorIngredients.filter(
@@ -81,7 +72,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case OPEN_INGREDIENTS_DETAILS: {
-      console.log("Открытие модального окна с информацией об ингредиенте.");
       return {
         ...state,
         selectedIngredient: state.ingredients.find(
@@ -90,7 +80,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case CLOSE_INGREDIENTS_DETAILS: {
-      console.log("Закрытие модального окна с информацией об ингредиенте.");
       return {
         ...state,
         selectedIngredient: null,

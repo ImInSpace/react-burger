@@ -7,8 +7,6 @@ import { createOrderAction } from "../../../services/actions/order";
 function CreateOrder() {
   const dispatch = useDispatch();
   const { constructorIngredients } = useSelector((store) => store.ingredients);
-  console.log("items: ", constructorIngredients);
-  console.log(constructorIngredients.ingredients?.map((item) => item._id));
 
   const { bun, ingredients } = useSelector(
     (store) => store.ingredients.constructorIngredients

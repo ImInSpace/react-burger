@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { ModalHeader } from "./modal-header/modal-header";
 import { useDispatch } from "react-redux";
 import { CLOSE_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
+import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
 
 function Modal(props) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function Modal(props) {
 
   const close = () => {
     dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
+    dispatch({ type: CLOSE_ORDER_MODAL });
   };
 
   return ReactDOM.createPortal(
