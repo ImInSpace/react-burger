@@ -1,15 +1,8 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
 import styles from "./tabs.module.css";
+import PropTypes from "prop-types";
 
-function Tabs(props) {
-  const switchTab = props.switchHandler;
-
-  const tabSwitchHandler = () => {
-    switchTab();
-  };
-
-  const [current, setCurrent] = useState("Булки");
+function Tabs({ current, setCurrent }) {
   return (
     <div style={{ display: "flex" }}>
       <Tab value="Булки" active={current === "Булки"} onClick={setCurrent}>
@@ -30,5 +23,10 @@ function Tabs(props) {
     </div>
   );
 }
+
+Tabs.propTypes = {
+  current: PropTypes.string.isRequired,
+  setCurrent: PropTypes.func.isRequired,
+};
 
 export { Tabs };

@@ -4,7 +4,7 @@ import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function BurgerIngredients() {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -36,16 +36,18 @@ function BurgerIngredients() {
       tabsRef.current.getBoundingClientRect().y;
 
     if (delta < 0) {
-      console.log("swap");
+      setCurrent("Соусы");
     }
     console.log(hiddenRef.current.getBoundingClientRect().y);
   };
+
+  const [current, setCurrent] = useState("Булки");
 
   return (
     <div>
       {/* prettier-ignore */}
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
-      <Tabs />
+      <Tabs current={current} setCurrent={setCurrent} />
       <div
         className={styles.scrollContainer + " custom-scroll mb-10"}
         onScroll={scrollHandler}
