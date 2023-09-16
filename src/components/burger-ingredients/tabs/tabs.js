@@ -2,7 +2,7 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
 import styles from "./tabs.module.css";
 
-function Tabs(props) {
+function Tabs() {
   const [current, setCurrent] = useState("Булки");
   return (
     <div style={{ display: "flex" }}>
