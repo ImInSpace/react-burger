@@ -1,11 +1,13 @@
-const initialState = {
+const initialIngredientsState = {
   ingredients: [],
   builderIngredients: [],
   selectedIngredient: null,
-  createdOrder: {},
+
+  ingredientsRequest: false,
+  ingredientsRequestError: false,
 };
 
-const ingredientReducer = (state = initialState, action) => {
+const ingredientReducer = (state = initialIngredientsState, action) => {
   switch (action.type) {
     default:
       return state;
