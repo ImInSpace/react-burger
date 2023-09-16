@@ -9,14 +9,12 @@ function getIngredients() {
 }
 
 function createOrderPOST(ids) {
-  console.log("POST: ", ids);
-  console.log("stringify: ", JSON.stringify(ids));
   return fetch(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(ids),
+    body: JSON.stringify({ ingredients: ids }),
   })
     .then((response) => checkResponse(response))
     .catch((err) => {
