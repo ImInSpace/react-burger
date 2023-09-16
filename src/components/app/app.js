@@ -16,7 +16,6 @@ import { loadIngredients } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
 
-  const [ingredientsData] = useState();
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
   const [ingredientInfo, setSelectedIngredient] = useState(null);
   const [orderNumber, setOrderNumber] = useState(0);
@@ -24,6 +23,8 @@ function App() {
   useEffect(() => {
     dispatch(loadIngredients());
   }, [dispatch]);
+
+  const { ingredients } = useSelector((store) => store.ingredients);
 
   const reducerInitialState = { bun: null, ingredients: [] };
 
@@ -93,7 +94,7 @@ function App() {
   };
 
   function ingredientClickHandler(ingredientId) {
-    const selected = ingredientsData.find(
+    const selected = ingredients.find(
       (ingredient) => ingredient._id === ingredientId
     );
 
@@ -104,7 +105,7 @@ function App() {
 
     // Ингредиент, для модального окна.
     setSelectedIngredient(
-      ingredientsData.find((ingredient) => ingredient._id === ingredientId)
+      ingredients.find((ingredient) => ingredient._id === ingredientId)
     );
 
     // Список ингредиентов для конструктора.
