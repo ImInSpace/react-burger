@@ -64,11 +64,16 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       }
     }
     case REMOVE_INGREDIENT: {
+      const filtered = state.constructorIngredients.ingredients.filter(
+        (ingredient) => ingredient._id !== action.id
+      );
+
       return {
         ...state,
-        constructorIngredients: state.constructorIngredients.filter(
-          (ingredient) => ingredient._id !== action.id
-        ),
+        constructorIngredients: {
+          bun: state.constructorIngredients.bun,
+          ingredients: filtered,
+        },
       };
     }
     case OPEN_INGREDIENTS_DETAILS: {
