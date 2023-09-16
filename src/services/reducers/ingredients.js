@@ -42,13 +42,34 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
     }
     case ADD_INGREDIENT: {
       console.log("Добавление инредиента.");
-      return {
-        ...state,
-        constructorIngredients: [
-          ...state.constructorIngredients,
-          state.ingredients.find((ingredient) => ingredient._id === action._id),
-        ],
-      };
+
+      const ingredient = state.ingredients.find(
+        (ingredient) => ingredient._id === action.id
+      );
+
+      console.log("Добавляемый ингредиент", ingredient);
+      console.log("Тип добавляемого ингредиента: ", ingredient.type);
+
+      if (ingredient.type === "bun") {
+        return {
+          ...state,
+          constructorIngredients: {
+            bun: ingredient,
+            ingredients: [...state.constructorIngredients.ingredients],
+          },
+        };
+      } else {
+        return {
+          ...state,
+          constructorIngredients: {
+            bun: state.constructorIngredients.bun,
+            ingredients: [
+              ...state.constructorIngredients.ingredients,
+              ingredient,
+            ],
+          },
+        };
+      }
     }
     case REMOVE_INGREDIENT: {
       console.log("Удаление ингредиента.");

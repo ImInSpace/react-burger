@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import styles from "./grouped-ingredients.module.css";
 import { ingredientDataShape } from "../../../utils/prop-types";
 import { useDispatch } from "react-redux";
-import { OPEN_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
+import {
+  ADD_INGREDIENT,
+  OPEN_INGREDIENTS_DETAILS,
+} from "../../../services/actions/ingredients";
 
 function GroupedIngredients(props) {
   const dispatch = useDispatch();
@@ -11,6 +14,11 @@ function GroupedIngredients(props) {
   const clickHandler = (id) => {
     dispatch({
       type: OPEN_INGREDIENTS_DETAILS,
+      id: id,
+    });
+
+    dispatch({
+      type: ADD_INGREDIENT,
       id: id,
     });
   };

@@ -5,24 +5,24 @@ import { v4 as uuid } from "uuid";
 import { useSelector } from "react-redux";
 
 function BurgerConstructor() {
-  const selectedIngredients = useSelector(
+  const constructorIngredients = useSelector(
     (store) => store.ingredients.constructorIngredients
   );
 
-  console.log("selected ingredients: ", selectedIngredients);
+  console.log("constructor ingredients: ", constructorIngredients);
 
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"top"} />
-      {selectedIngredients.ingredients?.map((ingredientInfo) => {
+      <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
+      {constructorIngredients.ingredients?.map((ingredientInfo) => {
         return (
           <Ingredient
             ingredientInfo={ingredientInfo}
-            key={"ingredient_" + uuid()} // могут быть добавлены два одинаковых ингредиента.
+            key={"ingredient_" + uuid()}
           />
         );
       })}
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"bottom"} />
+      <Bun bunInfo={constructorIngredients.bun} bunPosition={"bottom"} />
     </div>
   );
 }

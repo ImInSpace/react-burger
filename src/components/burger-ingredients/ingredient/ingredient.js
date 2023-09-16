@@ -2,13 +2,31 @@ import styles from "./ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { ingredientDataShape } from "../../../utils/prop-types";
-import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import {
+  ADD_INGREDIENT,
+  OPEN_INGREDIENTS_DETAILS,
+} from "../../../services/actions/ingredients";
 
-function Ingredient({ ingredientInfo, onClickHandler }) {
+function Ingredient({ ingredientInfo }) {
+  const dispatch = useDispatch();
+
+  const showIngredientInfo = (id) => {
+    dispatch({
+      type: OPEN_INGREDIENTS_DETAILS,
+      id: id,
+    });
+
+    dispatch({
+      type: ADD_INGREDIENT,
+      id: id,
+    });
+  };
+
   return (
     <div
       className={styles.card}
-      onClick={() => onClickHandler(ingredientInfo._id)}
+      onClick={() => showIngredientInfo(ingredientInfo._id)}
     >
       {ingredientInfo.count && (
         <div className={styles.counter}>
@@ -39,5 +57,4 @@ export { Ingredient };
 
 Ingredient.propTypes = {
   ingredientInfo: ingredientDataShape.isRequired,
-  onClickHandler: PropTypes.func.isRequired,
 };
