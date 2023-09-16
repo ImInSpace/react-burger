@@ -9,11 +9,7 @@ import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
 import { createOrderPOST } from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  CLOSE_INGREDIENTS_DETAILS,
-  loadIngredients,
-} from "../../services/actions/ingredients";
-import { OPEN_INGREDIENTS_DETAILS } from "../../services/actions/ingredients";
+import { loadIngredients } from "../../services/actions/ingredients";
 
 function App() {
   const dispatch = useDispatch();
@@ -22,14 +18,11 @@ function App() {
   );
 
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
-  // const [ingredientInfo, setSelectedIngredient] = useState(null);
   const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
     dispatch(loadIngredients());
   }, [dispatch]);
-
-  const { ingredients } = useSelector((store) => store.ingredients);
 
   const reducerInitialState = { bun: null, ingredients: [] };
 
@@ -93,27 +86,12 @@ function App() {
     setIsOrderModalShown(true);
   };
 
-  const closeModalHandler = () => {
-    setIsOrderModalShown(false);
-    dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
-  };
-
-  function ingredientClickHandler(ingredientId) {
-    dispatch({ type: OPEN_INGREDIENTS_DETAILS, id: ingredientId });
-
-    // Список ингредиентов для конструктора.
-    // selectedIngredientsDispatcher({
-    //   type: "add",
-    //   ingredient: selected,
-    // });
-  }
-
   return (
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
         <div className={styles.halfContainer}>
-          <BurgerIngredients handler={ingredientClickHandler} />
+          <BurgerIngredients />
         </div>
         <div className={styles.halfContainer}>
           <BurgerConstructor />
@@ -122,13 +100,13 @@ function App() {
       </div>
 
       {isOrderModalShown && (
-        <Modal closeHandler={closeModalHandler}>
+        <Modal>
           <OrderDetails />
         </Modal>
       )}
 
       {selectedIngredient && (
-        <Modal caption={"Детали инредиента"} closeHandler={closeModalHandler}>
+        <Modal caption={"Детали инредиента"}>
           <IngredientDetails data={selectedIngredient} />
         </Modal>
       )}

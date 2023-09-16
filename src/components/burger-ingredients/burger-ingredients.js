@@ -5,7 +5,7 @@ import * as Constants from "../../constants";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
-function BurgerIngredients({ handler }) {
+function BurgerIngredients() {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const groupType = {
@@ -28,19 +28,16 @@ function BurgerIngredients({ handler }) {
           ingredients={buns}
           groupName={Constants.BUNS_GROUP_NAME}
           anchor={Constants.BUNS_ANCHOR}
-          handler={handler}
         />
         <GroupedIngredients
           ingredients={sauces}
           groupName={Constants.SAUCES_GROUP_NAME}
           anchor={Constants.SAUCES_ANCHOR}
-          handler={handler}
         />
         <GroupedIngredients
           ingredients={mains}
           groupName={Constants.MAINS_GROUP_NAME}
           anchor={Constants.MAINS_ANCHOR}
-          handler={handler}
         />
       </div>
     </div>
