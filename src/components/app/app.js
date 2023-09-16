@@ -8,8 +8,6 @@ import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
 import { createOrderPOST } from "../../utils/api";
-import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
-import { CreateOrderContext } from "../../context/create-order-context";
 import { useDispatch, useSelector } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
 
@@ -119,23 +117,18 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
-        {/* prettier-ignore */}
-        <BurgerConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
-            <div className={styles.halfContainer}>
-              <BurgerIngredients handler={ingredientClickHandler} />
-            </div>
-            <div className={styles.halfContainer}>
-              <BurgerConstructor />
-              <CreateOrder clickHandler={createOrder} />
-            </div>
-          </BurgerConstructorContext.Provider>
+        <div className={styles.halfContainer}>
+          <BurgerIngredients handler={ingredientClickHandler} />
+        </div>
+        <div className={styles.halfContainer}>
+          <BurgerConstructor />
+          <CreateOrder clickHandler={createOrder} />
+        </div>
       </div>
 
       {isOrderModalShown && (
         <Modal closeHandler={closeModalHandler}>
-          <CreateOrderContext.Provider value={{ orderNumber }}>
-            <OrderDetails />
-          </CreateOrderContext.Provider>
+          <OrderDetails />
         </Modal>
       )}
 

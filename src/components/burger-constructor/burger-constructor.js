@@ -1,18 +1,15 @@
 import styles from "./burger-constructor.module.css";
-import { useContext } from "react";
-import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
 import { v4 as uuid } from "uuid";
+import { useSelector } from "react-redux";
 
 function BurgerConstructor() {
-  const { selectedIngredients, selectedIngredientsDispatcher } = useContext(
-    BurgerConstructorContext
+  const selectedIngredients = useSelector(
+    (store) => store.ingredients.constructorIngredients
   );
 
-  const deleteIngredient = (ingredient) => {
-    selectedIngredientsDispatcher({ type: "remove", ingredient: ingredient });
-  };
+  console.log("selected ingredients: ", selectedIngredients);
 
   return (
     <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
@@ -21,7 +18,6 @@ function BurgerConstructor() {
         return (
           <Ingredient
             ingredientInfo={ingredientInfo}
-            onDeleteHandler={deleteIngredient}
             key={"ingredient_" + uuid()} // могут быть добавлены два одинаковых ингредиента.
           />
         );

@@ -1,10 +1,9 @@
 import styles from "./order-number.module.css";
 import PropTypes from "prop-types";
-import { useContext } from "react";
-import { CreateOrderContext } from "../../../context/create-order-context";
+import { useSelector } from "react-redux";
 
 function OrderNumber() {
-  const { orderNumber } = useContext(CreateOrderContext);
+  const orderNumber = useSelector((store) => store.order.number);
 
   return (
     <>

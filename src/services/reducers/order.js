@@ -1,5 +1,5 @@
 const initialOrderState = {
-  orderNumber: 0,
+  number: 0,
   orderRequest: false,
   orderRequestError: false,
 };

@@ -2,13 +2,13 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./create-order.module.css";
 import { Price } from "../../common/price/price";
 import PropTypes from "prop-types";
-import { BurgerConstructorContext } from "../../../context/burder-contstructor-context";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 function CreateOrder(props) {
   const { clickHandler } = props;
-  const { selectedIngredients } = useContext(BurgerConstructorContext);
-  const { ingredients, bun } = selectedIngredients;
+  const { ingredients, bun } = useSelector(
+    (store) => store.ingredients.constructorIngredients
+  );
 
   let sum = bun == null ? 0 : bun.price * 2;
   ingredients?.forEach((ingredient) => {
