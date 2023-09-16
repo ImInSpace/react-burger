@@ -5,7 +5,7 @@ import {
 } from "../actions/ingredients";
 
 const initialIngredientsState = {
-  items: [],
+  ingredients: [],
   builderIngredients: [],
   selectedIngredient: null,
 
@@ -23,6 +23,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       console.log("Запрос на получение инредиентов успешно выполнен.");
       return {
         ...state,
+        ingredients: action.items,
         ingredientsRequest: false,
         ingredientsRequestError: false,
       };

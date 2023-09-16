@@ -7,8 +7,7 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
 import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
-import { getIngredients, createOrderPOST } from "../../utils/api";
-import { IngredientsContext } from "../../context/ingredients-context";
+import { createOrderPOST } from "../../utils/api";
 import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 import { CreateOrderContext } from "../../context/create-order-context";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,14 +16,13 @@ import { loadIngredients } from "../../services/actions/ingredients";
 function App() {
   const dispatch = useDispatch();
 
-  const [ingredientsData, setIngredientsData] = useState();
+  const [ingredientsData] = useState();
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
   const [ingredientInfo, setSelectedIngredient] = useState(null);
   const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
     dispatch(loadIngredients());
-    getIngredients().then((json) => setIngredientsData(json.data));
   }, [dispatch]);
 
   const reducerInitialState = { bun: null, ingredients: [] };
@@ -120,9 +118,8 @@ function App() {
     <div className={styles.app}>
       <AppHeader />
       <div className={styles.container}>
-        <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
-          {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
+        {/* prettier-ignore */}
+        <BurgerConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
             <div className={styles.halfContainer}>
               <BurgerIngredients handler={ingredientClickHandler} />
             </div>
@@ -131,7 +128,6 @@ function App() {
               <CreateOrder clickHandler={createOrder} />
             </div>
           </BurgerConstructorContext.Provider>
-        </IngredientsContext.Provider>
       </div>
 
       {isOrderModalShown && (

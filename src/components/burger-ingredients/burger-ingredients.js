@@ -3,11 +3,10 @@ import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
-import { IngredientsContext } from "../../context/ingredients-context";
-import { useContext } from "react";
+import { useSelector } from "react-redux";
 
 function BurgerIngredients({ handler }) {
-  const { ingredients } = useContext(IngredientsContext);
+  const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const groupType = {
     bun: "bun",
@@ -15,6 +14,7 @@ function BurgerIngredients({ handler }) {
     main: "main",
   };
 
+  // ToDo: Добавить useMemo() хук.
   const buns = ingredients?.filter((element) => element.type === groupType.bun);
   const sauces = ingredients?.filter((element) => element.type === groupType.sauce); // prettier-ignore
   const mains = ingredients?.filter((element) => element.type === groupType.main); // prettier-ignore

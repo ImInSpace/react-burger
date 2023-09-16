@@ -8,7 +8,7 @@ export function loadIngredients() {
   return function (dispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
     getIngredients().then((res) => {
-      if (res && res.success) {
+      if (res.success === true) {
         dispatch({
           type: GET_INGREDIENTS_SUCCESS,
           items: res.data,
