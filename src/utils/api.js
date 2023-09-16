@@ -9,6 +9,8 @@ function getIngredients() {
 }
 
 function createOrderPOST(ids) {
+  console.log("POST: ", ids);
+  console.log("stringify: ", JSON.stringify(ids));
   return fetch(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {

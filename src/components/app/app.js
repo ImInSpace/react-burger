@@ -22,24 +22,24 @@ function App() {
     dispatch(loadIngredients());
   }, [dispatch]);
 
-  const createOrder = () => {
-    // let ids = [];
-    // if (selectedIngredients.ingredients.length > 0) {
-    //   ids = selectedIngredients.ingredients.map((ingredient) => {
-    //     return ingredient._id;
-    //   });
-    // }
-    // if (selectedIngredients.bun !== null) {
-    //   ids.push(selectedIngredients.bun._id);
-    //   ids.push(selectedIngredients.bun._id);
-    // }
-    // if (ids.length > 0) {
-    //   createOrderPOST({ ingredients: ids }).then((json) => {
-    //     setOrderNumber(json.order.number);
-    //   });
-    // }
-    // openModalHandler();
-  };
+  //const createOrder = () => {
+  // let ids = [];
+  // if (selectedIngredients.ingredients.length > 0) {
+  //   ids = selectedIngredients.ingredients.map((ingredient) => {
+  //     return ingredient._id;
+  //   });
+  // }
+  // if (selectedIngredients.bun !== null) {
+  //   ids.push(selectedIngredients.bun._id);
+  //   ids.push(selectedIngredients.bun._id);
+  // }
+  // if (ids.length > 0) {
+  //   createOrderPOST({ ingredients: ids }).then((json) => {
+  //     setOrderNumber(json.order.number);
+  //   });
+  // }
+  // openModalHandler();
+  //};
 
   // const openModalHandler = () => {
   //   setIsOrderModalShown(true);
@@ -54,7 +54,7 @@ function App() {
         </div>
         <div className={styles.halfContainer}>
           <BurgerConstructor />
-          <CreateOrder clickHandler={createOrder} />
+          <CreateOrder />
         </div>
       </div>
 
