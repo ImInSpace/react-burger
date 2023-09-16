@@ -21,7 +21,8 @@ function BurgerIngredients() {
   const mains = ingredients?.filter((element) => element.type === groupType.main); // prettier-ignore
 
   const tabsRef = useRef(null);
-  const hiddenRef = useRef(null);
+  const saucesRef = useRef(null);
+  const mainsRef = useRef(null);
 
   useEffect(() => {
     console.log(
@@ -31,14 +32,25 @@ function BurgerIngredients() {
   });
 
   const scrollHandler = () => {
-    const delta =
-      hiddenRef.current.getBoundingClientRect().y -
+    var mainsDelta =
+      mainsRef.current.getBoundingClientRect().y -
       tabsRef.current.getBoundingClientRect().y;
 
-    if (delta < 0) {
-      setCurrent("Соусы");
+    if (mainsDelta < 0) {
+      setCurrent(Constants.MAINS_GROUP_NAME);
+      return;
     }
-    console.log(hiddenRef.current.getBoundingClientRect().y);
+
+    mainsDelta =
+      saucesRef.current.getBoundingClientRect().y -
+      tabsRef.current.getBoundingClientRect().y;
+
+    if (mainsDelta < 0) {
+      setCurrent(Constants.SAUCES_GROUP_NAME);
+      return;
+    }
+
+    setCurrent(Constants.BUNS_GROUP_NAME);
   };
 
   const [current, setCurrent] = useState("Булки");
@@ -58,12 +70,13 @@ function BurgerIngredients() {
           groupName={Constants.BUNS_GROUP_NAME}
           anchor={Constants.BUNS_ANCHOR}
         />
-        <div ref={hiddenRef}></div>
+        <div ref={saucesRef}></div>
         <GroupedIngredients
           ingredients={sauces}
           groupName={Constants.SAUCES_GROUP_NAME}
           anchor={Constants.SAUCES_ANCHOR}
         />
+        <div ref={mainsRef}></div>
         <GroupedIngredients
           ingredients={mains}
           groupName={Constants.MAINS_GROUP_NAME}
