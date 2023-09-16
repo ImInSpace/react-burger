@@ -9,13 +9,20 @@ import { useEffect, useReducer, useState } from "react";
 import { Modal } from "../ui/modal/modal";
 import { createOrderPOST } from "../../utils/api";
 import { useDispatch, useSelector } from "react-redux";
-import { loadIngredients } from "../../services/actions/ingredients";
+import {
+  CLOSE_INGREDIENTS_DETAILS,
+  loadIngredients,
+} from "../../services/actions/ingredients";
+import { OPEN_INGREDIENTS_DETAILS } from "../../services/actions/ingredients";
 
 function App() {
   const dispatch = useDispatch();
+  const selectedIngredient = useSelector(
+    (store) => store.ingredients.selectedIngredient
+  );
 
   const [isOrderModalShown, setIsOrderModalShown] = useState(false);
-  const [ingredientInfo, setSelectedIngredient] = useState(null);
+  // const [ingredientInfo, setSelectedIngredient] = useState(null);
   const [orderNumber, setOrderNumber] = useState(0);
 
   useEffect(() => {
@@ -88,29 +95,17 @@ function App() {
 
   const closeModalHandler = () => {
     setIsOrderModalShown(false);
-    setSelectedIngredient(null);
+    dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
   };
 
   function ingredientClickHandler(ingredientId) {
-    const selected = ingredients.find(
-      (ingredient) => ingredient._id === ingredientId
-    );
-
-    if (selected == null) {
-      console.error("Ингредиент не обнаружен. {id}: ", ingredientId);
-      return;
-    }
-
-    // Ингредиент, для модального окна.
-    setSelectedIngredient(
-      ingredients.find((ingredient) => ingredient._id === ingredientId)
-    );
+    dispatch({ type: OPEN_INGREDIENTS_DETAILS, id: ingredientId });
 
     // Список ингредиентов для конструктора.
-    selectedIngredientsDispatcher({
-      type: "add",
-      ingredient: selected,
-    });
+    // selectedIngredientsDispatcher({
+    //   type: "add",
+    //   ingredient: selected,
+    // });
   }
 
   return (
@@ -132,9 +127,9 @@ function App() {
         </Modal>
       )}
 
-      {ingredientInfo && (
+      {selectedIngredient && (
         <Modal caption={"Детали инредиента"} closeHandler={closeModalHandler}>
-          <IngredientDetails data={ingredientInfo} />
+          <IngredientDetails data={selectedIngredient} />
         </Modal>
       )}
     </div>

@@ -7,6 +7,9 @@ export const GET_INGREDIENTS_FAILED = "GET_INGREDIENTS_FAILED";
 export const ADD_INGREDIENT = "ADD_INGREDIENT";
 export const REMOVE_INGREDIENT = "REMOVE_INGREDIENT";
 
+export const OPEN_INGREDIENTS_DETAILS = "OPEN_INGREDIENTS_DETAILS";
+export const CLOSE_INGREDIENTS_DETAILS = "CLOSE_INGREDIENTS_DETAILS"; // prettier-ignore
+
 export function loadIngredients() {
   return function (dispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
