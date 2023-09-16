@@ -4,7 +4,7 @@ import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 function BurgerIngredients() {
   const ingredients = useSelector((store) => store.ingredients.ingredients);
@@ -21,36 +21,38 @@ function BurgerIngredients() {
   const mains = ingredients?.filter((element) => element.type === groupType.main); // prettier-ignore
 
   const tabsRef = useRef(null);
+  const bunsRef = useRef(null);
   const saucesRef = useRef(null);
   const mainsRef = useRef(null);
 
-  useEffect(() => {
-    console.log(
-      "tab position (y): ",
-      tabsRef.current.getBoundingClientRect().y
-    );
-  });
-
   const scrollHandler = () => {
-    var mainsDelta =
+    const bunsDelta =
+      bunsRef.current.getBoundingClientRect().y -
+      tabsRef.current.getBoundingClientRect().y;
+
+    if (bunsDelta > -20 && bunsDelta < 20) {
+      setCurrent(Constants.BUNS_GROUP_NAME);
+      return;
+    }
+
+    const mainsDelta =
       mainsRef.current.getBoundingClientRect().y -
       tabsRef.current.getBoundingClientRect().y;
 
-    if (mainsDelta < 0) {
+    if (mainsDelta > -20 && mainsDelta < 20) {
       setCurrent(Constants.MAINS_GROUP_NAME);
       return;
     }
 
-    mainsDelta =
+    const saucesDelta =
       saucesRef.current.getBoundingClientRect().y -
       tabsRef.current.getBoundingClientRect().y;
 
-    if (mainsDelta < 0) {
+    console.log(saucesDelta);
+    if (saucesDelta > -20 && saucesDelta < 20) {
       setCurrent(Constants.SAUCES_GROUP_NAME);
       return;
     }
-
-    setCurrent(Constants.BUNS_GROUP_NAME);
   };
 
   const [current, setCurrent] = useState("Булки");
@@ -65,6 +67,7 @@ function BurgerIngredients() {
         onScroll={scrollHandler}
         ref={tabsRef}
       >
+        <div ref={bunsRef}></div>
         <GroupedIngredients
           ingredients={buns}
           groupName={Constants.BUNS_GROUP_NAME}
