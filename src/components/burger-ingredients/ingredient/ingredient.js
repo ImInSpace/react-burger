@@ -5,9 +5,19 @@ import { ingredientDataShape } from "../../../utils/prop-types";
 import { useDispatch } from "react-redux";
 import { OPEN_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
 import { useDrag } from "react-dnd";
+import { useSelector } from "react-redux";
+import { useMemo } from "react";
 
 function Ingredient({ ingredientInfo }) {
   const dispatch = useDispatch();
+  const data = useSelector(
+    (store) => store.ingredients.constructorIngredients.ingredients
+  );
+
+  const counter = useMemo(() => {
+    return data.filter((ingredient) => ingredient._id === ingredientInfo._id)
+      .length;
+  }, [data, ingredientInfo]);
 
   const [{ isHover }, dragRef] = useDrag({
     type: "ingredient",
@@ -27,13 +37,9 @@ function Ingredient({ ingredientInfo }) {
       onClick={() => showIngredientInfo(ingredientInfo._id)}
       ref={dragRef}
     >
-      {ingredientInfo.count && (
+      {counter > 0 && (
         <div className={styles.counter}>
-          <Counter
-            count={ingredientInfo.count}
-            size="default"
-            extraClass="mr-5"
-          />
+          <Counter count={counter} size="default" extraClass="mr-5" />
         </div>
       )}
       <div className={styles.image}>
