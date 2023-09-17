@@ -66,7 +66,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
     }
     case REMOVE_INGREDIENT: {
       const filtered = state.constructorIngredients.ingredients.filter(
-        (ingredient) => ingredient._id !== action.id
+        (ingredient, index) => index !== action.index
       );
 
       return {

@@ -78,15 +78,6 @@ function Ingredient({ ingredientInfo, index }) {
     }),
   });
 
-  // const moveCard = (dragIndex, hoverIndex) => {
-  //     update(prevCards, {
-  //       $splice: [
-  //         [dragIndex, 1],
-  //         [hoverIndex, 0, prevCards[dragIndex]],
-  //       ],
-  //     }),
-  //   }
-
   drag(drop(draggableRowRef));
 
   return (
@@ -97,7 +88,7 @@ function Ingredient({ ingredientInfo, index }) {
           price={ingredientInfo.price}
           thumbnail={ingredientInfo.image}
           handleClose={() =>
-            dispatch({ type: REMOVE_INGREDIENT, id: ingredientInfo._id })
+            dispatch({ type: REMOVE_INGREDIENT, index: index })
           }
         />
       </ConstructorRow>
