@@ -70,6 +70,8 @@ function Ingredient({ ingredientInfo, index }) {
     }),
   });
 
+  drag(drop(draggableRowRef));
+
   return (
     <div ref={draggableRowRef} draggable className={styles.dragPointer}>
       <ConstructorRow showDragIcon={true}>
