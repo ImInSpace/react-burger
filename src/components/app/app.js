@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { Modal } from "../ui/modal/modal";
 import { useDispatch, useSelector } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,15 +30,17 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <div className={styles.container}>
-        <div className={styles.halfContainer}>
-          <BurgerIngredients />
+      <DndProvider backend={HTML5Backend}>
+        <div className={styles.container}>
+          <div className={styles.halfContainer}>
+            <BurgerIngredients />
+          </div>
+          <div className={styles.halfContainer}>
+            <BurgerConstructor />
+            <CreateOrder />
+          </div>
         </div>
-        <div className={styles.halfContainer}>
-          <BurgerConstructor />
-          <CreateOrder />
-        </div>
-      </div>
+      </DndProvider>
 
       {isCreateOrderModalShown && (
         <Modal>

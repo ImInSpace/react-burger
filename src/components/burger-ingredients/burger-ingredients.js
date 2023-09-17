@@ -48,7 +48,7 @@ function BurgerIngredients() {
       saucesRef.current.getBoundingClientRect().y -
       tabsRef.current.getBoundingClientRect().y;
 
-    console.log(saucesDelta);
+    // console.log(saucesDelta);
     if (saucesDelta > -20 && saucesDelta < 20) {
       setCurrent(Constants.SAUCES_GROUP_NAME);
       return;
