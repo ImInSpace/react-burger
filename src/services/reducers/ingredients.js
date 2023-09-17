@@ -46,14 +46,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       if (ingredient.type === "bun") {
         return {
           ...state,
-          ingredients: [
-            state.ingredients.map((ingredient) => {
-              if (ingredient._id === action.id) {
-                ingredient.count++;
-              }
-              return ingredient;
-            }),
-          ],
           constructorIngredients: {
             bun: ingredient,
             ingredients: [...state.constructorIngredients.ingredients],
