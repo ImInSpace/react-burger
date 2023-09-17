@@ -24,7 +24,6 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       return { ...state, ingredientsRequest: true };
     }
     case GET_INGREDIENTS_SUCCESS: {
-      console.log(state);
       return {
         ...state,
         ingredients: action.items,
