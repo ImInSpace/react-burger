@@ -9,12 +9,9 @@ import { useDrag } from "react-dnd";
 function Ingredient({ ingredientInfo }) {
   const dispatch = useDispatch();
 
-  const [{ isDrag }, dragRef] = useDrag({
+  const [{ isHover }, dragRef] = useDrag({
     type: "ingredient",
     item: { id: ingredientInfo._id },
-    collect: (monitor) => ({
-      isDrag: monitor.isDragging(),
-    }),
   });
 
   const showIngredientInfo = (id) => {
@@ -25,35 +22,33 @@ function Ingredient({ ingredientInfo }) {
   };
 
   return (
-    !isDrag && (
-      <div
-        className={styles.card}
-        onClick={() => showIngredientInfo(ingredientInfo._id)}
-        ref={dragRef}
-      >
-        {ingredientInfo.count && (
-          <div className={styles.counter}>
-            <Counter
-              count={ingredientInfo.count}
-              size="default"
-              extraClass="mr-5"
-            />
-          </div>
-        )}
-        <div className={styles.image}>
-          <img
-            src={ingredientInfo.image}
-            alt={"Изображение для " + ingredientInfo.name}
+    <div
+      className={styles.card}
+      onClick={() => showIngredientInfo(ingredientInfo._id)}
+      ref={dragRef}
+    >
+      {ingredientInfo.count && (
+        <div className={styles.counter}>
+          <Counter
+            count={ingredientInfo.count}
+            size="default"
+            extraClass="mr-5"
           />
         </div>
-        <div className={styles.costRow}>
-          <Price price={ingredientInfo.price} className={styles.costRow} />
-        </div>
-        <div className={styles.description}>
-          <p className="text text_type_main-default">{ingredientInfo.name}</p>
-        </div>
+      )}
+      <div className={styles.image}>
+        <img
+          src={ingredientInfo.image}
+          alt={"Изображение для " + ingredientInfo.name}
+        />
       </div>
-    )
+      <div className={styles.costRow}>
+        <Price price={ingredientInfo.price} className={styles.costRow} />
+      </div>
+      <div className={styles.description}>
+        <p className="text text_type_main-default">{ingredientInfo.name}</p>
+      </div>
+    </div>
   );
 }
 
