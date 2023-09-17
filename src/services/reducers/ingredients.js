@@ -97,7 +97,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
 
       console.log("До сортировки: ", state.constructorIngredients.ingredients);
 
-      var tmpArr = state.constructorIngredients.ingredients;
+      var tmpArr = [...state.constructorIngredients.ingredients];
       tmpArr[action.hoverIndex] =
         state.constructorIngredients.ingredients[action.dragIndex];
       tmpArr[action.dragIndex] =
@@ -112,6 +112,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
           ingredients: tmpArr,
         },
       };
+
     default:
       return state;
   }
