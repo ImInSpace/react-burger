@@ -11,9 +11,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import { ADD_INGREDIENT } from "../../services/actions/ingredients";
 
 function App() {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadIngredients());
+  }, [dispatch]);
 
   const selectedIngredient = useSelector(
     (store) => store.ingredients.selectedIngredient
@@ -23,9 +28,12 @@ function App() {
     (store) => store.order.isModalShown
   );
 
-  useEffect(() => {
-    dispatch(loadIngredients());
-  }, [dispatch]);
+  const handleDrop = (dragItem) => {
+    dispatch({
+      type: ADD_INGREDIENT,
+      id: dragItem.id,
+    });
+  };
 
   return (
     <div className={styles.app}>
@@ -36,7 +44,7 @@ function App() {
             <BurgerIngredients />
           </div>
           <div className={styles.halfContainer}>
-            <BurgerConstructor />
+            <BurgerConstructor onDropHandler={handleDrop} />
             <CreateOrder />
           </div>
         </div>

@@ -3,17 +3,15 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { ingredientDataShape } from "../../../utils/prop-types";
 import { useDispatch } from "react-redux";
-import {
-  ADD_INGREDIENT,
-  OPEN_INGREDIENTS_DETAILS,
-} from "../../../services/actions/ingredients";
+import { OPEN_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
 import { useDrag } from "react-dnd";
 
 function Ingredient({ ingredientInfo }) {
   const dispatch = useDispatch();
+
   const [{ isDrag }, dragRef] = useDrag({
     type: "ingredient",
-    item: ingredientInfo._id,
+    item: { id: ingredientInfo._id },
     collect: (monitor) => ({
       isDrag: monitor.isDragging(),
     }),
@@ -22,11 +20,6 @@ function Ingredient({ ingredientInfo }) {
   const showIngredientInfo = (id) => {
     dispatch({
       type: OPEN_INGREDIENTS_DETAILS,
-      id: id,
-    });
-
-    dispatch({
-      type: ADD_INGREDIENT,
       id: id,
     });
   };
