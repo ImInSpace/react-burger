@@ -34,11 +34,12 @@ function BurgerConstructor({ onDropHandler }) {
       style={hoverStyle}
     >
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
-      {constructorIngredients.ingredients?.map((ingredientInfo) => {
+      {constructorIngredients.ingredients?.map((ingredientInfo, index) => {
         return (
           <Ingredient
             ingredientInfo={ingredientInfo}
             key={"ingredient_" + uuid()}
+            index={index}
           />
         );
       })}
