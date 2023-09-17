@@ -26,7 +26,11 @@ const orderReducer = (state = initialOrderState, action) => {
         isModalShown: true,
       };
     case CREATE_ORDER_FAILED:
-      return { ...state, orderRequest: false, orderRequestError: true };
+      return {
+        ...initialOrderState,
+        orderRequest: false,
+        orderRequestError: true,
+      };
     case CLOSE_ORDER_MODAL: {
       return { ...state, isModalShown: false };
     }
