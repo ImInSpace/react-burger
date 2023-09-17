@@ -1,7 +1,6 @@
 import styles from "./burger-constructor.module.css";
 import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
-import { v4 as uuid } from "uuid";
 import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 
@@ -20,25 +19,21 @@ function BurgerConstructor({ onDropHandler }) {
     (store) => store.ingredients.constructorIngredients
   );
 
-  const border = {
-    outline: "2px dashed gray",
-    borderRadius: "5px",
-  };
-
-  const hoverStyle = isHover ? border : null;
-
   return (
     <div
-      className={styles.scrollContainer + " mt-25 custom-scroll"}
+      className={
+        styles.scrollContainer +
+        " mt-25 custom-scroll " +
+        (isHover ? styles.border : "")
+      }
       ref={dropTarget}
-      style={hoverStyle}
     >
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
       {constructorIngredients.ingredients?.map((ingredientInfo, index) => {
         return (
           <Ingredient
             ingredientInfo={ingredientInfo}
-            key={"ingredient_" + uuid()}
+            key={ingredientInfo.key}
             index={index}
           />
         );

@@ -11,7 +11,6 @@ export function createOrderAction(ids) {
     dispatch({ type: CREATE_ORDER_REQUEST });
     createOrderPOST(ids)
       .then((res) => {
-        console.log(res);
         if (res.success === true) {
           dispatch({ type: CREATE_ORDER_SUCCESS, number: res.order.number });
         } else {

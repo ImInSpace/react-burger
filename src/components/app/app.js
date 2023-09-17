@@ -8,7 +8,10 @@ import { OrderDetails } from "../order-details/order-details";
 import { useEffect } from "react";
 import { Modal } from "../ui/modal/modal";
 import { useDispatch, useSelector } from "react-redux";
-import { loadIngredients } from "../../services/actions/ingredients";
+import {
+  addIngredient,
+  loadIngredients,
+} from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { ADD_INGREDIENT } from "../../services/actions/ingredients";
@@ -29,10 +32,7 @@ function App() {
   );
 
   const handleDrop = (dragItem) => {
-    dispatch({
-      type: ADD_INGREDIENT,
-      id: dragItem.id,
-    });
+    dispatch(addIngredient(dragItem.id));
   };
 
   return (

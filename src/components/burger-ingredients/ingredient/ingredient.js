@@ -19,7 +19,7 @@ function Ingredient({ ingredientInfo }) {
       .length;
   }, [data, ingredientInfo]);
 
-  const [{ isHover }, dragRef] = useDrag({
+  const [, dragRef] = useDrag({
     type: "ingredient",
     item: { id: ingredientInfo._id },
   });

@@ -1,4 +1,5 @@
 import { getIngredients } from "../../utils/api";
+import { v4 as uuid } from "uuid";
 
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
@@ -29,3 +30,9 @@ export function loadIngredients() {
     });
   };
 }
+
+export const addIngredient = (ingredientId) => ({
+  type: ADD_INGREDIENT,
+  id: ingredientId,
+  key: uuid(),
+});

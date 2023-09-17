@@ -58,7 +58,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
             bun: state.constructorIngredients.bun,
             ingredients: [
               ...state.constructorIngredients.ingredients,
-              ingredient,
+              { ...ingredient, key: action.key },
             ],
           },
         };
