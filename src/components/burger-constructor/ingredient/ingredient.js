@@ -2,7 +2,10 @@ import { ingredientDataShape } from "../../../utils/prop-types";
 import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
-import { REMOVE_INGREDIENT } from "../../../services/actions/ingredients";
+import {
+  REMOVE_INGREDIENT,
+  REORDER_INGREDIENTS,
+} from "../../../services/actions/ingredients";
 import PropTypes from "prop-types";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
@@ -12,8 +15,12 @@ function Ingredient({ ingredientInfo, index }) {
   const dispatch = useDispatch();
   const draggableRowRef = useRef(null);
 
+  function moveRow(dragIndex, hoverIndex) {
+    dispatch({ type: REORDER_INGREDIENTS, hoverIndex, dragIndex });
+  }
+
   const [{ handlerId }, drop] = useDrop({
-    accept: "ingredient",
+    accept: "constructor-row",
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
@@ -51,7 +58,8 @@ function Ingredient({ ingredientInfo, index }) {
         return;
       }
       // Time to actually perform the action
-      //moveCard(dragIndex, hoverIndex);
+      moveRow(dragIndex, hoverIndex);
+
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
@@ -61,7 +69,7 @@ function Ingredient({ ingredientInfo, index }) {
   });
 
   const [{ isDragging }, drag] = useDrag({
-    type: "ingredient",
+    type: "constructor-row",
     item: () => {
       return { id: ingredientInfo._id, index };
     },
@@ -69,6 +77,15 @@ function Ingredient({ ingredientInfo, index }) {
       isDragging: monitor.isDragging(),
     }),
   });
+
+  // const moveCard = (dragIndex, hoverIndex) => {
+  //     update(prevCards, {
+  //       $splice: [
+  //         [dragIndex, 1],
+  //         [hoverIndex, 0, prevCards[dragIndex]],
+  //       ],
+  //     }),
+  //   }
 
   drag(drop(draggableRowRef));
 

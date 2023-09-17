@@ -6,6 +6,7 @@ import {
   REMOVE_INGREDIENT,
   OPEN_INGREDIENTS_DETAILS,
   CLOSE_INGREDIENTS_DETAILS,
+  REORDER_INGREDIENTS,
 } from "../actions/ingredients";
 
 const initialIngredientsState = {
@@ -90,6 +91,27 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
         selectedIngredient: null,
       };
     }
+    case REORDER_INGREDIENTS:
+      console.log("hoverIndex: ", action.hoverIndex);
+      console.log("dragIndex: ", action.dragIndex);
+
+      console.log("До сортировки: ", state.constructorIngredients.ingredients);
+
+      var tmpArr = state.constructorIngredients.ingredients;
+      tmpArr[action.hoverIndex] =
+        state.constructorIngredients.ingredients[action.dragIndex];
+      tmpArr[action.dragIndex] =
+        state.constructorIngredients.ingredients[action.hoverIndex];
+
+      console.log("После сортировки: ", tmpArr);
+
+      return {
+        ...state,
+        constructorIngredients: {
+          bun: state.constructorIngredients.bun,
+          ingredients: tmpArr,
+        },
+      };
     default:
       return state;
   }

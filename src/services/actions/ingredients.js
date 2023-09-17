@@ -10,6 +10,8 @@ export const REMOVE_INGREDIENT = "REMOVE_INGREDIENT";
 export const OPEN_INGREDIENTS_DETAILS = "OPEN_INGREDIENTS_DETAILS";
 export const CLOSE_INGREDIENTS_DETAILS = "CLOSE_INGREDIENTS_DETAILS"; // prettier-ignore
 
+export const REORDER_INGREDIENTS = "REORDER_INGREDIENTS";
+
 export function loadIngredients() {
   return function (dispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
