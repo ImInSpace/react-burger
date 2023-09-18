@@ -5,141 +5,60 @@ import { BurgerConstructor } from "../burger-constructor/burger-constructor";
 import { CreateOrder } from "../ui/create-order/create-order";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { OrderDetails } from "../order-details/order-details";
-import { useEffect, useReducer, useState } from "react";
+import { useEffect } from "react";
 import { Modal } from "../ui/modal/modal";
-import { getIngredients, createOrderPOST } from "../../utils/api";
-import { IngredientsContext } from "../../context/ingredients-context";
-import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
-import { CreateOrderContext } from "../../context/create-order-context";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addIngredient,
+  loadIngredients,
+} from "../../services/actions/ingredients";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { ADD_INGREDIENT } from "../../services/actions/ingredients";
 
 function App() {
-  const [ingredientsData, setIngredientsData] = useState([]);
-  const [isOrderModalShown, setIsOrderModalShown] = useState(false);
-  const [ingredientInfo, setSelectedIngredient] = useState(null);
-  const [orderNumber, setOrderNumber] = useState(0);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getIngredients().then((json) => setIngredientsData(json.data));
-  }, []);
+    dispatch(loadIngredients());
+  }, [dispatch]);
 
-  const reducerInitialState = { bun: null, ingredients: [] };
-
-  function ingredientsReducer(state, action) {
-    switch (action.type) {
-      case "add":
-        if (action.ingredient.type === "bun") {
-          return {
-            bun: action.ingredient,
-            ingredients: [...state.ingredients],
-          };
-        } else {
-          return {
-            bun: state.bun,
-            ingredients: [...state.ingredients, action.ingredient],
-          };
-        }
-      case "remove":
-        const newArr = state.ingredients.filter(
-          (ingredient) => ingredient._id != action.ingredient._id
-        );
-        return {
-          bun: state.bun,
-          ingredients: newArr,
-        };
-      default:
-        console.error("unknown action type: ", action.type);
-    }
-  }
-
-  const [selectedIngredients, selectedIngredientsDispatcher] = useReducer(
-    ingredientsReducer,
-    reducerInitialState,
-    undefined
+  const selectedIngredient = useSelector(
+    (store) => store.ingredients.selectedIngredient
   );
 
-  const createOrder = () => {
-    let ids = [];
+  const isCreateOrderModalShown = useSelector(
+    (store) => store.order.isModalShown
+  );
 
-    if (selectedIngredients.ingredients.length > 0) {
-      ids = selectedIngredients.ingredients.map((ingredient) => {
-        return ingredient._id;
-      });
-    }
-
-    if (selectedIngredients.bun !== null) {
-      ids.push(selectedIngredients.bun._id);
-      ids.push(selectedIngredients.bun._id);
-    }
-
-    if (ids.length > 0) {
-      createOrderPOST({ ingredients: ids }).then((json) => {
-        setOrderNumber(json.order.number);
-      });
-    }
-
-    openModalHandler();
+  const handleDrop = (dragItem) => {
+    dispatch(addIngredient(dragItem.id));
   };
-
-  const openModalHandler = () => {
-    setIsOrderModalShown(true);
-  };
-
-  const closeModalHandler = () => {
-    setIsOrderModalShown(false);
-    setSelectedIngredient(null);
-  };
-
-  function ingredientClickHandler(ingredientId) {
-    const selected = ingredientsData.find(
-      (ingredient) => ingredient._id === ingredientId
-    );
-
-    if (selected == null) {
-      console.error("Ингредиент не обнаружен. {id}: ", ingredientId);
-      return;
-    }
-
-    // Ингредиент, для модального окна.
-    setSelectedIngredient(
-      ingredientsData.find((ingredient) => ingredient._id === ingredientId)
-    );
-
-    // Список ингредиентов для конструктора.
-    selectedIngredientsDispatcher({
-      type: "add",
-      ingredient: selected,
-    });
-  }
 
   return (
     <div className={styles.app}>
       <AppHeader />
-      <div className={styles.container}>
-        <IngredientsContext.Provider value={{ ingredients: ingredientsData }}>
-          {/* prettier-ignore */}
-          <BurgerConstructorContext.Provider value={{selectedIngredients, selectedIngredientsDispatcher}}>
-            <div className={styles.halfContainer}>
-              <BurgerIngredients handler={ingredientClickHandler} />
-            </div>
-            <div className={styles.halfContainer}>
-              <BurgerConstructor />
-              <CreateOrder clickHandler={createOrder} />
-            </div>
-          </BurgerConstructorContext.Provider>
-        </IngredientsContext.Provider>
-      </div>
+      <DndProvider backend={HTML5Backend}>
+        <div className={styles.container}>
+          <div className={styles.halfContainer}>
+            <BurgerIngredients />
+          </div>
+          <div className={styles.halfContainer}>
+            <BurgerConstructor onDropHandler={handleDrop} />
+            <CreateOrder />
+          </div>
+        </div>
+      </DndProvider>
 
-      {isOrderModalShown && (
-        <Modal closeHandler={closeModalHandler}>
-          <CreateOrderContext.Provider value={{ orderNumber }}>
-            <OrderDetails />
-          </CreateOrderContext.Provider>
+      {isCreateOrderModalShown && (
+        <Modal>
+          <OrderDetails />
         </Modal>
       )}
 
-      {ingredientInfo && (
-        <Modal caption={"Детали инредиента"} closeHandler={closeModalHandler}>
-          <IngredientDetails data={ingredientInfo} />
+      {selectedIngredient && (
+        <Modal caption={"Детали инредиента"}>
+          <IngredientDetails data={selectedIngredient} />
         </Modal>
       )}
     </div>

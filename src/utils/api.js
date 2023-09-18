@@ -2,7 +2,7 @@ import * as Constants from "../constants";
 
 function getIngredients() {
   return fetch(Constants.INGREDIENTS_URL)
-    .then((response) => checkResponse(response))
+    .then(checkResponse)
     .catch((err) => {
       console.error("Не удалось выполнить запрос", err);
     });
@@ -14,7 +14,7 @@ function createOrderPOST(ids) {
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify(ids),
+    body: JSON.stringify({ ingredients: ids }),
   })
     .then((response) => checkResponse(response))
     .catch((err) => {

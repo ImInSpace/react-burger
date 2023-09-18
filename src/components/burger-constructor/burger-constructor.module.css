@@ -2,3 +2,8 @@
   height: 600px;
   overflow-y: auto;
 }
+
+.border {
+  outline: 2px dashed gray;
+  border-radius: 5px;
+}

@@ -14,10 +14,10 @@ function Macronutrients({ calories, proteins, fat, carbohydrates }) {
 }
 
 Macronutrients.propTypes = {
-  calories: PropTypes.number,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
+  calories: PropTypes.number.isRequired,
+  proteins: PropTypes.number.isRequired,
+  fat: PropTypes.number.isRequired,
+  carbohydrates: PropTypes.number.isRequired,
 };
 
 export { Macronutrients };

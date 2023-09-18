@@ -1,11 +1,15 @@
-import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./modal.module.css";
 import PropTypes from "prop-types";
 import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
 import { useEffect, useRef } from "react";
+import { ModalHeader } from "./modal-header/modal-header";
+import { useDispatch } from "react-redux";
+import { CLOSE_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
+import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
 
 function Modal(props) {
+  const dispatch = useDispatch();
   const portal = document.getElementById("react-modals");
   const modalDivRef = useRef(null);
 
@@ -23,17 +27,15 @@ function Modal(props) {
   };
 
   const close = () => {
-    props.closeHandler();
+    dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
+    dispatch({ type: CLOSE_ORDER_MODAL });
   };
 
   return ReactDOM.createPortal(
     <>
       <ModalOverlay closeHandler={close} />
       <div className={styles.modal} onKeyDown={close} ref={modalDivRef}>
-        <ModalHeader
-          caption={props.caption}
-          closeHandler={props.closeHandler}
-        />
+        <ModalHeader caption={props.caption} closeHandler={close} />
         {props.children}
       </div>
     </>,
@@ -41,26 +43,9 @@ function Modal(props) {
   );
 }
 
-function ModalHeader({ caption, closeHandler }) {
-  return (
-    <div className={styles.caption + " mt-10 ml-10 mr-10"}>
-      <p className="text text_type_main-large">{caption}</p>
-      <div className={styles.closeBtn} onClick={closeHandler}>
-        <CloseIcon />
-      </div>
-    </div>
-  );
-}
-
 Modal.propTypes = {
   caption: PropTypes.string,
-  closeHandler: PropTypes.func,
   children: PropTypes.element.isRequired,
-};
-
-ModalHeader.propTypes = {
-  caption: PropTypes.string,
-  closeHandler: PropTypes.func,
 };
 
 export { Modal };

@@ -1,33 +1,44 @@
 import styles from "./burger-constructor.module.css";
-import { useContext } from "react";
-import { BurgerConstructorContext } from "../../context/burder-contstructor-context";
 import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
-import { v4 as uuid } from "uuid";
+import { useSelector } from "react-redux";
+import { useDrop } from "react-dnd";
 
-function BurgerConstructor() {
-  const { selectedIngredients, selectedIngredientsDispatcher } = useContext(
-    BurgerConstructorContext
+function BurgerConstructor({ onDropHandler }) {
+  const [{ isHover }, dropTarget] = useDrop({
+    accept: "ingredient",
+    drop(item) {
+      onDropHandler(item);
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
+
+  const constructorIngredients = useSelector(
+    (store) => store.ingredients.constructorIngredients
   );
 
-  const deleteIngredient = (ingredient) => {
-    selectedIngredientsDispatcher({ type: "remove", ingredient: ingredient });
-  };
-
   return (
-    <div className={styles.scrollContainer + " mt-25 custom-scroll"}>
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"top"} />
-      {selectedIngredients.ingredients?.map((ingredientInfo) => {
+    <div
+      className={
+        styles.scrollContainer +
+        " mt-25 custom-scroll " +
+        (isHover ? styles.border : "")
+      }
+      ref={dropTarget}
+    >
+      <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
+      {constructorIngredients.ingredients?.map((ingredientInfo, index) => {
         return (
           <Ingredient
             ingredientInfo={ingredientInfo}
-            onDeleteHandler={deleteIngredient}
-            // Два одинаковых ингредиента, могут быть добавлены в конструктор бургеров.
-            key={"ingredient_" + uuid()}
+            key={ingredientInfo.key}
+            index={index}
           />
         );
       })}
-      <Bun bunInfo={selectedIngredients.bun} bunPosition={"bottom"} />
+      <Bun bunInfo={constructorIngredients.bun} bunPosition={"bottom"} />
     </div>
   );
 }
