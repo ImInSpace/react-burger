@@ -8,7 +8,7 @@ import {
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 
-export default function RegistrationPage() {
+export default function RegisterPage() {
   const [name, setName] = useState("");
   const nameInputRef = useRef(null);
 
