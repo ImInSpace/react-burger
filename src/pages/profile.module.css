@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  height: 80vh;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  flex-direction: row;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuCell {
+  width: 320px;
+  height: 64px;
+  /* border: 1px dashed white; */
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
