@@ -1,4 +1,4 @@
-import styles from "./registration.module.css";
+import styles from "./register.module.css";
 import { AppHeader } from "../components/app-header/app-header";
 import cn from "classnames";
 import {
