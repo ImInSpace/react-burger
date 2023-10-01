@@ -5,6 +5,7 @@ import RegisterPage from "../../pages/register";
 import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import Profile from "../../pages/profile";
+import NotFound404Page from "../../pages/not-found404";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="*" element={<NotFound404Page />} />
         </Routes>
       </BrowserRouter>
     </>
