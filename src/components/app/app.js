@@ -14,7 +14,6 @@ import {
 } from "../../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { ADD_INGREDIENT } from "../../services/actions/ingredients";
 
 function App() {
   const dispatch = useDispatch();
