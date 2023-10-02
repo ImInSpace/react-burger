@@ -1,6 +1,7 @@
 export const INGREDIENTS_URL = "https://norma.nomoreparties.space/api/ingredients"; // prettier-ignore
 export const CREATE_ORDER_URL = "https://norma.nomoreparties.space/api/orders";
-export const RESET_PASSWORD_URL = "https://norma.nomoreparties.space/api/password-reset"; // prettier-ignore
+export const FORGET_PASSWORD_URL = "https://norma.nomoreparties.space/api/password-reset"; // prettier-ignore
+export const RESET_PASSWORD_URL = "https://norma.nomoreparties.space/api/password-reset/reset"; // prettier-ignore
 export const REGISTER_URL = "https://norma.nomoreparties.space/api/auth/register"; // prettier-ignore
 
 export const BUNS_GROUP_NAME = "Булки";

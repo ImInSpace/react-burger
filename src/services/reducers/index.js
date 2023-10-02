@@ -5,6 +5,7 @@ import { modalReducer } from "./modal";
 import { tabsReducer } from "./tabs";
 import { forgotPasswordReducer } from "./forgot-password";
 import { registerReducer } from "./register";
+import { resetPasswordReducer } from "./reset-password";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   tabs: tabsReducer,
   forgotPassword: forgotPasswordReducer,
+  resetPassword: resetPasswordReducer,
   register: registerReducer,
 });
 

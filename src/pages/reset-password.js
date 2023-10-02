@@ -7,8 +7,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetPasswordAction } from "../services/actions/reset-password";
 
 export default function ResetPasswordPage() {
+  const dispatch = useDispatch();
+
   const [password, setPassword] = useState("");
   const passwordInputRef = useRef(null);
   const onIconPasswordClick = () => {
@@ -19,6 +23,10 @@ export default function ResetPasswordPage() {
   const [codeFromEmail, setCodeFromEmail] = useState("");
   const codeFromEmailInputRef = useRef(null);
 
+  const onSaveClickHandler = () => {
+    dispatch(resetPasswordAction(password, codeFromEmail));
+  };
+
   return (
     <>
       <AppHeader />
@@ -27,8 +35,8 @@ export default function ResetPasswordPage() {
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Восстановление пароля</p>
           <Input
-            type={"text"}
-            placeholder={"Имя"}
+            type={"password"}
+            placeholder={"Введите новый пароль"}
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             name={"emailCode"}
@@ -40,8 +48,8 @@ export default function ResetPasswordPage() {
             extraClass="mt-6"
           />
           <Input
-            type={"email"}
-            placeholder={"email"}
+            type={"text"}
+            placeholder={"Введите код из письма"}
             onChange={(e) => setCodeFromEmail(e.target.value)}
             value={codeFromEmail}
             name={"email"}
@@ -52,7 +60,12 @@ export default function ResetPasswordPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button htmlType="button" type="primary" size="medium">
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onSaveClickHandler}
+            >
               Сохранить
             </Button>
           </div>

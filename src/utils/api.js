@@ -22,20 +22,6 @@ function createOrderPOST(ids) {
     });
 }
 
-function forgotPasswordPOST(email) {
-  return fetch(Constants.RESET_PASSWORD_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ email: email }),
-  })
-    .then((response) => response.json())
-    .catch((err) => {
-      console.error("Не удалось выполнить запрос", err);
-    });
-}
-
 function registerUserPOST(registrationData) {
   return fetch(Constants.REGISTER_URL, {
     method: "POST",
@@ -50,6 +36,34 @@ function registerUserPOST(registrationData) {
     });
 }
 
+function forgotPasswordPOST(email) {
+  return fetch(Constants.FORGET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ email: email }),
+  })
+    .then((response) => response.json())
+    .catch((err) => {
+      console.error("Не удалось выполнить запрос", err);
+    });
+}
+
+function resetPasswordPOST(password, token) {
+  return fetch(Constants.RESET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ password: password, token: token }),
+  })
+    .then((response) => response.json())
+    .catch((err) => {
+      console.error("Не удалось выполнить запрос", err);
+    });
+}
+
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
@@ -61,4 +75,5 @@ export {
   createOrderPOST,
   forgotPasswordPOST,
   registerUserPOST,
+  resetPasswordPOST,
 };
