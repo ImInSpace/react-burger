@@ -1,0 +1,9 @@
+.menuCell {
+  width: 320px;
+  height: 64px;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+}
