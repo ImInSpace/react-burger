@@ -3,7 +3,7 @@ import { ingredientsReducer } from "./ingredients";
 import { orderReducer } from "./order";
 import { modalReducer } from "./modal";
 import { tabsReducer } from "./tabs";
-import { resetPasswordReducer } from "./reset-password";
+import { resetPasswordReducer } from "./forgot-password";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,

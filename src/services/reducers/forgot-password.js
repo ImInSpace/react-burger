@@ -2,7 +2,7 @@ import {
   PASSWORD_RESET_REQUEST,
   PASSWORD_RESET_FAILED,
   PASSWORD_RESET_SUCCESS,
-} from "../actions/reset-password";
+} from "../actions/forgot-password";
 
 const initialState = {
   email: "",
@@ -14,7 +14,7 @@ const initialState = {
   msg: "",
 };
 
-const resetPasswordReducer = (state = initialState, action) => {
+const forgotPasswordReducer = (state = initialState, action) => {
   switch (action.type) {
     case PASSWORD_RESET_REQUEST: {
       return { ...state, request: true };
@@ -41,4 +41,4 @@ const resetPasswordReducer = (state = initialState, action) => {
   }
 };
 
-export { resetPasswordReducer };
+export { forgotPasswordReducer as resetPasswordReducer };

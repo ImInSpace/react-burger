@@ -22,7 +22,7 @@ function createOrderPOST(ids) {
     });
 }
 
-function resetPasswordPOST(email) {
+function forgotPasswordPOST(email) {
   return fetch(Constants.RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -42,4 +42,4 @@ const checkResponse = (response) => {
     : response.json().then((err) => Promise.reject(err));
 };
 
-export { getIngredients, createOrderPOST, resetPasswordPOST };
+export { getIngredients, createOrderPOST, forgotPasswordPOST };

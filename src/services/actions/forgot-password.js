@@ -1,13 +1,13 @@
-import { resetPasswordPOST } from "../../utils/api";
+import { forgotPasswordPOST } from "../../utils/api";
 
 export const PASSWORD_RESET_REQUEST = "PASSWORD_RESET_REQUEST";
 export const PASSWORD_RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
 export const PASSWORD_RESET_FAILED = "PASSWORD_RESET_FAILED";
 
-export function resetPasswordAction(email) {
+export function forgotPasswordAction(email) {
   return function (dispatch) {
     dispatch({ type: PASSWORD_RESET_REQUEST });
-    resetPasswordPOST(email)
+    forgotPasswordPOST(email)
       .then((res) => {
         if (res.success) {
           dispatch({ type: PASSWORD_RESET_SUCCESS });

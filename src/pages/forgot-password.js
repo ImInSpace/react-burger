@@ -8,7 +8,7 @@ import {
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetPasswordAction } from "../services/actions/reset-password";
+import { forgotPasswordAction } from "../services/actions/forgot-password";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function ForgotPasswordPage() {
   const dispatch = useDispatch();
 
   const onClickHandler = (e) => {
-    dispatch(resetPasswordAction(email));
+    dispatch(forgotPasswordAction(email));
   };
 
   return (
