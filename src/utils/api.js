@@ -30,9 +30,23 @@ function forgotPasswordPOST(email) {
     },
     body: JSON.stringify({ email: email }),
   })
-    .then((response) => checkResponse(response))
+    .then((response) => response.json())
     .catch((err) => {
       console.error("Не удалось выполнить запрос", err);
+    });
+}
+
+function registerUserPOST(registrationData) {
+  return fetch(Constants.REGISTER_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(registrationData),
+  })
+    .then((response) => response.json())
+    .catch((err) => {
+      console.error("Не удалось зарегистрировать пользователя.", err);
     });
 }
 
@@ -42,4 +56,9 @@ const checkResponse = (response) => {
     : response.json().then((err) => Promise.reject(err));
 };
 
-export { getIngredients, createOrderPOST, forgotPasswordPOST };
+export {
+  getIngredients,
+  createOrderPOST,
+  forgotPasswordPOST,
+  registerUserPOST,
+};

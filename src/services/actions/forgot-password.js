@@ -10,7 +10,7 @@ export function forgotPasswordAction(email) {
     forgotPasswordPOST(email)
       .then((res) => {
         if (res.success) {
-          dispatch({ type: PASSWORD_RESET_SUCCESS });
+          dispatch({ type: PASSWORD_RESET_SUCCESS, message: res.message });
         } else {
           dispatch({ type: PASSWORD_RESET_FAILED, message: res.message });
         }

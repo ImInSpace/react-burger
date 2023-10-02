@@ -1,8 +1,8 @@
 import {
-  PASSWORD_RESET_REQUEST,
-  PASSWORD_RESET_FAILED,
-  PASSWORD_RESET_SUCCESS,
-} from "../actions/forgot-password";
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+} from "../actions/register";
 
 const initialState = {
   request: false,
@@ -12,24 +12,24 @@ const initialState = {
   message: "",
 };
 
-const forgotPasswordReducer = (state = initialState, action) => {
+const registerReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PASSWORD_RESET_REQUEST: {
+    case REGISTER_REQUEST: {
       return { ...state, request: true };
     }
-    case PASSWORD_RESET_FAILED: {
-      return {
-        ...state,
-        request: false,
-        error: true,
-        message: action.message,
-      };
-    }
-    case PASSWORD_RESET_SUCCESS: {
+    case REGISTER_SUCCESS: {
       return {
         ...state,
         request: false,
         success: true,
+        message: action.message,
+      };
+    }
+    case REGISTER_FAILED: {
+      return {
+        ...state,
+        request: false,
+        error: true,
         message: action.message,
       };
     }
@@ -38,4 +38,4 @@ const forgotPasswordReducer = (state = initialState, action) => {
   }
 };
 
-export { forgotPasswordReducer };
+export { registerReducer };

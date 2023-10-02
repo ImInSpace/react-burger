@@ -7,8 +7,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerAction } from "../services/actions/register";
 
 export default function RegisterPage() {
+  const dispatch = useDispatch();
+
   const [name, setName] = useState("");
   const nameInputRef = useRef(null);
 
@@ -20,6 +24,15 @@ export default function RegisterPage() {
   const onIconPasswordClick = () => {
     setTimeout(() => emailInputRef.current.focus(), 0);
     alert("Icon Click Callback");
+  };
+
+  const onRegisterHandler = () => {
+    const registrationData = {
+      email: email,
+      password: password,
+      name: name,
+    };
+    dispatch(registerAction(registrationData));
   };
 
   return (
@@ -68,7 +81,12 @@ export default function RegisterPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button htmlType="button" type="primary" size="medium">
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onRegisterHandler}
+            >
               Зарегистрироваться
             </Button>
           </div>

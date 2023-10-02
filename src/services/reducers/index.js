@@ -3,14 +3,16 @@ import { ingredientsReducer } from "./ingredients";
 import { orderReducer } from "./order";
 import { modalReducer } from "./modal";
 import { tabsReducer } from "./tabs";
-import { resetPasswordReducer } from "./forgot-password";
+import { forgotPasswordReducer } from "./forgot-password";
+import { registerReducer } from "./register";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
   order: orderReducer,
   modal: modalReducer,
   tabs: tabsReducer,
-  resetPassword: resetPasswordReducer,
+  forgotPassword: forgotPasswordReducer,
+  register: registerReducer,
 });
 
 export { rootReducer };
