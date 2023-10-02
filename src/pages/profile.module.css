@@ -27,9 +27,3 @@
   color: white;
   text-decoration: none;
 }
-
-.inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
