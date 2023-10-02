@@ -7,10 +7,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { resetPasswordAction } from "../services/actions/reset-password";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const emailInputRef = useRef(null);
+  const dispatch = useDispatch();
+
+  const onClickHandler = (e) => {
+    dispatch(resetPasswordAction(email));
+  };
 
   return (
     <>
@@ -32,7 +39,12 @@ export default function ForgotPasswordPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button htmlType="button" type="primary" size="medium">
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onClickHandler}
+            >
               Восстановить
             </Button>
           </div>

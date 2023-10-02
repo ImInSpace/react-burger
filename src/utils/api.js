@@ -22,10 +22,24 @@ function createOrderPOST(ids) {
     });
 }
 
+function resetPasswordPOST(email) {
+  return fetch(Constants.RESET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ email: email }),
+  })
+    .then((response) => checkResponse(response))
+    .catch((err) => {
+      console.error("Не удалось выполнить запрос", err);
+    });
+}
+
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
 };
 
-export { getIngredients, createOrderPOST };
+export { getIngredients, createOrderPOST, resetPasswordPOST };
