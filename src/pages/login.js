@@ -67,7 +67,7 @@ export default function LoginPage() {
             <span className={cn("text text_type_main-default", styles.gray)}>
             Вы - новый пользователь?
           </span>
-            <Link className={styles.link}>
+            <Link to="/register" className={styles.link}>
               {/* prettier-ignore */}
               <span className={cn("text text_type_main-default", styles.registerLink)}>
               Зарегистрироваться
@@ -77,7 +77,7 @@ export default function LoginPage() {
           <div className={cn(styles.registrationContainer, "mt-6")}>
             {/* prettier-ignore */}
             <span className={cn("text text_type_main-default", styles.gray)}>Забыли пароль?</span>
-            <Link className={styles.link}>
+            <Link to="/forgot-password" className={styles.link}>
               <span className="text text_type_main-default">
                 Восстановить пароль
               </span>

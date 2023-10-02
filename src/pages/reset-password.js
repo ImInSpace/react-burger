@@ -59,7 +59,7 @@ export default function ResetPasswordPage() {
           <div className={cn(styles.registrationContainer, "mt-28")}>
             {/* prettier-ignore */}
             <span className={cn("text text_type_main-default", styles.gray)}>Вспомнили пароль?</span>
-            <Link className={styles.link} to="#">
+            <Link to="/login" className={styles.link}>
               <span
                 className={cn(
                   "text text_type_main-default",
