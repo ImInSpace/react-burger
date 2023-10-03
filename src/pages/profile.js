@@ -9,7 +9,6 @@ export default function Profile() {
   const [activeMenu, setActiveMenu] = useState(initialState);
 
   const onMenuClickHandler = (index) => {
-    console.log("clicked: ", index);
     const newState = [false, false, false];
     newState[index] = true;
     setActiveMenu(newState);

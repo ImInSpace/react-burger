@@ -9,8 +9,11 @@ import { Link } from "react-router-dom";
 import { AppHeader } from "../components/app-header/app-header";
 import { useDispatch } from "react-redux";
 import { authAction } from "../services/actions/auth";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
@@ -28,15 +31,16 @@ export default function LoginPage() {
   };
 
   const onLoginHandler = () => {
-    console.log("Вход в систему (email): ", email);
-    console.log("Вход в систему (password): ", password);
-
     const loginForm = {
       email: email,
       password: password,
     };
 
     dispatch(authAction(loginForm));
+  };
+
+  const cb = () => {
+    navigate("/");
   };
 
   return (
@@ -68,7 +72,7 @@ export default function LoginPage() {
             name={"password"}
             error={false}
             ref={passwordInputRef}
-            onIconClick={onIconPasswordClick}
+            onIconClick={undefined}
             errorText={"Ошибка"}
             size={"default"}
             extraClass="mt-6"

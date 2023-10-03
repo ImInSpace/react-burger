@@ -30,7 +30,7 @@ function registerUserPOST(registrationData) {
     },
     body: JSON.stringify(registrationData),
   })
-    .then((response) => response.json())
+    .then((response) => checkResponse(response))
     .catch((err) => {
       console.error("Не удалось зарегистрировать пользователя.", err);
     });

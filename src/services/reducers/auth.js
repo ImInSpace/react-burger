@@ -1,4 +1,5 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/auth";
+import { setCookie, getCookie } from "../cookieManager";
 
 const initialState = {
   email: "",
@@ -17,6 +18,8 @@ const authReducer = (state = initialState, action) => {
       return { ...state, request: true };
     }
     case LOGIN_SUCCESS: {
+      setCookie("token", action.accessToken);
+
       return {
         ...state,
         request: false,
