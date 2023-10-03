@@ -6,13 +6,17 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
+import { ProtectedRouteElement } from "../protected-route/protected-route";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={<ProtectedRouteElement element={<HomePage />} />}
+          />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />

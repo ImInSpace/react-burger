@@ -1,23 +1,17 @@
 import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
-import { Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 
 function ProtectedRouteElement({ element }) {
-  const [isUserLoaded, setIsUserLoaded] = useState(false);
+  // const [isUserLoaded, setIsUserLoaded] = useState(false);
 
   const user = useSelector((store) => store.auth);
-  if (user) {
-    setIsUserLoaded(true);
-  }
+  // if (user.name) {
+  //   setIsUserLoaded(true);
+  // }
 
-  return (
-    <>
-      {/* Пользователь не прошёл аутентификацию? */}
-      {isUserLoaded && <Route to="login" replace />}
-
-      {element}
-    </>
-  );
+  return user.name ? element : <Navigate to="/login" replace />;
 }
 
 ProtectedRouteElement.propTypes = {
