@@ -9,6 +9,7 @@ export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 export function authAction(form) {
+  console.log("authAction form: ", form);
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
     loginRequest(form)
