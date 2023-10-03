@@ -41,7 +41,7 @@ export default function Profile() {
             />
           </div>
           <div className={styles.subMenu}>
-            <EditProfile />
+            {activeMenu[0] && <EditProfile />}
           </div>
         </div>
       </div>
