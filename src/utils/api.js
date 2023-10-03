@@ -70,6 +70,21 @@ const checkResponse = (response) => {
     : response.json().then((err) => Promise.reject(err));
 };
 
+export const loginRequest = async (form) => {
+  return await fetch(Constants.LOGIN_URL, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(form),
+  }).then((response) => checkResponse(response));
+};
+
 export {
   getIngredients,
   createOrderPOST,

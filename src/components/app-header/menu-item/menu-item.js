@@ -6,13 +6,12 @@ function MenuItem(props) {
   return (
     <div className={styles.container}>
       {icon}
-      <a
-        href={url}
+      <span
         className={"text text_type_main-default " + styles.link}
         style={{ display: "inline-block" }}
       >
         {text}
-      </a>
+      </span>
     </div>
   );
 }

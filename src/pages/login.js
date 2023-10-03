@@ -7,8 +7,12 @@ import { useState, useRef } from "react";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { AppHeader } from "../components/app-header/app-header";
+import { useDispatch } from "react-redux";
+import { authAction } from "../services/actions/auth";
 
 export default function LoginPage() {
+  const dispatch = useDispatch();
+
   const [email, setEmail] = useState("");
   const emailInputRef = useRef(null);
   const onIconEmailClick = () => {
@@ -21,6 +25,18 @@ export default function LoginPage() {
   const onIconPasswordClick = () => {
     setTimeout(() => passwordInputRef.current.focus(), 0);
     alert("Icon Click Callback");
+  };
+
+  const onLoginHandler = () => {
+    console.log("Вход в систему (email): ", email);
+    console.log("Вход в систему (password): ", password);
+
+    const loginForm = {
+      email: email,
+      password: password,
+    };
+
+    dispatch(authAction(loginForm));
   };
 
   return (
@@ -58,7 +74,12 @@ export default function LoginPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button htmlType="button" type="primary" size="medium">
+            <Button
+              htmlType="button"
+              type="primary"
+              size="medium"
+              onClick={onLoginHandler}
+            >
               Войти
             </Button>
           </div>

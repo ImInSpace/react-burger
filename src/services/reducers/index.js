@@ -6,6 +6,7 @@ import { tabsReducer } from "./tabs";
 import { forgotPasswordReducer } from "./forgot-password";
 import { registerReducer } from "./register";
 import { resetPasswordReducer } from "./reset-password";
+import { authReducer } from "./auth";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   register: registerReducer,
+  auth: authReducer,
 });
 
 export { rootReducer };

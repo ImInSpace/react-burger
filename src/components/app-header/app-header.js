@@ -12,9 +12,9 @@ function AppHeader() {
       <div className={styles.container}>
         <div className={styles.leftMenu}>
           <Link to="/">
-            <MenuItem text="Конструктор" url={"#"} icon={<BurgerIcon />} />
+            <MenuItem text="Конструктор" icon={<BurgerIcon />} />
           </Link>
-          <MenuItem text="Лента заказов" url={"#"} icon={<ListIcon />} />
+          <MenuItem text="Лента заказов" icon={<ListIcon />} />
         </div>
         <div className={styles.logo}>
           <Link to="/">
@@ -23,7 +23,7 @@ function AppHeader() {
         </div>
         <div className={styles.rightMenu}>
           <Link to="/profile">
-            <MenuItem text="Личный кабинет" url={"#"} icon={<ProfileIcon />} />
+            <MenuItem text="Личный кабинет" icon={<ProfileIcon />} />
           </Link>
         </div>
       </div>
