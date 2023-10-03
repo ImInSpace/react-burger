@@ -1,6 +1,6 @@
 .root {
+  height: 800px;
   display: flex;
-  height: 80vh;
   align-items: center;
 }
 
