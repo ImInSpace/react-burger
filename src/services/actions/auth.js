@@ -8,15 +8,15 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
 export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
-export function authAction(form) {
+export function authAction(form, navigateHook) {
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
     loginRequest(form)
       .then((res) => {
         if (res.success) {
+          // navigateHook("/");
           dispatch({
             type: LOGIN_SUCCESS,
-
             email: res.user.email,
             name: res.user.name,
             accessToken: res.accessToken,

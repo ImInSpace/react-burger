@@ -9,22 +9,26 @@ export function getCookie(name) {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function setCookie(name, value, props) {
-  props = props || {};
-  let exp = props.expires;
+export function setCookie(name, value, options) {
+  options = {
+    path: "/",
+    ...options,
+  };
+
+  let exp = options.expires;
   if (typeof exp == "number" && exp) {
     const d = new Date();
     d.setTime(d.getTime() + exp * 1000);
-    exp = props.expires = d;
+    exp = options.expires = d;
   }
   if (exp && exp.toUTCString) {
-    props.expires = exp.toUTCString();
+    options.expires = exp.toUTCString();
   }
   value = encodeURIComponent(value);
   let updatedCookie = name + "=" + value;
-  for (const propName in props) {
+  for (const propName in options) {
     updatedCookie += "; " + propName;
-    const propValue = props[propName];
+    const propValue = options[propName];
     if (propValue !== true) {
       updatedCookie += "=" + propValue;
     }

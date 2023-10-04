@@ -6,7 +6,7 @@ import ForgotPasswordPage from "../../pages/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password";
 import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
-import { ProtectedRouteElement } from "../protected-route/protected-route";
+import { RouteWrapper } from "../route-wrapper/route-wrapper";
 
 function App() {
   return (
@@ -15,9 +15,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<ProtectedRouteElement element={<HomePage />} />}
+            element={<RouteWrapper isProtected={true} element={<HomePage />} />}
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route
+            path="/login"
+            element={
+              <RouteWrapper isProtected={false} element={<LoginPage />} />
+            }
+          />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password" element={<ResetPasswordPage />} />

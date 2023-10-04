@@ -36,11 +36,7 @@ export default function LoginPage() {
       password: password,
     };
 
-    dispatch(authAction(loginForm));
-  };
-
-  const cb = () => {
-    navigate("/");
+    dispatch(authAction(loginForm, navigate));
   };
 
   return (
