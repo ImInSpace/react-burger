@@ -53,7 +53,7 @@ function forgotPasswordPOST(email) {
     });
 }
 
-function resetPasswordPOST(password, token) {
+function resetPassword(password, token) {
   return fetch(Constants.RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -138,7 +138,7 @@ export {
   createOrderPOST,
   forgotPasswordPOST,
   registerUser,
-  resetPasswordPOST,
+  resetPassword,
   getUser,
   patchUser,
   login,

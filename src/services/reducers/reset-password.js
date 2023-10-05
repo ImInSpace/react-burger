@@ -7,8 +7,6 @@ import {
 const initialState = {
   request: false,
   success: false,
-  error: false,
-
   message: "",
 };
 
@@ -22,15 +20,15 @@ const resetPasswordReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: true,
-        message: action.message,
+        message: action.payload.message,
       };
     }
     case PASSWORD_RESET_FAILED: {
       return {
         ...state,
         request: false,
-        error: true,
-        message: action.message,
+        success: true,
+        message: action.payload.message,
       };
     }
     default:

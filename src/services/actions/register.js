@@ -4,7 +4,7 @@ export const REGISTER_REQUEST = "REGISTER_REQUEST";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_FAILED = "REGISTER_FAILED";
 
-export function registerAction(registrationData, redirectCallback) {
+export function registerAction(registrationData, redirectHook) {
   return function (dispatch) {
     dispatch({ type: REGISTER_REQUEST });
 
@@ -13,7 +13,7 @@ export function registerAction(registrationData, redirectCallback) {
         console.log(res);
         console.log(res.success);
         if (res.success) {
-          redirectCallback("/login");
+          redirectHook("/login");
           dispatch({ type: REGISTER_SUCCESS, message: res.message });
         } else {
           dispatch({ type: REGISTER_FAILED, message: res.message });
