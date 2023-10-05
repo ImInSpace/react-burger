@@ -7,8 +7,6 @@ import {
 const initialState = {
   request: false,
   success: false,
-  error: false,
-
   message: "",
 };
 
@@ -29,7 +27,7 @@ const registerReducer = (state = initialState, action) => {
       return {
         ...state,
         request: false,
-        error: true,
+        success: false,
         message: action.message,
       };
     }

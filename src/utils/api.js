@@ -22,7 +22,7 @@ function createOrderPOST(ids) {
     });
 }
 
-function registerUserPOST(registrationData) {
+function registerUser(registrationData) {
   return fetch(Constants.REGISTER_URL, {
     method: "POST",
     headers: {
@@ -32,7 +32,7 @@ function registerUserPOST(registrationData) {
   })
     .then((response) => checkResponse(response))
     .catch((err) => {
-      console.error("Не удалось зарегистрировать пользователя.", err);
+      console.error("Не удалось зарегистрировать пользователя!", err);
     });
 }
 
@@ -137,7 +137,7 @@ export {
   getIngredients,
   createOrderPOST,
   forgotPasswordPOST,
-  registerUserPOST,
+  registerUser,
   resetPasswordPOST,
   getUser,
   patchUser,

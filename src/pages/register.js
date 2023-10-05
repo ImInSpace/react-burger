@@ -6,12 +6,13 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../services/actions/register";
 
 export default function RegisterPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const nameInputRef = useRef(null);
@@ -32,7 +33,7 @@ export default function RegisterPage() {
       password: password,
       name: name,
     };
-    dispatch(registerAction(registrationData));
+    dispatch(registerAction(registrationData, navigate));
   };
 
   return (
