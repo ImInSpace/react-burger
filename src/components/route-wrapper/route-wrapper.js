@@ -7,23 +7,26 @@ function RouteWrapper({ isProtected = false, element }) {
   const navigate = useNavigate();
   const location = useLocation();
 
+  console.log("location: ", location);
+
   const user = useSelector((store) => store.auth);
   console.log("user from store: ", user);
 
-  // Route не защищен.
-  if (!isProtected) {
-    return element;
-  }
-
-  if (user.name) {
+  if (!isProtected && user.email) {
+    console.log("#1");
     console.log("location state: ", location.state);
     const { from } = location.state || { from: { pathname: "/" } };
     console.log("from : ", from);
     return <Navigate to={from} />;
   }
 
-  /* prettier-ignore */
-  return user.name ? element : <Navigate to="/login" state={{from: location}} />;
+  if (isProtected && !user.email) {
+    console.log("#2");
+    return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  console.log("#3");
+  return element;
 }
 
 RouteWrapper.propTypes = {
