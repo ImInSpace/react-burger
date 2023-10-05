@@ -7,8 +7,6 @@ import {
 const initialState = {
   request: false,
   success: false,
-  error: false,
-
   message: "",
 };
 
@@ -22,15 +20,15 @@ const forgotPasswordReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: true,
-        message: action.message,
+        message: action.payload.message,
       };
     }
     case PASSWORD_FORGOT_FAILED: {
       return {
         ...state,
         request: false,
-        error: true,
-        message: action.message,
+        success: false,
+        message: action.payload.message,
       };
     }
     default:

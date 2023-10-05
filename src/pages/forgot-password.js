@@ -6,7 +6,7 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPasswordAction } from "../services/actions/forgot-password";
 
@@ -14,9 +14,10 @@ export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const emailInputRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onClickHandler = (e) => {
-    dispatch(forgotPasswordAction(email));
+    dispatch(forgotPasswordAction(email, navigate));
   };
 
   return (

@@ -1,5 +1,5 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/auth";
-import { setCookie, getCookie } from "../cookieManager";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/login";
+import { setCookie } from "../cookieManager";
 
 const initialState = {
   email: "",
@@ -10,7 +10,7 @@ const initialState = {
   message: "",
 };
 
-const authReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST: {
       return { ...state, request: true };
@@ -41,4 +41,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export { authReducer };
+export { loginReducer };

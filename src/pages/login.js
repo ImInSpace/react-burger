@@ -8,8 +8,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { AppHeader } from "../components/app-header/app-header";
 import { useDispatch } from "react-redux";
-import { authAction } from "../services/actions/auth";
-import { useSelector } from "react-redux";
+import { loginActionGen } from "../services/actions/login";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
@@ -36,7 +35,7 @@ export default function LoginPage() {
       password: password,
     };
 
-    dispatch(authAction(loginForm, navigate));
+    dispatch(loginActionGen(loginForm, navigate));
   };
 
   return (

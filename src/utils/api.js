@@ -44,9 +44,12 @@ function forgotPasswordPOST(email) {
     },
     body: JSON.stringify({ email: email }),
   })
-    .then((response) => response.json())
+    .then((response) => checkResponse(response))
     .catch((err) => {
-      console.error("Не удалось выполнить запрос", err);
+      console.error(
+        "Не удалось выполнить запрос для восстановления пароля.",
+        err
+      );
     });
 }
 
@@ -70,7 +73,7 @@ const checkResponse = (response) => {
     : response.json().then((err) => Promise.reject(err));
 };
 
-export const loginRequest = async (form) => {
+const login = async (form) => {
   return await fetch(Constants.LOGIN_URL, {
     method: "POST",
     mode: "cors",
@@ -85,10 +88,58 @@ export const loginRequest = async (form) => {
   }).then((response) => checkResponse(response));
 };
 
+const logout = async (token) => {
+  return await fetch(Constants.LOGIN_URL, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(token),
+  }).then((response) => checkResponse(response));
+};
+
+const getUser = async (token) => {
+  return await fetch(Constants.GET_USER_URL, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  }).then((response) => checkResponse(response));
+};
+
+const patchUser = async (token) => {
+  return await fetch(Constants.GET_USER_URL, {
+    method: "PATCH",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  }).then((response) => checkResponse(response));
+};
+
 export {
   getIngredients,
   createOrderPOST,
   forgotPasswordPOST,
   registerUserPOST,
   resetPasswordPOST,
+  getUser,
+  patchUser,
+  login,
 };

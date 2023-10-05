@@ -7,7 +7,7 @@ export const RESET_PASSWORD_URL = "https://norma.nomoreparties.space/api/passwor
 export const REGISTER_URL = "https://norma.nomoreparties.space/api/auth/register"; // prettier-ignore
 export const LOGIN_URL = "https://norma.nomoreparties.space/api/auth/login"; // prettier-ignore
 
-export const USER_URL = "https://norma.nomoreparties.space/api/auth/user"; // prettier-ignore
+export const GET_USER_URL = "https://norma.nomoreparties.space/api/auth/user"; // prettier-ignore
 
 export const BUNS_GROUP_NAME = "Булки";
 export const SAUCES_GROUP_NAME = "Соусы";

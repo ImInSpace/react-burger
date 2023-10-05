@@ -1,20 +1,15 @@
-import { loginRequest } from "../../utils/api";
+import { login } from "../../utils/api";
 
 export const LOGIN_REQUEST = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAILED = "LOGIN_FAILED";
 
-export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILED = "LOGOUT_FAILED";
-
-export function authAction(form, navigateHook) {
+export function loginActionGen(form) {
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
-    loginRequest(form)
+    login(form)
       .then((res) => {
         if (res.success) {
-          // navigateHook("/");
           dispatch({
             type: LOGIN_SUCCESS,
             email: res.user.email,
