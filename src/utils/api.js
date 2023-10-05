@@ -133,6 +133,21 @@ const patchUser = async (token) => {
   }).then((response) => checkResponse(response));
 };
 
+const updateToken = async (refreshToken) => {
+  return await fetch(Constants.REFRESH_TOKEN_URL, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify({ token: refreshToken }),
+  }).then((response) => checkResponse(response));
+};
+
 export {
   getIngredients,
   createOrderPOST,
@@ -143,4 +158,5 @@ export {
   patchUser,
   login,
   logout,
+  updateToken,
 };
