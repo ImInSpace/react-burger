@@ -3,15 +3,31 @@ import styles from "./profile.module.css";
 import { EditProfile } from "../components/profile/edit-profile";
 import { useState } from "react";
 import { MenuItem } from "../components/profile/menu-item";
+import { useDispatch } from "react-redux";
+import { logoutActionGen } from "../services/actions/logout";
+import { getCookie } from "../services/cookieManager";
+import { RESET_USER } from "../services/actions/get-user";
 
 export default function Profile() {
+  const dispatch = useDispatch();
   const initialState = [true, false, false];
   const [activeMenu, setActiveMenu] = useState(initialState);
+
+  const logout = () => {
+    dispatch(logoutActionGen(getCookie("refreshToken")));
+    //dispatch(RESET_USER);
+  };
 
   const onMenuClickHandler = (index) => {
     const newState = [false, false, false];
     newState[index] = true;
     setActiveMenu(newState);
+
+    // Индусы бы оценили.
+    // ToDo: сделать по человечески.
+    if (index === 2) {
+      logout();
+    }
   };
 
   return (

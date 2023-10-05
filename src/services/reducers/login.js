@@ -32,10 +32,11 @@ const loginReducer = (state = initialState, action) => {
       return {
         ...state,
         request: false,
-        error: true,
+        success: false,
         message: action.message,
       };
     }
+
     default:
       return state;
   }

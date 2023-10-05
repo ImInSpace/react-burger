@@ -3,7 +3,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 } from "../actions/logout";
-import { setCookie } from "../cookieManager";
+import { deleteCookie, setCookie } from "../cookieManager";
 
 const initialState = {
   request: false,
@@ -18,7 +18,8 @@ const logoutReducer = (state = initialState, action) => {
       return { ...state, request: true };
     }
     case LOGOUT_SUCCESS: {
-      setCookie("token", "");
+      deleteCookie("token");
+      deleteCookie("refreshToken");
 
       return {
         ...state,

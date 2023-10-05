@@ -6,6 +6,7 @@ export const RESET_PASSWORD_URL = "https://norma.nomoreparties.space/api/passwor
 
 export const REGISTER_URL = "https://norma.nomoreparties.space/api/auth/register"; // prettier-ignore
 export const LOGIN_URL = "https://norma.nomoreparties.space/api/auth/login"; // prettier-ignore
+export const LOGOUT_URL = "https://norma.nomoreparties.space/api/auth/logout"; // prettier-ignore
 
 export const GET_USER_URL = "https://norma.nomoreparties.space/api/auth/user"; // prettier-ignore
 

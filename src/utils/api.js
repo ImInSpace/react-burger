@@ -88,8 +88,8 @@ const login = async (form) => {
   }).then((response) => checkResponse(response));
 };
 
-const logout = async (token) => {
-  return await fetch(Constants.LOGIN_URL, {
+const logout = async (refreshToken) => {
+  return await fetch(Constants.LOGOUT_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -99,7 +99,7 @@ const logout = async (token) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify(token),
+    body: JSON.stringify({ token: refreshToken }),
   }).then((response) => checkResponse(response));
 };
 
@@ -142,4 +142,5 @@ export {
   getUser,
   patchUser,
   login,
+  logout,
 };

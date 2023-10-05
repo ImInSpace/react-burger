@@ -2,6 +2,7 @@ import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILED,
+  RESET_USER,
 } from "../actions/get-user";
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
   message: "",
 };
 
-const loginReducer = (state = initialState, action) => {
+const getUserReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return { ...state, request: true };
@@ -36,9 +37,12 @@ const loginReducer = (state = initialState, action) => {
         message: action.message,
       };
     }
+    case RESET_USER: {
+      return { ...initialState };
+    }
     default:
       return state;
   }
 };
 
-export { loginReducer };
+export { getUserReducer };
