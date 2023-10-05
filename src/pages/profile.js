@@ -13,11 +13,6 @@ export default function Profile() {
   const initialState = [true, false, false];
   const [activeMenu, setActiveMenu] = useState(initialState);
 
-  const logout = () => {
-    dispatch(logoutActionGen(getCookie("refreshToken")));
-    //dispatch(RESET_USER);
-  };
-
   const onMenuClickHandler = (index) => {
     const newState = [false, false, false];
     newState[index] = true;
@@ -28,6 +23,11 @@ export default function Profile() {
     if (index === 2) {
       logout();
     }
+  };
+
+  const logout = () => {
+    dispatch(logoutActionGen(getCookie("refreshToken")));
+    dispatch({ type: RESET_USER });
   };
 
   return (

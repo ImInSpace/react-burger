@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   forgotPassword: forgotPasswordReducer,
   resetPassword: resetPasswordReducer,
   register: registerReducer,
-  auth: loginReducer,
+  login: loginReducer,
   logout: logoutReducer,
   user: getUserReducer,
 });

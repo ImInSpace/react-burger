@@ -1,4 +1,9 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from "../actions/login";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  RESET_USER,
+} from "../actions/login";
 import { setCookie } from "../cookieManager";
 
 const initialState = {
@@ -36,7 +41,8 @@ const loginReducer = (state = initialState, action) => {
         message: action.message,
       };
     }
-
+    case RESET_USER:
+      return { ...initialState };
     default:
       return state;
   }
