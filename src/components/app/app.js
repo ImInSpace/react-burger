@@ -23,10 +23,34 @@ function App() {
               <RouteWrapper isProtected={false} element={<LoginPage />} />
             }
           />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-          <Route path="/reset-password" element={<ResetPasswordPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/register"
+            element={
+              <RouteWrapper isProtected={false} element={<RegisterPage />} />
+            }
+          />
+          <Route
+            path="/profile"
+            element={<RouteWrapper isProtected={true} element={<Profile />} />}
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <RouteWrapper
+                isProtected={false}
+                element={<ForgotPasswordPage />}
+              />
+            }
+          />
+          <Route
+            path="/reset-password"
+            element={
+              <RouteWrapper
+                isProtected={false}
+                element={<ResetPasswordPage />}
+              />
+            }
+          />
           <Route path="*" element={<NotFound404Page />} />
         </Routes>
       </BrowserRouter>
