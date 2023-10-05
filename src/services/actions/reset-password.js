@@ -9,7 +9,6 @@ export function resetPasswordAction(password, token, redirectHook) {
     dispatch({ type: PASSWORD_RESET_REQUEST });
     resetPassword(password, token, redirectHook)
       .then((res) => {
-        console.log(res);
         if (res.success) {
           redirectHook("/login");
           dispatch({

@@ -6,25 +6,25 @@ import {
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetPasswordAction } from "../services/actions/reset-password";
 
 export default function ResetPasswordPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
   const passwordInputRef = useRef(null);
   const onIconPasswordClick = () => {
     setTimeout(() => passwordInputRef.current.focus(), 0);
-    alert("Icon Click Callback");
   };
 
   const [codeFromEmail, setCodeFromEmail] = useState("");
   const codeFromEmailInputRef = useRef(null);
 
   const onSaveClickHandler = () => {
-    dispatch(resetPasswordAction(password, codeFromEmail));
+    dispatch(resetPasswordAction(password, codeFromEmail, navigate));
   };
 
   return (
