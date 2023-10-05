@@ -9,7 +9,6 @@ function RouteWrapper({ isProtected = false, element }) {
 
   if (!isProtected && user.email) {
     const { from } = location.state || { from: { pathname: "/" } };
-    console.log("from : ", from);
     return <Navigate to={from} />;
   }
 

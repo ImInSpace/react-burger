@@ -27,7 +27,6 @@ export default function HomePage() {
   );
 
   const savedUser = useSelector((store) => store.auth);
-  console.log("saved user: ", savedUser);
 
   const isCreateOrderModalShown = useSelector(
     (store) => store.order.isModalShown
