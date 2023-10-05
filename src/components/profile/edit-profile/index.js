@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Button,
+  Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
 import { getUser } from "../../../utils/api";
 import { getCookie } from "../../../services/cookieManager";
@@ -56,7 +59,7 @@ function EditProfile() {
         type={"text"}
         placeholder={"Пароль"}
         onChange={(e) => setPassword(e.target.value)}
-        icon={"EditIcon"}
+        icon={"HideIcon"}
         value={password}
         name={"name"}
         error={false}
@@ -65,6 +68,9 @@ function EditProfile() {
         size={"default"}
         extraClass="ml-1"
       />
+      <Button htmlType="button" type="primary" size="medium" extraClass={styles.saveBtn}>
+        Сохранить
+      </Button>
     </div>
   );
 }
