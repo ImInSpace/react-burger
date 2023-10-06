@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import {
   Button,
   Input,
@@ -15,9 +15,8 @@ function EditProfile() {
 
   useEffect(() => {
     getUser().then((userInfo) => {
-      console.log("user info успешно загружен: ", userInfo);
-      // setName(userInfo.user.name);
-      // setEmail(userInfo.user.email);
+      setName(userInfo.user.name);
+      setEmail(userInfo.user.email);
     });
   });
 

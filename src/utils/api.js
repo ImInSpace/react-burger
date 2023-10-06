@@ -119,21 +119,6 @@ const patchUser = async (token) => {
   }).then((response) => checkResponse(response));
 };
 
-const updateTokenAsync = async (refreshToken) => {
-  return await fetch(Constants.REFRESH_TOKEN_URL, {
-    method: "POST",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-    body: JSON.stringify({ token: refreshToken }),
-  }).then((response) => checkResponse(response));
-};
-
 const updateToken = () => {
   return fetch(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
@@ -149,8 +134,8 @@ const updateToken = () => {
   }).then((response) => checkResponse(response));
 };
 
-const getUserRequest = async () => {
-  return await fetch(Constants.GET_USER_URL, {
+const getUserRequest = () => {
+  return fetch(Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
@@ -164,36 +149,22 @@ const getUserRequest = async () => {
   }).then((response) => checkResponse(response));
 };
 
-const getUser = async () => {
-  return await getUserRequest()
+const getUser = () => {
+  return getUserRequest()
     .then((json) => {
-      console.log("everything is great!");
       return json;
     })
     .catch((json) => {
-      console.log("catch(err): ", json);
       if (!json.success && json.message === "jwt expired") {
-        console.log("Обнаружен просроченый токен.");
-        updateToken()
-          .then((json) => {
-            console.log("Запускаю процедуру обновления токена.");
-            if (json.success) {
-              setCookie("token", json.accessToken);
-              setCookie("refreshToken", json.refreshToken);
-
-              console.log(
-                "Токен успешно обновлён! Теперь получаю данные пользователя."
-              );
-              return getUserRequest(); // ¯\_(ツ)_/¯
-            } else {
-              console.error(
-                "Не удалось обновить токен для выполнения запроса."
-              );
-            }
-          })
-          .catch((err) => {
-            console.log("update token err: ", err);
-          });
+        return updateToken().then((json) => {
+          if (json.success) {
+            setCookie("token", json.accessToken);
+            setCookie("refreshToken", json.refreshToken);
+            return getUserRequest();
+          } else {
+            console.error("Не удалось обновить токен для выполнения запроса.");
+          }
+        });
       }
     });
 };
