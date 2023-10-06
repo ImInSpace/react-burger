@@ -4,6 +4,7 @@ import cn from "classnames";
 import {
   Input,
   Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -21,11 +22,6 @@ export default function RegisterPage() {
   const emailInputRef = useRef(null);
 
   const [password, setPassword] = useState("");
-  const passwordInputRef = useRef(null);
-  const onIconPasswordClick = () => {
-    setTimeout(() => emailInputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
 
   const onRegisterHandler = () => {
     const registrationData = {
@@ -67,18 +63,10 @@ export default function RegisterPage() {
             size={"default"}
             extraClass="mt-6"
           />
-          <Input
-            type={"password"}
-            placeholder={"Пароль"}
+          <PasswordInput
             onChange={(e) => setPassword(e.target.value)}
-            icon={"HideIcon"}
             value={password}
             name={"password"}
-            error={false}
-            ref={passwordInputRef}
-            onIconClick={onIconPasswordClick}
-            errorText={"Ошибка"}
-            size={"default"}
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>

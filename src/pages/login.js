@@ -2,6 +2,8 @@ import styles from "./login.module.css";
 import {
   Input,
   Button,
+  PasswordInput,
+  EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import cn from "classnames";
@@ -16,18 +18,8 @@ export default function LoginPage() {
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
-  const emailInputRef = useRef(null);
-  const onIconEmailClick = () => {
-    setTimeout(() => emailInputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
 
   const [password, setPassword] = useState("");
-  const passwordInputRef = useRef(null);
-  const onIconPasswordClick = () => {
-    setTimeout(() => passwordInputRef.current.focus(), 0);
-    alert("Icon Click Callback");
-  };
 
   const onLoginHandler = () => {
     const loginForm = {
@@ -45,31 +37,17 @@ export default function LoginPage() {
         <div className={styles.container}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Вход</p>
-          <Input
-            type={"email"}
-            placeholder={"email"}
+          <EmailInput
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             name={"email"}
-            error={false}
-            ref={emailInputRef}
-            onIconClick={onIconEmailClick}
-            errorText={"Ошибка"}
-            size={"default"}
+            isIcon={false}
             extraClass="mt-6"
           />
-          <Input
-            type={"password"}
-            placeholder={"Пароль"}
+          <PasswordInput
             onChange={(e) => setPassword(e.target.value)}
-            icon={"HideIcon"}
             value={password}
             name={"password"}
-            error={false}
-            ref={passwordInputRef}
-            onIconClick={undefined}
-            errorText={"Ошибка"}
-            size={"default"}
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>

@@ -4,6 +4,7 @@ import cn from "classnames";
 import {
   Input,
   Button,
+  PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,10 +16,6 @@ export default function ResetPasswordPage() {
   const navigate = useNavigate();
 
   const [password, setPassword] = useState("");
-  const passwordInputRef = useRef(null);
-  const onIconPasswordClick = () => {
-    setTimeout(() => passwordInputRef.current.focus(), 0);
-  };
 
   const [codeFromEmail, setCodeFromEmail] = useState("");
   const codeFromEmailInputRef = useRef(null);
@@ -34,17 +31,10 @@ export default function ResetPasswordPage() {
         <div className={styles.container}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Восстановление пароля</p>
-          <Input
-            type={"password"}
-            placeholder={"Введите новый пароль"}
+          <PasswordInput
             onChange={(e) => setPassword(e.target.value)}
             value={password}
-            name={"emailCode"}
-            error={false}
-            onIconClick={onIconPasswordClick}
-            ref={codeFromEmailInputRef}
-            errorText={"Ошибка"}
-            size={"default"}
+            name={"password"}
             extraClass="mt-6"
           />
           <Input

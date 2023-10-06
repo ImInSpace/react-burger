@@ -2,6 +2,8 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import {
   Button,
   Input,
+  PasswordInput,
+  EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
 import { getUser } from "../../../utils/api";
@@ -12,10 +14,8 @@ function EditProfile() {
   const nameInputRef = useRef(null);
 
   const [email, setEmail] = useState("");
-  const loginInputRef = useRef(null);
 
-  const [password, setPassword] = useState("******");
-  const passwordInputRef = useRef(null);
+  const [password, setPassword] = useState("Введите новый пароль");
 
   const token = getCookie("token");
   useEffect(() => {
@@ -33,7 +33,6 @@ function EditProfile() {
         type={"text"}
         placeholder={"Имя"}
         onChange={(e) => setName(e.target.value)}
-        icon={"EditIcon"}
         value={name}
         name={"name"}
         error={false}
@@ -42,33 +41,26 @@ function EditProfile() {
         size={"default"}
         extraClass="ml-1"
       />
-      <Input
-        type={"text"}
-        placeholder={"Email"}
+      <EmailInput
         onChange={(e) => setEmail(e.target.value)}
-        icon={"EditIcon"}
         value={email}
-        name={"name"}
-        error={false}
-        ref={loginInputRef}
-        errorText={"Ошибка"}
-        size={"default"}
+        name={"email"}
+        placeholder="Почта"
+        isIcon={true}
         extraClass="ml-1"
       />
-      <Input
-        type={"text"}
-        placeholder={"Пароль"}
+      <PasswordInput
         onChange={(e) => setPassword(e.target.value)}
-        icon={"HideIcon"}
         value={password}
-        name={"name"}
-        error={false}
-        ref={passwordInputRef}
-        errorText={"Ошибка"}
-        size={"default"}
-        extraClass="ml-1"
+        name={"password"}
+        icon="EditIcon"
       />
-      <Button htmlType="button" type="primary" size="medium" extraClass={styles.saveBtn}>
+      <Button
+        htmlType="button"
+        type="primary"
+        size="medium"
+        extraClass={styles.saveBtn}
+      >
         Сохранить
       </Button>
     </div>
