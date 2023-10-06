@@ -13,10 +13,12 @@ export function loginActionGen(form) {
         if (res.success) {
           dispatch({
             type: LOGIN_SUCCESS,
-            email: res.user.email,
-            name: res.user.name,
-            accessToken: res.accessToken,
-            refreshToken: res.refreshToken,
+            payload: {
+              email: res.user.email,
+              name: res.user.name,
+              accessToken: res.accessToken,
+              refreshToken: res.refreshToken,
+            },
           });
         } else {
           dispatch({ type: LOGIN_FAILED, message: res.message });

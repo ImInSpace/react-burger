@@ -115,7 +115,15 @@ const getUser = async (token) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-  }).then((response) => checkResponse(response));
+  }).then((response) =>
+    checkResponse(response).then((json) => {
+      console.log("response checked: ", json);
+
+      if (json.message === "jwt expired") {
+        console.log("yeap, expired");
+      }
+    })
+  );
 };
 
 const patchUser = async (token) => {
@@ -147,6 +155,8 @@ const updateToken = async (refreshToken) => {
     body: JSON.stringify({ token: refreshToken }),
   }).then((response) => checkResponse(response));
 };
+
+const refreshTokenWrapper = async (data) => {};
 
 export {
   getIngredients,

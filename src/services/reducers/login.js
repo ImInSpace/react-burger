@@ -21,16 +21,16 @@ const loginReducer = (state = initialState, action) => {
       return { ...state, request: true };
     }
     case LOGIN_SUCCESS: {
-      setCookie("token", action.accessToken);
-      setCookie("refreshToken", action.refreshToken);
+      setCookie("token", action.payload.accessToken);
+      setCookie("refreshToken", action.payload.refreshToken);
 
       return {
         ...state,
         request: false,
         success: true,
 
-        email: action.email,
-        name: action.name,
+        email: action.payload.email,
+        name: action.payload.name,
       };
     }
     case LOGIN_FAILED: {

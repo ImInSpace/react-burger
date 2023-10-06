@@ -13,9 +13,10 @@ export function getUserActionGen(token) {
         if (res.success) {
           dispatch({
             type: GET_USER_SUCCESS,
-
-            email: res.user.email,
-            name: res.user.name,
+            payload: {
+              email: res.user.email,
+              name: res.user.name,
+            },
           });
         } else {
           dispatch({ type: GET_USER_FAILED });

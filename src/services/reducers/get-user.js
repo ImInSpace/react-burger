@@ -25,8 +25,8 @@ const getUserReducer = (state = initialState, action) => {
         request: false,
         success: true,
 
-        email: action.email,
-        name: action.name,
+        email: action.payload.email,
+        name: action.payload.name,
       };
     }
     case GET_USER_FAILED: {
