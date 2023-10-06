@@ -1,4 +1,5 @@
 import * as Constants from "../constants";
+import { getCookie } from "../services/cookieManager";
 
 function getIngredients() {
   return fetch(Constants.INGREDIENTS_URL)
@@ -103,7 +104,7 @@ const logout = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const getUser = async (token) => {
+const getUser = async () => {
   return await fetch(Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
@@ -111,7 +112,7 @@ const getUser = async (token) => {
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: getCookie("token"),
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
@@ -122,6 +123,7 @@ const getUser = async (token) => {
       if (json.message === "jwt expired") {
         console.log("yeap, expired");
       }
+      return json;
     })
   );
 };

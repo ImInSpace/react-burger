@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   Button,
   Input,
@@ -7,25 +7,18 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
 import { getUser } from "../../../utils/api";
-import { getCookie } from "../../../services/cookieManager";
 
 function EditProfile() {
   const [name, setName] = useState("");
-  const nameInputRef = useRef(null);
-
   const [email, setEmail] = useState("");
-
   const [password, setPassword] = useState("Введите новый пароль");
 
-  const token = getCookie("token");
   useEffect(() => {
-    if (!token) return;
-
-    getUser(token).then((data) => {
-      setName(data.user.name);
-      setEmail(data.user.email);
+    getUser().then((userInfo) => {
+      setName(userInfo.user.name);
+      setEmail(userInfo.user.email);
     });
-  }, [token]);
+  });
 
   return (
     <div className={styles.inputs}>
@@ -36,7 +29,6 @@ function EditProfile() {
         value={name}
         name={"name"}
         error={false}
-        ref={nameInputRef}
         errorText={"Ошибка"}
         size={"default"}
         extraClass="ml-1"

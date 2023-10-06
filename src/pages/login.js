@@ -1,6 +1,5 @@
 import styles from "./login.module.css";
 import {
-  Input,
   Button,
   PasswordInput,
   EmailInput,
@@ -10,7 +9,7 @@ import cn from "classnames";
 import { Link } from "react-router-dom";
 import { AppHeader } from "../components/app-header/app-header";
 import { useDispatch } from "react-redux";
-import { loginActionGen } from "../services/actions/login";
+import { loginActionGen } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {

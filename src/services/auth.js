@@ -52,4 +52,3 @@ const logoutResponse = {
   accessToken: "Bearer ...",
   refreshToken: "",
 };
-

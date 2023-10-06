@@ -5,14 +5,14 @@ import { Navigate, useLocation } from "react-router-dom";
 function RouteWrapper({ isProtected = false, element }) {
   const location = useLocation();
 
-  const user = useSelector((store) => store.login);
+  const auth = useSelector((store) => store.auth);
 
-  if (!isProtected && user.email) {
+  if (!isProtected && auth.email) {
     const { from } = location.state || { from: { pathname: "/" } };
     return <Navigate to={from} />;
   }
 
-  if (isProtected && !user.email) {
+  if (isProtected && !auth.email) {
     return <Navigate to="/login" state={{ from: location }} />;
   }
 

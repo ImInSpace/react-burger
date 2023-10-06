@@ -4,9 +4,9 @@ import { EditProfile } from "../components/profile/edit-profile";
 import { useState } from "react";
 import { MenuItem } from "../components/profile/menu-item";
 import { useDispatch } from "react-redux";
-import { logoutActionGen } from "../services/actions/logout";
+import { logoutActionGen } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
-import { RESET_USER } from "../services/actions/get-user";
+import { RESET_USER } from "../services/actions/auth";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -27,7 +27,6 @@ export default function Profile() {
 
   const logout = () => {
     dispatch(logoutActionGen(getCookie("refreshToken")));
-    dispatch({ type: RESET_USER });
   };
 
   return (
