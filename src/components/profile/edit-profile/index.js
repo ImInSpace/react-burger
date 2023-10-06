@@ -15,8 +15,9 @@ function EditProfile() {
 
   useEffect(() => {
     getUser().then((userInfo) => {
-      setName(userInfo.user.name);
-      setEmail(userInfo.user.email);
+      console.log("user info успешно загружен: ", userInfo);
+      // setName(userInfo.user.name);
+      // setEmail(userInfo.user.email);
     });
   });
 

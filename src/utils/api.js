@@ -1,5 +1,5 @@
 import * as Constants from "../constants";
-import { getCookie } from "../services/cookieManager";
+import { getCookie, setCookie } from "../services/cookieManager";
 
 function getIngredients() {
   return fetch(Constants.INGREDIENTS_URL)
@@ -119,7 +119,7 @@ const patchUser = async (token) => {
   }).then((response) => checkResponse(response));
 };
 
-const updateToken = async (refreshToken) => {
+const updateTokenAsync = async (refreshToken) => {
   return await fetch(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
@@ -134,7 +134,7 @@ const updateToken = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const updateToken2 = (refreshToken) => {
+const updateToken = () => {
   return fetch(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
@@ -145,7 +145,7 @@ const updateToken2 = (refreshToken) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify({ token: refreshToken }),
+    body: JSON.stringify({ token: getCookie("refreshToken") }),
   }).then((response) => checkResponse(response));
 };
 
@@ -166,19 +166,25 @@ const getUserRequest = async () => {
 
 const getUser = async () => {
   return await getUserRequest()
-    .then((json) => json)
+    .then((json) => {
+      console.log("everything is great!");
+      return json;
+    })
     .catch((json) => {
       console.log("catch(err): ", json);
       if (!json.success && json.message === "jwt expired") {
         console.log("Обнаружен просроченый токен.");
-        return updateToken2(getCookie("refreshToken"))
+        updateToken()
           .then((json) => {
             console.log("Запускаю процедуру обновления токена.");
             if (json.success) {
+              setCookie("token", json.accessToken);
+              setCookie("refreshToken", json.refreshToken);
+
               console.log(
-                "Токен успешно обвноёлен! Теперь получаю данные пользователя."
+                "Токен успешно обновлён! Теперь получаю данные пользователя."
               );
-              return getUserRequest();
+              return getUserRequest(); // ¯\_(ツ)_/¯
             } else {
               console.error(
                 "Не удалось обновить токен для выполнения запроса."
@@ -201,6 +207,5 @@ export {
   patchUser,
   login,
   logout,
-  updateToken,
   getUser,
 };

@@ -6,7 +6,6 @@ import { MenuItem } from "../components/profile/menu-item";
 import { useDispatch } from "react-redux";
 import { logoutActionGen } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
-import { RESET_USER } from "../services/actions/auth";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -18,8 +17,6 @@ export default function Profile() {
     newState[index] = true;
     setActiveMenu(newState);
 
-    // Индусы бы оценили.
-    // ToDo: сделать по человечески.
     if (index === 2) {
       logout();
     }
