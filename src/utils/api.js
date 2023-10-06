@@ -104,30 +104,6 @@ const logout = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const getUser = async () => {
-  return await fetch(Constants.GET_USER_URL, {
-    method: "GET",
-    mode: "cors",
-    cache: "no-cache",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: getCookie("token"),
-    },
-    redirect: "follow",
-    referrerPolicy: "no-referrer",
-  }).then((response) =>
-    checkResponse(response).then((json) => {
-      console.log("response checked: ", json);
-
-      if (json.message === "jwt expired") {
-        console.log("yeap, expired");
-      }
-      return json;
-    })
-  );
-};
-
 const patchUser = async (token) => {
   return await fetch(Constants.GET_USER_URL, {
     method: "PATCH",
@@ -158,7 +134,63 @@ const updateToken = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const refreshTokenWrapper = async (data) => {};
+const updateToken2 = (refreshToken) => {
+  return fetch(Constants.REFRESH_TOKEN_URL, {
+    method: "POST",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify({ token: refreshToken }),
+  }).then((response) => checkResponse(response));
+};
+
+const getUserRequest = async () => {
+  return await fetch(Constants.GET_USER_URL, {
+    method: "GET",
+    mode: "cors",
+    cache: "no-cache",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: getCookie("token"),
+    },
+    redirect: "follow",
+    referrerPolicy: "no-referrer",
+  }).then((response) => checkResponse(response));
+};
+
+const getUser = async () => {
+  return await getUserRequest()
+    .then((json) => json)
+    .catch((json) => {
+      console.log("catch(err): ", json);
+      if (!json.success && json.message === "jwt expired") {
+        console.log("Обнаружен просроченый токен.");
+        return updateToken2(getCookie("refreshToken"))
+          .then((json) => {
+            console.log("Запускаю процедуру обновления токена.");
+            if (json.success) {
+              console.log(
+                "Токен успешно обвноёлен! Теперь получаю данные пользователя."
+              );
+              return getUserRequest();
+            } else {
+              console.error(
+                "Не удалось обновить токен для выполнения запроса."
+              );
+            }
+          })
+          .catch((err) => {
+            console.log("update token err: ", err);
+          });
+      }
+    });
+};
 
 export {
   getIngredients,
@@ -166,9 +198,9 @@ export {
   forgotPasswordPOST,
   registerUser,
   resetPassword,
-  getUser,
   patchUser,
   login,
   logout,
   updateToken,
+  getUser,
 };
