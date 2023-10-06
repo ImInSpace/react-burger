@@ -6,19 +6,23 @@ import {
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
-import { getUser } from "../../../utils/api";
+import { getUser, patchUser } from "../../../utils/api";
 
 function EditProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("Введите новый пароль");
+  const [password, setPassword] = useState("********");
 
   useEffect(() => {
     getUser().then((userInfo) => {
       setName(userInfo.user.name);
       setEmail(userInfo.user.email);
     });
-  });
+  }, []);
+
+  const onUserUpdate = () => {
+    patchUser(name, email);
+  };
 
   return (
     <div className={styles.inputs}>
@@ -52,6 +56,7 @@ function EditProfile() {
         type="primary"
         size="medium"
         extraClass={styles.saveBtn}
+        onClick={onUserUpdate}
       >
         Сохранить
       </Button>

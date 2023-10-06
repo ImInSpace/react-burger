@@ -104,19 +104,41 @@ const logout = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const patchUser = async (token) => {
-  return await fetch(Constants.GET_USER_URL, {
+const patchUserRequest = (name, email) => {
+  return fetch(Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
     cache: "no-cache",
     credentials: "same-origin",
     headers: {
       "Content-Type": "application/json",
-      Authorization: token,
+      Authorization: getCookie("token"),
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
+    body: JSON.stringify({ name: name, email: email }),
   }).then((response) => checkResponse(response));
+};
+
+const patchUser = (name, email) => {
+  return patchUserRequest(name, email)
+    .then((json) => {
+      console.log("json: ", json);
+      return json;
+    })
+    .catch((json) => {
+      if (!json.success && json.message === "jwt expired") {
+        return updateToken().then((json) => {
+          if (json.success) {
+            setCookie("token", json.accessToken);
+            setCookie("refreshToken", json.refreshToken);
+            return patchUserRequest(name, email);
+          } else {
+            console.error("Не удалось обновить токен для выполнения запроса.");
+          }
+        });
+      }
+    });
 };
 
 const updateToken = () => {
@@ -175,8 +197,8 @@ export {
   forgotPasswordPOST,
   registerUser,
   resetPassword,
-  patchUser,
   login,
   logout,
   getUser,
+  patchUser,
 };

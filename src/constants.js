@@ -9,6 +9,7 @@ export const LOGIN_URL = "https://norma.nomoreparties.space/api/auth/login"; // 
 export const LOGOUT_URL = "https://norma.nomoreparties.space/api/auth/logout"; // prettier-ignore
 
 export const GET_USER_URL = "https://norma.nomoreparties.space/api/auth/user"; // prettier-ignore
+export const PATCH_USER_URL = "https://norma.nomoreparties.space/api/auth/user"; // prettier-ignore
 export const REFRESH_TOKEN_URL = "https://norma.nomoreparties.space/api/auth/token"; // prettier-ignore
 
 export const BUNS_GROUP_NAME = "Булки";
