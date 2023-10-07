@@ -6,15 +6,9 @@ import { MenuItem } from "../components/profile/menu-item";
 import { useDispatch } from "react-redux";
 import { logoutActionGen } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
-import { HEADER_MENU_PROFILE } from "../constants";
-import { SELECT_HEADER_MENU } from "../services/actions/header-menu";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  dispatch({
-    type: SELECT_HEADER_MENU,
-    payload: { menu: HEADER_MENU_PROFILE },
-  });
 
   const initialState = [true, false, false];
   const [activeMenu, setActiveMenu] = useState(initialState);

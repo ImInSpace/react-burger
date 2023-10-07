@@ -1,1 +1,0 @@
-export const SELECT_HEADER_MENU = "SELECT_HEADER_MENU";

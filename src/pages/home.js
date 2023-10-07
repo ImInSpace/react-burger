@@ -14,16 +14,9 @@ import {
 } from "../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { SELECT_HEADER_MENU } from "../services/actions/header-menu";
-import { HEADER_MENU_CONSTRUCTOR } from "../constants";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  dispatch({
-    type: SELECT_HEADER_MENU,
-    payload: { menu: HEADER_MENU_CONSTRUCTOR },
-  });
-
   useEffect(() => {
     dispatch(loadIngredients());
   }, [dispatch]);
