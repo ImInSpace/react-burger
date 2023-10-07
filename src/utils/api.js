@@ -9,17 +9,18 @@ function getIngredients() {
     });
 }
 
-function createOrderPOST(ids) {
+function createOrder(ids) {
   return fetch(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
+      Authorization: getCookie("token"),
     },
     body: JSON.stringify({ ingredients: ids }),
   })
     .then((response) => checkResponse(response))
     .catch((err) => {
-      console.error("Не удалось выполнить запрос", err);
+      console.error("Не удалось выполнить запрос.", err);
     });
 }
 
@@ -193,7 +194,7 @@ const getUser = () => {
 
 export {
   getIngredients,
-  createOrderPOST,
+  createOrder,
   forgotPasswordPOST,
   registerUser,
   resetPassword,
