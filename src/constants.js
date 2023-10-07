@@ -19,3 +19,7 @@ export const MAINS_GROUP_NAME = "Начинки";
 export const BUNS_ANCHOR = "buns-anchor";
 export const SAUCES_ANCHOR = "sauces-anchor";
 export const MAINS_ANCHOR = "mains-anchor";
+
+export const HEADER_MENU_CONSTRUCTOR = "Конструктор";
+export const HEADER_MENU_ORDER_RIBBON = "Лента заказов";
+export const HEADER_MENU_PROFILE = "Личный кабинет";

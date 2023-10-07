@@ -7,8 +7,10 @@ import { forgotPasswordReducer } from "./forgot-password";
 import { registerReducer } from "./register";
 import { resetPasswordReducer } from "./reset-password";
 import { authReducer } from "./auth";
+import { headerMenuReducer } from "./header-menu";
 
 const rootReducer = combineReducers({
+  headerMenu: headerMenuReducer,
   ingredients: ingredientsReducer,
   order: orderReducer,
   modal: modalReducer,

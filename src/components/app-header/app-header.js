@@ -5,16 +5,23 @@ import { ListIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-router-dom";
+import * as Constants from "../../constants";
 
 function AppHeader() {
   return (
     <div className={styles.header}>
       <div className={styles.container}>
         <div className={styles.leftMenu}>
-          <Link to="/">
-            <MenuItem text="Конструктор" icon={<BurgerIcon />} />
-          </Link>
-          <MenuItem text="Лента заказов" icon={<ListIcon />} />
+          <MenuItem
+            url="/"
+            text={Constants.HEADER_MENU_CONSTRUCTOR}
+            icon={<BurgerIcon />}
+          />
+          <MenuItem
+            url="/order-ribbon"
+            text={Constants.HEADER_MENU_ORDER_RIBBON}
+            icon={<ListIcon />}
+          />
         </div>
         <div className={styles.logo}>
           <Link to="/">
@@ -22,9 +29,11 @@ function AppHeader() {
           </Link>
         </div>
         <div className={styles.rightMenu}>
-          <Link to="/profile">
-            <MenuItem text="Личный кабинет" icon={<ProfileIcon />} />
-          </Link>
+          <MenuItem
+            url="/profile"
+            text={Constants.HEADER_MENU_PROFILE}
+            icon={<ProfileIcon />}
+          />
         </div>
       </div>
     </div>
