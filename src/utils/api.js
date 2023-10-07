@@ -124,7 +124,6 @@ const patchUserRequest = (name, email) => {
 const patchUser = (name, email) => {
   return patchUserRequest(name, email)
     .then((json) => {
-      console.log("json: ", json);
       return json;
     })
     .catch((json) => {
