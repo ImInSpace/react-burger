@@ -1,10 +1,15 @@
 import styles from "./order-status.module.css";
+import { useSelector } from "react-redux";
 
 function OrderStatus() {
+  const { number } = useSelector((store) => store.order);
+
   return (
     <>
       <p className="text text_type_main-default mt-15">
-        Ваш заказ начали готовить
+        {number === 0
+          ? "Отправляем заказ в бургерную..."
+          : "Ваш заказ начали готовить"}
       </p>
       <p
         className={

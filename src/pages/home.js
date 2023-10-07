@@ -26,8 +26,6 @@ export default function HomePage() {
     (store) => store.ingredients.selectedIngredient
   );
 
-  const savedUser = useSelector((store) => store.auth);
-
   const isCreateOrderModalShown = useSelector(
     (store) => store.order.isModalShown
   );
