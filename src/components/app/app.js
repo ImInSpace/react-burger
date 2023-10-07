@@ -15,8 +15,14 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<RouteWrapper isProtected={true} element={<HomePage />} />}
+            element={
+              <RouteWrapper isProtected={false} element={<HomePage />} />
+            }
           />
+          {/* <Route
+            path="/order-ribbon"
+            element={<RouteWrapper isProtected={true} element={<HomePage />} />}
+          /> */}
           <Route
             path="/login"
             element={

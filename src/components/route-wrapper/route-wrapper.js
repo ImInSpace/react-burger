@@ -8,6 +8,7 @@ function RouteWrapper({ isProtected = false, element }) {
   const auth = useSelector((store) => store.auth);
 
   if (!isProtected && auth.email) {
+    if (location.state == null) return element;
     const { from } = location.state || { from: { pathname: "/" } };
     return <Navigate to={from} />;
   }
