@@ -10,7 +10,6 @@ function IngredientDetails() {
   const { id } = useParams("id");
 
   const location = useLocation();
-  console.log("ingredient details location: ", location);
 
   const { ingredients } = useSelector((store) => store.ingredients);
 

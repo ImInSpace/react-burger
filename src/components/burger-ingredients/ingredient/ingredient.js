@@ -26,15 +26,7 @@ function Ingredient({ ingredientInfo }) {
     item: { id: ingredientInfo._id },
   });
 
-  const showIngredientInfo = (id) => {
-    // navigate("/ingredients/" + id);
-    // dispatch({
-    //   type: OPEN_INGREDIENTS_DETAILS,
-    //   id: id,
-    // });
-  };
-
-  console.log("background location: ", location);
+  const showIngredientInfo = (id) => {};
 
   return (
     <Link
