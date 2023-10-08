@@ -19,6 +19,7 @@ function RouteWrapper({ isProtected = false, element }) {
     (store) => store.auth
   );
 
+  // Запрос еще выполняется? Показываем Loader.
   if (getUserRequest && !getUserError) {
     return <Loader size="small" inverse={true} />;
   }
@@ -38,12 +39,23 @@ function RouteWrapper({ isProtected = false, element }) {
     }
 
     const { from } = location.state || { from: { pathname: "/" } };
-
     return <Navigate to={from} />;
   }
 
+  // Если роут защищен и пользователь не авторизован, сохраняем destintation-url
+  // и отправляем пользователя авторизоваться.
   if (isProtected && !email) {
     return <Navigate to="/login" state={{ from: location }} />;
+  }
+
+  // Доступ к reset-password возможно только после страницы forgot-password.
+  if (location.pathname === "/reset-password") {
+    if (localStorage.getItem("forgot-password") === "visited") return element;
+    else return <Navigate to="/forgot-password" />;
+  }
+
+  if (location.pathname === "/forgot-password") {
+    localStorage.setItem("forgot-password", "visited");
   }
 
   return element;
