@@ -3,12 +3,16 @@ import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { ingredientDataShape } from "../../../utils/prop-types";
 import { useDispatch } from "react-redux";
-import { OPEN_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 
 function Ingredient({ ingredientInfo }) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const data = useSelector(
     (store) => store.ingredients.constructorIngredients.ingredients
@@ -25,36 +29,42 @@ function Ingredient({ ingredientInfo }) {
   });
 
   const showIngredientInfo = (id) => {
-    dispatch({
-      type: OPEN_INGREDIENTS_DETAILS,
-      id: id,
-    });
+    // navigate("/ingredients/" + id);
+    // dispatch({
+    //   type: OPEN_INGREDIENTS_DETAILS,
+    //   id: id,
+    // });
   };
 
   return (
-    <div
-      className={styles.card}
-      onClick={() => showIngredientInfo(ingredientInfo._id)}
-      ref={dragRef}
+    <Link
+      to={`/ingredients/${ingredientInfo._id}`}
+      state={{ backgroundLocation: location }}
     >
-      {counter > 0 && (
-        <div className={styles.counter}>
-          <Counter count={counter} size="default" extraClass="mr-5" />
+      <div
+        className={styles.card}
+        onClick={() => showIngredientInfo(ingredientInfo._id)}
+        ref={dragRef}
+      >
+        {counter > 0 && (
+          <div className={styles.counter}>
+            <Counter count={counter} size="default" extraClass="mr-5" />
+          </div>
+        )}
+        <div className={styles.image}>
+          <img
+            src={ingredientInfo.image}
+            alt={"Изображение для " + ingredientInfo.name}
+          />
         </div>
-      )}
-      <div className={styles.image}>
-        <img
-          src={ingredientInfo.image}
-          alt={"Изображение для " + ingredientInfo.name}
-        />
+        <div className={styles.costRow}>
+          <Price price={ingredientInfo.price} className={styles.costRow} />
+        </div>
+        <div className={styles.description}>
+          <p className="text text_type_main-default">{ingredientInfo.name}</p>
+        </div>
       </div>
-      <div className={styles.costRow}>
-        <Price price={ingredientInfo.price} className={styles.costRow} />
-      </div>
-      <div className={styles.description}>
-        <p className="text text_type_main-default">{ingredientInfo.name}</p>
-      </div>
-    </div>
+    </Link>
   );
 }
 

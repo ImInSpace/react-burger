@@ -67,13 +67,13 @@ function App() {
             }
           />
           <Route
-            path="/ingredient/:id"
+            path="/ingredients/:id"
             element={
               <Modal>
                 <IngredientDetails />
               </Modal>
             }
-          />
+          ></Route>
           <Route path="*" element={<NotFound404Page />} />
         </Routes>
       </BrowserRouter>
