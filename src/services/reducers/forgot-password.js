@@ -16,6 +16,8 @@ const forgotPasswordReducer = (state = initialState, action) => {
       return { ...state, request: true };
     }
     case PASSWORD_FORGOT_SUCCESS: {
+      localStorage.setItem("forgot-password", "visited");
+
       return {
         ...state,
         request: false,

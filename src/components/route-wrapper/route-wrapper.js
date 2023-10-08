@@ -53,11 +53,6 @@ function RouteWrapper({ isProtected = false, element }) {
     if (localStorage.getItem("forgot-password") === "visited") return element;
     else return <Navigate to="/forgot-password" />;
   }
-
-  if (location.pathname === "/forgot-password") {
-    localStorage.setItem("forgot-password", "visited");
-  }
-
   return element;
 }
 
