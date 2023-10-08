@@ -156,8 +156,8 @@ const updateToken = () => {
   }).then((response) => checkResponse(response));
 };
 
-const getUserRequest = () => {
-  return fetch(Constants.GET_USER_URL, {
+const getUserRequest = async () => {
+  return await fetch(Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
@@ -171,8 +171,8 @@ const getUserRequest = () => {
   }).then((response) => checkResponse(response));
 };
 
-const getUser = () => {
-  return getUserRequest()
+const getUser = async () => {
+  return await getUserRequest()
     .then((json) => {
       return json;
     })

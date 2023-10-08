@@ -17,6 +17,9 @@ const initialState = {
   email: "",
   name: "",
 
+  getUserRequest: false,
+  getUserError: false,
+
   request: false,
   success: false,
   message: "",
@@ -49,13 +52,14 @@ const authReducer = (state = initialState, action) => {
       };
     }
     case GET_USER_REQUEST: {
-      return { ...state, request: true };
+      return { ...state, getUserRequest: true };
     }
     case GET_USER_SUCCESS: {
+      console.log("Данные о пользователе успешно получены.");
       return {
         ...state,
-        request: false,
-        success: true,
+        getUserRequest: false,
+        getUserError: false,
 
         email: action.payload.email,
         name: action.payload.name,
@@ -64,8 +68,8 @@ const authReducer = (state = initialState, action) => {
     case GET_USER_FAILED: {
       return {
         ...state,
-        request: false,
-        error: true,
+        getUserRequest: false,
+        getUserError: true,
         message: action.message,
       };
     }
