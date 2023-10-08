@@ -7,8 +7,10 @@ import { ModalHeader } from "./modal-header/modal-header";
 import { useDispatch } from "react-redux";
 import { CLOSE_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
 import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
+import { useNavigate } from "react-router";
 
 function Modal(props) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const portal = document.getElementById("react-modals");
   const modalDivRef = useRef(null);
@@ -29,6 +31,7 @@ function Modal(props) {
   const close = () => {
     dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
     dispatch({ type: CLOSE_ORDER_MODAL });
+    navigate(-1);
   };
 
   return ReactDOM.createPortal(
@@ -44,7 +47,7 @@ function Modal(props) {
 }
 
 Modal.propTypes = {
-  caption: PropTypes.string,
+  caption: PropTypes.string.isRequired,
   children: PropTypes.element.isRequired,
 };
 
