@@ -1,5 +1,5 @@
 .root {
-  height: 800px;
+  height: 600px;
   display: flex;
   align-items: center;
 }
@@ -8,13 +8,12 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: row;
+  gap: 60px;
 }
 
 .menu {
-  display: flex;
-  flex-direction: column;
+  width: 320px;
 }
 
 .menuCell {

@@ -105,7 +105,7 @@ const logout = async (refreshToken) => {
   }).then((response) => checkResponse(response));
 };
 
-const patchUserRequest = (name, email) => {
+const patchUserRequest = (patchForm) => {
   return fetch(Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
@@ -117,12 +117,12 @@ const patchUserRequest = (name, email) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify({ name: name, email: email }),
+    body: JSON.stringify(patchForm),
   }).then((response) => checkResponse(response));
 };
 
-const patchUser = (name, email) => {
-  return patchUserRequest(name, email)
+const patchUser = (patchForm) => {
+  return patchUserRequest(patchForm)
     .then((json) => {
       return json;
     })
@@ -132,7 +132,7 @@ const patchUser = (name, email) => {
           if (json.success) {
             setCookie("token", json.accessToken);
             setCookie("refreshToken", json.refreshToken);
-            return patchUserRequest(name, email);
+            return patchUserRequest(patchForm);
           } else {
             console.error("Не удалось обновить токен для выполнения запроса.");
           }

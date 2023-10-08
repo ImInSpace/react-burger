@@ -32,7 +32,7 @@ export default function Profile() {
       <AppHeader />
       <div className={styles.root}>
         <div className={styles.container}>
-          <div className="menu">
+          <div className={styles.menu}>
             <MenuItem
               caption="Профиль"
               link="/profile"
@@ -51,6 +51,11 @@ export default function Profile() {
               isActive={activeMenu[2]}
               onClickHandler={() => onMenuClickHandler(2)}
             />
+            <div className={styles.menuDescription}>
+              <p className="text text_type_main-default text_color_inactive mt-20">
+                В этом разделе вы можете изменить свои персональные данные
+              </p>
+            </div>
           </div>
           <div className={styles.subMenu}>
             {activeMenu[0] && <EditProfile />}

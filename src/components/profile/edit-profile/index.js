@@ -7,11 +7,16 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
 import { getUser, patchUser } from "../../../utils/api";
+import { useSelector } from "react-redux";
 
 function EditProfile() {
+  const savedUserName = useSelector((store) => store.auth.name);
+  const savedEmail = useSelector((store) => store.auth.email);
+
+  const [isSaveButtonsShown, setIsSaveButtonsShown] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("********");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     getUser().then((userInfo) => {
@@ -21,15 +26,47 @@ function EditProfile() {
   }, []);
 
   const onUserUpdate = () => {
-    patchUser(name, email);
+    const patchObj = {
+      name: name,
+      email: email,
+    };
+
+    if (password !== "") {
+      patchObj["password"] = password;
+    }
+
+    patchUser(patchObj);
+    setIsSaveButtonsShown(false);
+  };
+
+  const cancelChanges = () => {
+    setName(savedUserName);
+    setEmail(savedEmail);
+    setPassword("");
+    setIsSaveButtonsShown(false);
+  };
+
+  const onNameChanged = (e) => {
+    setName(e.target.value);
+    setIsSaveButtonsShown(true);
+  };
+
+  const onEmailChanged = (e) => {
+    setEmail(e.target.value);
+    setIsSaveButtonsShown(true);
+  };
+
+  const onPasswordChanged = (e) => {
+    setPassword(e.target.value);
+    setIsSaveButtonsShown(true);
   };
 
   return (
-    <div className={styles.inputs}>
+    <form className={styles.inputs}>
       <Input
         type={"text"}
         placeholder={"Имя"}
-        onChange={(e) => setName(e.target.value)}
+        onChange={onNameChanged}
         value={name}
         name={"name"}
         error={false}
@@ -38,7 +75,7 @@ function EditProfile() {
         extraClass="ml-1"
       />
       <EmailInput
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={onEmailChanged}
         value={email}
         name={"email"}
         placeholder="Почта"
@@ -46,21 +83,34 @@ function EditProfile() {
         extraClass="ml-1"
       />
       <PasswordInput
-        onChange={(e) => setPassword(e.target.value)}
+        onChange={onPasswordChanged}
         value={password}
         name={"password"}
+        placeholder="Введите новый пароль"
         icon="EditIcon"
       />
-      <Button
-        htmlType="button"
-        type="primary"
-        size="medium"
-        extraClass={styles.saveBtn}
-        onClick={onUserUpdate}
-      >
-        Сохранить
-      </Button>
-    </div>
+      {isSaveButtonsShown && (
+        <div className={styles.buttons}>
+          <Button
+            htmlType="button"
+            type="secondary"
+            size="medium"
+            onClick={cancelChanges}
+          >
+            Отменить
+          </Button>
+          <Button
+            htmlType="button"
+            type="primary"
+            size="medium"
+            extraClass={styles.saveBtn}
+            onClick={onUserUpdate}
+          >
+            Сохранить
+          </Button>
+        </div>
+      )}
+    </form>
   );
 }
 
