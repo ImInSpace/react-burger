@@ -11,7 +11,7 @@ import {
   RESET_USER,
 } from "../actions/auth";
 
-import { getCookie, setCookie, deleteCookie } from "../cookieManager";
+import { setCookie, deleteCookie } from "../cookieManager";
 
 const initialState = {
   email: "",
@@ -55,7 +55,6 @@ const authReducer = (state = initialState, action) => {
       return { ...state, getUserRequest: true };
     }
     case GET_USER_SUCCESS: {
-      console.log("Данные о пользователе успешно получены.");
       return {
         ...state,
         getUserRequest: false,
