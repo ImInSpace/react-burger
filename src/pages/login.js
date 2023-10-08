@@ -4,10 +4,9 @@ import {
   PasswordInput,
   EmailInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import cn from "classnames";
 import { Link } from "react-router-dom";
-import { AppHeader } from "../components/app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loginActionGen } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +30,6 @@ export default function LoginPage() {
 
   return (
     <>
-      <AppHeader />
       <div className={styles.root}>
         <div className={styles.container}>
           {/* prettier-ignore */}

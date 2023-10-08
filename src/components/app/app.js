@@ -11,6 +11,7 @@ import OrderHistoryPage from "../../pages/order-history";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useLocation } from "react-router-dom";
 import IngredientModal from "../ui/ingredient-modal";
+import { AppHeader } from "../app-header/app-header";
 
 function App() {
   let location = useLocation();
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <>
+      <AppHeader />
       <Routes location={state?.backgroundLocation || location}>
         <Route
           path="/"

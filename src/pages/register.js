@@ -1,5 +1,4 @@
 import styles from "./register.module.css";
-import { AppHeader } from "../components/app-header/app-header";
 import cn from "classnames";
 import {
   Input,
@@ -34,7 +33,6 @@ export default function RegisterPage() {
 
   return (
     <>
-      <AppHeader />
       <div className={styles.root}>
         <div className={styles.container}>
           {/* prettier-ignore */}

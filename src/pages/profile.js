@@ -1,4 +1,3 @@
-import { AppHeader } from "../components/app-header/app-header";
 import styles from "./profile.module.css";
 import { EditProfile } from "../components/profile/edit-profile";
 import { useState } from "react";
@@ -29,7 +28,6 @@ export default function Profile() {
 
   return (
     <>
-      <AppHeader />
       <div className={styles.root}>
         <div className={styles.container}>
           <div className={styles.menu}>

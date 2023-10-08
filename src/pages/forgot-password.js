@@ -1,5 +1,4 @@
 import styles from "./forgot-password.module.css";
-import { AppHeader } from "../components/app-header/app-header";
 import cn from "classnames";
 import {
   Input,
@@ -22,7 +21,6 @@ export default function ForgotPasswordPage() {
 
   return (
     <>
-      <AppHeader />
       <div className={styles.root}>
         <div className={styles.container}>
           {/* prettier-ignore */}

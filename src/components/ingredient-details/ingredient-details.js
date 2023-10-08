@@ -4,9 +4,12 @@ import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getIngredients } from "../../utils/api";
+import { useDispatch } from "react-redux";
+import { loadIngredients } from "../../services/actions/ingredients";
+import { useEffect } from "react";
 
 function IngredientDetails() {
+  const dispatch = useDispatch();
   const { id } = useParams("id");
 
   // Если это модалка - данные об ингредиентах находятся в сторе.
@@ -15,22 +18,9 @@ function IngredientDetails() {
     (ingredient) => ingredient._id === id
   );
 
-  // Если страница с ингредиентом открывается вне сайта - делаем запрос к серверу,
-  // получаем ингредиенту и фильтруем по идентификатору.
-  if (!selectedIngredient) {
-    getIngredients().then((json) => {
-      console.log(json);
-      if (json.success) {
-        console.log("У нас тут саксес");
-        json.data.map((el) => console.log(el._id));
-        console.log("id: ", id);
-
-        selectedIngredient = json.data.find(
-          (ingredient) => ingredient._id === id
-        );
-      }
-    });
-  }
+  useEffect(() => {
+    dispatch(loadIngredients());
+  }, [dispatch]);
 
   return (
     <>

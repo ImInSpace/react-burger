@@ -1,12 +1,8 @@
 import styles from "./home.module.css";
-import { AppHeader } from "../components/app-header/app-header";
 import { BurgerIngredients } from "../components/burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
 import { CreateOrder } from "../components/ui/create-order/create-order";
-import { IngredientDetails } from "../components/ingredient-details/ingredient-details";
-import { OrderDetails } from "../components/order-details/order-details";
 import { useEffect } from "react";
-import { Modal } from "../components/ui/modal/modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addIngredient,
@@ -22,10 +18,6 @@ export default function HomePage() {
     dispatch(loadIngredients());
   }, [dispatch]);
 
-  const selectedIngredient = useSelector(
-    (store) => store.ingredients.selectedIngredient
-  );
-
   const isCreateOrderModalShown = useSelector(
     (store) => store.order.isModalShown
   );
@@ -36,7 +28,6 @@ export default function HomePage() {
 
   return (
     <div className={styles.app}>
-      <AppHeader />
       <DndProvider backend={HTML5Backend}>
         <div className={styles.container}>
           <div className={styles.halfContainer}>
