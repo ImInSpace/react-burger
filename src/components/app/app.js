@@ -8,9 +8,9 @@ import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
 import { RouteWrapper } from "../route-wrapper/route-wrapper";
 import OrderHistoryPage from "../../pages/order-history";
-import { Modal } from "../ui/modal/modal";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useLocation } from "react-router-dom";
+import IngredientModal from "../ui/ingredient-modal";
 
 function App() {
   let location = useLocation();
@@ -18,7 +18,7 @@ function App() {
 
   return (
     <>
-      <Routes location={state || location}>
+      <Routes location={state?.backgroundLocation || location}>
         <Route
           path="/"
           element={<RouteWrapper isProtected={false} element={<HomePage />} />}
@@ -63,20 +63,9 @@ function App() {
         <Route path="*" element={<NotFound404Page />} />
       </Routes>
 
-      {/* <Routes>
-        <Route path="/ingredients/:id" element={<IngredientDetails />}></Route>
-      </Routes> */}
-
       {state?.backgroundLocation && (
         <Routes>
-          <Route
-            path="/ingredients/:id"
-            element={
-              <Modal caption="Детали ингредиента">
-                <IngredientDetails />
-              </Modal>
-            }
-          />
+          <Route path="/ingredients/:id" element={<IngredientModal />} />
         </Routes>
       )}
     </>

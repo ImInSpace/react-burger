@@ -86,6 +86,8 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case CLOSE_INGREDIENTS_DETAILS: {
+      action.payload.navigateHook(-1);
+      
       return {
         ...state,
         selectedIngredient: null,

@@ -4,14 +4,8 @@ import { ModalOverlay } from "../modal-overlay/modal-overlay";
 import ReactDOM from "react-dom";
 import { useEffect, useRef } from "react";
 import { ModalHeader } from "./modal-header/modal-header";
-import { useDispatch } from "react-redux";
-import { CLOSE_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
-import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
-import { useNavigate } from "react-router";
 
 function Modal(props) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const portal = document.getElementById("react-modals");
   const modalDivRef = useRef(null);
 
@@ -29,9 +23,7 @@ function Modal(props) {
   };
 
   const close = () => {
-    dispatch({ type: CLOSE_INGREDIENTS_DETAILS });
-    dispatch({ type: CLOSE_ORDER_MODAL });
-    navigate(-1);
+    props.closeHandler();
   };
 
   return ReactDOM.createPortal(
@@ -47,8 +39,9 @@ function Modal(props) {
 }
 
 Modal.propTypes = {
-  caption: PropTypes.string.isRequired,
+  caption: PropTypes.string, // Не у всех модальных окон есть заголовок.
   children: PropTypes.element.isRequired,
+  closeHandler: PropTypes.any.isRequired,
 };
 
 export { Modal };

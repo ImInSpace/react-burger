@@ -14,6 +14,7 @@ import {
 } from "../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import OrderModal from "../components/ui/order-modal";
 
 export default function HomePage() {
   const dispatch = useDispatch();
@@ -48,17 +49,7 @@ export default function HomePage() {
         </div>
       </DndProvider>
 
-      {isCreateOrderModalShown && (
-        <Modal>
-          <OrderDetails />
-        </Modal>
-      )}
-
-      {selectedIngredient && (
-        <Modal caption={"Детали инредиента"}>
-          <IngredientDetails />
-        </Modal>
-      )}
+      {isCreateOrderModalShown && <OrderModal />}
     </div>
   );
 }

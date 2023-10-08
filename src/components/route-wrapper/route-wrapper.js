@@ -11,8 +11,6 @@ function RouteWrapper({ isProtected = false, element }) {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  console.log(location);
-
   useEffect(() => {
     dispatch(getUserActionGen(getCookie("token")));
   }, [dispatch]);
@@ -27,7 +25,6 @@ function RouteWrapper({ isProtected = false, element }) {
   }
 
   if (!isProtected && email) {
-    console.log("!isProtected && email");
     if (location.state == null) {
       // Авторизованный пользователь не должен иметь доступ к этим роутам.
       if (
@@ -48,7 +45,6 @@ function RouteWrapper({ isProtected = false, element }) {
   // Если роут защищен и пользователь не авторизован, сохраняем destintation-url
   // и отправляем пользователя авторизоваться.
   if (isProtected && !email) {
-    console.log("isProtected && !email");
     return <Navigate to="/login" state={{ from: location }} />;
   }
 
@@ -58,7 +54,6 @@ function RouteWrapper({ isProtected = false, element }) {
     else return <Navigate to="/forgot-password" />;
   }
 
-  console.log("isProtected && !email");
   return element;
 }
 
