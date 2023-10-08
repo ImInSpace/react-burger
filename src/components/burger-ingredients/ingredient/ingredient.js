@@ -12,8 +12,6 @@ import { useLocation } from "react-router";
 
 function Ingredient({ ingredientInfo }) {
   const location = useLocation();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const data = useSelector(
     (store) => store.ingredients.constructorIngredients.ingredients
   );
@@ -36,10 +34,13 @@ function Ingredient({ ingredientInfo }) {
     // });
   };
 
+  console.log("background location: ", location);
+
   return (
     <Link
       to={`/ingredients/${ingredientInfo._id}`}
       state={{ backgroundLocation: location }}
+      className={styles.link}
     >
       <div
         className={styles.card}
