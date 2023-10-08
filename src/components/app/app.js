@@ -8,6 +8,8 @@ import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
 import { RouteWrapper } from "../route-wrapper/route-wrapper";
 import OrderHistoryPage from "../../pages/order-history";
+import { Modal } from "../ui/modal/modal";
+import { IngredientDetails } from "../ingredient-details/ingredient-details";
 
 function App() {
   return (
@@ -62,6 +64,14 @@ function App() {
                 isProtected={false}
                 element={<ResetPasswordPage />}
               />
+            }
+          />
+          <Route
+            path="/ingredient/:id"
+            element={
+              <Modal>
+                <IngredientDetails />
+              </Modal>
             }
           />
           <Route path="*" element={<NotFound404Page />} />

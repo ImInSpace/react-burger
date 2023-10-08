@@ -2,20 +2,20 @@ import styles from "./ingredient-details.module.css";
 import { IngredientImage } from "./ingredient-image/ingredient-image";
 import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
-import { ingredientDataShape } from "../../utils/prop-types";
+import { useSelector } from "react-redux";
 
-function IngredientDetails({ data }) {
+function IngredientDetails() {
+  const selectedIngredient = useSelector(
+    (store) => store.ingredients.selectedIngredient
+  );
+
   return (
     <div className={styles.container}>
-      <IngredientImage img={data.image} />
-      <IngredientTitle text={data.name} />
-      <Macronutrients {...data} />
+      <IngredientImage img={selectedIngredient.image} />
+      <IngredientTitle text={selectedIngredient.name} />
+      <Macronutrients {...selectedIngredient} />
     </div>
   );
 }
-
-IngredientDetails.propTypes = {
-  data: ingredientDataShape,
-};
 
 export { IngredientDetails };

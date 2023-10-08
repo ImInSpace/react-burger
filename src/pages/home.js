@@ -56,7 +56,7 @@ export default function HomePage() {
 
       {selectedIngredient && (
         <Modal caption={"Детали инредиента"}>
-          <IngredientDetails data={selectedIngredient} />
+          <IngredientDetails />
         </Modal>
       )}
     </div>
