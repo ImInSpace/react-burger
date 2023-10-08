@@ -35,13 +35,13 @@ export default function Profile() {
           <div className="menu">
             <MenuItem
               caption="Профиль"
-              link="#"
+              link="/profile"
               isActive={activeMenu[0]}
               onClickHandler={() => onMenuClickHandler(0)}
             />
             <MenuItem
               caption="История заказов"
-              link="#"
+              link="/profile/orders"
               isActive={activeMenu[1]}
               onClickHandler={() => onMenuClickHandler(1)}
             />

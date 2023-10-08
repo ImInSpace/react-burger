@@ -7,6 +7,7 @@ import ResetPasswordPage from "../../pages/reset-password";
 import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
 import { RouteWrapper } from "../route-wrapper/route-wrapper";
+import OrderHistoryPage from "../../pages/order-history";
 
 function App() {
   return (
@@ -19,10 +20,6 @@ function App() {
               <RouteWrapper isProtected={false} element={<HomePage />} />
             }
           />
-          {/* <Route
-            path="/order-ribbon"
-            element={<RouteWrapper isProtected={true} element={<HomePage />} />}
-          /> */}
           <Route
             path="/login"
             element={
@@ -38,7 +35,17 @@ function App() {
           <Route
             path="/profile"
             element={<RouteWrapper isProtected={true} element={<Profile />} />}
-          />
+          >
+            <Route
+              path="/profile/orders"
+              element={
+                <RouteWrapper
+                  isProtected={true}
+                  element={<OrderHistoryPage />}
+                />
+              }
+            />
+          </Route>
           <Route
             path="/forgot-password"
             element={
