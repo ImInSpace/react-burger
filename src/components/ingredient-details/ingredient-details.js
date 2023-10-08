@@ -4,13 +4,9 @@ import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 
 function IngredientDetails() {
   const { id } = useParams("id");
-
-  const location = useLocation();
-
   const { ingredients } = useSelector((store) => store.ingredients);
 
   const selectedIngredient = ingredients.find(

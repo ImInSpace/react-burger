@@ -2,11 +2,9 @@ import styles from "./ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { ingredientDataShape } from "../../../utils/prop-types";
-import { useDispatch } from "react-redux";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 
@@ -26,7 +24,9 @@ function Ingredient({ ingredientInfo }) {
     item: { id: ingredientInfo._id },
   });
 
-  const showIngredientInfo = (id) => {};
+  const showIngredientInfo = (id) => {
+    // ToDo: Удалить, когда заработает отображение по ссылке.
+  };
 
   return (
     <Link
