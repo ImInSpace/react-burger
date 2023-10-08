@@ -9,15 +9,17 @@ function IngredientDetails() {
   const { id } = useParams("id");
   const { ingredients } = useSelector((store) => store.ingredients);
 
-  const theOne = ingredients.find((ingredient) => ingredient._id === id);
+  const selectedIngredient = ingredients.find(
+    (ingredient) => ingredient._id === id
+  );
 
   return (
     <>
-      {theOne ? (
+      {selectedIngredient ? (
         <div className={styles.container}>
-          <IngredientImage img={theOne.image} />
-          <IngredientTitle text={theOne.name} />
-          <Macronutrients {...theOne} />
+          <IngredientImage img={selectedIngredient.image} />
+          <IngredientTitle text={selectedIngredient.name} />
+          <Macronutrients {...selectedIngredient} />
         </div>
       ) : (
         <p className="text text_type_main-medium">
