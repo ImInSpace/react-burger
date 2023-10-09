@@ -11,11 +11,7 @@ export function createOrderAction(ids) {
     dispatch({ type: CREATE_ORDER_REQUEST });
     createOrder(ids)
       .then((res) => {
-        if (res.success === true) {
-          dispatch({ type: CREATE_ORDER_SUCCESS, number: res.order.number });
-        } else {
-          dispatch({ type: CREATE_ORDER_FAILED });
-        }
+        dispatch({ type: CREATE_ORDER_SUCCESS, number: res.order.number });
       })
       .catch((err) => {
         console.error("Ошибка при выполнении запроса: ", err);

@@ -9,17 +9,13 @@ export function refreshTokenActionGen(refreshToken) {
     dispatch({ type: REFRESH_TOKEN_REQUEST });
     updateToken(refreshToken)
       .then((res) => {
-        if (res.success) {
-          dispatch({
-            type: REFRESH_TOKEN_SUCCESS,
-            payload: {
-              accessToken: res.accessToken,
-              refreshToken: res.refreshToken,
-            },
-          });
-        } else {
-          dispatch({ type: REFRESH_TOKEN_FAILED });
-        }
+        dispatch({
+          type: REFRESH_TOKEN_SUCCESS,
+          payload: {
+            accessToken: res.accessToken,
+            refreshToken: res.refreshToken,
+          },
+        });
       })
       .catch((err) => dispatch({ type: REFRESH_TOKEN_FAILED, message: err }));
   };

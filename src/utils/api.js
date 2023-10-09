@@ -8,18 +8,24 @@ const checkResponse = (response) => {
     : response.json().then((err) => Promise.reject(err));
 };
 
+// Проверка на 'success'.
+const checkSuccess = (res) => {
+  if (res && res.success) {
+    return res;
+  }
+
+  return Promise.reject(`Ответ не success: ${res}`);
+};
+
 // Обёртка, для каждого отправляемого запроса.
 function request(endpoint, options) {
-  return fetch(Constants.BASE_URL + endpoint, options).then(checkResponse);
+  return fetch(Constants.BASE_URL + endpoint, options)
+    .then(checkResponse)
+    .then(checkSuccess);
 }
 
 function getIngredients() {
-  return request(Constants.INGREDIENTS_URL, {
-    method: "GET",
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+  return request(Constants.INGREDIENTS_URL);
 }
 
 function createOrder(ids) {

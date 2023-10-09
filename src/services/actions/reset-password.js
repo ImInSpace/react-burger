@@ -9,18 +9,11 @@ export function resetPasswordAction(password, token, redirectHook) {
     dispatch({ type: PASSWORD_RESET_REQUEST });
     resetPassword(password, token, redirectHook)
       .then((res) => {
-        if (res.success) {
-          redirectHook("/login");
-          dispatch({
-            type: PASSWORD_RESET_SUCCESS,
-            payload: { message: res.message },
-          });
-        } else {
-          dispatch({
-            type: PASSWORD_RESET_FAILED,
-            payload: { message: res.message },
-          });
-        }
+        redirectHook("/login");
+        dispatch({
+          type: PASSWORD_RESET_SUCCESS,
+          payload: { message: res.message },
+        });
       })
       .catch((err) =>
         dispatch({ type: PASSWORD_RESET_FAILED, payload: { message: err } })

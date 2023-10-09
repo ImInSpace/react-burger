@@ -9,19 +9,11 @@ export function forgotPasswordAction(email, redirectCallback) {
     dispatch({ type: PASSWORD_FORGOT_REQUEST });
     forgotPasswordPOST(email)
       .then((res) => {
-        console.log(res);
-        if (res.success) {
-          redirectCallback("/reset-password");
-          dispatch({
-            type: PASSWORD_FORGOT_SUCCESS,
-            payload: res,
-          });
-        } else {
-          dispatch({
-            type: PASSWORD_FORGOT_FAILED,
-            payload: res,
-          });
-        }
+        redirectCallback("/reset-password");
+        dispatch({
+          type: PASSWORD_FORGOT_SUCCESS,
+          payload: res,
+        });
       })
       .catch((err) => dispatch({ type: PASSWORD_FORGOT_FAILED, payload: err }));
   };

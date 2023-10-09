@@ -10,12 +10,8 @@ export function registerAction(registrationData, redirectHook) {
 
     registerUser(registrationData)
       .then((res) => {
-        if (res.success) {
-          redirectHook("/login");
-          dispatch({ type: REGISTER_SUCCESS, message: res.message });
-        } else {
-          dispatch({ type: REGISTER_FAILED, message: res.message });
-        }
+        redirectHook("/login");
+        dispatch({ type: REGISTER_SUCCESS, message: res.message });
       })
       .catch((err) => {
         dispatch({ type: REGISTER_FAILED, message: err });
