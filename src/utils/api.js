@@ -1,61 +1,70 @@
 import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
 
-function getIngredients() {
-  return fetch(Constants.BASE_URL + Constants.INGREDIENTS_URL).then(
-    checkResponse
-  );
-}
-
-function createOrder(ids) {
-  return fetch(Constants.BASE_URL + Constants.CREATE_ORDER_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: getCookie("token"),
-    },
-    body: JSON.stringify({ ingredients: ids }),
-  }).then((response) => checkResponse(response));
-}
-
-function registerUser(registrationData) {
-  return fetch(Constants.BASE_URL + Constants.REGISTER_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(registrationData),
-  }).then((response) => checkResponse(response));
-}
-
-function forgotPasswordPOST(email) {
-  return fetch(Constants.BASE_URL + Constants.FORGET_PASSWORD_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ email: email }),
-  }).then((response) => checkResponse(response));
-}
-
-function resetPassword(password, token) {
-  return fetch(Constants.BASE_URL + Constants.RESET_PASSWORD_URL, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify({ password: password, token: token }),
-  }).then((response) => response.json());
-}
-
+// Проверка запроса.
 const checkResponse = (response) => {
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
 };
 
+// Обёртка, для каждого отправляемого запроса.
+function request(endpoint, options) {
+  return fetch(Constants.BASE_URL + endpoint, options).then(checkResponse);
+}
+
+function getIngredients() {
+  return request(Constants.INGREDIENTS_URL, {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+    },
+  });
+}
+
+function createOrder(ids) {
+  return request(Constants.CREATE_ORDER_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: getCookie("token"),
+    },
+    body: JSON.stringify({ ingredients: ids }),
+  });
+}
+
+function registerUser(registrationData) {
+  return request(Constants.REGISTER_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify(registrationData),
+  });
+}
+
+function forgotPasswordPOST(email) {
+  return request(Constants.FORGET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ email: email }),
+  });
+}
+
+function resetPassword(password, token) {
+  return request(Constants.RESET_PASSWORD_URL, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ password: password, token: token }),
+  });
+}
+
 const login = async (form) => {
-  return await fetch(Constants.BASE_URL + Constants.LOGIN_URL, {
+  return request(Constants.LOGIN_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -66,11 +75,11 @@ const login = async (form) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(form),
-  }).then((response) => checkResponse(response));
+  });
 };
 
 const logout = async (refreshToken) => {
-  return await fetch(Constants.BASE_URL + Constants.LOGOUT_URL, {
+  return request(Constants.LOGOUT_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -81,11 +90,11 @@ const logout = async (refreshToken) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify({ token: refreshToken }),
-  }).then((response) => checkResponse(response));
+  });
 };
 
 const patchUserRequest = (patchForm) => {
-  return fetch(Constants.BASE_URL + Constants.PATCH_USER_URL, {
+  return request(Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
     cache: "no-cache",
@@ -97,7 +106,7 @@ const patchUserRequest = (patchForm) => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(patchForm),
-  }).then((response) => checkResponse(response));
+  });
 };
 
 const patchUser = (patchForm) => {
@@ -121,7 +130,7 @@ const patchUser = (patchForm) => {
 };
 
 const updateToken = () => {
-  return fetch(Constants.BASE_URL + Constants.REFRESH_TOKEN_URL, {
+  return request(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -132,11 +141,11 @@ const updateToken = () => {
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify({ token: getCookie("refreshToken") }),
-  }).then((response) => checkResponse(response));
+  });
 };
 
 const getUserRequest = async () => {
-  return await fetch(Constants.BASE_URL + Constants.GET_USER_URL, {
+  return request(Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
@@ -147,7 +156,7 @@ const getUserRequest = async () => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-  }).then((response) => checkResponse(response));
+  });
 };
 
 const getUser = async () => {
