@@ -12,8 +12,13 @@ import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useLocation } from "react-router-dom";
 import IngredientModal from "../ui/ingredient-modal";
 import { AppHeader } from "../app-header/app-header";
+import { useDispatch } from "react-redux";
+import { loadIngredients } from "../../services/actions/ingredients";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(loadIngredients());
+
   let location = useLocation();
   let state = location.state;
 

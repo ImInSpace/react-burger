@@ -4,12 +4,8 @@ import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loadIngredients } from "../../services/actions/ingredients";
-import { useEffect } from "react";
 
 function IngredientDetails() {
-  const dispatch = useDispatch();
   const { id } = useParams("id");
 
   // Если это модалка - данные об ингредиентах находятся в сторе.
@@ -17,10 +13,6 @@ function IngredientDetails() {
   let selectedIngredient = ingredients.find(
     (ingredient) => ingredient._id === id
   );
-
-  useEffect(() => {
-    dispatch(loadIngredients());
-  }, [dispatch]);
 
   return (
     <>
