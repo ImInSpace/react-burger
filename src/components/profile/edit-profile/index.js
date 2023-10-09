@@ -25,7 +25,9 @@ function EditProfile() {
     });
   }, []);
 
-  const onUserUpdate = () => {
+  const updateUser = (e) => {
+    e.preventDefault();
+
     const patchObj = {
       name: name,
       email: email,
@@ -62,7 +64,7 @@ function EditProfile() {
   };
 
   return (
-    <form className={styles.inputs}>
+    <form className={styles.inputs} onSubmit={updateUser}>
       <Input
         type={"text"}
         placeholder={"Имя"}
@@ -100,11 +102,10 @@ function EditProfile() {
             Отменить
           </Button>
           <Button
-            htmlType="button"
+            htmlType="submit"
             type="primary"
             size="medium"
             extraClass={styles.saveBtn}
-            onClick={onUserUpdate}
           >
             Сохранить
           </Button>

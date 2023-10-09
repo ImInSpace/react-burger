@@ -19,7 +19,9 @@ export default function LoginPage() {
 
   const [password, setPassword] = useState("");
 
-  const onLoginHandler = () => {
+  const login = (e) => {
+    e.preventDefault();
+
     const loginForm = {
       email: email,
       password: password,
@@ -31,7 +33,7 @@ export default function LoginPage() {
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.container}>
+        <form className={styles.container} onSubmit={login}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Вход</p>
           <EmailInput
@@ -49,10 +51,10 @@ export default function LoginPage() {
           />
           <div className={styles.loginButton}>
             <Button
-              htmlType="button"
+              htmlType="submit"
               type="primary"
               size="medium"
-              onClick={onLoginHandler}
+              onClick={login}
             >
               Войти
             </Button>
@@ -78,7 +80,7 @@ export default function LoginPage() {
               </span>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

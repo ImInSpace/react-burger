@@ -22,7 +22,9 @@ export default function RegisterPage() {
 
   const [password, setPassword] = useState("");
 
-  const onRegisterHandler = () => {
+  const registerUser = (e) => {
+    e.preventDefault();
+
     const registrationData = {
       email: email,
       password: password,
@@ -34,7 +36,7 @@ export default function RegisterPage() {
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.container}>
+        <form className={styles.container} onSubmit={registerUser}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Регистрация</p>
           <Input
@@ -68,12 +70,7 @@ export default function RegisterPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={onRegisterHandler}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Зарегистрироваться
             </Button>
           </div>
@@ -91,7 +88,7 @@ export default function RegisterPage() {
               </span>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

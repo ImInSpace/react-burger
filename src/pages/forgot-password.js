@@ -15,14 +15,15 @@ export default function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const onClickHandler = (e) => {
+  const restorePassword = (e) => {
+    e.preventDefault();
     dispatch(forgotPasswordAction(email, navigate));
   };
 
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.container}>
+        <form className={styles.container} onSubmit={restorePassword}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Восстановление пароля</p>
           <Input
@@ -38,12 +39,7 @@ export default function ForgotPasswordPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={onClickHandler}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Восстановить
             </Button>
           </div>
@@ -61,7 +57,7 @@ export default function ForgotPasswordPage() {
               </span>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

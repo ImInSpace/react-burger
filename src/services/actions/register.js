@@ -10,8 +10,6 @@ export function registerAction(registrationData, redirectHook) {
 
     registerUser(registrationData)
       .then((res) => {
-        console.log(res);
-        console.log(res.success);
         if (res.success) {
           redirectHook("/login");
           dispatch({ type: REGISTER_SUCCESS, message: res.message });

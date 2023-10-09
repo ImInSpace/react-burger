@@ -19,14 +19,15 @@ export default function ResetPasswordPage() {
   const [codeFromEmail, setCodeFromEmail] = useState("");
   const codeFromEmailInputRef = useRef(null);
 
-  const onSaveClickHandler = () => {
+  const resetPassword = (e) => {
+    e.preventDefault();
     dispatch(resetPasswordAction(password, codeFromEmail, navigate));
   };
 
   return (
     <>
       <div className={styles.root}>
-        <div className={styles.container}>
+        <form className={styles.container} onSubmit={resetPassword}>
           {/* prettier-ignore */}
           <p className="text text_type_main-medium">Восстановление пароля</p>
           <PasswordInput
@@ -48,12 +49,7 @@ export default function ResetPasswordPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button
-              htmlType="button"
-              type="primary"
-              size="medium"
-              onClick={onSaveClickHandler}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Сохранить
             </Button>
           </div>
@@ -71,7 +67,7 @@ export default function ResetPasswordPage() {
               </span>
             </Link>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );
