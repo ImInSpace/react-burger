@@ -2,7 +2,7 @@ import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
 
 function getIngredients() {
-  return fetch(Constants.INGREDIENTS_URL)
+  return fetch(Constants.BASE_URL + Constants.INGREDIENTS_URL)
     .then(checkResponse)
     .catch((err) => {
       console.error("Не удалось выполнить запрос", err);
@@ -10,7 +10,7 @@ function getIngredients() {
 }
 
 function createOrder(ids) {
-  return fetch(Constants.CREATE_ORDER_URL, {
+  return fetch(Constants.BASE_URL + Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -25,7 +25,7 @@ function createOrder(ids) {
 }
 
 function registerUser(registrationData) {
-  return fetch(Constants.REGISTER_URL, {
+  return fetch(Constants.BASE_URL + Constants.REGISTER_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -39,7 +39,7 @@ function registerUser(registrationData) {
 }
 
 function forgotPasswordPOST(email) {
-  return fetch(Constants.FORGET_PASSWORD_URL, {
+  return fetch(Constants.BASE_URL + Constants.FORGET_PASSWORD_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -56,7 +56,7 @@ function forgotPasswordPOST(email) {
 }
 
 function resetPassword(password, token) {
-  return fetch(Constants.RESET_PASSWORD_URL, {
+  return fetch(Constants.BASE_URL + Constants.RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -76,7 +76,7 @@ const checkResponse = (response) => {
 };
 
 const login = async (form) => {
-  return await fetch(Constants.LOGIN_URL, {
+  return await fetch(Constants.BASE_URL + Constants.LOGIN_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -91,7 +91,7 @@ const login = async (form) => {
 };
 
 const logout = async (refreshToken) => {
-  return await fetch(Constants.LOGOUT_URL, {
+  return await fetch(Constants.BASE_URL + Constants.LOGOUT_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -106,7 +106,7 @@ const logout = async (refreshToken) => {
 };
 
 const patchUserRequest = (patchForm) => {
-  return fetch(Constants.PATCH_USER_URL, {
+  return fetch(Constants.BASE_URL + Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
     cache: "no-cache",
@@ -142,7 +142,7 @@ const patchUser = (patchForm) => {
 };
 
 const updateToken = () => {
-  return fetch(Constants.REFRESH_TOKEN_URL, {
+  return fetch(Constants.BASE_URL + Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
     cache: "no-cache",
@@ -157,7 +157,7 @@ const updateToken = () => {
 };
 
 const getUserRequest = async () => {
-  return await fetch(Constants.GET_USER_URL, {
+  return await fetch(Constants.BASE_URL + Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
     cache: "no-cache",
