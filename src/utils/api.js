@@ -2,11 +2,9 @@ import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
 
 function getIngredients() {
-  return fetch(Constants.BASE_URL + Constants.INGREDIENTS_URL)
-    .then(checkResponse)
-    .catch((err) => {
-      console.error("Не удалось выполнить запрос", err);
-    });
+  return fetch(Constants.BASE_URL + Constants.INGREDIENTS_URL).then(
+    checkResponse
+  );
 }
 
 function createOrder(ids) {
@@ -17,11 +15,7 @@ function createOrder(ids) {
       Authorization: getCookie("token"),
     },
     body: JSON.stringify({ ingredients: ids }),
-  })
-    .then((response) => checkResponse(response))
-    .catch((err) => {
-      console.error("Не удалось выполнить запрос.", err);
-    });
+  }).then((response) => checkResponse(response));
 }
 
 function registerUser(registrationData) {
@@ -31,11 +25,7 @@ function registerUser(registrationData) {
       "Content-type": "application/json",
     },
     body: JSON.stringify(registrationData),
-  })
-    .then((response) => checkResponse(response))
-    .catch((err) => {
-      console.error("Не удалось зарегистрировать пользователя!", err);
-    });
+  }).then((response) => checkResponse(response));
 }
 
 function forgotPasswordPOST(email) {
@@ -45,14 +35,7 @@ function forgotPasswordPOST(email) {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ email: email }),
-  })
-    .then((response) => checkResponse(response))
-    .catch((err) => {
-      console.error(
-        "Не удалось выполнить запрос для восстановления пароля.",
-        err
-      );
-    });
+  }).then((response) => checkResponse(response));
 }
 
 function resetPassword(password, token) {
@@ -62,11 +45,7 @@ function resetPassword(password, token) {
       "Content-type": "application/json",
     },
     body: JSON.stringify({ password: password, token: token }),
-  })
-    .then((response) => response.json())
-    .catch((err) => {
-      console.error("Не удалось выполнить запрос", err);
-    });
+  }).then((response) => response.json());
 }
 
 const checkResponse = (response) => {
