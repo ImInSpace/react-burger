@@ -8,20 +8,27 @@ import {
 import styles from "./edit-profile.module.css";
 import { getUser, patchUser } from "../../../utils/api";
 import { useSelector } from "react-redux";
+import { useForm } from "../../../hooks/useForm";
 
 function EditProfile() {
   const savedUserName = useSelector((store) => store.auth.name);
   const savedEmail = useSelector((store) => store.auth.email);
 
   const [isSaveButtonsShown, setIsSaveButtonsShown] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const { values, handleChange, setValues } = useForm({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   useEffect(() => {
     getUser().then((userInfo) => {
-      setName(userInfo.user.name);
-      setEmail(userInfo.user.email);
+      setValues({
+        ...values,
+        ["name"]: userInfo.user.name,
+        ["email"]: userInfo.user.email,
+      });
     });
   }, []);
 
@@ -29,12 +36,12 @@ function EditProfile() {
     e.preventDefault();
 
     const patchObj = {
-      name: name,
-      email: email,
+      name: values["name"],
+      email: values["email"],
     };
 
-    if (password !== "") {
-      patchObj["password"] = password;
+    if (values["password"] !== "") {
+      patchObj["password"] = values["password"];
     }
 
     patchUser(patchObj);
@@ -42,24 +49,16 @@ function EditProfile() {
   };
 
   const cancelChanges = () => {
-    setName(savedUserName);
-    setEmail(savedEmail);
-    setPassword("");
-    setIsSaveButtonsShown(false);
+    setValues({
+      ...values,
+      ["name"]: savedUserName,
+      ["email"]: savedEmail,
+      ["password"]: "",
+    });
   };
 
-  const onNameChanged = (e) => {
-    setName(e.target.value);
-    setIsSaveButtonsShown(true);
-  };
-
-  const onEmailChanged = (e) => {
-    setEmail(e.target.value);
-    setIsSaveButtonsShown(true);
-  };
-
-  const onPasswordChanged = (e) => {
-    setPassword(e.target.value);
+  const onInputChanged = (e) => {
+    handleChange(e);
     setIsSaveButtonsShown(true);
   };
 
@@ -68,8 +67,8 @@ function EditProfile() {
       <Input
         type={"text"}
         placeholder={"Имя"}
-        onChange={onNameChanged}
-        value={name}
+        onChange={onInputChanged}
+        value={values["name"]}
         name={"name"}
         error={false}
         errorText={"Ошибка"}
@@ -77,16 +76,16 @@ function EditProfile() {
         extraClass="ml-1"
       />
       <EmailInput
-        onChange={onEmailChanged}
-        value={email}
+        onChange={onInputChanged}
+        value={values["email"]}
         name={"email"}
         placeholder="Почта"
         isIcon={true}
         extraClass="ml-1"
       />
       <PasswordInput
-        onChange={onPasswordChanged}
-        value={password}
+        onChange={onInputChanged}
+        value={values["password"]}
         name={"password"}
         placeholder="Введите новый пароль"
         icon="EditIcon"
