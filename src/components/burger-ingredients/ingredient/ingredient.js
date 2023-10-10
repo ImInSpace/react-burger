@@ -10,14 +10,21 @@ import { useLocation } from "react-router";
 
 function Ingredient({ ingredientInfo }) {
   const location = useLocation();
-  const data = useSelector(
-    (store) => store.ingredients.constructorIngredients.ingredients
+  const { ingredients, bun } = useSelector(
+    (store) => store.ingredients.constructorIngredients
   );
 
-  const counter = useMemo(() => {
-    return data.filter((ingredient) => ingredient._id === ingredientInfo._id)
-      .length;
-  }, [data, ingredientInfo]);
+  let counter = 0;
+
+  counter = useMemo(() => {
+    return ingredients.filter(
+      (ingredient) => ingredient._id === ingredientInfo._id
+    ).length;
+  }, [ingredients, ingredientInfo]);
+
+  if (bun && bun._id === ingredientInfo._id) {
+    counter = 2;
+  }
 
   const [, dragRef] = useDrag({
     type: "ingredient",
