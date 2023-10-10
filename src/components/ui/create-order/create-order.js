@@ -32,21 +32,19 @@ function CreateOrder() {
   });
 
   return (
-    <>
-      <div className={styles.container + " mt-5 mr-4"}>
-        <div className="mr-5">
-          <Price price={sum} textSize="medium" />
-        </div>
-        <Button
-          htmlType="button"
-          type="primary"
-          size="large"
-          onClick={createOrder}
-        >
-          Оформить заказ
-        </Button>
+    <div className={styles.container + " mt-5 mr-4"}>
+      <div className="mr-5">
+        <Price price={sum} textSize="medium" />
       </div>
-    </>
+      <Button
+        htmlType="button"
+        type="primary"
+        size="large"
+        onClick={createOrder}
+      >
+        Оформить заказ
+      </Button>
+    </div>
   );
 }
 
