@@ -14,10 +14,14 @@ import IngredientModal from "../ui/ingredient-modal";
 import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
+import { useEffect } from "react";
 
 function App() {
   const dispatch = useDispatch();
-  dispatch(loadIngredients());
+
+  useEffect(() => {
+    dispatch(loadIngredients());
+  }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;
