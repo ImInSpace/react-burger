@@ -50,12 +50,7 @@ export default function LoginPage() {
             extraClass="mt-6"
           />
           <div className={styles.loginButton}>
-            <Button
-              htmlType="submit"
-              type="primary"
-              size="medium"
-              onClick={login}
-            >
+            <Button htmlType="submit" type="primary" size="medium">
               Войти
             </Button>
           </div>
