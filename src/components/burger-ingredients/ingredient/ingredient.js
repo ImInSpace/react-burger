@@ -24,21 +24,13 @@ function Ingredient({ ingredientInfo }) {
     item: { id: ingredientInfo._id },
   });
 
-  const showIngredientInfo = (id) => {
-    // ToDo: Удалить, когда заработает отображение по ссылке.
-  };
-
   return (
     <Link
       to={`/ingredients/${ingredientInfo._id}`}
       state={{ backgroundLocation: location }}
       className={styles.link}
     >
-      <div
-        className={styles.card}
-        onClick={() => showIngredientInfo(ingredientInfo._id)}
-        ref={dragRef}
-      >
+      <div className={styles.card} ref={dragRef}>
         {counter > 0 && (
           <div className={styles.counter}>
             <Counter count={counter} size="default" extraClass="mr-5" />

@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 function IngredientDetails() {
   const { id } = useParams("id");
 
-  // Если это модалка - данные об ингредиентах находятся в сторе.
   const { ingredients } = useSelector((store) => store.ingredients);
   let selectedIngredient = ingredients.find(
     (ingredient) => ingredient._id === id
