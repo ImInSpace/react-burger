@@ -16,18 +16,23 @@ export const REORDER_INGREDIENTS = "REORDER_INGREDIENTS";
 export function loadIngredients() {
   return function (dispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
-    getIngredients().then((res) => {
-      if (res.success === true) {
+    getIngredients()
+      .then((res) => {
         dispatch({
           type: GET_INGREDIENTS_SUCCESS,
-          items: res.data,
+          payload: {
+            items: res.data,
+          },
         });
-      } else {
+      })
+      .catch((err) => {
         dispatch({
           type: GET_INGREDIENTS_FAILED,
+          payload: {
+            ingredientsErrorMsg: err,
+          },
         });
-      }
-    });
+      });
   };
 }
 

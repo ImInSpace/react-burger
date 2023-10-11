@@ -1,26 +1,30 @@
 import PropTypes from "prop-types";
 import styles from "./menu-item.module.css";
+import { NavLink } from "react-router-dom";
 
 function MenuItem(props) {
   const { text, icon, url } = props;
+
   return (
-    <div className={styles.container}>
+    <NavLink
+      to={url}
+      className={({ isActive }) =>
+        styles.container +
+        (isActive
+          ? " text text_type_main-default " + styles.active
+          : " text text_type_main-default text_color_inactive ")
+      }
+    >
       {icon}
-      <a
-        href={url}
-        className={"text text_type_main-default " + styles.link}
-        style={{ display: "inline-block" }}
-      >
-        {text}
-      </a>
-    </div>
+      {text}
+    </NavLink>
   );
 }
 
 export { MenuItem };
 
 MenuItem.propTypes = {
-  text: PropTypes.string,
+  text: PropTypes.string.isRequired,
   icon: PropTypes.element.isRequired,
-  url: PropTypes.string,
+  url: PropTypes.string.isRequired,
 };

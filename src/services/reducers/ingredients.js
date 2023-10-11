@@ -16,6 +16,7 @@ const initialIngredientsState = {
 
   ingredientsRequest: false,
   ingredientsRequestError: false,
+  ingredientsErrorMsg: "",
 };
 
 const ingredientsReducer = (state = initialIngredientsState, action) => {
@@ -26,7 +27,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
     case GET_INGREDIENTS_SUCCESS: {
       return {
         ...state,
-        ingredients: action.items,
+        ingredients: action.payload.items,
         ingredientsRequest: false,
         ingredientsRequestError: false,
       };
@@ -36,6 +37,7 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
         ...initialIngredientsState,
         ingredientsRequest: false,
         ingredientsRequestError: true,
+        ingredientsErrorMsg: action.payload.ingredientsErrorMsg,
       };
     }
     case ADD_INGREDIENT: {
@@ -86,6 +88,8 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
       };
     }
     case CLOSE_INGREDIENTS_DETAILS: {
+      action.payload.navigateHook(-1);
+
       return {
         ...state,
         selectedIngredient: null,

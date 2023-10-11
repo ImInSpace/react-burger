@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 function OrderNumber() {
-  const orderNumber = useSelector((store) => store.order.number);
+  const { number } = useSelector((store) => store.order);
 
   return (
     <>
       <p className={styles.orderNumber + " text text_type_digits-large mt-20"}>
-        {orderNumber}
+        {number === 0 ? "" : number}
       </p>
+
       <p className="text text_type_main-medium mt-8">Идентификатор заказа</p>
     </>
   );

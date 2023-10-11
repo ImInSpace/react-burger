@@ -2,20 +2,32 @@ import styles from "./ingredient-details.module.css";
 import { IngredientImage } from "./ingredient-image/ingredient-image";
 import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
-import { ingredientDataShape } from "../../utils/prop-types";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function IngredientDetails({ data }) {
+function IngredientDetails() {
+  const { id } = useParams("id");
+
+  const { ingredients } = useSelector((store) => store.ingredients);
+  let selectedIngredient = ingredients.find(
+    (ingredient) => ingredient._id === id
+  );
+
   return (
-    <div className={styles.container}>
-      <IngredientImage img={data.image} />
-      <IngredientTitle text={data.name} />
-      <Macronutrients {...data} />
-    </div>
+    <>
+      {selectedIngredient ? (
+        <div className={styles.container}>
+          <IngredientImage img={selectedIngredient.image} />
+          <IngredientTitle text={selectedIngredient.name} />
+          <Macronutrients {...selectedIngredient} />
+        </div>
+      ) : (
+        <p className="text text_type_main-medium">
+          А такого ингредиента не существует...
+        </p>
+      )}
+    </>
   );
 }
-
-IngredientDetails.propTypes = {
-  data: ingredientDataShape,
-};
 
 export { IngredientDetails };

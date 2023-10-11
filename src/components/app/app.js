@@ -1,20 +1,20 @@
-import { AppHeader } from "../app-header/app-header";
-import styles from "./app.module.css";
-import { BurgerIngredients } from "../burger-ingredients/burger-ingredients";
-import { BurgerConstructor } from "../burger-constructor/burger-constructor";
-import { CreateOrder } from "../ui/create-order/create-order";
+import { Routes, Route } from "react-router-dom";
+import HomePage from "../../pages/home";
+import LoginPage from "../../pages/login";
+import RegisterPage from "../../pages/register";
+import ForgotPasswordPage from "../../pages/forgot-password";
+import ResetPasswordPage from "../../pages/reset-password";
+import Profile from "../../pages/profile";
+import NotFound404Page from "../../pages/not-found404";
+import { RouteWrapper } from "../route-wrapper/route-wrapper";
+import OrderHistoryPage from "../../pages/order-history";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
-import { OrderDetails } from "../order-details/order-details";
+import { useLocation } from "react-router-dom";
+import IngredientModal from "../ui/ingredient-modal";
+import { AppHeader } from "../app-header/app-header";
+import { useDispatch } from "react-redux";
+import { loadIngredients } from "../../services/actions/ingredients";
 import { useEffect } from "react";
-import { Modal } from "../ui/modal/modal";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addIngredient,
-  loadIngredients,
-} from "../../services/actions/ingredients";
-import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { ADD_INGREDIENT } from "../../services/actions/ingredients";
 
 function App() {
   const dispatch = useDispatch();
@@ -23,45 +23,63 @@ function App() {
     dispatch(loadIngredients());
   }, [dispatch]);
 
-  const selectedIngredient = useSelector(
-    (store) => store.ingredients.selectedIngredient
-  );
-
-  const isCreateOrderModalShown = useSelector(
-    (store) => store.order.isModalShown
-  );
-
-  const handleDrop = (dragItem) => {
-    dispatch(addIngredient(dragItem.id));
-  };
+  let location = useLocation();
+  let state = location.state;
 
   return (
-    <div className={styles.app}>
+    <>
       <AppHeader />
-      <DndProvider backend={HTML5Backend}>
-        <div className={styles.container}>
-          <div className={styles.halfContainer}>
-            <BurgerIngredients />
-          </div>
-          <div className={styles.halfContainer}>
-            <BurgerConstructor onDropHandler={handleDrop} />
-            <CreateOrder />
-          </div>
-        </div>
-      </DndProvider>
+      <Routes location={state?.backgroundLocation || location}>
+        <Route
+          path="/"
+          element={<RouteWrapper isProtected={false} element={<HomePage />} />}
+        />
+        <Route
+          path="/login"
+          element={<RouteWrapper isProtected={false} element={<LoginPage />} />}
+        />
+        <Route
+          path="/register"
+          element={
+            <RouteWrapper isProtected={false} element={<RegisterPage />} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={<RouteWrapper isProtected={true} element={<Profile />} />}
+        >
+          <Route
+            path="/profile/orders"
+            element={
+              <RouteWrapper isProtected={true} element={<OrderHistoryPage />} />
+            }
+          />
+        </Route>
+        <Route
+          path="/forgot-password"
+          element={
+            <RouteWrapper
+              isProtected={false}
+              element={<ForgotPasswordPage />}
+            />
+          }
+        />
+        <Route path="/ingredients/:id" element={<IngredientDetails />}></Route>
+        <Route
+          path="/reset-password"
+          element={
+            <RouteWrapper isProtected={false} element={<ResetPasswordPage />} />
+          }
+        />
+        <Route path="*" element={<NotFound404Page />} />
+      </Routes>
 
-      {isCreateOrderModalShown && (
-        <Modal>
-          <OrderDetails />
-        </Modal>
+      {state?.backgroundLocation && (
+        <Routes>
+          <Route path="/ingredients/:id" element={<IngredientModal />} />
+        </Routes>
       )}
-
-      {selectedIngredient && (
-        <Modal caption={"Детали инредиента"}>
-          <IngredientDetails data={selectedIngredient} />
-        </Modal>
-      )}
-    </div>
+    </>
   );
 }
 

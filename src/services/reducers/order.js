@@ -16,14 +16,24 @@ const initialOrderState = {
 const orderReducer = (state = initialOrderState, action) => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
-      return { ...state, orderRequest: true, orderRequestError: false };
+      // Заказ уже создан. Нет смысла отправлять запрос повторно.
+      if (state.number !== 0) {
+        return { ...state, isModalShown: true };
+      }
+
+      return {
+        ...state,
+        orderRequest: true,
+        orderRequestError: false,
+        isModalShown: true,
+      };
+
     case CREATE_ORDER_SUCCESS:
       return {
         ...state,
         number: action.number,
         orderRequest: false,
         orderRequestError: false,
-        isModalShown: true,
       };
     case CREATE_ORDER_FAILED:
       return {

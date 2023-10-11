@@ -2,59 +2,61 @@ import styles from "./ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { ingredientDataShape } from "../../../utils/prop-types";
-import { useDispatch } from "react-redux";
-import { OPEN_INGREDIENTS_DETAILS } from "../../../services/actions/ingredients";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 
 function Ingredient({ ingredientInfo }) {
-  const dispatch = useDispatch();
-  const data = useSelector(
-    (store) => store.ingredients.constructorIngredients.ingredients
+  const location = useLocation();
+  const { ingredients, bun } = useSelector(
+    (store) => store.ingredients.constructorIngredients
   );
 
-  const counter = useMemo(() => {
-    return data.filter((ingredient) => ingredient._id === ingredientInfo._id)
-      .length;
-  }, [data, ingredientInfo]);
+  let counter = 0;
+
+  counter = useMemo(() => {
+    return ingredients.filter(
+      (ingredient) => ingredient._id === ingredientInfo._id
+    ).length;
+  }, [ingredients, ingredientInfo]);
+
+  if (bun && bun._id === ingredientInfo._id) {
+    counter = 2;
+  }
 
   const [, dragRef] = useDrag({
     type: "ingredient",
     item: { id: ingredientInfo._id },
   });
 
-  const showIngredientInfo = (id) => {
-    dispatch({
-      type: OPEN_INGREDIENTS_DETAILS,
-      id: id,
-    });
-  };
-
   return (
-    <div
-      className={styles.card}
-      onClick={() => showIngredientInfo(ingredientInfo._id)}
-      ref={dragRef}
+    <Link
+      to={`/ingredients/${ingredientInfo._id}`}
+      state={{ backgroundLocation: location }}
+      className={styles.link}
     >
-      {counter > 0 && (
-        <div className={styles.counter}>
-          <Counter count={counter} size="default" extraClass="mr-5" />
+      <div className={styles.card} ref={dragRef}>
+        {counter > 0 && (
+          <div className={styles.counter}>
+            <Counter count={counter} size="default" extraClass="mr-5" />
+          </div>
+        )}
+        <div className={styles.image}>
+          <img
+            src={ingredientInfo.image}
+            alt={"Изображение для " + ingredientInfo.name}
+          />
         </div>
-      )}
-      <div className={styles.image}>
-        <img
-          src={ingredientInfo.image}
-          alt={"Изображение для " + ingredientInfo.name}
-        />
+        <div className={styles.costRow}>
+          <Price price={ingredientInfo.price} className={styles.costRow} />
+        </div>
+        <div className={styles.description}>
+          <p className="text text_type_main-default">{ingredientInfo.name}</p>
+        </div>
       </div>
-      <div className={styles.costRow}>
-        <Price price={ingredientInfo.price} className={styles.costRow} />
-      </div>
-      <div className={styles.description}>
-        <p className="text text_type_main-default">{ingredientInfo.name}</p>
-      </div>
-    </div>
+    </Link>
   );
 }
 
