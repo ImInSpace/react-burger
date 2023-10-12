@@ -31,10 +31,10 @@ export function getUserActionGen(token) {
   };
 }
 
-export function loginActionGen(form) {
+export function loginActionGen(loginForm) {
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
-    login(form)
+    login(loginForm)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -50,10 +50,10 @@ export function loginActionGen(form) {
   };
 }
 
-export function logoutActionGen(form) {
+export function logoutActionGen(logoutBody) {
   return function (dispatch) {
     dispatch({ type: LOGOUT_REQUEST });
-    logout(form)
+    logout(logoutBody)
       .then((res) => {
         dispatch({
           type: LOGOUT_SUCCESS,
