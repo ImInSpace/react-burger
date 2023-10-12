@@ -3,14 +3,25 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-function MenuItem(props) {
+interface IMenuItemProps {
+  link: string;
+  isActive: boolean;
+  caption: string;
+  onClickHandler: () => void;
+}
+
+function MenuItem(props: IMenuItemProps) {
   const { link, isActive, caption, onClickHandler } = props;
 
   return (
     <div className={styles.menuCell} onClick={onClickHandler}>
       <Link to={link} className={styles.link}>
-        {/* prettier-ignore */}
-        <p className={cn("text text_type_main-medium ", isActive ? "" : "text_color_inactive")}>
+        <p
+          className={cn(
+            "text text_type_main-medium ",
+            isActive ? "" : "text_color_inactive"
+          )}
+        >
           {caption}
         </p>
       </Link>

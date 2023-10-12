@@ -12,7 +12,7 @@ export default function Profile() {
   const initialState = [true, false, false];
   const [activeMenu, setActiveMenu] = useState(initialState);
 
-  const onMenuClickHandler = (index) => {
+  const onMenuClickHandler = (index: number) => {
     const newState = [false, false, false];
     newState[index] = true;
     setActiveMenu(newState);
@@ -23,6 +23,7 @@ export default function Profile() {
   };
 
   const logout = () => {
+    // @ts-ignore
     dispatch(logoutActionGen(getCookie("refreshToken")));
   };
 

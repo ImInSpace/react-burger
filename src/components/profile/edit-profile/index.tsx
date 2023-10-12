@@ -32,7 +32,7 @@ function EditProfile() {
     });
   }, []);
 
-  const updateUser = (e) => {
+  const updateUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const patchObj = {
@@ -57,7 +57,7 @@ function EditProfile() {
     });
   };
 
-  const onInputChanged = (e) => {
+  const onInputChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
     handleChange(e);
     setIsSaveButtonsShown(true);
   };

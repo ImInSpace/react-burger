@@ -19,7 +19,7 @@ export default function LoginPage() {
 
   const [password, setPassword] = useState("");
 
-  const login = (e) => {
+  const login = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const loginForm = {
@@ -27,6 +27,7 @@ export default function LoginPage() {
       password: password,
     };
 
+    // @ts-ignore
     dispatch(loginActionGen(loginForm, navigate));
   };
 

@@ -3,7 +3,17 @@ import { ingredientDataShape } from "../../../utils/prop-types";
 import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
-function Bun({ bunInfo, bunPosition }) {
+interface IBunProps {
+  bunInfo: {
+    name: string;
+    price: number;
+    image: string;
+  };
+
+  bunPosition: "top" | "bottom";
+}
+
+function Bun({ bunInfo, bunPosition }: IBunProps): JSX.Element | null {
   if (bunInfo == null) return null;
 
   return (

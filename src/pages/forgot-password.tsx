@@ -8,6 +8,7 @@ import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPasswordAction } from "../services/actions/forgot-password";
+import { SyntheticEventData } from "react-dom/test-utils";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -15,8 +16,9 @@ export default function ForgotPasswordPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const restorePassword = (e) => {
+  const restorePassword = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    //@ts-ignore
     dispatch(forgotPasswordAction(email, navigate));
   };
 
