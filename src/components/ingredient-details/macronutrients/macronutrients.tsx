@@ -1,8 +1,19 @@
 import { Macronutrient } from "../macronutrient/macronutrient";
 import styles from "./macronutrients.module.css";
-import PropTypes from "prop-types";
 
-function Macronutrients({ calories, proteins, fat, carbohydrates }) {
+interface IMacronutrientsProps {
+  calories: number;
+  proteins: number;
+  fat: number;
+  carbohydrates: number;
+}
+
+function Macronutrients({
+  calories,
+  proteins,
+  fat,
+  carbohydrates,
+}: IMacronutrientsProps): JSX.Element {
   return (
     <div className={styles.macronutrients + " mt-8 mb-10"}>
       <Macronutrient title="Калории,ккал" value={calories} />
@@ -12,12 +23,4 @@ function Macronutrients({ calories, proteins, fat, carbohydrates }) {
     </div>
   );
 }
-
-Macronutrients.propTypes = {
-  calories: PropTypes.number.isRequired,
-  proteins: PropTypes.number.isRequired,
-  fat: PropTypes.number.isRequired,
-  carbohydrates: PropTypes.number.isRequired,
-};
-
 export { Macronutrients };

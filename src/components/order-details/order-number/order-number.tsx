@@ -1,8 +1,8 @@
 import styles from "./order-number.module.css";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 
 function OrderNumber() {
+  // @ts-ignore
   const { number } = useSelector((store) => store.order);
 
   return (
@@ -15,9 +15,5 @@ function OrderNumber() {
     </>
   );
 }
-
-OrderNumber.propTypes = {
-  number: PropTypes.number,
-};
 
 export { OrderNumber };

@@ -10,19 +10,19 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerAction } from "../services/actions/register";
 
-export default function RegisterPage() {
+export default function RegisterPage(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const nameInputRef = useRef(null);
 
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState<string>("");
   const emailInputRef = useRef(null);
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState<string>("");
 
-  const registerUser = (e) => {
+  const registerUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     const registrationData = {
@@ -30,6 +30,8 @@ export default function RegisterPage() {
       password: password,
       name: name,
     };
+
+    // @ts-ignore
     dispatch(registerAction(registrationData, navigate));
   };
 

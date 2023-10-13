@@ -5,22 +5,23 @@ import {
   Button,
   PasswordInput,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useRef } from "react";
+import { useState, useRef, SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { resetPasswordAction } from "../services/actions/reset-password";
 
-export default function ResetPasswordPage() {
+export default function ResetPasswordPage(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState<string>("");
 
-  const [codeFromEmail, setCodeFromEmail] = useState("");
+  const [codeFromEmail, setCodeFromEmail] = useState<string>("");
   const codeFromEmailInputRef = useRef(null);
 
-  const resetPassword = (e) => {
+  const resetPassword = (e: SyntheticEvent) => {
     e.preventDefault();
+    // @ts-ignore
     dispatch(resetPasswordAction(password, codeFromEmail, navigate));
   };
 

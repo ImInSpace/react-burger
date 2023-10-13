@@ -1,7 +1,11 @@
 import styles from "./modal-overlay.module.css";
 import PropTypes from "prop-types";
 
-function ModalOverlay({ closeHandler }) {
+interface IModalOverlayProps {
+  closeHandler: () => void;
+}
+
+function ModalOverlay({ closeHandler }: IModalOverlayProps): JSX.Element {
   return <div className={styles.overlay} onClick={closeHandler}></div>;
 }
 

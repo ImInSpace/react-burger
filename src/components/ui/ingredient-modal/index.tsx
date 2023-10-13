@@ -2,7 +2,7 @@ import { IngredientDetails } from "../../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
 import { useNavigate } from "react-router";
 
-export default function IngredientModal() {
+export default function IngredientModal(): JSX.Element {
   const navigate = useNavigate();
 
   const onClose = () => {

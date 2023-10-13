@@ -1,6 +1,3 @@
-import { ingredientDataShape } from "../../../utils/prop-types";
-import { ConstructorRow } from "../constructor-row/constructor-row";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDispatch } from "react-redux";
 import {
   REMOVE_INGREDIENT,
@@ -10,12 +7,18 @@ import PropTypes from "prop-types";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./ingredient.module.css";
+import { IIngredientDataShape } from "../../../utils/prop-types";
 
-function Ingredient({ ingredientInfo, index }) {
+interface IIngredient {
+  ingredientInfo: IIngredientDataShape;
+  index: number;
+}
+
+function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
   const dispatch = useDispatch();
-  const draggableRowRef = useRef(null);
+  const draggableRowRef = useRef<HTMLDivElement>(null);
 
-  function moveRow(dragIndex, hoverIndex) {
+  function moveRow(dragIndex: number, hoverIndex: number) {
     dispatch({ type: REORDER_INGREDIENTS, hoverIndex, dragIndex });
   }
 

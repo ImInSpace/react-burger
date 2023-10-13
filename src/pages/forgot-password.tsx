@@ -8,7 +8,6 @@ import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPasswordAction } from "../services/actions/forgot-password";
-import { SyntheticEventData } from "react-dom/test-utils";
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");

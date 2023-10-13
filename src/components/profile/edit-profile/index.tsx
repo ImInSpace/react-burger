@@ -11,7 +11,9 @@ import { useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 
 function EditProfile() {
+  // @ts-ignore
   const savedUserName = useSelector((store) => store.auth.name);
+  // @ts-ignore
   const savedEmail = useSelector((store) => store.auth.email);
 
   const [isSaveButtonsShown, setIsSaveButtonsShown] = useState(false);

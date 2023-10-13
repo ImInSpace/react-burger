@@ -1,8 +1,12 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./tabs.module.css";
-import PropTypes from "prop-types";
 
-function Tabs({ current, onTabClickHandler }) {
+interface ITabsProps {
+  current: string;
+  onTabClickHandler: (value: string) => void;
+}
+
+function Tabs({ current, onTabClickHandler }: ITabsProps): JSX.Element {
   return (
     <div style={{ display: "flex" }}>
       <Tab
@@ -35,10 +39,5 @@ function Tabs({ current, onTabClickHandler }) {
     </div>
   );
 }
-
-Tabs.propTypes = {
-  current: PropTypes.string.isRequired,
-  onTabClickHandler: PropTypes.func.isRequired,
-};
 
 export { Tabs };

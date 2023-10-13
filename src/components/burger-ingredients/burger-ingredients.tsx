@@ -2,11 +2,12 @@ import { Tabs } from "./tabs/tabs";
 import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
-import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { useRef, useState, useMemo } from "react";
+import { IIngredientDataShape } from "../../utils/prop-types";
 
 function BurgerIngredients() {
+  // @ts-ignore
   const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const groupType = {
@@ -16,26 +17,32 @@ function BurgerIngredients() {
   };
 
   const buns = useMemo(() => {
-    return ingredients.filter((element) => element.type === groupType.bun);
+    return ingredients.filter(
+      (element: IIngredientDataShape) => element.type === groupType.bun
+    );
   }, [ingredients, groupType.bun]);
 
   const sauces = useMemo(() => {
-    return ingredients.filter((element) => element.type === groupType.sauce);
+    return ingredients.filter(
+      (element: IIngredientDataShape) => element.type === groupType.sauce
+    );
   }, [ingredients, groupType.sauce]);
 
   const mains = useMemo(() => {
-    return ingredients.filter((element) => element.type === groupType.main);
+    return ingredients.filter(
+      (element: IIngredientDataShape) => element.type === groupType.main
+    );
   }, [ingredients, groupType.main]);
 
-  const tabsRef = useRef(null);
-  const bunsRef = useRef(null);
-  const saucesRef = useRef(null);
-  const mainsRef = useRef(null);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const bunsRef = useRef<HTMLDivElement>(null);
+  const saucesRef = useRef<HTMLDivElement>(null);
+  const mainsRef = useRef<HTMLDivElement>(null);
 
   const scrollHandler = () => {
     const bunsDelta =
-      bunsRef.current.getBoundingClientRect().y -
-      tabsRef.current.getBoundingClientRect().y;
+      bunsRef.current!.getBoundingClientRect().y -
+      tabsRef.current!.getBoundingClientRect().y;
 
     if (bunsDelta > -20 && bunsDelta < 20) {
       setCurrentTab(Constants.BUNS_GROUP_NAME);
@@ -43,8 +50,8 @@ function BurgerIngredients() {
     }
 
     const mainsDelta =
-      mainsRef.current.getBoundingClientRect().y -
-      tabsRef.current.getBoundingClientRect().y;
+      mainsRef.current!.getBoundingClientRect().y -
+      tabsRef.current!.getBoundingClientRect().y;
 
     if (mainsDelta > -20 && mainsDelta < 20) {
       setCurrentTab(Constants.MAINS_GROUP_NAME);
@@ -52,8 +59,8 @@ function BurgerIngredients() {
     }
 
     const saucesDelta =
-      saucesRef.current.getBoundingClientRect().y -
-      tabsRef.current.getBoundingClientRect().y;
+      saucesRef.current!.getBoundingClientRect().y -
+      tabsRef.current!.getBoundingClientRect().y;
 
     if (saucesDelta > -20 && saucesDelta < 20) {
       setCurrentTab(Constants.SAUCES_GROUP_NAME);
@@ -62,19 +69,19 @@ function BurgerIngredients() {
   };
 
   const [currentTab, setCurrentTab] = useState("Булки");
-  const tabClickHandler = (tabTitle) => {
+  const tabClickHandler = (tabTitle: string) => {
     switch (tabTitle) {
       case Constants.BUNS_GROUP_NAME:
         setCurrentTab(Constants.BUNS_GROUP_NAME);
-        bunsRef.current.scrollIntoView();
+        bunsRef.current!.scrollIntoView();
         break;
       case Constants.SAUCES_GROUP_NAME:
         setCurrentTab(Constants.SAUCES_ANCHOR);
-        saucesRef.current.scrollIntoView();
+        saucesRef.current!.scrollIntoView();
         break;
       case Constants.MAINS_GROUP_NAME:
         setCurrentTab(Constants.MAINS_ANCHOR);
-        mainsRef.current.scrollIntoView();
+        mainsRef.current!.scrollIntoView();
         break;
       default:
         break;
@@ -110,9 +117,4 @@ function BurgerIngredients() {
     </div>
   );
 }
-
-BurgerIngredients.propTypes = {
-  handler: PropTypes.func,
-};
-
 export { BurgerIngredients };

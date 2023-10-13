@@ -1,16 +1,21 @@
 import styles from "./ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
-import { ingredientDataShape } from "../../../utils/prop-types";
 import { useDrag } from "react-dnd";
 import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
+import { IIngredientDataShape } from "../../../utils/prop-types";
 
-function Ingredient({ ingredientInfo }) {
+interface IIngredientProps {
+  ingredientInfo: IIngredientDataShape;
+}
+
+function Ingredient({ ingredientInfo }: IIngredientProps): JSX.Element {
   const location = useLocation();
   const { ingredients, bun } = useSelector(
+    // @ts-ignore
     (store) => store.ingredients.constructorIngredients
   );
 
@@ -18,7 +23,8 @@ function Ingredient({ ingredientInfo }) {
 
   counter = useMemo(() => {
     return ingredients.filter(
-      (ingredient) => ingredient._id === ingredientInfo._id
+      (ingredient: IIngredientDataShape) =>
+        ingredient._id === ingredientInfo._id
     ).length;
   }, [ingredients, ingredientInfo]);
 

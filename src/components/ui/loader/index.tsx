@@ -6,7 +6,13 @@ const loaderSizes = {
   medium: 24,
   large: 40,
 };
-export const Loader = ({ size, inverse = false }) => {
+
+interface ILoaderProps {
+  size: number;
+  inverse: boolean;
+}
+
+function Loader({ size, inverse = false }: ILoaderProps): JSX.Element {
   const loaderColor = inverse ? "#fff" : "#3C39EC";
 
   const wrapperStyleKey = "wrapper_" + size;
@@ -15,4 +21,4 @@ export const Loader = ({ size, inverse = false }) => {
       <LoaderSvg color={loaderColor} size={loaderSizes[size]} />
     </div>
   );
-};
+}

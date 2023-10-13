@@ -3,6 +3,7 @@ import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
 import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
+import { IIngredientDataShape } from "../../utils/prop-types";
 
 function BurgerConstructor({ onDropHandler }) {
   const [{ isHover }, dropTarget] = useDrop({
@@ -16,6 +17,7 @@ function BurgerConstructor({ onDropHandler }) {
   });
 
   const constructorIngredients = useSelector(
+    // @ts-ignore
     (store) => store.ingredients.constructorIngredients
   );
 
@@ -29,15 +31,17 @@ function BurgerConstructor({ onDropHandler }) {
       ref={dropTarget}
     >
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
-      {constructorIngredients.ingredients?.map((ingredientInfo, index) => {
-        return (
-          <Ingredient
-            ingredientInfo={ingredientInfo}
-            key={ingredientInfo.key}
-            index={index}
-          />
-        );
-      })}
+      {constructorIngredients.ingredients?.map(
+        (ingredientInfo: IIngredientDataShape, index: number) => {
+          return (
+            <Ingredient
+              ingredientInfo={ingredientInfo}
+              key={ingredientInfo.key} // Добавить это свойство динамически.
+              index={index}
+            />
+          );
+        }
+      )}
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"bottom"} />
     </div>
   );

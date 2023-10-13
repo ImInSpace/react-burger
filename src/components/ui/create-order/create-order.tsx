@@ -4,16 +4,20 @@ import { Price } from "../../common/price/price";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderAction } from "../../../services/actions/order";
 import { useNavigate } from "react-router-dom";
+import { IIngredientDataShape } from "../../../utils/prop-types";
 
-function CreateOrder() {
+function CreateOrder(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // @ts-ignore
   const { constructorIngredients } = useSelector((store) => store.ingredients);
 
   const { bun, ingredients } = useSelector(
+    // @ts-ignore
     (store) => store.ingredients.constructorIngredients
   );
 
+  // @ts-ignore
   const { email } = useSelector((store) => store.auth);
 
   const createOrder = () => {
@@ -22,12 +26,16 @@ function CreateOrder() {
       return;
     }
 
-    const ids = constructorIngredients.ingredients?.map((item) => item._id);
+    const ids = constructorIngredients.ingredients?.map(
+      (item: IIngredientDataShape) => item._id
+    );
+
+    // @ts-ignore
     dispatch(createOrderAction(ids));
   };
 
   let sum = bun == null ? 0 : bun.price * 2;
-  ingredients?.forEach((ingredient) => {
+  ingredients?.forEach((ingredient: IIngredientDataShape) => {
     sum += ingredient.price;
   });
 

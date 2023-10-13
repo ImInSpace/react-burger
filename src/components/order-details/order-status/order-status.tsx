@@ -1,7 +1,8 @@
 import styles from "./order-status.module.css";
 import { useSelector } from "react-redux";
 
-function OrderStatus() {
+function OrderStatus(): JSX.Element {
+  // @ts-ignore
   const { number } = useSelector((store) => store.order);
 
   return (

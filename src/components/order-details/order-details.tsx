@@ -6,6 +6,7 @@ import { Loader } from "../ui/loader";
 import { useSelector } from "react-redux";
 
 function OrderDetails() {
+  // @ts-ignore
   const { orderRequest } = useSelector((store) => store.order);
 
   return (

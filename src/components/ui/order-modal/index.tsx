@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
 import { OrderDetails } from "../../order-details/order-details";
 
-export default function OrderModal() {
+export default function OrderModal(): JSX.Element {
   const dispatch = useDispatch();
 
   const onClose = () => {

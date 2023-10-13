@@ -1,19 +1,18 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
 import styles from "./price.module.css";
 
-function Price({ price, textSize = "default" }) {
+interface IPriceProps {
+  price: number;
+  textSize: "default" | "medium" | "large";
+}
+
+function Price({ price, textSize = "default" }: IPriceProps): JSX.Element {
   return (
     <div className={styles.costRow}>
       <span className={"text text_type_digits-" + textSize}>{price}</span>
-      <CurrencyIcon />
+      <CurrencyIcon type="primary" />
     </div>
   );
 }
-
-Price.propTypes = {
-  price: PropTypes.number.isRequired,
-  textSize: PropTypes.oneOf(["default", "medium", "large"]),
-};
 
 export { Price };
