@@ -9,6 +9,7 @@ import styles from "./ingredient.module.css";
 import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IIngredientDataShape } from "../../../utils/api-shape";
+import { ICollectedProps, IDragObject } from "../../../utils/common-types";
 
 interface IIngredient {
   ingredientInfo: IIngredientDataShape;
@@ -72,26 +73,15 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
     },
   });
 
-  interface IDragObject {
-    id: string;
-    index: number;
-  }
-
-  interface ICollectedProps {
-    isDragging: boolean;
-  }
-
-  const [{ isDragging }, drag] = useDrag<IDragObject, unknown, ICollectedProps>(
-    {
-      type: "constructor-row",
-      item: () => {
-        return { id: ingredientInfo._id, index };
-      },
-      collect: (monitor) => ({
-        isDragging: monitor.isDragging(),
-      }),
-    }
-  );
+  const [, drag] = useDrag<IDragObject, unknown, ICollectedProps>({
+    type: "constructor-row",
+    item: () => {
+      return { id: ingredientInfo._id, index };
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
 
   drag(drop(draggableRowRef));
 

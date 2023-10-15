@@ -4,18 +4,25 @@ import { Ingredient } from "./ingredient/ingredient";
 import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { IIngredientDataShape } from "../../utils/api-shape";
+import { useDispatch } from "react-redux";
+import { addIngredient } from "../../services/actions/ingredients";
+import { IDragObject } from "../../utils/common-types";
 
-interface IBurgerConstructorProps {
-  onDropHandler: (dragItem: any) => void;
-}
+function BurgerConstructor(): JSX.Element {
+  const dispatch = useDispatch();
 
-function BurgerConstructor({
-  onDropHandler,
-}: IBurgerConstructorProps): JSX.Element {
-  const [{ isHover }, dropTarget] = useDrop({
+  const handleDrop = (dragItem: IDragObject) => {
+    dispatch(addIngredient(dragItem.id));
+  };
+
+  const [{ isHover }, dropTarget] = useDrop<
+    IDragObject,
+    unknown,
+    { isHover: boolean }
+  >({
     accept: "ingredient",
     drop(item) {
-      onDropHandler(item);
+      handleDrop(item);
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
