@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPasswordAction } from "../services/actions/forgot-password";
 
-export default function ForgotPasswordPage() {
+export default function ForgotPasswordPage(): JSX.Element {
   const [email, setEmail] = useState("");
   const emailInputRef = useRef(null);
   const dispatch = useDispatch();

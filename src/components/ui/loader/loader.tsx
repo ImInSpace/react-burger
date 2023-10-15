@@ -8,7 +8,7 @@ const loaderSizes = {
 };
 
 interface ILoaderProps {
-  size: number;
+  size: "small" | "medium" | "large";
   inverse: boolean;
 }
 
@@ -22,3 +22,5 @@ function Loader({ size, inverse = false }: ILoaderProps): JSX.Element {
     </div>
   );
 }
+
+export { Loader };

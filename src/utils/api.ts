@@ -1,15 +1,16 @@
 import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
+import { IRegistrationFormSend } from "./api-shape";
 
 // Проверка запроса.
-const checkResponse = (response) => {
+const checkResponse = (response: Response): Promise<any> => {
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
 };
 
 // Проверка на 'success'.
-const checkSuccess = (res) => {
+const checkSuccess = (res: Promise<any> & { success: boolean }) => {
   if (res && res.success) {
     return res;
   }
@@ -18,17 +19,17 @@ const checkSuccess = (res) => {
 };
 
 // Обёртка, для каждого отправляемого запроса.
-function request(endpoint, options) {
+function request(endpoint: string, options?: RequestInit) {
   return fetch(Constants.BASE_URL + endpoint, options)
     .then(checkResponse)
     .then(checkSuccess);
 }
 
-function getIngredients() {
+function getIngredients(): Promise<IIngredientDataShape> {
   return request(Constants.INGREDIENTS_URL);
 }
 
-function createOrder(ids) {
+function createOrder(ids: Array<string>) {
   return request(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
@@ -39,7 +40,7 @@ function createOrder(ids) {
   });
 }
 
-function registerUser(registrationData) {
+function registerUser(registrationData: IRegistrationFormSend) {
   return request(Constants.REGISTER_URL, {
     method: "POST",
     headers: {
@@ -49,7 +50,7 @@ function registerUser(registrationData) {
   });
 }
 
-function forgotPasswordPOST(email) {
+function forgotPasswordPOST(email: string) {
   return request(Constants.FORGET_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -84,7 +85,7 @@ const login = async (form) => {
   });
 };
 
-const logout = async (refreshToken) => {
+const logout = async (refreshToken: string) => {
   return request(Constants.LOGOUT_URL, {
     method: "POST",
     mode: "cors",

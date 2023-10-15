@@ -3,11 +3,12 @@ import {
   REMOVE_INGREDIENT,
   REORDER_INGREDIENTS,
 } from "../../../services/actions/ingredients";
-import PropTypes from "prop-types";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./ingredient.module.css";
-import { IIngredientDataShape } from "../../../utils/prop-types";
+import { ConstructorRow } from "../constructor-row/constructor-row";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { IIngredientDataShape } from "../../../utils/api-shape";
 
 interface IIngredient {
   ingredientInfo: IIngredientDataShape;
@@ -22,7 +23,7 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
     dispatch({ type: REORDER_INGREDIENTS, hoverIndex, dragIndex });
   }
 
-  const [{ handlerId }, drop] = useDrop({
+  const [, drop] = useDrop<IDragObject, unknown>({
     accept: "constructor-row",
     collect(monitor) {
       return {
@@ -48,7 +49,7 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
       // Determine mouse position
       const clientOffset = monitor.getClientOffset();
       // Get pixels to the top
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      const hoverClientY = clientOffset!.y - hoverBoundingRect.top;
       // Only perform the move when the mouse has crossed half of the items height
       // When dragging downwards, only move when the cursor is below 50%
       // When dragging upwards, only move when the cursor is above 50%
@@ -71,15 +72,26 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
     },
   });
 
-  const [{ isDragging }, drag] = useDrag({
-    type: "constructor-row",
-    item: () => {
-      return { id: ingredientInfo._id, index };
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-    }),
-  });
+  interface IDragObject {
+    id: string;
+    index: number;
+  }
+
+  interface ICollectedProps {
+    isDragging: boolean;
+  }
+
+  const [{ isDragging }, drag] = useDrag<IDragObject, unknown, ICollectedProps>(
+    {
+      type: "constructor-row",
+      item: () => {
+        return { id: ingredientInfo._id, index };
+      },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+    }
+  );
 
   drag(drop(draggableRowRef));
 
@@ -98,10 +110,5 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
     </div>
   );
 }
-
-Ingredient.propTypes = {
-  ingredientInfo: ingredientDataShape.isRequired,
-  index: PropTypes.number.isRequired,
-};
 
 export { Ingredient };

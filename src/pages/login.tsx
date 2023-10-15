@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { loginActionGen } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
 
-export default function LoginPage() {
+export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 

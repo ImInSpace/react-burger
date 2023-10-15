@@ -1,6 +1,6 @@
 import styles from "./not-found404.module.css";
 
-export default function NotFound404Page() {
+export default function NotFound404Page(): JSX.Element {
   return (
     <>
       <h1 className={styles.text}>¯\_(ツ)_/¯</h1>

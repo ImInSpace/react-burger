@@ -4,7 +4,7 @@ import { Price } from "../../common/price/price";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderAction } from "../../../services/actions/order";
 import { useNavigate } from "react-router-dom";
-import { IIngredientDataShape } from "../../../utils/prop-types";
+import { IIngredientDataShape } from "../../../utils/api-shape";
 
 function CreateOrder(): JSX.Element {
   const navigate = useNavigate();

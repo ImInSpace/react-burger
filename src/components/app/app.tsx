@@ -10,7 +10,7 @@ import { RouteWrapper } from "../route-wrapper/route-wrapper";
 import OrderHistoryPage from "../../pages/order-history";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useLocation } from "react-router-dom";
-import IngredientModal from "../ui/ingredient-modal";
+import IngredientModal from "../ui/ingredient-modal/ingredient-modal";
 import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";

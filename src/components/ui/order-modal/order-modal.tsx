@@ -11,7 +11,7 @@ export default function OrderModal(): JSX.Element {
   };
 
   return (
-    <Modal closeHandler={onClose}>
+    <Modal caption="" closeHandler={onClose}>
       <OrderDetails />
     </Modal>
   );

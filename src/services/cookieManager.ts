@@ -1,15 +1,14 @@
-export function getCookie(name: string) {
+export function getCookie(name: string): string | undefined {
   const matches = document.cookie.match(
     new RegExp(
-      "(?:^|; )" +
-        name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, "\\$1") +
-        "=([^;]*)"
+      "(?:^|; )" + name.replace(/([.$?*|{}()[\]\\/+^])/g, "\\$1") + "=([^;]*)"
     )
   );
   return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function setCookie(name, value, options) {
+export function setCookie(name: string, value: string, options?: any): void {
+  options.path = "/";
   options = {
     path: "/",
     ...options,
@@ -36,7 +35,7 @@ export function setCookie(name, value, options) {
   document.cookie = updatedCookie;
 }
 
-export function deleteCookie(name) {
+export function deleteCookie(name: string): void {
   setCookie(name, "", {
     "max-age": -1,
   });

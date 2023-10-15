@@ -1,12 +1,12 @@
 import styles from "./profile.module.css";
-import { EditProfile } from "../components/profile/edit-profile";
+import { EditProfile } from "../components/profile/edit-profile/edit-profile";
 import { useState } from "react";
-import { MenuItem } from "../components/profile/menu-item";
+import { MenuItem } from "../components/profile/menu-item/menu-item";
 import { useDispatch } from "react-redux";
 import { logoutActionGen } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
 
-export default function Profile() {
+export default function Profile(): JSX.Element {
   const dispatch = useDispatch();
 
   const initialState = [true, false, false];

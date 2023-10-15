@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-import { ingredientDataShape } from "../../../utils/prop-types";
 import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -28,10 +26,5 @@ function Bun({ bunInfo, bunPosition }: IBunProps): JSX.Element | null {
     </ConstructorRow>
   );
 }
-
-Bun.propTypes = {
-  bunInfo: ingredientDataShape,
-  bunPosition: PropTypes.oneOf(["top", "bottom"]).isRequired,
-};
 
 export { Bun };

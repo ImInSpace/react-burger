@@ -7,7 +7,7 @@ import { ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components"
 import { Link } from "react-router-dom";
 import * as Constants from "../../constants";
 
-function AppHeader() {
+function AppHeader(): JSX.Element {
   return (
     <div className={styles.header}>
       <div className={styles.container}>
@@ -15,12 +15,12 @@ function AppHeader() {
           <MenuItem
             url="/"
             text={Constants.HEADER_MENU_CONSTRUCTOR}
-            icon={<BurgerIcon />}
+            icon={<BurgerIcon type="primary" />}
           />
           <MenuItem
             url="/order-ribbon"
             text={Constants.HEADER_MENU_ORDER_RIBBON}
-            icon={<ListIcon />}
+            icon={<ListIcon type="primary" />}
           />
         </div>
         <div className={styles.logo}>
@@ -32,7 +32,7 @@ function AppHeader() {
           <MenuItem
             url="/profile"
             text={Constants.HEADER_MENU_PROFILE}
-            icon={<ProfileIcon />}
+            icon={<ProfileIcon type="primary" />}
           />
         </div>
       </div>

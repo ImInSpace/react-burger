@@ -12,7 +12,7 @@ import { useForm } from "../../../hooks/useForm";
 
 function EditProfile() {
   // @ts-ignore
-  const savedUserName = useSelector((store) => store.auth.name);
+  const savedUserName = useSelector<string>((store) => store.auth.name);
   // @ts-ignore
   const savedEmail = useSelector((store) => store.auth.email);
 
@@ -28,16 +28,22 @@ function EditProfile() {
     getUser().then((userInfo) => {
       setValues({
         ...values,
-        ["name"]: userInfo.user.name,
-        ["email"]: userInfo.user.email,
+        name: userInfo.user.name,
+        email: userInfo.user.email,
       });
     });
-  }, []);
+  }, [setValues, values]);
+
+  interface IPatchObj {
+    name?: string;
+    email?: string;
+    password?: string;
+  }
 
   const updateUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const patchObj = {
+    const patchObj: IPatchObj = {
       name: values["name"],
       email: values["email"],
     };
@@ -53,9 +59,9 @@ function EditProfile() {
   const cancelChanges = () => {
     setValues({
       ...values,
-      ["name"]: savedUserName,
-      ["email"]: savedEmail,
-      ["password"]: "",
+      name: savedUserName,
+      email: savedEmail,
+      password: "",
     });
   };
 

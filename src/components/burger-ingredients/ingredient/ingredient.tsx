@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
-import { IIngredientDataShape } from "../../../utils/prop-types";
+import { IIngredientDataShape } from "../../../utils/api-shape";
 
 interface IIngredientProps {
   ingredientInfo: IIngredientDataShape;
@@ -56,7 +56,7 @@ function Ingredient({ ingredientInfo }: IIngredientProps): JSX.Element {
           />
         </div>
         <div className={styles.costRow}>
-          <Price price={ingredientInfo.price} className={styles.costRow} />
+          <Price price={ingredientInfo.price} textSize="default" />
         </div>
         <div className={styles.description}>
           <p className="text text_type_main-default">{ingredientInfo.name}</p>
@@ -67,7 +67,3 @@ function Ingredient({ ingredientInfo }: IIngredientProps): JSX.Element {
 }
 
 export { Ingredient };
-
-Ingredient.propTypes = {
-  ingredientInfo: ingredientDataShape.isRequired,
-};

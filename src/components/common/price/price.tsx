@@ -6,7 +6,7 @@ interface IPriceProps {
   textSize: "default" | "medium" | "large";
 }
 
-function Price({ price, textSize = "default" }: IPriceProps): JSX.Element {
+function Price({ price, textSize }: IPriceProps): JSX.Element {
   return (
     <div className={styles.costRow}>
       <span className={"text text_type_digits-" + textSize}>{price}</span>

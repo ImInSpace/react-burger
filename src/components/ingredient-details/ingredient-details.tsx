@@ -1,4 +1,4 @@
-import { IIngredientDataShape } from "../../utils/prop-types";
+import { IIngredientDataShape } from "../../utils/api-shape";
 import styles from "./ingredient-details.module.css";
 import { IngredientImage } from "./ingredient-image/ingredient-image";
 import { IngredientTitle } from "./ingredient-title/ingredient-title";

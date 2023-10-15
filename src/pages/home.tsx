@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { addIngredient } from "../services/actions/ingredients";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import OrderModal from "../components/ui/order-modal";
+import OrderModal from "../components/ui/order-modal/order-modal";
 
-export default function HomePage() {
+export default function HomePage(): JSX.Element {
   const dispatch = useDispatch();
 
   const isCreateOrderModalShown = useSelector(
+    // @ts-ignore
     (store) => store.order.isModalShown
   );
 
+  // ToDo: После рефакторинга перенести обработчик в BurgerConstructor.
   const handleDrop = (dragItem) => {
     dispatch(addIngredient(dragItem.id));
   };
