@@ -9,6 +9,7 @@ import styles from "./edit-profile.module.css";
 import { getUser, patchUser } from "../../../utils/api";
 import { useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
+import { IPatchForm } from "../../../utils/api-shape";
 
 function EditProfile() {
   // @ts-ignore
@@ -34,16 +35,10 @@ function EditProfile() {
     });
   }, [setValues, values]);
 
-  interface IPatchObj {
-    name?: string;
-    email?: string;
-    password?: string;
-  }
-
   const updateUser = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const patchObj: IPatchObj = {
+    const patchObj: IPatchForm = {
       name: values["name"],
       email: values["email"],
     };

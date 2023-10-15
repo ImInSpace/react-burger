@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginActionGen } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
+import { ILoginForm } from "../utils/api-shape";
 
 export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function LoginPage(): JSX.Element {
   const login = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
-    const loginForm = {
+    const loginForm: ILoginForm = {
       email: email,
       password: password,
     };

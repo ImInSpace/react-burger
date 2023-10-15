@@ -1,6 +1,12 @@
 import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
-import { IRegistrationFormSend } from "./api-shape";
+import {
+  IIngredientDataShape,
+  ILoginForm,
+  IPatchForm,
+  IRegistrationFormSend,
+  IResetPasswordForm,
+} from "./api-shape";
 
 // Проверка запроса.
 const checkResponse = (response: Response): Promise<any> => {
@@ -10,16 +16,16 @@ const checkResponse = (response: Response): Promise<any> => {
 };
 
 // Проверка на 'success'.
-const checkSuccess = (res: Promise<any> & { success: boolean }) => {
-  if (res && res.success) {
-    return res;
+const checkSuccess = (response: Promise<any> & { success: boolean }) => {
+  if (response && response.success) {
+    return response;
   }
 
-  return Promise.reject(`Ответ не success: ${res}`);
+  return Promise.reject(`Ответ не success: ${response}`);
 };
 
 // Обёртка, для каждого отправляемого запроса.
-function request(endpoint: string, options?: RequestInit) {
+function request(endpoint: string, options?: RequestInit | undefined) {
   return fetch(Constants.BASE_URL + endpoint, options)
     .then(checkResponse)
     .then(checkSuccess);
@@ -60,17 +66,17 @@ function forgotPasswordPOST(email: string) {
   });
 }
 
-function resetPassword(password, token) {
+function resetPassword(resetPasswordForm: IResetPasswordForm) {
   return request(Constants.RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify({ password: password, token: token }),
+    body: JSON.stringify(resetPasswordForm),
   });
 }
 
-const login = async (form) => {
+const login = async (loginForm: ILoginForm) => {
   return request(Constants.LOGIN_URL, {
     method: "POST",
     mode: "cors",
@@ -81,7 +87,7 @@ const login = async (form) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify(form),
+    body: JSON.stringify(loginForm),
   });
 };
 
@@ -100,7 +106,7 @@ const logout = async (refreshToken: string) => {
   });
 };
 
-const patchUserRequest = (patchForm) => {
+const patchUserRequest = (patchForm: IPatchForm) => {
   return request(Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
@@ -116,7 +122,7 @@ const patchUserRequest = (patchForm) => {
   });
 };
 
-const patchUser = (patchForm) => {
+const patchUser = (patchForm: IPatchForm) => {
   return patchUserRequest(patchForm)
     .then((json) => {
       return json;

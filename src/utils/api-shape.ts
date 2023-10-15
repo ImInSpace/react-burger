@@ -23,3 +23,19 @@ export interface IRegistrationFormSend {
   password: string;
   name: string;
 }
+
+export interface IResetPasswordForm {
+  password: string;
+  token: string;
+}
+
+export interface ILoginForm {
+  email: string;
+  password: string;
+}
+
+export interface IPatchForm {
+  name?: string;
+  email?: string;
+  password?: string;
+}

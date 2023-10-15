@@ -31,10 +31,10 @@ export function getUserActionGen(token) {
   };
 }
 
-export function loginActionGen(form) {
+export function loginActionGen(loginForm) {
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
-    login(form)
+    login(loginForm)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,

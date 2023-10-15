@@ -4,10 +4,10 @@ export const PASSWORD_RESET_REQUEST = "PASSWORD_RESET_REQUEST";
 export const PASSWORD_RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
 export const PASSWORD_RESET_FAILED = "PASSWORD_RESET_FAILED";
 
-export function resetPasswordAction(password, token, redirectHook) {
+export function resetPasswordAction(resetPasswordForm, redirectHook) {
   return function (dispatch) {
     dispatch({ type: PASSWORD_RESET_REQUEST });
-    resetPassword(password, token, redirectHook)
+    resetPassword(resetPasswordForm)
       .then((res) => {
         redirectHook("/login");
         dispatch({
