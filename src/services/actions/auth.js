@@ -36,7 +36,6 @@ export function loginActionGen(loginForm) {
     dispatch({ type: LOGIN_REQUEST });
     login(loginForm)
       .then((res) => {
-        console.log("login action: ", res);
         dispatch({
           type: LOGIN_SUCCESS,
           payload: {

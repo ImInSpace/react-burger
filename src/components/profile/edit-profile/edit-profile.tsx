@@ -26,7 +26,6 @@ function EditProfile() {
   });
 
   useEffect(() => {
-    console.log("use effect edit-profile");
     getUser().then((userInfo) => {
       setValues({
         ...values,
@@ -34,7 +33,7 @@ function EditProfile() {
         email: userInfo.user.email,
       });
     });
-  }, [setValues, values]);
+  }, []);
 
   const updateUser = (e: React.SyntheticEvent) => {
     e.preventDefault();

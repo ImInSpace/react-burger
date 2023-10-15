@@ -10,7 +10,6 @@ import {
 
 // Проверка запроса.
 const checkResponse = (response: Response) => {
-  console.error("response: ", response);
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
@@ -18,7 +17,6 @@ const checkResponse = (response: Response) => {
 
 // Проверка на 'success'.
 const checkSuccess = (response: Promise<any> & { success: boolean }) => {
-  console.log("check success: ", response);
   if (response && response.success) {
     return response;
   }

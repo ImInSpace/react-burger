@@ -31,12 +31,8 @@ const authReducer = (state = initialState, action) => {
       return { ...state, request: true };
     }
     case LOGIN_SUCCESS: {
-      console.log("login success (reducer)1");
-
       setCookie("token", action.payload.accessToken);
       setCookie("refreshToken", action.payload.refreshToken);
-
-      console.log("login success (reducer)2");
 
       return {
         ...state,
