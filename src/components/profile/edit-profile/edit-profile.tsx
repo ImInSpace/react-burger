@@ -26,6 +26,7 @@ function EditProfile() {
   });
 
   useEffect(() => {
+    console.log("use effect edit-profile");
     getUser().then((userInfo) => {
       setValues({
         ...values,

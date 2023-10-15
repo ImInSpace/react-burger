@@ -8,7 +8,6 @@ export function getCookie(name: string): string | undefined {
 }
 
 export function setCookie(name: string, value: string, options?: any): void {
-  options.path = "/";
   options = {
     path: "/",
     ...options,

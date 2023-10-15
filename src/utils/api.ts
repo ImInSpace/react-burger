@@ -9,7 +9,8 @@ import {
 } from "./api-shape";
 
 // Проверка запроса.
-const checkResponse = (response: Response): Promise<any> => {
+const checkResponse = (response: Response) => {
+  console.error("response: ", response);
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
@@ -17,6 +18,7 @@ const checkResponse = (response: Response): Promise<any> => {
 
 // Проверка на 'success'.
 const checkSuccess = (response: Promise<any> & { success: boolean }) => {
+  console.log("check success: ", response);
   if (response && response.success) {
     return response;
   }
@@ -35,13 +37,17 @@ function getIngredients(): Promise<IIngredientDataShape> {
   return request(Constants.INGREDIENTS_URL);
 }
 
+const requestHeaders: HeadersInit = new Headers();
+requestHeaders.set("Content-Type", "application/json");
+requestHeaders.set("Authorization", getCookie("token")!);
+
 function createOrder(ids: Array<string>) {
   return request(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
       Authorization: getCookie("token"),
-    },
+    } as HeadersInit,
     body: JSON.stringify({ ingredients: ids }),
   });
 }
@@ -115,7 +121,7 @@ const patchUserRequest = (patchForm: IPatchForm) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: getCookie("token"),
-    },
+    } as HeadersInit,
     redirect: "follow",
     referrerPolicy: "no-referrer",
     body: JSON.stringify(patchForm),
@@ -166,7 +172,7 @@ const getUserRequest = async () => {
     headers: {
       "Content-Type": "application/json",
       Authorization: getCookie("token"),
-    },
+    } as HeadersInit,
     redirect: "follow",
     referrerPolicy: "no-referrer",
   });
