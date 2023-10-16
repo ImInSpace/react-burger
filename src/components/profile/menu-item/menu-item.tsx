@@ -1,0 +1,38 @@
+import styles from "./menu-item.module.css";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import cn from "classnames";
+
+interface IMenuItemProps {
+  link: string;
+  isActive: boolean;
+  caption: string;
+  onClickHandler: () => void;
+}
+
+function MenuItem(props: IMenuItemProps) {
+  const { link, isActive, caption, onClickHandler } = props;
+
+  return (
+    <div className={styles.menuCell} onClick={onClickHandler}>
+      <Link to={link} className={styles.link}>
+        <p
+          className={cn(
+            "text text_type_main-medium ",
+            isActive ? "" : "text_color_inactive"
+          )}
+        >
+          {caption}
+        </p>
+      </Link>
+    </div>
+  );
+}
+
+MenuItem.propTypes = {
+  link: PropTypes.string.isRequired,
+  caption: PropTypes.string.isRequired,
+  isActive: PropTypes.bool.isRequired,
+};
+
+export { MenuItem };
