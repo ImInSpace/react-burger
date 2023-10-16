@@ -20,7 +20,6 @@ const registerReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: true,
-        message: action.message,
       };
     }
     case REGISTER_FAILED: {

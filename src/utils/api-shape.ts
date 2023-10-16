@@ -24,6 +24,13 @@ export interface IRegistrationRequestForm {
   name: string;
 }
 
+export interface IRefreshTokenRequest extends IToken {}
+
+export interface IRefreshTokenResponse extends IResponseResult {
+  accessToken: string;
+  refreshToken: string;
+}
+
 export interface IRegistrationResponseForm extends IResponseResult {
   user: IUser;
   accessToken: string;
@@ -98,12 +105,16 @@ export interface IForgotPasswordResponseBody
 export interface IResetPasswordResponseBody extends IResponseResult, IMessage {}
 
 export interface ILoginResponseBody extends IResponseResult {
+  accessToken: string;
+  refreshToken: string;
   user: IUser;
 }
 
-export interface ILogoutRequestBody {
+interface IToken {
   token: string;
 }
+
+export interface ILogoutRequestBody extends IToken {}
 
 export interface IUpdateTokenRequestBody {
   token: string;
@@ -119,3 +130,5 @@ export interface ILogoutResponseBody extends IResponseResult, IMessage {}
 export interface IGetUserResponseBody extends IResponseResult {
   user: IUser;
 }
+
+interface IGetUserRequest extends IToken {}

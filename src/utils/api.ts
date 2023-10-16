@@ -14,6 +14,7 @@ import {
   ILogoutResponseBody,
   IPatchBodyResponse,
   IPatchForm,
+  IRefreshTokenRequest,
   IRegistrationRequestForm,
   IRegistrationResponseForm,
   IResetPasswordForm,
@@ -131,7 +132,10 @@ const patchUser = (patchForm: IPatchForm) => {
     })
     .catch((json) => {
       if (!json.success && json.message === "jwt expired") {
-        return updateToken().then((json) => {
+        const refreshTokenBody: IRefreshTokenRequest = {
+          token: getCookie("refreshToken")!,
+        };
+        return updateToken(refreshTokenBody).then((json) => {
           if (json.success) {
             setCookie("token", json.accessToken);
             setCookie("refreshToken", json.refreshToken);
@@ -144,7 +148,9 @@ const patchUser = (patchForm: IPatchForm) => {
     });
 };
 
-const updateToken = (): Promise<IUpdateTokenResponseBody> => {
+export const updateToken = (
+  body: IRefreshTokenRequest | undefined
+): Promise<IUpdateTokenResponseBody> => {
   return request(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
@@ -155,7 +161,7 @@ const updateToken = (): Promise<IUpdateTokenResponseBody> => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify({ token: getCookie("refreshToken") }),
+    body: body ? JSON.stringify(body) : getCookie("refreshToken"),
   });
 };
 
@@ -181,7 +187,10 @@ const getUser = async () => {
     })
     .catch((json) => {
       if (!json.success && json.message === "jwt expired") {
-        return updateToken().then((json) => {
+        const refreshTokenBody: IRefreshTokenRequest = {
+          token: getCookie("refreshToken")!,
+        };
+        return updateToken(refreshTokenBody).then((json) => {
           if (json.success) {
             setCookie("token", json.accessToken);
             setCookie("refreshToken", json.refreshToken);

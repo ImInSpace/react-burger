@@ -14,6 +14,7 @@ export const CLOSE_INGREDIENTS_DETAILS = "CLOSE_INGREDIENTS_DETAILS"; // prettie
 export const REORDER_INGREDIENTS = "REORDER_INGREDIENTS";
 
 export function loadIngredients() {
+  // @ts-ignore
   return function (dispatch) {
     dispatch({ type: GET_INGREDIENTS_REQUEST });
     getIngredients()
@@ -26,6 +27,7 @@ export function loadIngredients() {
         });
       })
       .catch((err) => {
+        // @ts-ignore
         dispatch({
           type: GET_INGREDIENTS_FAILED,
           payload: {
@@ -36,7 +38,7 @@ export function loadIngredients() {
   };
 }
 
-export const addIngredient = (ingredientId) => ({
+export const addIngredient = (ingredientId: string) => ({
   type: ADD_INGREDIENT,
   id: ingredientId,
   key: uuid(),

@@ -1,4 +1,5 @@
 import { getUser, login, logout } from "../../utils/api";
+import { ILoginForm, ILogoutRequestBody } from "../../utils/api-shape";
 
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -14,16 +15,17 @@ export const LOGOUT_FAILED = "LOGOUT_FAILED";
 
 export const RESET_USER = "RESET_USER";
 
-export function getUserActionGen(token) {
+export function getUserActionGen() {
+  // @ts-ignore
   return function (dispatch) {
     dispatch({ type: GET_USER_REQUEST });
-    getUser(token)
+    getUser()
       .then((res) => {
         dispatch({
           type: GET_USER_SUCCESS,
           payload: {
-            email: res.user.email,
-            name: res.user.name,
+            email: res!.user.email,
+            name: res!.user.name,
           },
         });
       })
@@ -31,7 +33,8 @@ export function getUserActionGen(token) {
   };
 }
 
-export function loginActionGen(loginForm) {
+export function loginActionGen(loginForm: ILoginForm) {
+  // @ts-ignore
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
     login(loginForm)
@@ -50,7 +53,8 @@ export function loginActionGen(loginForm) {
   };
 }
 
-export function logoutActionGen(logoutBody) {
+export function logoutActionGen(logoutBody: ILogoutRequestBody) {
+  // @ts-ignore
   return function (dispatch) {
     dispatch({ type: LOGOUT_REQUEST });
     logout(logoutBody)

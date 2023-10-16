@@ -20,7 +20,7 @@ function RouteWrapper({
 
   useEffect(() => {
     // @ts-ignore
-    dispatch(getUserActionGen(getCookie("token")));
+    dispatch(getUserActionGen());
   }, [dispatch]);
 
   const { getUserRequest, getUserError, email } = useSelector(
