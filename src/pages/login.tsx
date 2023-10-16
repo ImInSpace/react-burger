@@ -20,7 +20,7 @@ export default function LoginPage(): JSX.Element {
 
   const [password, setPassword] = useState("");
 
-  const login = (e: React.SyntheticEvent) => {
+  const login = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const loginForm: ILoginForm = {

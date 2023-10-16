@@ -16,7 +16,7 @@ export default function ForgotPasswordPage(): JSX.Element {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const restorePassword = (e: React.SyntheticEvent) => {
+  const restorePassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const forgotPasswordBody: IForgotPasswordRequestBody = {

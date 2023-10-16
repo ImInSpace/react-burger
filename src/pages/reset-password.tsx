@@ -20,7 +20,7 @@ export default function ResetPasswordPage(): JSX.Element {
   const [codeFromEmail, setCodeFromEmail] = useState<string>("");
   const codeFromEmailInputRef = useRef(null);
 
-  const resetPassword = (e: SyntheticEvent) => {
+  const resetPassword = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const resetPasswordForm: IResetPasswordForm = {

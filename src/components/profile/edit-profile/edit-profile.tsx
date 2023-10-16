@@ -35,7 +35,7 @@ function EditProfile() {
     });
   }, []);
 
-  const updateUser = (e: React.SyntheticEvent) => {
+  const updateUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const patchObj: IPatchForm = {
@@ -51,7 +51,7 @@ function EditProfile() {
     setIsSaveButtonsShown(false);
   };
 
-  const cancelChanges = () => {
+  const cancelChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues({
       ...values,
       name: savedUserName,
@@ -60,7 +60,7 @@ function EditProfile() {
     });
   };
 
-  const onInputChanged = (e: React.SyntheticEvent<HTMLInputElement>) => {
+  const onInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
     handleChange(e);
     setIsSaveButtonsShown(true);
   };
@@ -99,7 +99,7 @@ function EditProfile() {
             htmlType="button"
             type="secondary"
             size="medium"
-            onClick={cancelChanges}
+            onClick={(e) => cancelChanges}
           >
             Отменить
           </Button>

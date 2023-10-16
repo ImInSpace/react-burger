@@ -22,7 +22,7 @@ export default function RegisterPage(): JSX.Element {
 
   const [password, setPassword] = useState<string>("");
 
-  const registerUser = (e: React.SyntheticEvent) => {
+  const registerUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const registrationData = {
