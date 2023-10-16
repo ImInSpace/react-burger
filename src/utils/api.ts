@@ -1,22 +1,28 @@
 import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
 import {
+  ICreateOrderRequestForm,
+  ICreateOrderResponseForm,
   IIngredientDataShape,
+  IIngredientsResponse,
   ILoginForm,
   IPatchForm,
-  IRegistrationFormSend,
+  IRegistrationRequestForm,
+  IRegistrationResponseForm,
   IResetPasswordForm,
 } from "./api-shape";
 
 // Проверка запроса.
-const checkResponse = (response: Response) => {
+const checkResponse = (response: Response): Promise<any> => {
   return response.ok
     ? response.json()
     : response.json().then((err) => Promise.reject(err));
 };
 
 // Проверка на 'success'.
-const checkSuccess = (response: Promise<any> & { success: boolean }) => {
+const checkSuccess = (
+  response: Promise<any> & { success: boolean }
+): Promise<any> => {
   if (response && response.success) {
     return response;
   }
@@ -31,26 +37,26 @@ function request(endpoint: string, options?: RequestInit | undefined) {
     .then(checkSuccess);
 }
 
-function getIngredients(): Promise<IIngredientDataShape> {
+function getIngredients(): Promise<IIngredientsResponse> {
   return request(Constants.INGREDIENTS_URL);
 }
 
-const requestHeaders: HeadersInit = new Headers();
-requestHeaders.set("Content-Type", "application/json");
-requestHeaders.set("Authorization", getCookie("token")!);
-
-function createOrder(ids: Array<string>) {
+function createOrder(
+  createOrderRequestForm: ICreateOrderRequestForm
+): Promise<ICreateOrderResponseForm> {
   return request(Constants.CREATE_ORDER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Authorization: getCookie("token"),
     } as HeadersInit,
-    body: JSON.stringify({ ingredients: ids }),
+    body: JSON.stringify(createOrderRequestForm),
   });
 }
 
-function registerUser(registrationData: IRegistrationFormSend) {
+function registerUser(
+  registrationData: IRegistrationRequestForm
+): Promise<IRegistrationResponseForm> {
   return request(Constants.REGISTER_URL, {
     method: "POST",
     headers: {

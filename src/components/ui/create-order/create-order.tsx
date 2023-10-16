@@ -4,7 +4,7 @@ import { Price } from "../../common/price/price";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderAction } from "../../../services/actions/order";
 import { useNavigate } from "react-router-dom";
-import { IIngredientDataShape } from "../../../utils/api-shape";
+import { ICreateOrderRequestForm, IIngredientDataShape } from "../../../utils/api-shape";
 
 function CreateOrder(): JSX.Element {
   const navigate = useNavigate();
@@ -30,8 +30,12 @@ function CreateOrder(): JSX.Element {
       (item: IIngredientDataShape) => item._id
     );
 
+    const createOrderForm: ICreateOrderRequestForm = {
+      ingredients: ids,
+    };
+
     // @ts-ignore
-    dispatch(createOrderAction(ids));
+    dispatch(createOrderAction(createOrderForm));
   };
 
   let sum = bun == null ? 0 : bun.price * 2;
