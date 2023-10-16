@@ -174,7 +174,7 @@ const getUserRequest = async (): Promise<IGetUserResponseBody> => {
   });
 };
 
-const getUser = async (): Promise<IGetUserResponseBody> => {
+const getUser = async () => {
   return await getUserRequest()
     .then((json) => {
       return json;

@@ -29,8 +29,8 @@ function EditProfile() {
     getUser().then((response) => {
       setValues({
         ...values,
-        name: response.user.name,
-        email: response.user.email,
+        name: response!.user.name,
+        email: response!.user.email,
       });
     });
   }, []);
