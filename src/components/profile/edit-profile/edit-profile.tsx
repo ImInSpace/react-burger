@@ -26,11 +26,11 @@ function EditProfile() {
   });
 
   useEffect(() => {
-    getUser().then((userInfo) => {
+    getUser().then((response) => {
       setValues({
         ...values,
-        name: userInfo.user.name,
-        email: userInfo.user.email,
+        name: response.user.name,
+        email: response.user.email,
       });
     });
   }, []);

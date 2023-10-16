@@ -5,6 +5,7 @@ import { MenuItem } from "../components/profile/menu-item/menu-item";
 import { useDispatch } from "react-redux";
 import { logoutActionGen } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
+import { ILogoutRequestBody } from "../utils/api-shape";
 
 export default function Profile(): JSX.Element {
   const dispatch = useDispatch();
@@ -23,8 +24,18 @@ export default function Profile(): JSX.Element {
   };
 
   const logout = () => {
+    const refreshToken = getCookie("refreshToken");
+    if (!refreshToken) {
+      console.error("Отсутствует refreshToken");
+      return;
+    }
+
+    const logoutBody: ILogoutRequestBody = {
+      token: refreshToken,
+    };
+
     // @ts-ignore
-    dispatch(logoutActionGen(getCookie("refreshToken")));
+    dispatch(logoutActionGen(logoutBody));
   };
 
   return (

@@ -8,6 +8,7 @@ import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { forgotPasswordAction } from "../services/actions/forgot-password";
+import { IForgotPasswordRequestBody } from "../utils/api-shape";
 
 export default function ForgotPasswordPage(): JSX.Element {
   const [email, setEmail] = useState("");
@@ -17,8 +18,13 @@ export default function ForgotPasswordPage(): JSX.Element {
 
   const restorePassword = (e: React.SyntheticEvent) => {
     e.preventDefault();
+
+    const forgotPasswordBody: IForgotPasswordRequestBody = {
+      email: email,
+    };
+
     //@ts-ignore
-    dispatch(forgotPasswordAction(email, navigate));
+    dispatch(forgotPasswordAction(forgotPasswordBody, navigate));
   };
 
   return (

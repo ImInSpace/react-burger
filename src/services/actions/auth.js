@@ -50,10 +50,10 @@ export function loginActionGen(loginForm) {
   };
 }
 
-export function logoutActionGen(form) {
+export function logoutActionGen(logoutBody) {
   return function (dispatch) {
     dispatch({ type: LOGOUT_REQUEST });
-    logout(form)
+    logout(logoutBody)
       .then((res) => {
         dispatch({
           type: LOGOUT_SUCCESS,

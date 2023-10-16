@@ -1,41 +1,25 @@
+import { request } from "../utils/api-common";
 import * as Constants from "../constants";
 import { getCookie, setCookie } from "../services/cookieManager";
 import {
   ICreateOrderRequestForm,
   ICreateOrderResponseForm,
-  IIngredientDataShape,
+  IForgotPasswordRequestBody,
+  IForgotPasswordResponseBody,
+  IGetUserResponseBody,
   IIngredientsResponse,
   ILoginForm,
+  ILoginResponseBody,
+  ILogoutRequestBody,
+  ILogoutResponseBody,
+  IPatchBodyResponse,
   IPatchForm,
   IRegistrationRequestForm,
   IRegistrationResponseForm,
   IResetPasswordForm,
+  IResetPasswordResponseBody,
+  IUpdateTokenResponseBody,
 } from "./api-shape";
-
-// Проверка запроса.
-const checkResponse = (response: Response): Promise<any> => {
-  return response.ok
-    ? response.json()
-    : response.json().then((err) => Promise.reject(err));
-};
-
-// Проверка на 'success'.
-const checkSuccess = (
-  response: Promise<any> & { success: boolean }
-): Promise<any> => {
-  if (response && response.success) {
-    return response;
-  }
-
-  return Promise.reject(`Ответ не success: ${response}`);
-};
-
-// Обёртка, для каждого отправляемого запроса.
-function request(endpoint: string, options?: RequestInit | undefined) {
-  return fetch(Constants.BASE_URL + endpoint, options)
-    .then(checkResponse)
-    .then(checkSuccess);
-}
 
 function getIngredients(): Promise<IIngredientsResponse> {
   return request(Constants.INGREDIENTS_URL);
@@ -66,17 +50,21 @@ function registerUser(
   });
 }
 
-function forgotPasswordPOST(email: string) {
+function forgotPasswordPOST(
+  forgotPasswordBody: IForgotPasswordRequestBody
+): Promise<IForgotPasswordResponseBody> {
   return request(Constants.FORGET_PASSWORD_URL, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
     },
-    body: JSON.stringify({ email: email }),
+    body: JSON.stringify(forgotPasswordBody),
   });
 }
 
-function resetPassword(resetPasswordForm: IResetPasswordForm) {
+function resetPassword(
+  resetPasswordForm: IResetPasswordForm
+): Promise<IResetPasswordResponseBody> {
   return request(Constants.RESET_PASSWORD_URL, {
     method: "POST",
     headers: {
@@ -86,7 +74,7 @@ function resetPassword(resetPasswordForm: IResetPasswordForm) {
   });
 }
 
-const login = async (loginForm: ILoginForm) => {
+const login = async (loginBody: ILoginForm): Promise<ILoginResponseBody> => {
   return request(Constants.LOGIN_URL, {
     method: "POST",
     mode: "cors",
@@ -97,11 +85,13 @@ const login = async (loginForm: ILoginForm) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify(loginForm),
+    body: JSON.stringify(loginBody),
   });
 };
 
-const logout = async (refreshToken: string) => {
+const logout = async (
+  logoutBody: ILogoutRequestBody
+): Promise<ILogoutResponseBody> => {
   return request(Constants.LOGOUT_URL, {
     method: "POST",
     mode: "cors",
@@ -112,11 +102,13 @@ const logout = async (refreshToken: string) => {
     },
     redirect: "follow",
     referrerPolicy: "no-referrer",
-    body: JSON.stringify({ token: refreshToken }),
+    body: JSON.stringify(logoutBody),
   });
 };
 
-const patchUserRequest = (patchForm: IPatchForm) => {
+const patchUserRequest = (
+  patchForm: IPatchForm
+): Promise<IPatchBodyResponse> => {
   return request(Constants.PATCH_USER_URL, {
     method: "PATCH",
     mode: "cors",
@@ -152,7 +144,7 @@ const patchUser = (patchForm: IPatchForm) => {
     });
 };
 
-const updateToken = () => {
+const updateToken = (): Promise<IUpdateTokenResponseBody> => {
   return request(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
@@ -167,7 +159,7 @@ const updateToken = () => {
   });
 };
 
-const getUserRequest = async () => {
+const getUserRequest = async (): Promise<IGetUserResponseBody> => {
   return request(Constants.GET_USER_URL, {
     method: "GET",
     mode: "cors",
@@ -182,7 +174,7 @@ const getUserRequest = async () => {
   });
 };
 
-const getUser = async () => {
+const getUser = async (): Promise<IGetUserResponseBody> => {
   return await getUserRequest()
     .then((json) => {
       return json;

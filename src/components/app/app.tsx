@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
 import { useEffect } from "react";
 
-function App() {
+function App(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {

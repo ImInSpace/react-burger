@@ -80,3 +80,42 @@ export interface IPatchForm {
   email?: string;
   password?: string;
 }
+
+export interface IPatchBodyResponse extends IResponseResult, IUser {}
+
+export interface IForgotPasswordRequestBody {
+  email: string;
+}
+
+interface IMessage {
+  message: string;
+}
+
+export interface IForgotPasswordResponseBody
+  extends IResponseResult,
+    IMessage {}
+
+export interface IResetPasswordResponseBody extends IResponseResult, IMessage {}
+
+export interface ILoginResponseBody extends IResponseResult {
+  user: IUser;
+}
+
+export interface ILogoutRequestBody {
+  token: string;
+}
+
+export interface IUpdateTokenRequestBody {
+  token: string;
+}
+
+export interface IUpdateTokenResponseBody extends IResponseResult {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export interface ILogoutResponseBody extends IResponseResult, IMessage {}
+
+export interface IGetUserResponseBody extends IResponseResult {
+  user: IUser;
+}
