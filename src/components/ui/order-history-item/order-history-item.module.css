@@ -1,0 +1,48 @@
+.container {
+  display: flex;
+  width: 584px;
+  padding: 24px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+
+  border-radius: 40px;
+  border: 2px dashed var(--interface-accent, #4c4cff);
+  background: var(--interface-modal-bg, #1c1c21);
+
+  /* /card/base */
+  box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.04),
+    0px 0px 2px 0px rgba(0, 0, 0, 0.06), 0px 4px 8px 0px rgba(0, 0, 0, 0.04);
+}
+
+.orderNumberRow {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.number {
+  color: var(--text-primary-light-standart-text, #f2f2f3);
+
+  /* desktop/digits small */
+  font-family: Iceland;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 85.714% */
+}
+
+.time {
+  color: var(--text-dark-grey-secondary-text, #8585ad);
+
+  /* desktop/text */
+  font-family: JetBrains Mono;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 150% */
+}
+
+.ingredients {
+  height: 64px;
+}
