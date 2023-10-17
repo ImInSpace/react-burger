@@ -37,7 +37,7 @@
 
   /* desktop/text */
   font-family: JetBrains Mono;
-  font-size: 16px;
+  font-size: 18px;
   font-style: normal;
   font-weight: 400;
   line-height: 24px; /* 150% */
@@ -51,18 +51,9 @@
   justify-content: space-between;
 }
 
-.ingredientsContainer {
-  display: flex;
-}
 
-.ingredient {
-  width: 64px;
-  height: 64px;
 
-  border-radius: 100px;
-  border: 2px solid var(--button-normal, #801ab2);
-  background: var(--interface-bg, #131316);
-}
+
 
 .ingredientForeground {
   width: 100%;

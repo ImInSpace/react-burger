@@ -3,7 +3,7 @@ import styles from "./price.module.css";
 
 interface IPriceProps {
   price: number;
-  textSize: "default" | "medium" | "large";
+  textSize: "default" | "medium" | "large" | "small";
 }
 
 function Price({ price, textSize }: IPriceProps): JSX.Element {
