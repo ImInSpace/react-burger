@@ -1,3 +1,4 @@
+import { Price } from "../../common/price/price";
 import styles from "./order-history-item.module.css";
 
 function OrderHistoryItem(): JSX.Element {
@@ -12,7 +13,23 @@ function OrderHistoryItem(): JSX.Element {
           Death Star Starship Main бургер
         </p>
       </div>
-      <div className={styles.ingredients}></div>
+      <div className={styles.ingredients}>
+        <div className={styles.ingredientsContainer}>
+          <div className={styles.ingredient}></div>
+          <div className={styles.ingredient}></div>
+          <div className={styles.ingredient}></div>
+          <div className={styles.ingredient}></div>
+          <div className={styles.ingredient}></div>
+          <div className={styles.ingredient}>
+            <div className={styles.ingredientForeground}>
+              <p className={styles.ingredientPlus}>+30000000</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.price}>
+          <Price price={150} textSize="default" />
+        </div>
+      </div>
     </div>
   );
 }
