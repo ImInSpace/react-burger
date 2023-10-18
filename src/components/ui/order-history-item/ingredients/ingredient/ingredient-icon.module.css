@@ -1,0 +1,8 @@
+.ingredient {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 100px;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
+}
