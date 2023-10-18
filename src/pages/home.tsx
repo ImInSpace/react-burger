@@ -13,11 +13,6 @@ export default function HomePage(): JSX.Element {
     (store) => store.order.isModalShown
   );
 
-  // ToDo: После рефакторинга перенести обработчик в BurgerConstructor.
-  /*   const handleDrop = (dragItem) => {
-    dispatch(addIngredient(dragItem.id));
-  }; */
-
   return (
     <div className={styles.app}>
       <DndProvider backend={HTML5Backend}>
