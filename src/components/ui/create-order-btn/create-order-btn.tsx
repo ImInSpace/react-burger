@@ -1,12 +1,15 @@
 import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import styles from "./create-order.module.css";
+import styles from "./create-order-btn.module.css";
 import { Price } from "../../common/price/price";
 import { useSelector, useDispatch } from "react-redux";
 import { createOrderAction } from "../../../services/actions/order";
 import { useNavigate } from "react-router-dom";
-import { ICreateOrderRequestForm, IIngredientDataShape } from "../../../utils/api-shape";
+import {
+  ICreateOrderRequestForm,
+  IIngredientDataShape,
+} from "../../../utils/api-shape";
 
-function CreateOrder(): JSX.Element {
+function CreateOrderBtn(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // @ts-ignore
@@ -60,4 +63,4 @@ function CreateOrder(): JSX.Element {
   );
 }
 
-export { CreateOrder };
+export { CreateOrderBtn };

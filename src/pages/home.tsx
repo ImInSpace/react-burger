@@ -1,7 +1,7 @@
 import styles from "./home.module.css";
 import { BurgerIngredients } from "../components/burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
-import { CreateOrder } from "../components/ui/create-order/create-order";
+import { CreateOrderBtn } from "../components/ui/create-order-btn/create-order-btn";
 import { useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
@@ -27,7 +27,7 @@ export default function HomePage(): JSX.Element {
           </div>
           <div className={styles.halfContainer}>
             <BurgerConstructor />
-            <CreateOrder />
+            <CreateOrderBtn />
           </div>
         </div>
       </DndProvider>
