@@ -1,0 +1,25 @@
+.container {
+  width: 640px;
+  height: 620px;
+
+  margin: 0 auto;
+}
+
+.number {
+  text-align: center;
+}
+
+.status {
+  margin-top: 12px;
+  color: #0cc;
+}
+
+.ingredients {
+  height: 312px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
