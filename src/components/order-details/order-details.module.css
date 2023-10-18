@@ -15,7 +15,10 @@
 }
 
 .ingredients {
-  height: 312px;
+  height: 340px;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 .footer {

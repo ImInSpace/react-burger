@@ -15,7 +15,13 @@ function OrderDetails() {
         Выполнен
       </p>
       <p className="text text_type_main-medium mt-15">Состав:</p>
-      <div className={"mt-6 " + styles.ingredients}>
+      <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
+        <IngredientPrice
+          icon=""
+          ingredientName="Флюоресцентная булка R2-D3"
+          price={200}
+          quantity={2}
+        />
         <IngredientPrice
           icon=""
           ingredientName="Флюоресцентная булка R2-D3"
@@ -46,7 +52,7 @@ function OrderDetails() {
           Вчера, 13:50
         </p>
         <div>
-          <Price price={510} textSize="medium" />
+          <Price price={510} textSize="default" />
         </div>
       </div>
     </div>
