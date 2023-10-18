@@ -7,7 +7,9 @@ interface IOrderHistoryProps {
 
 function OrdersRibbon(): JSX.Element {
   return (
-    <div className={styles.container}>
+    <div className={styles.container + "  custom-scroll pr-2"}>
+      <HistoryItem />
+      <HistoryItem />
       <HistoryItem />
       <HistoryItem />
     </div>

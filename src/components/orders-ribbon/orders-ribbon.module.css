@@ -1,3 +1,6 @@
 .container {
   height: 600px;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
