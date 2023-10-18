@@ -1,0 +1,20 @@
+.container {
+  width: 1240px;
+  margin: 0 auto;
+}
+
+.pageTitle {
+  margin-top: 40px;
+}
+
+.twoColumnsWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 20px;
+}
+
+.halfContainer {
+  width: 600px;
+}

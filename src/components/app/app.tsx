@@ -7,7 +7,6 @@ import ResetPasswordPage from "../../pages/reset-password";
 import Profile from "../../pages/profile";
 import NotFound404Page from "../../pages/not-found404";
 import { RouteWrapper } from "../route-wrapper/route-wrapper";
-import OrderHistoryPage from "../../pages/order-history";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { useLocation } from "react-router-dom";
 import IngredientModal from "../ui/ingredient-modal/ingredient-modal";
@@ -15,6 +14,7 @@ import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loadIngredients } from "../../services/actions/ingredients";
 import { useEffect } from "react";
+import OrdersHistory from "../../pages/orders-history";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -36,6 +36,12 @@ function App(): JSX.Element {
           element={<RouteWrapper isProtected={false} element={<HomePage />} />}
         />
         <Route
+          path="/history"
+          element={
+            <RouteWrapper isProtected={false} element={<OrdersHistory />} />
+          }
+        />
+        <Route
           path="/login"
           element={<RouteWrapper isProtected={false} element={<LoginPage />} />}
         />
@@ -50,9 +56,9 @@ function App(): JSX.Element {
           element={<RouteWrapper isProtected={true} element={<Profile />} />}
         >
           <Route
-            path="/profile/orders"
+            path="/profile/history"
             element={
-              <RouteWrapper isProtected={true} element={<OrderHistoryPage />} />
+              <RouteWrapper isProtected={true} element={<OrdersHistory />} />
             }
           />
         </Route>

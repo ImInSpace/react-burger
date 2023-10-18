@@ -1,8 +1,8 @@
 import { Price } from "../../common/price/price";
 import { Ingredients } from "./ingredients/ingredients";
-import styles from "./order-history-item.module.css";
+import styles from "./history-item.module.css";
 
-function OrderHistoryItem(): JSX.Element {
+function HistoryItem(): JSX.Element {
   return (
     <div className={styles.container}>
       <div className={styles.orderNumberRow}>
@@ -24,4 +24,4 @@ function OrderHistoryItem(): JSX.Element {
   );
 }
 
-export { OrderHistoryItem };
+export { HistoryItem };

@@ -1,0 +1,13 @@
+.total_all_time {
+  margin-top: 60px;
+}
+
+.total_today {
+  margin-top: 60px;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  list-style: none;
+}

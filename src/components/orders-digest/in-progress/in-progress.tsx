@@ -15,10 +15,10 @@ function InProgress({
         <p className="text text_type_main-medium">{headerText}</p>
       </div>
       <div className={styles.orders}>
-        <ul>
+        <ul className={styles.numbers_list}>
           {orderNumbers.map((number) => (
             <li key={number}>
-              <p className="text text_type_main-default text_color_inactive">
+              <p className="text text_type_main-medium text_color_inactive">
                 {number}
               </p>
             </li>

@@ -1,9 +1,7 @@
-.container {
-}
-
-.header {
-}
-
 .orders {
   margin-top: 24px;
+}
+
+.numbers_list {
+  list-style: none;
 }

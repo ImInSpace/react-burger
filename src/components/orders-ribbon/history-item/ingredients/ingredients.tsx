@@ -1,4 +1,4 @@
-import { IngredientIcon } from "./ingredient/ingredient-icon";
+import { IngredientIcon } from "./ingredient-icon/ingredient-icon";
 import styles from "./ingredients.module.css";
 
 interface IIngredientsProps {

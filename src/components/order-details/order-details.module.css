@@ -4,3 +4,8 @@
 
   text-align: center;
 }
+
+.numbers {
+  display: flex;
+  justify-content: space-between;
+}

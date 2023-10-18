@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getUserActionGen } from "../../services/actions/auth";
-import { getCookie } from "../../services/cookieManager";
 import { Loader } from "../ui/loader/loader";
 
 interface IRouterWrapperProps {
