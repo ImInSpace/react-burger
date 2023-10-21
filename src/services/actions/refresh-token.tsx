@@ -1,9 +1,12 @@
 import { updateToken } from "../../utils/api";
 import { IRefreshTokenRequest } from "../../utils/api-shape";
 
-export const REFRESH_TOKEN_REQUEST = "REFRESH_TOKEN_REQUEST";
-export const REFRESH_TOKEN_SUCCESS = "REFRESH_TOKEN_SUCCESS";
-export const REFRESH_TOKEN_FAILED = "REFRESH_TOKEN_SUCCESS";
+export const REFRESH_TOKEN_REQUEST: "REFRESH_TOKEN_REQUEST" =
+  "REFRESH_TOKEN_REQUEST";
+export const REFRESH_TOKEN_SUCCESS: "REFRESH_TOKEN_SUCCESS" =
+  "REFRESH_TOKEN_SUCCESS";
+export const REFRESH_TOKEN_FAILED: "REFRESH_TOKEN_SUCCESS" =
+  "REFRESH_TOKEN_SUCCESS";
 
 export function refreshTokenActionGen(body: IRefreshTokenRequest) {
   // @ts-ignore

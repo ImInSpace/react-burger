@@ -2,9 +2,12 @@ import { NavigateFunction } from "react-router-dom";
 import { resetPassword } from "../../utils/api";
 import { IResetPasswordForm } from "../../utils/api-shape";
 
-export const PASSWORD_RESET_REQUEST = "PASSWORD_RESET_REQUEST";
-export const PASSWORD_RESET_SUCCESS = "PASSWORD_RESET_SUCCESS";
-export const PASSWORD_RESET_FAILED = "PASSWORD_RESET_FAILED";
+export const PASSWORD_RESET_REQUEST: "PASSWORD_RESET_REQUEST" =
+  "PASSWORD_RESET_REQUEST";
+export const PASSWORD_RESET_SUCCESS: "PASSWORD_RESET_SUCCESS" =
+  "PASSWORD_RESET_SUCCESS";
+export const PASSWORD_RESET_FAILED: "PASSWORD_RESET_FAILED" =
+  "PASSWORD_RESET_FAILED";
 
 export function resetPasswordAction(
   resetPasswordForm: IResetPasswordForm,
