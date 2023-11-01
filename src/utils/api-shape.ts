@@ -122,9 +122,12 @@ export interface IUpdateTokenRequestBody {
   token: string;
 }
 
-export interface IUpdateTokenResponseBody extends IResponseResult {
+export interface ITokens {
   accessToken: string;
-  refreshToken: string;
+  refreshToken: string;  
+}
+
+export interface IUpdateTokenResponseBody extends IResponseResult, ITokens {  
 }
 
 export interface ILogoutResponseBody extends IResponseResult, IMessage {}

@@ -1,5 +1,5 @@
-import { updateTokenRequest as updateTokenRequest } from "../../utils/api";
-import { IRefreshTokenRequest } from "../../utils/api-shape";
+import { updateTokenRequest } from "../../utils/api";
+import { IRefreshTokenRequest, ITokens } from "../../utils/api-shape";
 import {
   REFRESH_TOKEN_REQUEST,
   REFRESH_TOKEN_SUCCESS,
@@ -17,8 +17,7 @@ export interface IRefreshTokenFailedAction {
 
 export interface IRefreshTokenSuccessAction {
   readonly type: typeof REFRESH_TOKEN_SUCCESS;
-  readonly tokens: TTokens;
-  readonly foo: string;
+  readonly tokens: ITokens;
 }
 
 export const refreshTokenAction = (): IRefreshTokenAction => ({
@@ -30,11 +29,10 @@ export const refreshTokenFailedAction = (): IRefreshTokenFailedAction => ({
 });
 
 export const refreshTokenSuccessAction = (
-  tokens: TTokens
+  tokens: ITokens
 ): IRefreshTokenSuccessAction => ({
   type: REFRESH_TOKEN_SUCCESS,
   tokens: tokens,
-  foo: "bar",
 });
 
 export function refreshTokenActionGen(body: IRefreshTokenRequest) {

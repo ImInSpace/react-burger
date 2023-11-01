@@ -25,7 +25,7 @@ const refreshTokenReducer = (
       return { ...state, request: true };
     }
     case REFRESH_TOKEN_SUCCESS: {
-      setCookie("token", action.tokens.token);
+      setCookie("token", action.tokens.accessToken);
       setCookie("refreshToken", action.tokens.refreshToken);
       return { ...state, request: false, success: true };
     }

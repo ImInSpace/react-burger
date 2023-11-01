@@ -151,7 +151,7 @@ const patchUser = (patchForm: IPatchForm) => {
 
 export const updateTokenRequest = (
   body: IRefreshTokenRequest | undefined
-): Promise<TTokens> => {
+): Promise<IUpdateTokenResponseBody> => {
   return request(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
