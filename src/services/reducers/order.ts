@@ -12,7 +12,7 @@ type TOrderState = {
   orderRequest: boolean;
   orderRequestError: boolean;
 
-  isModalShown: false;
+  isModalShown: boolean;
 };
 
 const initialOrderState: TOrderState = {
@@ -44,7 +44,7 @@ const orderReducer = (
     case CREATE_ORDER_SUCCESS:
       return {
         ...state,
-        number: action.number,
+        orderNumber: action.orderNumber,
         orderRequest: false,
         orderRequestError: false,
       };

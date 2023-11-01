@@ -1,24 +1,24 @@
+import { TIngredientsActions } from "../actions/ingredients";
 import {
+  ADD_INGREDIENT,
+  CLOSE_INGREDIENTS_DETAILS,
   GET_INGREDIENTS_FAILED,
   GET_INGREDIENTS_REQUEST,
   GET_INGREDIENTS_SUCCESS,
-  ADD_INGREDIENT,
-  REMOVE_INGREDIENT,
   OPEN_INGREDIENTS_DETAILS,
-  CLOSE_INGREDIENTS_DETAILS,
+  REMOVE_INGREDIENT,
   REORDER_INGREDIENTS,
-  TIngredientsActions,
-} from "../actions/ingredients";
-import { TIngredient } from "../types/data";
+} from "../constants";
+import { TConstructorIngredient, TIngredient } from "../types/data";
 
 type TIngredientsState = {
   ingredients: ReadonlyArray<TIngredient>;
-  constructorIngredients: { bun: null; ingredients: [] };
-  selectedIngredient: null;
+  constructorIngredients: TConstructorIngredient;
+  selectedIngredient: TIngredient | null;
 
-  ingredientsRequest: false;
-  ingredientsRequestError: false;
-  ingredientsErrorMsg: "";
+  getIngredientsRequest: boolean;
+  getIngredientsError: boolean;
+  error: "";
 };
 
 const initialIngredientsState: TIngredientsState = {
@@ -26,9 +26,9 @@ const initialIngredientsState: TIngredientsState = {
   constructorIngredients: { bun: null, ingredients: [] },
   selectedIngredient: null,
 
-  ingredientsRequest: false,
-  ingredientsRequestError: false,
-  ingredientsErrorMsg: "",
+  getIngredientsRequest: false,
+  getIngredientsError: false,
+  error: "",
 };
 
 const ingredientsReducer = (
@@ -37,22 +37,21 @@ const ingredientsReducer = (
 ): TIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
-      return { ...state, ingredientsRequest: true };
+      return { ...state, getIngredientsRequest: true };
     }
     case GET_INGREDIENTS_SUCCESS: {
       return {
         ...state,
-        ingredients: action.payload.items,
-        ingredientsRequest: false,
-        ingredientsRequestError: false,
+        ingredients: action.items,
+        getIngredientsRequest: false,
+        getIngredientsError: false,
       };
     }
     case GET_INGREDIENTS_FAILED: {
       return {
         ...initialIngredientsState,
-        ingredientsRequest: false,
-        ingredientsRequestError: true,
-        ingredientsErrorMsg: action.payload.ingredientsErrorMsg,
+        getIngredientsRequest: false,
+        getIngredientsError: true,
       };
     }
     case ADD_INGREDIENT: {
@@ -60,11 +59,11 @@ const ingredientsReducer = (
         (ingredient) => ingredient._id === action.id
       );
 
-      if (ingredient.type === "bun") {
+      if (ingredient!.type === "bun") {
         return {
           ...state,
           constructorIngredients: {
-            bun: ingredient,
+            bun: ingredient!,
             ingredients: [...state.constructorIngredients.ingredients],
           },
         };
@@ -98,12 +97,12 @@ const ingredientsReducer = (
       return {
         ...state,
         selectedIngredient: state.ingredients.find(
-          (ingredient) => ingredient._id === action.id
-        ),
+          (ingredient) => ingredient._id === action.ingredientId
+        )!,
       };
     }
     case CLOSE_INGREDIENTS_DETAILS: {
-      action.payload.navigateHook(-1);
+      action.navigateHook(-1);
 
       return {
         ...state,

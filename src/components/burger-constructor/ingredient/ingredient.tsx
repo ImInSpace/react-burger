@@ -1,8 +1,4 @@
 import { useDispatch } from "react-redux";
-import {
-  REMOVE_INGREDIENT,
-  REORDER_INGREDIENTS,
-} from "../../../services/actions/ingredients";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import styles from "./ingredient.module.css";
@@ -10,6 +6,10 @@ import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { IIngredientDataShape } from "../../../utils/api-shape";
 import { ICollectedProps, IDragObject } from "../../../utils/common-types";
+import {
+  removeIngredientAction,
+  reorderIngredientsAction,
+} from "../../../services/actions/ingredients";
 
 interface IIngredient {
   ingredientInfo: IIngredientDataShape;
@@ -21,7 +21,7 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
   const draggableRowRef = useRef<HTMLDivElement>(null);
 
   function moveRow(dragIndex: number, hoverIndex: number) {
-    dispatch({ type: REORDER_INGREDIENTS, hoverIndex, dragIndex });
+    dispatch(reorderIngredientsAction(hoverIndex, dragIndex));
   }
 
   const [, drop] = useDrop<IDragObject, unknown>({
@@ -92,9 +92,7 @@ function Ingredient({ ingredientInfo, index }: IIngredient): JSX.Element {
           text={ingredientInfo.name}
           price={ingredientInfo.price}
           thumbnail={ingredientInfo.image}
-          handleClose={() =>
-            dispatch({ type: REMOVE_INGREDIENT, index: index })
-          }
+          handleClose={() => dispatch(removeIngredientAction(index))}
         />
       </ConstructorRow>
     </div>

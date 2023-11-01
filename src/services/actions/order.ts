@@ -4,6 +4,7 @@ import {
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
   CREATE_ORDER_FAILED,
+  CLOSE_ORDER_MODAL,
 } from "../constants";
 
 export interface ICreateOrderAction {
@@ -18,6 +19,14 @@ export interface ICreateOrderSuccessAction {
   readonly type: typeof CREATE_ORDER_SUCCESS;
   orderNumber: number;
 }
+
+export interface ICloseOrderModal {
+  readonly type: typeof CLOSE_ORDER_MODAL;
+}
+
+export const closeOrderModalAction = (): ICloseOrderModal => ({
+  type: CLOSE_ORDER_MODAL,
+});
 
 export const createOrderAction = (): ICreateOrderAction => ({
   type: CREATE_ORDER_REQUEST,
@@ -52,4 +61,5 @@ export function createOrderThunk(orderForm: ICreateOrderRequestForm) {
 export type TOrderActions =
   | ICreateOrderAction
   | ICreateOrderFailedAction
-  | ICreateOrderSuccessAction;
+  | ICreateOrderSuccessAction
+  | ICloseOrderModal;

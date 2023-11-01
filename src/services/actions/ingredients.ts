@@ -5,8 +5,14 @@ import {
   GET_INGREDIENTS_SUCCESS,
   GET_INGREDIENTS_FAILED,
   ADD_INGREDIENT,
+  REMOVE_INGREDIENT,
+  OPEN_INGREDIENTS_DETAILS,
+  CLOSE_INGREDIENTS_DETAILS,
+  REORDER_INGREDIENTS,
 } from "../constants";
 import { TIngredient } from "../types/data";
+import { NavigateFunction } from "react-router-dom";
+import { type } from "os";
 
 export interface IGetIngredientsAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
@@ -26,6 +32,57 @@ export interface IAddIngredientAction {
   id: string;
   key: string;
 }
+
+export interface IRemoveIngredientAction {
+  readonly type: typeof REMOVE_INGREDIENT;
+  index: number;
+}
+
+export interface IOpenIngredientsDetailsAction {
+  readonly type: typeof OPEN_INGREDIENTS_DETAILS;
+  ingredientId: string;
+}
+
+export interface ICloseIngredientDetailsAction {
+  readonly type: typeof CLOSE_INGREDIENTS_DETAILS;
+  navigateHook: NavigateFunction;
+}
+
+export interface IReorderIngredientsAction {
+  readonly type: typeof REORDER_INGREDIENTS;
+  hoverIndex: number;
+  dragIndex: number;
+}
+
+export const reorderIngredientsAction = (
+  hoverIndex: number,
+  dragIndex: number
+): IReorderIngredientsAction => ({
+  type: REORDER_INGREDIENTS,
+  hoverIndex,
+  dragIndex,
+});
+
+export const closeIngredientDetailsAction = (
+  hook: NavigateFunction
+): ICloseIngredientDetailsAction => ({
+  type: CLOSE_INGREDIENTS_DETAILS,
+  navigateHook: hook,
+});
+
+export const openIngredientId = (
+  ingredientId: string
+): IOpenIngredientsDetailsAction => ({
+  type: OPEN_INGREDIENTS_DETAILS,
+  ingredientId: ingredientId,
+});
+
+export const removeIngredientAction = (
+  index: number
+): IRemoveIngredientAction => ({
+  type: REMOVE_INGREDIENT,
+  index: index,
+});
 
 export const getIngredientsAction = (): IGetIngredientsAction => ({
   type: GET_INGREDIENTS_REQUEST,
@@ -67,4 +124,8 @@ export type TIngredientsActions =
   | IAddIngredientAction
   | IGetIngredientsAction
   | IGetIngredientsFailedAction
-  | IGetIngredientsSuccessAction;
+  | IGetIngredientsSuccessAction
+  | IRemoveIngredientAction
+  | IOpenIngredientsDetailsAction
+  | ICloseIngredientDetailsAction
+  | IReorderIngredientsAction;
