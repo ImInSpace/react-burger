@@ -3,7 +3,7 @@ import { EditProfile } from "../components/profile/edit-profile/edit-profile";
 import { useState } from "react";
 import { MenuItem } from "../components/profile/menu-item/menu-item";
 import { useDispatch } from "react-redux";
-import { logoutActionGen } from "../services/actions/auth";
+import { logoutThunk } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
 import { ILogoutRequestBody } from "../utils/api-shape";
 
@@ -35,7 +35,7 @@ export default function Profile(): JSX.Element {
     };
 
     // @ts-ignore
-    dispatch(logoutActionGen(logoutBody));
+    dispatch(logoutThunk(logoutBody));
   };
 
   return (

@@ -8,7 +8,7 @@ import {
 import { useState, useRef, SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetPasswordAction } from "../services/actions/reset-password";
+import { resetPasswordThunk } from "../services/actions/reset-password";
 import { IResetPasswordForm } from "../utils/api-shape";
 
 export default function ResetPasswordPage(): JSX.Element {
@@ -29,7 +29,7 @@ export default function ResetPasswordPage(): JSX.Element {
     };
 
     // @ts-ignore
-    dispatch(resetPasswordAction(resetPasswordForm, navigate));
+    dispatch(resetPasswordThunk(resetPasswordForm, navigate));
   };
 
   return (

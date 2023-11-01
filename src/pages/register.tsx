@@ -8,7 +8,7 @@ import {
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerAction } from "../services/actions/register";
+import { registerThunk } from "../services/actions/register";
 
 export default function RegisterPage(): JSX.Element {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ export default function RegisterPage(): JSX.Element {
     };
 
     // @ts-ignore
-    dispatch(registerAction(registrationData, navigate));
+    dispatch(registerThunk(registrationData, navigate));
   };
 
   return (

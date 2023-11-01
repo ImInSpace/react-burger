@@ -1,3 +1,5 @@
+import { TIngredient, TUser } from "../services/types/data";
+
 export interface IIngredientDataShape {
   _id: string;
   name: string;
@@ -15,7 +17,7 @@ export interface IResponseResult {
 }
 
 export interface IIngredientsResponse extends IResponseResult {
-  data: IIngredientDataShape;
+  data: ReadonlyArray<TIngredient>;
 }
 
 export interface IRegistrationRequestForm {
@@ -128,7 +130,7 @@ export interface IUpdateTokenResponseBody extends IResponseResult {
 export interface ILogoutResponseBody extends IResponseResult, IMessage {}
 
 export interface IGetUserResponseBody extends IResponseResult {
-  user: IUser;
+  user: TUser;
 }
 
 interface IGetUserRequest extends IToken {}

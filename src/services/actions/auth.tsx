@@ -1,39 +1,106 @@
-import { getUser, login, logout } from "../../utils/api";
+import { getUser as getUserRequest, login, logout } from "../../utils/api";
 import { ILoginForm, ILogoutRequestBody } from "../../utils/api-shape";
+import {
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  GET_USER_FAILED,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  LOGOUT_FAILED,
+} from "../constants";
+import { TAuth, TUser } from "../types/data";
 
-export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
-export const GET_USER_SUCCESS: "GET_USER_SUCCESS" = "GET_USER_SUCCESS";
-export const GET_USER_FAILED: "GET_USER_FAILED" = "GET_USER_FAILED";
+interface IGetUserAction {
+  readonly type: typeof GET_USER_REQUEST;
+}
 
-export const LOGIN_REQUEST: "LOGIN_REQUEST" = "LOGIN_REQUEST";
-export const LOGIN_SUCCESS: "LOGIN_SUCCESS" = "LOGIN_SUCCESS";
-export const LOGIN_FAILED: "LOGIN_FAILED" = "LOGIN_FAILED";
+interface IGetUserSuccessAction {
+  readonly type: typeof GET_USER_SUCCESS;
+  readonly user: TUser;
+}
 
-export const LOGOUT_REQUEST: "LOGOUT_REQUEST" = "LOGOUT_REQUEST";
-export const LOGOUT_SUCCESS: "LOGOUT_SUCCESS" = "LOGOUT_SUCCESS";
-export const LOGOUT_FAILED: "LOGOUT_FAILED" = "LOGOUT_FAILED";
+interface IGetUserFailedAction {
+  readonly type: typeof GET_USER_FAILED;
+}
 
-export const RESET_USER: "RESET_USER" = "RESET_USER";
+interface ILoginAction {
+  readonly type: typeof LOGIN_REQUEST;
+}
 
-export function getUserActionGen() {
+interface ILoginSuccessAction {
+  readonly type: typeof LOGIN_SUCCESS;
+  readonly auth: TAuth;
+}
+
+interface ILoginFailedAction {
+  readonly type: typeof LOGIN_FAILED;
+}
+
+interface ILogoutAction {
+  readonly type: typeof LOGOUT_REQUEST;
+}
+
+interface ILogoutSuccessAction {
+  readonly type: typeof LOGOUT_SUCCESS;
+}
+
+interface ILogoutFailedAction {
+  readonly type: typeof LOGOUT_FAILED;
+}
+
+// @ts-ignore
+export const getUserAction = (): IGetUserAction => ({ type: GET_USER_REQUEST });
+
+export const getUserFailedAction = (): IGetUserFailedAction => ({
+  type: GET_USER_FAILED,
+});
+
+export const getUserSuccessAction = (user: TUser): IGetUserSuccessAction => ({
+  type: GET_USER_SUCCESS,
+  user: user,
+});
+
+export const loginAction = (): ILoginAction => ({
+  type: LOGIN_REQUEST,
+});
+
+export const loginFailedAction = (): ILoginFailedAction => ({
+  type: LOGIN_FAILED,
+});
+
+export const loginSuccessAction = (authData: TAuth): ILoginSuccessAction => ({
+  type: LOGIN_SUCCESS,
+  auth: authData,
+});
+
+export const logoutAction = (): ILogoutAction => ({
+  type: LOGOUT_REQUEST,
+});
+
+export const logoutFailedAction = (): ILogoutFailedAction => ({
+  type: LOGOUT_FAILED,
+});
+
+export const logoutSuccessAction = (): ILogoutSuccessAction => ({
+  type: LOGOUT_SUCCESS,
+});
+
+export function getUserThunk() {
   // @ts-ignore
   return function (dispatch) {
-    dispatch({ type: GET_USER_REQUEST });
-    getUser()
+    dispatch(getUserAction());
+    getUserRequest()
       .then((res) => {
-        dispatch({
-          type: GET_USER_SUCCESS,
-          payload: {
-            email: res!.user.email,
-            name: res!.user.name,
-          },
-        });
+        dispatch(getUserSuccessAction(res!.user));
       })
-      .catch((err) => dispatch({ type: GET_USER_FAILED, message: err }));
+      .catch((err) => dispatch(getUserFailedAction()));
   };
 }
 
-export function loginActionGen(loginForm: ILoginForm) {
+export function loginThunk(loginForm: ILoginForm) {
   // @ts-ignore
   return function (dispatch) {
     dispatch({ type: LOGIN_REQUEST });
@@ -53,7 +120,7 @@ export function loginActionGen(loginForm: ILoginForm) {
   };
 }
 
-export function logoutActionGen(logoutBody: ILogoutRequestBody) {
+export function logoutThunk(logoutBody: ILogoutRequestBody) {
   // @ts-ignore
   return function (dispatch) {
     dispatch({ type: LOGOUT_REQUEST });
@@ -61,10 +128,10 @@ export function logoutActionGen(logoutBody: ILogoutRequestBody) {
       .then((res) => {
         dispatch({
           type: LOGOUT_SUCCESS,
-          payload: {
-            success: res.success,
-            message: res.message,
-          },
+          // payload: {
+          //   success: res.success,
+          //   message: res.message,
+          // },
         });
       })
       .catch((err) => dispatch({ type: LOGOUT_FAILED, message: err }));

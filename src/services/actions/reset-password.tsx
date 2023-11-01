@@ -1,31 +1,52 @@
 import { NavigateFunction } from "react-router-dom";
 import { resetPassword } from "../../utils/api";
 import { IResetPasswordForm } from "../../utils/api-shape";
+import {
+  PASSWORD_RESET_REQUEST,
+  PASSWORD_RESET_SUCCESS,
+  PASSWORD_RESET_FAILED,
+} from "../constants";
 
-export const PASSWORD_RESET_REQUEST: "PASSWORD_RESET_REQUEST" =
-  "PASSWORD_RESET_REQUEST";
-export const PASSWORD_RESET_SUCCESS: "PASSWORD_RESET_SUCCESS" =
-  "PASSWORD_RESET_SUCCESS";
-export const PASSWORD_RESET_FAILED: "PASSWORD_RESET_FAILED" =
-  "PASSWORD_RESET_FAILED";
+export interface IPasswordReset {
+  readonly type: typeof PASSWORD_RESET_REQUEST;
+}
 
-export function resetPasswordAction(
+export interface IPasswordResetFailed {
+  readonly type: typeof PASSWORD_RESET_FAILED;
+}
+
+export interface IPasswordResetSuccess {
+  readonly type: typeof PASSWORD_RESET_SUCCESS;
+  message: string;
+}
+
+export const passwordResetAction = (): IPasswordReset => ({
+  type: PASSWORD_RESET_REQUEST,
+});
+
+export const passwordResetFailedAction = (): IPasswordResetFailed => ({
+  type: PASSWORD_RESET_FAILED,
+});
+
+export const passwordResetSuccessAction = (
+  message: string
+): IPasswordResetSuccess => ({
+  type: PASSWORD_RESET_SUCCESS,
+  message: message,
+});
+
+export function resetPasswordThunk(
   resetPasswordForm: IResetPasswordForm,
   redirectHook: NavigateFunction
 ) {
   // @ts-ignore
   return function (dispatch) {
-    dispatch({ type: PASSWORD_RESET_REQUEST });
+    dispatch(passwordResetAction());
     resetPassword(resetPasswordForm)
       .then((res) => {
         redirectHook("/login");
-        dispatch({
-          type: PASSWORD_RESET_SUCCESS,
-          payload: { message: res.message },
-        });
+        dispatch(passwordResetSuccessAction(res.message));
       })
-      .catch((err) =>
-        dispatch({ type: PASSWORD_RESET_FAILED, payload: { message: err } })
-      );
+      .catch((err) => dispatch(passwordResetFailedAction()));
   };
 }

@@ -1,26 +1,47 @@
-import { updateToken } from "../../utils/api";
+import { updateToken as updateTokenRequest } from "../../utils/api";
 import { IRefreshTokenRequest } from "../../utils/api-shape";
+import {
+  REFRESH_TOKEN_REQUEST,
+  REFRESH_TOKEN_SUCCESS,
+  REFRESH_TOKEN_FAILED,
+} from "../constants";
+import { TTokens } from "../types/data";
 
-export const REFRESH_TOKEN_REQUEST: "REFRESH_TOKEN_REQUEST" =
-  "REFRESH_TOKEN_REQUEST";
-export const REFRESH_TOKEN_SUCCESS: "REFRESH_TOKEN_SUCCESS" =
-  "REFRESH_TOKEN_SUCCESS";
-export const REFRESH_TOKEN_FAILED: "REFRESH_TOKEN_SUCCESS" =
-  "REFRESH_TOKEN_SUCCESS";
+export interface IRefreshTokenAction {
+  readonly type: typeof REFRESH_TOKEN_REQUEST;
+}
+
+export interface IRefreshTokenFailedAction {
+  readonly type: typeof REFRESH_TOKEN_FAILED;
+}
+
+export interface IRefreshTokenSuccessAction {
+  readonly type: typeof REFRESH_TOKEN_SUCCESS;
+  tokens: TTokens;
+}
+
+export const refreshTokenAction = (): IRefreshTokenAction => ({
+  type: REFRESH_TOKEN_REQUEST,
+});
+
+export const refreshTokenFailedAction = (): IRefreshTokenFailedAction => ({
+  type: REFRESH_TOKEN_FAILED,
+});
+
+export const refreshTokenSuccessAction = (
+  tokens: TTokens
+): IRefreshTokenSuccessAction => ({
+  type: REFRESH_TOKEN_SUCCESS,
+  tokens: tokens,
+});
 
 export function refreshTokenActionGen(body: IRefreshTokenRequest) {
   // @ts-ignore
   return function (dispatch) {
-    dispatch({ type: REFRESH_TOKEN_REQUEST });
-    updateToken(body)
+    dispatch(refreshTokenAction());
+    updateTokenRequest(body)
       .then((response) => {
-        dispatch({
-          type: REFRESH_TOKEN_SUCCESS,
-          payload: {
-            accessToken: response.accessToken,
-            refreshToken: response.refreshToken,
-          },
-        });
+        dispatch(refreshTokenSuccessAction(response));
       })
       .catch((err) => dispatch({ type: REFRESH_TOKEN_FAILED, message: err }));
   };

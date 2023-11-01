@@ -12,7 +12,7 @@ import { useLocation } from "react-router-dom";
 import IngredientModal from "../ui/ingredient-modal/ingredient-modal";
 import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
-import { loadIngredients } from "../../services/actions/ingredients";
+import { loadIngredientsThunk } from "../../services/actions/ingredients";
 import { useEffect } from "react";
 import OrdersHistory from "../../pages/orders-history";
 
@@ -21,7 +21,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     //@ts-ignore
-    dispatch(loadIngredients());
+    dispatch(loadIngredientsThunk());
   }, [dispatch]);
 
   let location = useLocation();

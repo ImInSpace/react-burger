@@ -1,43 +1,52 @@
-import { getIngredients } from "../../utils/api";
+import { getIngredients as getIngredientsRequest } from "../../utils/api";
 import { v4 as uuid } from "uuid";
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED,
+  ADD_INGREDIENT,
+} from "../constants";
+import { TIngredient } from "../types/data";
 
-export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" =
-  "GET_INGREDIENTS_REQUEST";
-export const GET_INGREDIENTS_SUCCESS: "GET_INGREDIENTS_SUCCESS" =
-  "GET_INGREDIENTS_SUCCESS";
-export const GET_INGREDIENTS_FAILED: "GET_INGREDIENTS_FAILED" =
-  "GET_INGREDIENTS_FAILED";
+export interface IGetIngredientsAction {
+  readonly type: typeof GET_INGREDIENTS_REQUEST;
+}
 
-export const ADD_INGREDIENT: "ADD_INGREDIENT" = "ADD_INGREDIENT";
-export const REMOVE_INGREDIENT: "REMOVE_INGREDIENT" = "REMOVE_INGREDIENT";
+export interface IGetIngredientsFailedAction {
+  readonly type: typeof GET_INGREDIENTS_FAILED;
+}
 
-export const OPEN_INGREDIENTS_DETAILS: "OPEN_INGREDIENTS_DETAILS" =
-  "OPEN_INGREDIENTS_DETAILS";
-export const CLOSE_INGREDIENTS_DETAILS: 'CLOSE_INGREDIENTS_DETAILS' = "CLOSE_INGREDIENTS_DETAILS"; // prettier-ignore
+export interface IGetIngredientsSuccessAction {
+  readonly type: typeof GET_INGREDIENTS_SUCCESS;
+  readonly items: ReadonlyArray<TIngredient>;
+}
 
-export const REORDER_INGREDIENTS: "REORDER_INGREDIENTS" = "REORDER_INGREDIENTS";
+export const GetIngredientsAction = (): IGetIngredientsAction => ({
+  type: GET_INGREDIENTS_REQUEST,
+});
 
-export function loadIngredients() {
+export const GetIngredientsFailedAction = (): IGetIngredientsFailedAction => ({
+  type: GET_INGREDIENTS_FAILED,
+});
+
+export const GetIngredientsSuccessAction = (
+  ingredients: ReadonlyArray<TIngredient>
+): IGetIngredientsSuccessAction => ({
+  type: GET_INGREDIENTS_SUCCESS,
+  items: ingredients,
+});
+
+export function loadIngredientsThunk() {
   // @ts-ignore
   return function (dispatch) {
-    dispatch({ type: GET_INGREDIENTS_REQUEST });
-    getIngredients()
+    dispatch(GetIngredientsAction());
+    getIngredientsRequest()
       .then((res) => {
-        dispatch({
-          type: GET_INGREDIENTS_SUCCESS,
-          payload: {
-            items: res.data,
-          },
-        });
+        dispatch(GetIngredientsSuccessAction(res.data));
       })
       .catch((err) => {
         // @ts-ignore
-        dispatch({
-          type: GET_INGREDIENTS_FAILED,
-          payload: {
-            ingredientsErrorMsg: err,
-          },
-        });
+        dispatch(GetIngredientsFailedAction());
       });
   };
 }

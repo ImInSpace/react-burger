@@ -7,7 +7,7 @@ import {
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { forgotPasswordAction } from "../services/actions/forgot-password";
+import { forgotPasswordThunk } from "../services/actions/forgot-password";
 import { IForgotPasswordRequestBody } from "../utils/api-shape";
 
 export default function ForgotPasswordPage(): JSX.Element {
@@ -24,7 +24,7 @@ export default function ForgotPasswordPage(): JSX.Element {
     };
 
     //@ts-ignore
-    dispatch(forgotPasswordAction(forgotPasswordBody, navigate));
+    dispatch(forgotPasswordThunk(forgotPasswordBody, navigate));
   };
 
   return (

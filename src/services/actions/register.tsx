@@ -1,26 +1,50 @@
 import { NavigateFunction } from "react-router-dom";
-import { registerUser } from "../../utils/api";
+import { registerUser as registerUserRequest } from "../../utils/api";
 import { IRegistrationRequestForm } from "../../utils/api-shape";
+import {
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILED,
+} from "../constants";
 
-export const REGISTER_REQUEST: "REGISTER_REQUEST" = "REGISTER_REQUEST";
-export const REGISTER_SUCCESS: "REGISTER_SUCCESS" = "REGISTER_SUCCESS";
-export const REGISTER_FAILED: "REGISTER_FAILED" = "REGISTER_FAILED";
+export interface IRegisterAction {
+  readonly type: typeof REGISTER_REQUEST;
+}
 
-export function registerAction(
+export interface IRegisterFailedAction {
+  readonly type: typeof REGISTER_FAILED;
+}
+
+export interface IRegisterSuccessAction {
+  readonly type: typeof REGISTER_SUCCESS;
+}
+
+export const registerAction = (): IRegisterAction => ({
+  type: REGISTER_REQUEST,
+});
+
+export const registerFailedAction = (): IRegisterFailedAction => ({
+  type: REGISTER_FAILED,
+});
+
+export const registerSuccessAction = (): IRegisterSuccessAction => ({
+  type: REGISTER_SUCCESS,
+});
+
+export function registerThunk(
   registrationData: IRegistrationRequestForm,
   redirectHook: NavigateFunction
 ) {
   // @ts-ignore
   return function (dispatch) {
-    dispatch({ type: REGISTER_REQUEST });
-
-    registerUser(registrationData)
+    dispatch(registerAction());
+    registerUserRequest(registrationData)
       .then((res) => {
         redirectHook("/login");
-        dispatch({ type: REGISTER_SUCCESS });
+        dispatch(registerSuccessAction());
       })
       .catch((err) => {
-        dispatch({ type: REGISTER_FAILED, message: err });
+        dispatch(registerFailedAction());
       });
   };
 }

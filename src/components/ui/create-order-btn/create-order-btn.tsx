@@ -2,7 +2,7 @@ import { Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./create-order-btn.module.css";
 import { Price } from "../../common/price/price";
 import { useSelector, useDispatch } from "react-redux";
-import { createOrderAction } from "../../../services/actions/order";
+import { createOrderThunk } from "../../../services/actions/order";
 import { useNavigate } from "react-router-dom";
 import {
   ICreateOrderRequestForm,
@@ -38,7 +38,7 @@ function CreateOrderBtn(): JSX.Element {
     };
 
     // @ts-ignore
-    dispatch(createOrderAction(createOrderForm));
+    dispatch(createOrderThunk(createOrderForm));
   };
 
   let sum = bun == null ? 0 : bun.price * 2;

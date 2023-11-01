@@ -21,6 +21,7 @@ import {
   IResetPasswordResponseBody,
   IUpdateTokenResponseBody,
 } from "./api-shape";
+import { TTokens } from "../services/types/data";
 
 function getIngredients(): Promise<IIngredientsResponse> {
   return request(Constants.INGREDIENTS_URL);
@@ -150,7 +151,7 @@ const patchUser = (patchForm: IPatchForm) => {
 
 export const updateToken = (
   body: IRefreshTokenRequest | undefined
-): Promise<IUpdateTokenResponseBody> => {
+): Promise<TTokens> => {
   return request(Constants.REFRESH_TOKEN_URL, {
     method: "POST",
     mode: "cors",
