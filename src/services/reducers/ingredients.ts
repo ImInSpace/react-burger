@@ -7,7 +7,19 @@ import {
   OPEN_INGREDIENTS_DETAILS,
   CLOSE_INGREDIENTS_DETAILS,
   REORDER_INGREDIENTS,
+  TIngredientsActions,
 } from "../actions/ingredients";
+import { TIngredient } from "../types/data";
+
+type TIngredientsReducerState = {
+  ingredients: ReadonlyArray<TIngredient>;
+  constructorIngredients: { bun: null; ingredients: [] };
+  selectedIngredient: null;
+
+  ingredientsRequest: false;
+  ingredientsRequestError: false;
+  ingredientsErrorMsg: "";
+};
 
 const initialIngredientsState = {
   ingredients: [],
@@ -19,7 +31,10 @@ const initialIngredientsState = {
   ingredientsErrorMsg: "",
 };
 
-const ingredientsReducer = (state = initialIngredientsState, action) => {
+const ingredientsReducer = (
+  state = initialIngredientsState,
+  action: TIngredientsActions
+) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return { ...state, ingredientsRequest: true };

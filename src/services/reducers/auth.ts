@@ -1,54 +1,76 @@
+import { TAuthActions } from "../actions/auth";
 import {
+  GET_USER_FAILED,
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
-  GET_USER_FAILED,
+  LOGIN_FAILED,
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
-  LOGIN_FAILED,
+  LOGOUT_FAILED,
   LOGOUT_REQUEST,
   LOGOUT_SUCCESS,
-  LOGOUT_FAILED,
-  RESET_USER,
-} from "../actions/auth";
+} from "../constants";
 
 import { setCookie, deleteCookie } from "../cookieManager";
 
-const initialState = {
+type TAuthState = {
+  email: string;
+  name: string;
+
+  getUserRequest: boolean;
+  getUserError: boolean;
+
+  loginRequest: boolean;
+  loginError: boolean;
+
+  logoutRequest: boolean;
+  logoutError: boolean;
+
+  message: string;
+};
+
+const initialState: TAuthState = {
   email: "",
   name: "",
 
   getUserRequest: false,
   getUserError: false,
 
-  request: false,
-  success: false,
+  loginRequest: false,
+  loginError: false,
+
+  logoutRequest: false,
+  logoutError: false,
+
   message: "",
 };
 
-const authReducer = (state = initialState, action) => {
+const authReducer = (
+  state = initialState,
+  action: TAuthActions
+): TAuthState => {
   switch (action.type) {
     case LOGIN_REQUEST: {
-      return { ...state, request: true };
+      return { ...state, loginRequest: true };
     }
     case LOGIN_SUCCESS: {
-      setCookie("token", action.payload.accessToken);
-      setCookie("refreshToken", action.payload.refreshToken);
+      setCookie("token", action.auth.token);
+      setCookie("refreshToken", action.auth.refreshToken);
 
       return {
         ...state,
-        request: false,
-        success: true,
+        loginRequest: false,
+        loginError: false,
 
-        email: action.payload.email,
-        name: action.payload.name,
+        email: action.auth.user.email,
+        name: action.auth.user.name,
       };
     }
     case LOGIN_FAILED: {
       return {
         ...state,
-        request: false,
-        success: false,
-        message: action.message,
+        loginRequest: false,
+        loginError: true,
       };
     }
     case GET_USER_REQUEST: {
@@ -60,8 +82,8 @@ const authReducer = (state = initialState, action) => {
         getUserRequest: false,
         getUserError: false,
 
-        email: action.payload.email,
-        name: action.payload.name,
+        email: action.user.email,
+        name: action.user.name,
       };
     }
     case GET_USER_FAILED: {
@@ -69,11 +91,10 @@ const authReducer = (state = initialState, action) => {
         ...state,
         getUserRequest: false,
         getUserError: true,
-        message: action.message,
       };
     }
     case LOGOUT_REQUEST: {
-      return { ...state, request: true };
+      return { ...state, logoutRequest: true, logoutError: false };
     }
     case LOGOUT_SUCCESS: {
       deleteCookie("token");
@@ -81,10 +102,9 @@ const authReducer = (state = initialState, action) => {
 
       return {
         ...state,
-        request: false,
-        success: true,
 
-        message: action.payload.message,
+        logoutRequest: false,
+        logoutError: false,
 
         name: "",
         email: "",
@@ -93,13 +113,9 @@ const authReducer = (state = initialState, action) => {
     case LOGOUT_FAILED: {
       return {
         ...state,
-        request: false,
-        error: true,
-        message: action.message,
+        logoutRequest: false,
+        logoutError: true,
       };
-    }
-    case RESET_USER: {
-      return { ...initialState };
     }
     default:
       return state;

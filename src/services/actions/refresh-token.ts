@@ -17,7 +17,7 @@ export interface IRefreshTokenFailedAction {
 
 export interface IRefreshTokenSuccessAction {
   readonly type: typeof REFRESH_TOKEN_SUCCESS;
-  tokens: TTokens;
+  readonly tokens: TTokens;
 }
 
 export const refreshTokenAction = (): IRefreshTokenAction => ({

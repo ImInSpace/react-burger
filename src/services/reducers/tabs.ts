@@ -1,14 +1,13 @@
 import {
-  SELECT_BUNS_TAB,
-  SELECT_SAUCES_TAB,
-  SELECT_MAINS_TAB,
-} from "../actions/tabs";
-
-import {
   BUNS_GROUP_NAME,
   SAUCES_GROUP_NAME,
   MAINS_GROUP_NAME,
 } from "../../constants";
+import {
+  SELECT_BUNS_TAB,
+  SELECT_MAINS_TAB,
+  SELECT_SAUCES_TAB,
+} from "../constants";
 
 const tabsInitialState = {
   currentTab: "Булки",

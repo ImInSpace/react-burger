@@ -1,23 +1,33 @@
+import { TOrderActions } from "../actions/order";
 import {
+  CLOSE_ORDER_MODAL,
+  CREATE_ORDER_FAILED,
   CREATE_ORDER_REQUEST,
   CREATE_ORDER_SUCCESS,
-  CREATE_ORDER_FAILED,
-  CLOSE_ORDER_MODAL,
-} from "../actions/order";
+} from "../constants";
 
-const initialOrderState = {
-  number: 0,
+type TOrderState = {
+  orderNumber: number;
+
+  orderRequest: boolean;
+  orderRequestError: boolean;
+
+  isModalShown: false;
+};
+
+const initialOrderState: TOrderState = {
+  orderNumber: 0,
 
   orderRequest: false,
   orderRequestError: false,
 
   isModalShown: false,
 };
-const orderReducer = (state = initialOrderState, action) => {
+const orderReducer = (state = initialOrderState, action: TOrderActions) => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       // Заказ уже создан. Нет смысла отправлять запрос повторно.
-      if (state.number !== 0) {
+      if (state.orderNumber !== 0) {
         return { ...state, isModalShown: true };
       }
 

@@ -1,16 +1,27 @@
+import { TForgotPasswordActions } from "../actions/forgot-password";
 import {
-  PASSWORD_FORGOT_REQUEST,
   PASSWORD_FORGOT_FAILED,
+  PASSWORD_FORGOT_REQUEST,
   PASSWORD_FORGOT_SUCCESS,
-} from "../actions/forgot-password";
+} from "../constants";
 
-const initialState = {
+type TForgotPasswordReducerState = {
+  request: boolean;
+  success: boolean;
+
+  message: string;
+};
+
+const initialState: TForgotPasswordReducerState = {
   request: false,
   success: false,
   message: "",
 };
 
-const forgotPasswordReducer = (state = initialState, action) => {
+const forgotPasswordReducer = (
+  state = initialState,
+  action: TForgotPasswordActions
+) => {
   switch (action.type) {
     case PASSWORD_FORGOT_REQUEST: {
       return { ...state, request: true };
@@ -22,7 +33,7 @@ const forgotPasswordReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: true,
-        message: action.payload.message,
+        message: action.message,
       };
     }
     case PASSWORD_FORGOT_FAILED: {
@@ -30,7 +41,6 @@ const forgotPasswordReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: false,
-        message: action.payload.message,
       };
     }
     default:

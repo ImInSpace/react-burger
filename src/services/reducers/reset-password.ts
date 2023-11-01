@@ -1,28 +1,40 @@
+import { TResetPasswordActions } from "../actions/reset-password";
 import {
+  PASSWORD_RESET_FAILED,
   PASSWORD_RESET_REQUEST,
   PASSWORD_RESET_SUCCESS,
-  PASSWORD_RESET_FAILED,
-} from "../actions/reset-password";
+} from "../constants";
 
-const initialState = {
+type TResetPasswordState = {
+  request: boolean;
+  success: boolean;
+  message: string;
+};
+
+const initialState: TResetPasswordState = {
   request: false,
   success: false,
   message: "",
 };
 
-const resetPasswordReducer = (state = initialState, action) => {
+const resetPasswordReducer = (
+  state = initialState,
+  action: TResetPasswordActions
+) => {
   switch (action.type) {
     case PASSWORD_RESET_REQUEST: {
       return { ...state, request: true };
     }
     case PASSWORD_RESET_SUCCESS: {
-      localStorage.removeItem("forgot-password", "visited");
+      //localStorage.removeItem("forgot-password", "visited");
+      //localStorage.removeItem("forgot-password", "visited");
+      localStorage.removeItem("visited");
 
       return {
         ...state,
         request: false,
         success: true,
-        message: action.payload.message,
+        message: action.message,
       };
     }
     case PASSWORD_RESET_FAILED: {
@@ -30,7 +42,6 @@ const resetPasswordReducer = (state = initialState, action) => {
         ...state,
         request: false,
         success: true,
-        message: action.payload.message,
       };
     }
     default:

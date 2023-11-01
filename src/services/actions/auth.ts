@@ -11,7 +11,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 } from "../constants";
-import { TAuth, TUser } from "../types/data";
+import { TAuth, TTokens, TUser } from "../types/data";
 
 interface IGetUserAction {
   readonly type: typeof GET_USER_REQUEST;
@@ -32,7 +32,7 @@ interface ILoginAction {
 
 interface ILoginSuccessAction {
   readonly type: typeof LOGIN_SUCCESS;
-  readonly auth: TAuth;
+  readonly auth: TAuth & { user: TUser };
 }
 
 interface ILoginFailedAction {
