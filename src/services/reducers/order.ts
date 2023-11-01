@@ -23,7 +23,10 @@ const initialOrderState: TOrderState = {
 
   isModalShown: false,
 };
-const orderReducer = (state = initialOrderState, action: TOrderActions) => {
+const orderReducer = (
+  state = initialOrderState,
+  action: TOrderActions
+): TOrderState => {
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       // Заказ уже создан. Нет смысла отправлять запрос повторно.

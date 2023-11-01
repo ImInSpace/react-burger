@@ -1,24 +1,32 @@
-// import { SHOW_MODAL, HIDE_MODAL } from "../actions/modal";
+import { TModalActions } from "../actions/modal";
+import { HIDE_MODAL, SHOW_MODAL } from "../constants";
 
-// const modalInitialState = {
-//   isShown: false,
-// };
+type TModalState = {
+  isShown: boolean;
+};
 
-// const modalReducer = (state = modalInitialState, action) => {
-//   switch (action.type) {
-//     case SHOW_MODAL:
-//       return {
-//         ...state,
-//         isShown: true,
-//       };
-//     case HIDE_MODAL:
-//       return {
-//         ...state,
-//         isShown: false,
-//       };
-//     default:
-//       return state;
-//   }
-// };
+const modalInitialState: TModalState = {
+  isShown: false,
+};
 
-// export { modalReducer };
+const modalReducer = (
+  state = modalInitialState,
+  action: TModalActions
+): TModalState => {
+  switch (action.type) {
+    case SHOW_MODAL:
+      return {
+        ...state,
+        isShown: true,
+      };
+    case HIDE_MODAL:
+      return {
+        ...state,
+        isShown: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export { modalReducer };

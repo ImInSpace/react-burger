@@ -19,7 +19,7 @@ const initialState: TRefreshTokenState = {
 const refreshTokenReducer = (
   state = initialState,
   action: TRefreshTokenActions
-) => {
+): TRefreshTokenState => {
   switch (action.type) {
     case REFRESH_TOKEN_REQUEST: {
       return { ...state, request: true };

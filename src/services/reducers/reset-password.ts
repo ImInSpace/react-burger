@@ -20,7 +20,7 @@ const initialState: TResetPasswordState = {
 const resetPasswordReducer = (
   state = initialState,
   action: TResetPasswordActions
-) => {
+): TResetPasswordState => {
   switch (action.type) {
     case PASSWORD_RESET_REQUEST: {
       return { ...state, request: true };

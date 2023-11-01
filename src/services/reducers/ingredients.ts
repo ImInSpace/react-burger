@@ -11,7 +11,7 @@ import {
 } from "../actions/ingredients";
 import { TIngredient } from "../types/data";
 
-type TIngredientsReducerState = {
+type TIngredientsState = {
   ingredients: ReadonlyArray<TIngredient>;
   constructorIngredients: { bun: null; ingredients: [] };
   selectedIngredient: null;
@@ -21,7 +21,7 @@ type TIngredientsReducerState = {
   ingredientsErrorMsg: "";
 };
 
-const initialIngredientsState = {
+const initialIngredientsState: TIngredientsState = {
   ingredients: [],
   constructorIngredients: { bun: null, ingredients: [] },
   selectedIngredient: null,
@@ -34,7 +34,7 @@ const initialIngredientsState = {
 const ingredientsReducer = (
   state = initialIngredientsState,
   action: TIngredientsActions
-) => {
+): TIngredientsState => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return { ...state, ingredientsRequest: true };

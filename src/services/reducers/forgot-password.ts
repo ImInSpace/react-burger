@@ -5,14 +5,14 @@ import {
   PASSWORD_FORGOT_SUCCESS,
 } from "../constants";
 
-type TForgotPasswordReducerState = {
+type TForgotPasswordState = {
   request: boolean;
   success: boolean;
 
   message: string;
 };
 
-const initialState: TForgotPasswordReducerState = {
+const initialState: TForgotPasswordState = {
   request: false,
   success: false,
   message: "",
@@ -21,7 +21,7 @@ const initialState: TForgotPasswordReducerState = {
 const forgotPasswordReducer = (
   state = initialState,
   action: TForgotPasswordActions
-) => {
+): TForgotPasswordState => {
   switch (action.type) {
     case PASSWORD_FORGOT_REQUEST: {
       return { ...state, request: true };
