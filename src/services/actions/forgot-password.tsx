@@ -50,3 +50,8 @@ export function forgotPasswordThunk(
       .catch((err) => dispatch({ type: PASSWORD_FORGOT_FAILED, payload: err }));
   };
 }
+
+export type TForgotPasswordActions =
+  | IForgotPassword
+  | IForgotPasswordFailed
+  | IForgotPasswordSuccess;

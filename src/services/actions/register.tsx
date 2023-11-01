@@ -48,3 +48,8 @@ export function registerThunk(
       });
   };
 }
+
+export type TRegisterActions =
+  | IRegisterAction
+  | IRegisterFailedAction
+  | IRegisterSuccessAction;

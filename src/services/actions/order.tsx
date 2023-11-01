@@ -48,3 +48,8 @@ export function createOrderThunk(orderForm: ICreateOrderRequestForm) {
       });
   };
 }
+
+export type TOrderActions =
+  | ICreateOrderAction
+  | ICreateOrderFailedAction
+  | ICreateOrderSuccessAction;

@@ -137,3 +137,14 @@ export function logoutThunk(logoutBody: ILogoutRequestBody) {
       .catch((err) => dispatch({ type: LOGOUT_FAILED, message: err }));
   };
 }
+
+export type TAuthActions =
+  | IGetUserAction
+  | IGetUserFailedAction
+  | IGetUserSuccessAction
+  | ILoginAction
+  | ILoginFailedAction
+  | ILoginSuccessAction
+  | ILogoutAction
+  | ILogoutFailedAction
+  | ILogoutSuccessAction;

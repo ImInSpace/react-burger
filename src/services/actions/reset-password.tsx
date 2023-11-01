@@ -7,30 +7,30 @@ import {
   PASSWORD_RESET_FAILED,
 } from "../constants";
 
-export interface IPasswordReset {
+export interface IPasswordResetAction {
   readonly type: typeof PASSWORD_RESET_REQUEST;
 }
 
-export interface IPasswordResetFailed {
+export interface IPasswordResetFailedAction {
   readonly type: typeof PASSWORD_RESET_FAILED;
 }
 
-export interface IPasswordResetSuccess {
+export interface IPasswordResetSuccessAction {
   readonly type: typeof PASSWORD_RESET_SUCCESS;
   message: string;
 }
 
-export const passwordResetAction = (): IPasswordReset => ({
+export const passwordResetAction = (): IPasswordResetAction => ({
   type: PASSWORD_RESET_REQUEST,
 });
 
-export const passwordResetFailedAction = (): IPasswordResetFailed => ({
+export const passwordResetFailedAction = (): IPasswordResetFailedAction => ({
   type: PASSWORD_RESET_FAILED,
 });
 
 export const passwordResetSuccessAction = (
   message: string
-): IPasswordResetSuccess => ({
+): IPasswordResetSuccessAction => ({
   type: PASSWORD_RESET_SUCCESS,
   message: message,
 });
@@ -50,3 +50,8 @@ export function resetPasswordThunk(
       .catch((err) => dispatch(passwordResetFailedAction()));
   };
 }
+
+export type TResetPasswordActions =
+  | IPasswordResetAction
+  | IPasswordResetFailedAction
+  | IPasswordResetSuccessAction;

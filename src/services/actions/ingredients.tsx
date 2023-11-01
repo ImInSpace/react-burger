@@ -21,38 +21,50 @@ export interface IGetIngredientsSuccessAction {
   readonly items: ReadonlyArray<TIngredient>;
 }
 
-export const GetIngredientsAction = (): IGetIngredientsAction => ({
+export interface IAddIngredientAction {
+  readonly type: typeof ADD_INGREDIENT;
+  id: string;
+  key: string;
+}
+
+export const getIngredientsAction = (): IGetIngredientsAction => ({
   type: GET_INGREDIENTS_REQUEST,
 });
 
-export const GetIngredientsFailedAction = (): IGetIngredientsFailedAction => ({
+export const getIngredientsFailedAction = (): IGetIngredientsFailedAction => ({
   type: GET_INGREDIENTS_FAILED,
 });
 
-export const GetIngredientsSuccessAction = (
+export const getIngredientsSuccessAction = (
   ingredients: ReadonlyArray<TIngredient>
 ): IGetIngredientsSuccessAction => ({
   type: GET_INGREDIENTS_SUCCESS,
   items: ingredients,
 });
 
-export function loadIngredientsThunk() {
-  // @ts-ignore
-  return function (dispatch) {
-    dispatch(GetIngredientsAction());
-    getIngredientsRequest()
-      .then((res) => {
-        dispatch(GetIngredientsSuccessAction(res.data));
-      })
-      .catch((err) => {
-        // @ts-ignore
-        dispatch(GetIngredientsFailedAction());
-      });
-  };
-}
-
-export const addIngredient = (ingredientId: string) => ({
+export const addIngredient = (ingredientId: string): IAddIngredientAction => ({
   type: ADD_INGREDIENT,
   id: ingredientId,
   key: uuid(),
 });
+
+export function loadIngredientsThunk() {
+  // @ts-ignore
+  return function (dispatch) {
+    dispatch(getIngredientsAction());
+    getIngredientsRequest()
+      .then((res) => {
+        dispatch(getIngredientsSuccessAction(res.data));
+      })
+      .catch((err) => {
+        // @ts-ignore
+        dispatch(getIngredientsFailedAction());
+      });
+  };
+}
+
+export type TIngredientsActions =
+  | IAddIngredientAction
+  | IGetIngredientsAction
+  | IGetIngredientsFailedAction
+  | IGetIngredientsSuccessAction;

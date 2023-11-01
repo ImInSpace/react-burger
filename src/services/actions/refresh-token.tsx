@@ -46,3 +46,8 @@ export function refreshTokenActionGen(body: IRefreshTokenRequest) {
       .catch((err) => dispatch({ type: REFRESH_TOKEN_FAILED, message: err }));
   };
 }
+
+export type TRefreshTokenActions =
+  | IRefreshTokenAction
+  | IRefreshTokenFailedAction
+  | IRefreshTokenSuccessAction;
