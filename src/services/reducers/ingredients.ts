@@ -9,11 +9,11 @@ import {
   REMOVE_INGREDIENT,
   REORDER_INGREDIENTS,
 } from "../constants";
-import { TConstructorIngredient, TIngredient } from "../types/data";
+import { TConstructorIngredients, TIngredient } from "../types/data";
 
 type TIngredientsState = {
   ingredients: ReadonlyArray<TIngredient>;
-  constructorIngredients: TConstructorIngredient;
+  constructorIngredients: TConstructorIngredients;
   selectedIngredient: TIngredient | null;
 
   getIngredientsRequest: boolean;

@@ -28,7 +28,7 @@ export type TIngredient = {
   image: string;
 };
 
-export type TConstructorIngredient = {
+export type TConstructorIngredients = {
   bun: TIngredient | null;
   ingredients: ReadonlyArray<TIngredient>;
 };
