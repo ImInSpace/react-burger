@@ -6,7 +6,7 @@ import {
   PASSWORD_FORGOT_FAILED,
   PASSWORD_FORGOT_SUCCESS,
 } from "../constants";
-import { AppDispatch, AppThunk } from "../types";
+import { AppThunk } from "../types";
 
 export interface IForgotPassword {
   readonly type: typeof PASSWORD_FORGOT_REQUEST;
@@ -14,6 +14,7 @@ export interface IForgotPassword {
 
 export interface IForgotPasswordFailed {
   readonly type: typeof PASSWORD_FORGOT_FAILED;
+  message: string;
 }
 
 export interface IForgotPasswordSuccess {
@@ -25,8 +26,11 @@ export const forgotPasswordAction = (): IForgotPassword => ({
   type: PASSWORD_FORGOT_REQUEST,
 });
 
-export const forgotPasswordFailed = (): IForgotPasswordFailed => ({
+export const forgotPasswordFailedAction = (
+  error: string
+): IForgotPasswordFailed => ({
   type: PASSWORD_FORGOT_FAILED,
+  error: error,
 });
 
 export const forgotPasswordSuccess = (
@@ -40,14 +44,14 @@ export function forgotPasswordThunk(
   requestBody: IForgotPasswordRequestBody,
   redirectCallback: NavigateFunction
 ) {
-  return function (dispatch: AppDispatch) {
+  return function (dispatch) {
     dispatch(forgotPasswordAction());
     forgotPasswordRequest(requestBody)
       .then((response) => {
         redirectCallback("/reset-password");
         dispatch(forgotPasswordSuccess(response.message));
       })
-      .catch((err) => dispatch({ type: PASSWORD_FORGOT_FAILED, payload: err }));
+      .catch((err) => dispatch(forgotPasswordFailedAction(err)));
   };
 }
 
