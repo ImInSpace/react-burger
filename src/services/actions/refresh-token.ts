@@ -13,6 +13,7 @@ export interface IRefreshTokenAction {
 
 export interface IRefreshTokenFailedAction {
   readonly type: typeof REFRESH_TOKEN_FAILED;
+  error: string;
 }
 
 export interface IRefreshTokenSuccessAction {
@@ -24,8 +25,11 @@ export const refreshTokenAction = (): IRefreshTokenAction => ({
   type: REFRESH_TOKEN_REQUEST,
 });
 
-export const refreshTokenFailedAction = (): IRefreshTokenFailedAction => ({
+export const refreshTokenFailedAction = (
+  msg: string
+): IRefreshTokenFailedAction => ({
   type: REFRESH_TOKEN_FAILED,
+  error: msg,
 });
 
 export const refreshTokenSuccessAction = (
@@ -43,7 +47,7 @@ export function refreshTokenActionGen(body: IRefreshTokenRequest) {
       .then((response) => {
         dispatch(refreshTokenSuccessAction(response));
       })
-      .catch((err) => dispatch({ type: REFRESH_TOKEN_FAILED, message: err }));
+      .catch((err) => dispatch(refreshTokenFailedAction(err)));
   };
 }
 

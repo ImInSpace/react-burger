@@ -6,6 +6,7 @@ import {
   REGISTER_SUCCESS,
   REGISTER_FAILED,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface IRegisterAction {
   readonly type: typeof REGISTER_REQUEST;
@@ -35,8 +36,7 @@ export function registerThunk(
   registrationData: IRegistrationRequestForm,
   redirectHook: NavigateFunction
 ) {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(registerAction());
     registerUserRequest(registrationData)
       .then((res) => {

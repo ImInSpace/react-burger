@@ -11,6 +11,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 } from "../constants";
+import { AppDispatch, AppThunk } from "../types";
 import { TAuth, TTokens, TUser } from "../types/data";
 
 interface IGetUserAction {
@@ -121,17 +122,12 @@ export function loginThunk(loginForm: ILoginForm) {
 }
 
 export function logoutThunk(logoutBody: ILogoutRequestBody) {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch({ type: LOGOUT_REQUEST });
     logout(logoutBody)
       .then((res) => {
         dispatch({
           type: LOGOUT_SUCCESS,
-          // payload: {
-          //   success: res.success,
-          //   message: res.message,
-          // },
         });
       })
       .catch((err) => dispatch({ type: LOGOUT_FAILED, message: err }));

@@ -30,5 +30,5 @@ export type TIngredient = {
 
 export type TConstructorIngredients = {
   bun: TIngredient | null;
-  ingredients: ReadonlyArray<TIngredient>;
+  ingredients: ReadonlyArray<TIngredient & { key: string }>;
 };

@@ -6,6 +6,7 @@ import {
   CREATE_ORDER_FAILED,
   CLOSE_ORDER_MODAL,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface ICreateOrderAction {
   readonly type: typeof CREATE_ORDER_REQUEST;
@@ -44,8 +45,7 @@ export const createOrderSuccessAction = (
 });
 
 export function createOrderThunk(orderForm: ICreateOrderRequestForm) {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(createOrderAction());
     createOrder(orderForm)
       .then((response) =>

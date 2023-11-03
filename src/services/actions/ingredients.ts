@@ -13,6 +13,7 @@ import {
 import { TIngredient } from "../types/data";
 import { NavigateFunction } from "react-router-dom";
 import { type } from "os";
+import { AppDispatch } from "../types";
 
 export interface IGetIngredientsAction {
   readonly type: typeof GET_INGREDIENTS_REQUEST;
@@ -106,8 +107,7 @@ export const addIngredient = (ingredientId: string): IAddIngredientAction => ({
 });
 
 export function loadIngredientsThunk() {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(getIngredientsAction());
     getIngredientsRequest()
       .then((res) => {

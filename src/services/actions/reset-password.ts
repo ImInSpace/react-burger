@@ -6,6 +6,7 @@ import {
   PASSWORD_RESET_SUCCESS,
   PASSWORD_RESET_FAILED,
 } from "../constants";
+import { AppDispatch } from "../types";
 
 export interface IPasswordResetAction {
   readonly type: typeof PASSWORD_RESET_REQUEST;
@@ -40,7 +41,7 @@ export function resetPasswordThunk(
   redirectHook: NavigateFunction
 ) {
   // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(passwordResetAction());
     resetPassword(resetPasswordForm)
       .then((res) => {

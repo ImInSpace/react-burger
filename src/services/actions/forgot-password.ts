@@ -6,6 +6,7 @@ import {
   PASSWORD_FORGOT_FAILED,
   PASSWORD_FORGOT_SUCCESS,
 } from "../constants";
+import { AppDispatch, AppThunk } from "../types";
 
 export interface IForgotPassword {
   readonly type: typeof PASSWORD_FORGOT_REQUEST;
@@ -39,8 +40,7 @@ export function forgotPasswordThunk(
   requestBody: IForgotPasswordRequestBody,
   redirectCallback: NavigateFunction
 ) {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(forgotPasswordAction());
     forgotPasswordRequest(requestBody)
       .then((response) => {
