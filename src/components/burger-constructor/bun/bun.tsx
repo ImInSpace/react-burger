@@ -1,12 +1,9 @@
+import { TIngredient } from "../../../services/types/data";
 import { ConstructorRow } from "../constructor-row/constructor-row";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
 interface IBunProps {
-  bunInfo: {
-    name: string;
-    price: number;
-    image: string;
-  };
+  bunInfo: TIngredient | null;
 
   bunPosition: "top" | "bottom";
 }

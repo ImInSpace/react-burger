@@ -1,4 +1,9 @@
-import { getUser as getUserRequest, login, logout } from "../../utils/api";
+import { NavigateFunction } from "react-router-dom";
+import {
+  getUser as getUserRequest,
+  login as loginRequest,
+  logout,
+} from "../../utils/api";
 import { ILoginForm, ILogoutRequestBody } from "../../utils/api-shape";
 import {
   GET_USER_REQUEST,
@@ -11,8 +16,8 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAILED,
 } from "../constants";
-import { AppDispatch, AppThunk } from "../types";
-import { TAuth, TTokens, TUser } from "../types/data";
+import { AppDispatch } from "../types";
+import { TAuth, TUser } from "../types/data";
 
 interface IGetUserAction {
   readonly type: typeof GET_USER_REQUEST;
@@ -38,6 +43,7 @@ interface ILoginSuccessAction {
 
 interface ILoginFailedAction {
   readonly type: typeof LOGIN_FAILED;
+  message: string;
 }
 
 interface ILogoutAction {
@@ -50,9 +56,9 @@ interface ILogoutSuccessAction {
 
 interface ILogoutFailedAction {
   readonly type: typeof LOGOUT_FAILED;
+  message: string;
 }
 
-// @ts-ignore
 export const getUserAction = (): IGetUserAction => ({ type: GET_USER_REQUEST });
 
 export const getUserFailedAction = (): IGetUserFailedAction => ({
@@ -68,8 +74,9 @@ export const loginAction = (): ILoginAction => ({
   type: LOGIN_REQUEST,
 });
 
-export const loginFailedAction = (): ILoginFailedAction => ({
+export const loginFailedAction = (message: string): ILoginFailedAction => ({
   type: LOGIN_FAILED,
+  message: message,
 });
 
 export const loginSuccessAction = (authData: TAuth): ILoginSuccessAction => ({
@@ -81,8 +88,9 @@ export const logoutAction = (): ILogoutAction => ({
   type: LOGOUT_REQUEST,
 });
 
-export const logoutFailedAction = (): ILogoutFailedAction => ({
+export const logoutFailedAction = (message: string): ILogoutFailedAction => ({
   type: LOGOUT_FAILED,
+  message: message,
 });
 
 export const logoutSuccessAction = (): ILogoutSuccessAction => ({
@@ -90,8 +98,7 @@ export const logoutSuccessAction = (): ILogoutSuccessAction => ({
 });
 
 export function getUserThunk() {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(getUserAction());
     getUserRequest()
       .then((res) => {
@@ -101,36 +108,34 @@ export function getUserThunk() {
   };
 }
 
-export function loginThunk(loginForm: ILoginForm) {
-  // @ts-ignore
-  return function (dispatch) {
-    dispatch({ type: LOGIN_REQUEST });
-    login(loginForm)
+export function loginThunk(
+  loginForm: ILoginForm,
+  navigateHook: NavigateFunction
+) {
+  return function (dispatch: AppDispatch) {
+    dispatch(loginAction());
+    loginRequest(loginForm)
       .then((res) => {
-        dispatch({
-          type: LOGIN_SUCCESS,
-          payload: {
-            email: res.user.email,
-            name: res.user.name,
-            accessToken: res.accessToken,
+        dispatch(
+          loginSuccessAction({
+            token: res.accessToken,
             refreshToken: res.refreshToken,
-          },
-        });
+            user: { name: res.user.name, email: res.user.email },
+          })
+        );
       })
-      .catch((err) => dispatch({ type: LOGIN_FAILED, message: err }));
+      .catch((err) => dispatch(loginFailedAction(err)));
   };
 }
 
 export function logoutThunk(logoutBody: ILogoutRequestBody) {
   return function (dispatch: AppDispatch) {
-    dispatch({ type: LOGOUT_REQUEST });
+    dispatch(logoutAction());
     logout(logoutBody)
       .then((res) => {
-        dispatch({
-          type: LOGOUT_SUCCESS,
-        });
+        dispatch(logoutSuccessAction());
       })
-      .catch((err) => dispatch({ type: LOGOUT_FAILED, message: err }));
+      .catch((err) => dispatch(logoutFailedAction(err)));
   };
 }
 

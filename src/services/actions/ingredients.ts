@@ -12,7 +12,6 @@ import {
 } from "../constants";
 import { TIngredient } from "../types/data";
 import { NavigateFunction } from "react-router-dom";
-import { type } from "os";
 import { AppDispatch } from "../types";
 
 export interface IGetIngredientsAction {
@@ -114,7 +113,6 @@ export function loadIngredientsThunk() {
         dispatch(getIngredientsSuccessAction(res.data));
       })
       .catch((err) => {
-        // @ts-ignore
         dispatch(getIngredientsFailedAction());
       });
   };

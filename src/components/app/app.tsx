@@ -20,7 +20,6 @@ function App(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //@ts-ignore
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
 

@@ -1,14 +1,13 @@
+import { useSelector } from "../../../services/types";
 import styles from "./order-status.module.css";
-import { useSelector } from "react-redux";
 
 function OrderStatus(): JSX.Element {
-  // @ts-ignore
-  const { number } = useSelector((store) => store.order);
+  const { orderNumber } = useSelector((store) => store.order);
 
   return (
     <>
       <p className="text text_type_main-default mt-15">
-        {number === 0
+        { orderNumber === 0
           ? "Отправляем заказ в бургерную..."
           : "Ваш заказ начали готовить"}
       </p>

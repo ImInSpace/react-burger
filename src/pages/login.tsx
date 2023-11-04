@@ -28,7 +28,6 @@ export default function LoginPage(): JSX.Element {
       password: password,
     };
 
-    // @ts-ignore
     dispatch(loginThunk(loginForm, navigate));
   };
 

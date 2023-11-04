@@ -31,7 +31,6 @@ export default function RegisterPage(): JSX.Element {
       name: name,
     };
 
-    // @ts-ignore
     dispatch(registerThunk(registrationData, navigate));
   };
 

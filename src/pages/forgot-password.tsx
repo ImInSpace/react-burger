@@ -23,7 +23,6 @@ export default function ForgotPasswordPage(): JSX.Element {
       email: email,
     };
 
-    //@ts-ignore
     dispatch(forgotPasswordThunk(forgotPasswordBody, navigate));
   };
 

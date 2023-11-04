@@ -34,7 +34,6 @@ export default function Profile(): JSX.Element {
       token: refreshToken,
     };
 
-    // @ts-ignore
     dispatch(logoutThunk(logoutBody));
   };
 

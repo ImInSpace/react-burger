@@ -2,12 +2,11 @@ import { Tabs } from "./tabs/tabs";
 import styles from "./burger-ingredients.module.css";
 import { GroupedIngredients } from "./grouped-ingredients/grouped-ingredients";
 import * as Constants from "../../constants";
-import { useSelector } from "react-redux";
 import { useRef, useState, useMemo } from "react";
 import { IIngredientDataShape } from "../../utils/api-shape";
+import { useSelector } from "../../services/types";
 
 function BurgerIngredients() {
-  // @ts-ignore
   const ingredients = useSelector((store) => store.ingredients.ingredients);
 
   const groupType = {

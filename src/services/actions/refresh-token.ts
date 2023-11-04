@@ -5,7 +5,7 @@ import {
   REFRESH_TOKEN_SUCCESS,
   REFRESH_TOKEN_FAILED,
 } from "../constants";
-import { TTokens } from "../types/data";
+import { AppDispatch } from "../types";
 
 export interface IRefreshTokenAction {
   readonly type: typeof REFRESH_TOKEN_REQUEST;
@@ -40,8 +40,7 @@ export const refreshTokenSuccessAction = (
 });
 
 export function refreshTokenActionGen(body: IRefreshTokenRequest) {
-  // @ts-ignore
-  return function (dispatch) {
+  return function (dispatch: AppDispatch) {
     dispatch(refreshTokenAction());
     updateTokenRequest(body)
       .then((response) => {

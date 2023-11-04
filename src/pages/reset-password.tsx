@@ -28,7 +28,6 @@ export default function ResetPasswordPage(): JSX.Element {
       token: codeFromEmail,
     };
 
-    // @ts-ignore
     dispatch(resetPasswordThunk(resetPasswordForm, navigate));
   };
 

@@ -40,7 +40,6 @@ export function resetPasswordThunk(
   resetPasswordForm: IResetPasswordForm,
   redirectHook: NavigateFunction
 ) {
-  // @ts-ignore
   return function (dispatch: AppDispatch) {
     dispatch(passwordResetAction());
     resetPassword(resetPasswordForm)
