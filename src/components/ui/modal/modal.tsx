@@ -22,7 +22,9 @@ function Modal({ caption, closeHandler, children }: IModalProps): JSX.Element {
   });
 
   const keyDownHandler = (args: KeyboardEvent) => {
+    console.log("key down");
     if (args.key === "Escape") {
+      console.log("escape pressed!");
       close();
     }
   };

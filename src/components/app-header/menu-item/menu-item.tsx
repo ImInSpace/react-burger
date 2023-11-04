@@ -1,10 +1,13 @@
-import PropTypes from "prop-types";
 import styles from "./menu-item.module.css";
 import { NavLink } from "react-router-dom";
 
-function MenuItem(props) {
-  const { text, icon, url } = props;
+interface IMenuItem {
+  text: string;
+  icon: JSX.Element;
+  url: string;
+}
 
+function MenuItem({ text, icon, url }: IMenuItem): JSX.Element {
   return (
     <NavLink
       to={url}
@@ -22,9 +25,3 @@ function MenuItem(props) {
 }
 
 export { MenuItem };
-
-MenuItem.propTypes = {
-  text: PropTypes.string.isRequired,
-  icon: PropTypes.element.isRequired,
-  url: PropTypes.string.isRequired,
-};
