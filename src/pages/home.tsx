@@ -5,12 +5,20 @@ import { CreateOrderBtn } from "../components/ui/create-order-btn/create-order-b
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import OrderModal from "../components/ui/order-modal/order-modal";
-import { useSelector } from "../services/types";
+import { useDispatch, useSelector } from "../services/types";
+import { useEffect } from "react";
+import { wsConnectionStartAction } from "../services/actions/web-socket";
 
 export default function HomePage(): JSX.Element {
+  const dispatch = useDispatch();
+
   const isCreateOrderModalShown = useSelector(
     (store) => store.order.isModalShown
   );
+
+  useEffect(() => {
+    dispatch(wsConnectionStartAction());
+  });
 
   return (
     <div className={styles.app}>

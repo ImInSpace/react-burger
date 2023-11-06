@@ -7,6 +7,7 @@ import { TRefreshTokenActions } from "./refresh-token";
 import { TRegisterActions } from "./register";
 import { TResetPasswordActions } from "./reset-password";
 import { TTabsActions } from "./tabs";
+import { TWsActions } from "./web-socket";
 
 export type TAppActions =
   | TAuthActions
@@ -17,4 +18,5 @@ export type TAppActions =
   | TOrderActions
   | TModalActions
   | TIngredientsActions
-  | TForgotPasswordActions;
+  | TForgotPasswordActions
+  | TWsActions;
