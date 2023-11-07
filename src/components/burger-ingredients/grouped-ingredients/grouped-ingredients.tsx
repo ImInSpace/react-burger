@@ -17,11 +17,7 @@ function GroupedIngredients({
       <div className={styles.table}>
         {ingredients?.map((ingredient) => {
           return (
-            <Ingredient
-              ingredientInfo={ingredient}
-              // count={undefined}
-              key={ingredient._id}
-            />
+            <Ingredient ingredientInfo={ingredient} key={ingredient._id} />
           );
         })}
       </div>

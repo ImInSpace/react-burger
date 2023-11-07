@@ -16,6 +16,8 @@ import { loadIngredientsThunk } from "../../services/actions/ingredients";
 import { useEffect } from "react";
 import OrdersHistory from "../../pages/feed";
 import { wsConnectionStartAction } from "../../services/actions/web-socket";
+import FeedModal from "../ui/feed-modal/feed-modal";
+import { OrderDetails } from "../order-details/order-details";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -76,6 +78,7 @@ function App(): JSX.Element {
           }
         />
         <Route path="/ingredients/:id" element={<IngredientDetails />}></Route>
+        <Route path="/feed/:id" element={<OrderDetails />}></Route>
         <Route
           path="/reset-password"
           element={
@@ -88,6 +91,12 @@ function App(): JSX.Element {
       {state?.backgroundLocation && (
         <Routes>
           <Route path="/ingredients/:id" element={<IngredientModal />} />
+        </Routes>
+      )}
+
+      {state?.backgroundLocation && (
+        <Routes>
+          <Route path="/feed/:id" element={<FeedModal />} />
         </Routes>
       )}
     </>
