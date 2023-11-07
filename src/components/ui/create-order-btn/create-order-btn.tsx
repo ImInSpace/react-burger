@@ -26,11 +26,13 @@ function CreateOrderBtn(): JSX.Element {
       return;
     }
 
+    // Собираем идентификаторы ингредиентов в заказе.
     let ids: Array<string> = [];
-    ids.push(constructorIngredients.bun!._id);
+    ids = [...ids, constructorIngredients.bun!._id];
     constructorIngredients.ingredients?.map((item: IIngredientDataShape) =>
       ids.push(item._id)
     );
+    ids = [...ids, constructorIngredients.bun!._id];
 
     const createOrderForm: ICreateOrderRequestForm = {
       ingredients: ids,

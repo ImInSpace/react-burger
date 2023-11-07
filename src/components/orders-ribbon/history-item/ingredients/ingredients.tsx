@@ -16,7 +16,7 @@ function Ingredients({
       {ingredientIcons.map((icon, index) => {
         if (index < iconsLimit)
           return <IngredientIcon icon={icon} key={uuid()} />;
-        if (index == iconsLimit) {
+        if (index === iconsLimit) {
           return (
             <IngredientIcon
               icon={icon}

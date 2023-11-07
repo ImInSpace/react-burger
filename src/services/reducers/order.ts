@@ -30,9 +30,9 @@ const orderReducer = (
   switch (action.type) {
     case CREATE_ORDER_REQUEST:
       // Заказ уже создан. Нет смысла отправлять запрос повторно.
-      if (state.orderNumber !== 0) {
-        return { ...state, isModalShown: true };
-      }
+      // if (state.orderNumber !== 0) {
+      //   return { ...state, isModalShown: true };
+      // }
 
       return {
         ...state,
