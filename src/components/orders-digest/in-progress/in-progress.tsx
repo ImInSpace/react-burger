@@ -19,12 +19,12 @@ function InProgress({
           {orderNumbers.map((number) => (
             <li key={number}>
               <p className="text text_type_main-medium text_color_inactive">
-                {number}
+                0{number}
               </p>
             </li>
           ))}
         </ul>
-      </div>
+      </div>z
     </div>
   );
 }

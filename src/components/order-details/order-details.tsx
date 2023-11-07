@@ -6,6 +6,7 @@ import { useSelector } from "../../services/types";
 import { EOrderStatus } from "../../utils/api-shape";
 import { useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
+import { TIngredient } from "../../services/types/data";
 
 function OrderDetails() {
   const { id } = useParams();
@@ -13,6 +14,20 @@ function OrderDetails() {
   const order = useSelector((store) =>
     store.feed.message?.orders.find((order) => order.number.toString() === id)
   );
+
+  // ToDo: UseMemo ?
+  const allIngredients = useSelector((store) => store.ingredients.ingredients);
+  let ingredientsInOrder: Array<TIngredient> = [];
+
+  // ToDo: Push? Mb spread?
+  order?.ingredients.forEach((ingredientInOrder) => {
+    ingredientsInOrder = [
+      ...ingredientsInOrder,
+      allIngredients.find((ing) => ing._id === ingredientInOrder)!,
+    ];
+  });
+
+  console.log("ingredients in order: ", ingredientsInOrder);
 
   if (order === undefined) {
     return <Loader inverse={true} size="large" />;
@@ -46,36 +61,17 @@ function OrderDetails() {
       </p>
       <p className="text text_type_main-medium mt-15">Состав:</p>
       <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
-        <IngredientPrice
-          icon=""
-          ingredientName="Флюоресцентная булка R2-D3"
-          price={200}
-          quantity={2}
-        />
-        <IngredientPrice
-          icon=""
-          ingredientName="Флюоресцентная булка R2-D3"
-          price={200}
-          quantity={2}
-        />
-        <IngredientPrice
-          icon=""
-          ingredientName="Флюоресцентная булка R2-D3"
-          price={200}
-          quantity={2}
-        />
-        <IngredientPrice
-          icon=""
-          ingredientName="Флюоресцентная булка R2-D3"
-          price={200}
-          quantity={2}
-        />
-        <IngredientPrice
-          icon=""
-          ingredientName="Флюоресцентная булка R2-D3"
-          price={200}
-          quantity={2}
-        />
+        {ingredientsInOrder.map((ingredient) => {
+          console.log("oops: ", ingredient);
+          return (
+            <IngredientPrice
+              icon={ingredient!.image}
+              ingredientName={ingredient!.name}
+              price={ingredient!.price}
+              quantity={-1}
+            />
+          );
+        })}
       </div>
       <div className={"mt-10 mb-10 " + styles.footer}>
         <p className="text text_type_main-default text_color_inactive">

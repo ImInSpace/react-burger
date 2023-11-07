@@ -30,6 +30,7 @@ function HistoryItem({
     (ingredient) => ingredient.image
   );
 
+  // ToDo: Вынести функцию подсчета суммы в Utils, например.
   ingredients!.map((ingredient) => {
     if (ingredient.type === "bun") price += ingredient.price * 2;
     else price += ingredient.price;

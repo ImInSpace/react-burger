@@ -17,7 +17,9 @@ function IngredientPrice({
 }: IIngredientPrice) {
   return (
     <div className={styles.container}>
-      <div className={styles.icon}>{/* <IngredientIcon /> */}</div>
+      <div className={styles.icon}>
+        <IngredientIcon icon={icon} />
+      </div>
       <div className={styles.title}>
         <p className={"text text_type_main-default"}>{ingredientName}</p>
       </div>
