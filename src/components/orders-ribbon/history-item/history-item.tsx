@@ -24,7 +24,8 @@ function HistoryItem({
   );
 
   ingredients!.map((ingredient) => {
-    price += ingredient.price;
+    if (ingredient.type === "bun") price += ingredient.price * 2;
+    else price += ingredient.price;
   });
 
   return (

@@ -27,11 +27,6 @@ function IngredientIcon({
     </div>
   );
   {
-    /* <div className={styles.ingredient}>
-            <div className={styles.ingredientForeground}>
-              <p className={styles.ingredientPlus}>+30000000</p>
-            </div>
-          </div> */
   }
 }
 

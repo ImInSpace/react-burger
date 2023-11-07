@@ -26,8 +26,10 @@ function CreateOrderBtn(): JSX.Element {
       return;
     }
 
-    const ids = constructorIngredients.ingredients?.map(
-      (item: IIngredientDataShape) => item._id
+    let ids: Array<string> = [];
+    ids.push(constructorIngredients.bun!._id);
+    constructorIngredients.ingredients?.map((item: IIngredientDataShape) =>
+      ids.push(item._id)
     );
 
     const createOrderForm: ICreateOrderRequestForm = {
