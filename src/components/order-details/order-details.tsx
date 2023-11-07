@@ -68,6 +68,7 @@ function OrderDetails() {
                 ingredientsInOrder.filter((x) => x._id === ingredient._id)
                   .length
               }
+              key={uuid()}
             />
           );
         })}

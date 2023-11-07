@@ -24,7 +24,7 @@ function InProgress({
             </li>
           ))}
         </ul>
-      </div>z
+      </div>
     </div>
   );
 }
