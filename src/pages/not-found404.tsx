@@ -1,6 +1,4 @@
-import { InProgress } from "../components/orders-digest/in-progress/in-progress";
-import { OrdersDigest } from "../components/orders-digest/orders-digest";
-import { Total } from "../components/orders-digest/total/total";
+import { IngredientIcon } from "../components/orders-ribbon/history-item/ingredients/ingredient-icon/ingredient-icon";
 import styles from "./not-found404.module.css";
 
 export default function NotFound404Page(): JSX.Element {
@@ -11,7 +9,7 @@ export default function NotFound404Page(): JSX.Element {
     <>
       {/* <InProgress headerText="Готовы: " orderNumbers={numbers} /> */}
       {/* <Total caption="Выполнено за все время:" number={28752} /> */}
-      <OrdersDigest />
+      {/* <OrdersDigest /> */}
       <h1 className={styles.text}>¯\_(ツ)_/¯</h1>
       <h1 className={styles.text}>Ой, а где это мы ?</h1>
     </>

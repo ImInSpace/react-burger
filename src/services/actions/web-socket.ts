@@ -1,3 +1,4 @@
+import { TWsResponseBody } from "../../utils/api-shape";
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
@@ -25,7 +26,7 @@ export interface IWsConnectionClosedAction {
 
 export interface IWsGetMessageAction {
   readonly type: typeof WS_GET_MESSAGE;
-  messages: Array<string>;
+  message: TWsResponseBody;
 }
 
 export const wsConnectionStartAction = (): IWsConnectionStartAction => ({
@@ -36,10 +37,12 @@ export const wsConnectionSuccessAction = (): IWsConnectionSuccessAction => ({
   type: WS_CONNECTION_SUCCESS,
 });
 
-// export const wsGetMessageAction = (message: string): IWsGetMessageAction => ({
-//   type: WS_GET_MESSAGE,
-//   messages: ],
-// });
+export const wsGetMessageAction = (
+  message: TWsResponseBody
+): IWsGetMessageAction => ({
+  type: WS_GET_MESSAGE,
+  message: message,
+});
 
 export type TWsActions =
   | IWsConnectionStartAction

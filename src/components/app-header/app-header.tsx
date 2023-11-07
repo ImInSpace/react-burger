@@ -18,7 +18,7 @@ function AppHeader(): JSX.Element {
             icon={<BurgerIcon type="primary" />}
           />
           <MenuItem
-            url="/history"
+            url="/feed"
             text={Constants.HEADER_MENU_ORDER_RIBBON}
             icon={<ListIcon type="primary" />}
           />

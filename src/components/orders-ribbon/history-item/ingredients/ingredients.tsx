@@ -2,18 +2,29 @@ import { IngredientIcon } from "./ingredient-icon/ingredient-icon";
 import styles from "./ingredients.module.css";
 
 interface IIngredientsProps {
-  ingredients: Array<JSX.Element>;
+  iconsUrl: ReadonlyArray<string>;
 }
 
-function Ingredients(): JSX.Element {
+function Ingredients({
+  iconsUrl: ingredientIcons,
+}: IIngredientsProps): JSX.Element {
+  const iconsLimit: number = 5;
+
   return (
     <div className={styles.container}>
-      <IngredientIcon />
-      <IngredientIcon />
-      <IngredientIcon />
-      <IngredientIcon />
-      <IngredientIcon />
-      <IngredientIcon />
+      {ingredientIcons.map((icon, index) => {
+        if (index < iconsLimit)
+          return <IngredientIcon icon={icon} key={index} />;
+        if (index == iconsLimit) {
+          return (
+            <IngredientIcon
+              icon={icon}
+              isCounterShown={true}
+              number={ingredientIcons.length - index}
+            />
+          );
+        }
+      })}
     </div>
   );
 }

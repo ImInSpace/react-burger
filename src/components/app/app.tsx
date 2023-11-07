@@ -14,7 +14,8 @@ import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loadIngredientsThunk } from "../../services/actions/ingredients";
 import { useEffect } from "react";
-import OrdersHistory from "../../pages/orders-history";
+import OrdersHistory from "../../pages/feed";
+import { wsConnectionStartAction } from "../../services/actions/web-socket";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -22,6 +23,10 @@ function App(): JSX.Element {
   useEffect(() => {
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(wsConnectionStartAction());
+  });
 
   let location = useLocation();
   let state = location.state;
@@ -35,7 +40,7 @@ function App(): JSX.Element {
           element={<RouteWrapper isProtected={false} element={<HomePage />} />}
         />
         <Route
-          path="/history"
+          path="/feed"
           element={
             <RouteWrapper isProtected={false} element={<OrdersHistory />} />
           }

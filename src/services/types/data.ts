@@ -26,6 +26,7 @@ export type TIngredient = {
   calories: number;
   price: number;
   image: string;
+  image_mobile: string;
 };
 
 export type TConstructorIngredients = {

@@ -2,7 +2,7 @@ import styles from "./in-progress.module.css";
 
 interface IInProgressProps {
   headerText: string;
-  orderNumbers: Array<string>;
+  orderNumbers: Array<number>;
 }
 
 function InProgress({
@@ -14,7 +14,7 @@ function InProgress({
       <div className={styles.header}>
         <p className="text text_type_main-medium">{headerText}</p>
       </div>
-      <div className={styles.orders}>
+      <div className={styles.orders + " custom-scroll"}>
         <ul className={styles.numbers_list}>
           {orderNumbers.map((number) => (
             <li key={number}>

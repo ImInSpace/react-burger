@@ -1,7 +1,31 @@
 import styles from "./ingredient-icon.module.css";
 
-function IngredientIcon(): JSX.Element {
-  return <div className={styles.ingredient}></div>;
+interface IIngredientIcon {
+  icon: string;
+  isCounterShown?: boolean;
+  number?: number;
+}
+
+function IngredientIcon({
+  icon,
+  isCounterShown = false,
+  number,
+}: IIngredientIcon): JSX.Element {
+  return (
+    <div className={styles.ingredient}>
+      {isCounterShown && (
+        <>
+          <div className={styles.ingredientForeground}></div>
+          <p
+            className={styles.foregroundText + " text text_type_digits-default"}
+          >
+            +3
+          </p>
+        </>
+      )}
+      <img className={styles.icon} src={icon}></img>
+    </div>
+  );
   {
     /* <div className={styles.ingredient}>
             <div className={styles.ingredientForeground}>

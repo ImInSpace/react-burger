@@ -26,3 +26,7 @@ export const MAINS_ANCHOR = "mains-anchor";
 export const HEADER_MENU_CONSTRUCTOR = "Конструктор";
 export const HEADER_MENU_ORDER_RIBBON = "Лента заказов";
 export const HEADER_MENU_PROFILE = "Личный кабинет";
+
+export const ORDER_STATUS_CREATED: "created" = "created";
+export const ORDER_STATUS_PENDING: "pending" = "pending";
+export const ORDER_STATUS_DONE: "done" = "done";

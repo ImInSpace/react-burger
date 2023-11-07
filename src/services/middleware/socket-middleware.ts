@@ -1,9 +1,10 @@
 import type { Middleware, MiddlewareAPI } from "redux";
 
 import type { TAppActions } from "../actions";
-import { AppDispatch } from "../types";
-import { TWsActions } from "../actions/web-socket";
+import { AppDispatch, useDispatch } from "../types";
+import { TWsActions, wsGetMessageAction } from "../actions/web-socket";
 import { WS_CONNECTION_START } from "../constants";
+import { TWsResponseBody } from "../../utils/api-shape";
 
 export const socketMiddleware = (wsUrl: string): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -11,8 +12,9 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
     return (next) => (action: TWsActions) => {
       const { type } = action;
+      const { dispatch } = store;
 
-      if (type === WS_CONNECTION_START) {
+      if (type === WS_CONNECTION_START && !socket) {
         socket = new WebSocket(`${wsUrl}`);
       }
 
@@ -29,7 +31,8 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
         socket.onmessage = (event) => {
           const { data } = event;
-          console.log("received message: ", JSON.parse(data));
+          const message: TWsResponseBody = JSON.parse(data);
+          dispatch(wsGetMessageAction(message));
         };
 
         socket.onclose = (event) => {

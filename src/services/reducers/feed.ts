@@ -1,3 +1,4 @@
+import { TWsResponseBody } from "../../utils/api-shape";
 import { TWsActions } from "../actions/web-socket";
 import {
   WS_CONNECTION_SUCCESS,
@@ -6,20 +7,18 @@ import {
   WS_GET_MESSAGE,
 } from "../constants";
 
-type TMessage = {};
-
 type TWsState = {
   isWsConnected: boolean;
-  messages: Array<TMessage>;
+  message: TWsResponseBody | null;
   error?: Event;
 };
 
 const initialState: TWsState = {
   isWsConnected: false,
-  messages: [],
+  message: null,
 };
 
-export const wsReducer = (state = initialState, action: TWsActions) => {
+export const feedReducer = (state = initialState, action: TWsActions) => {
   switch (action.type) {
     case WS_CONNECTION_SUCCESS:
       return { ...state, isWsConnected: true, error: undefined };
@@ -27,8 +26,9 @@ export const wsReducer = (state = initialState, action: TWsActions) => {
       return { ...state, isWsConnected: false, error: undefined };
     case WS_CONNECTION_ERROR:
       return { ...state, isWsConnected: false, error: action.payload };
-    case WS_GET_MESSAGE:
-      return state;
+    case WS_GET_MESSAGE: {
+      return { ...state, message: action.message };
+    }
     default:
       return state;
   }
