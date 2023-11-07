@@ -1,5 +1,6 @@
 import { IngredientIcon } from "./ingredient-icon/ingredient-icon";
 import styles from "./ingredients.module.css";
+import { v4 as uuid } from "uuid";
 
 interface IIngredientsProps {
   iconsUrl: ReadonlyArray<string>;
@@ -14,7 +15,7 @@ function Ingredients({
     <div className={styles.container}>
       {ingredientIcons.map((icon, index) => {
         if (index < iconsLimit)
-          return <IngredientIcon icon={icon} key={index} />;
+          return <IngredientIcon icon={icon} key={uuid()} />;
         if (index == iconsLimit) {
           return (
             <IngredientIcon

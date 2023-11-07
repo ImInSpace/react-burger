@@ -1,18 +1,26 @@
-import { useSelector } from "../../services/types";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "../../services/types";
 import { TIngredient } from "../../services/types/data";
-import { TOrder } from "../../utils/api-shape";
 import { HistoryItem } from "./history-item/history-item";
 import styles from "./orders-ribbon.module.css";
-
-interface IOrderHistoryProps {
-  children?: JSX.Element;
-}
+import { wsConnectionStartAction } from "../../services/actions/web-socket";
+import { Loader } from "../ui/loader/loader";
 
 function OrdersRibbon(): JSX.Element {
-  const orders = useSelector((store) => store.feed.message?.orders);
+  const dispatch = useDispatch();
 
-  // prettier-ignore
-  const storeIngredients = useSelector((store) => store.ingredients.ingredients);
+  useEffect(() => {
+    dispatch(wsConnectionStartAction());
+  });
+
+  const orders = useSelector((store) => store.feed.message?.orders);
+  const storeIngredients = useSelector(
+    (store) => store.ingredients.ingredients
+  );
+
+  if (orders === undefined) {
+    return <Loader size="large" inverse={true} />;
+  }
 
   return (
     <div className={styles.container + "  custom-scroll pr-2"}>

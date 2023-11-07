@@ -20,30 +20,23 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
       if (socket) {
         socket.onopen = (event) => {
-          console.log("socket.onOpen()");
-          // wsConnectionStartAction();
-          // dispatch({ type: onOpen, payload: event });
+          console.log("Connection opened");
         };
 
         socket.onerror = (event) => {
-          // dispatch({ type: onError, payload: event });
+          console.log("Connection error");
         };
 
         socket.onmessage = (event) => {
+          console.log("Get message()");
           const { data } = event;
           const message: TWsResponseBody = JSON.parse(data);
           dispatch(wsGetMessageAction(message));
         };
 
         socket.onclose = (event) => {
-          // dispatch({ type: onClose, payload: event });
+          console.log("Connection close()");
         };
-
-        // if (type === wsSendMessage) {
-        // const payload = action.payload;
-        // const message = { ...(payload as IMessage), token: user?.token };
-        // socket.send(JSON.stringify(message));
-        // }
       }
 
       next(action);
