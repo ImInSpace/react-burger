@@ -15,11 +15,9 @@ function OrderDetails() {
     store.feed.message?.orders.find((order) => order.number.toString() === id)
   );
 
-  // ToDo: UseMemo ?
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
   let ingredientsInOrder: Array<TIngredient> = [];
 
-  // ToDo: Push? Mb spread?
   order?.ingredients.forEach((ingredientInOrder) => {
     ingredientsInOrder = [
       ...ingredientsInOrder,
@@ -68,7 +66,10 @@ function OrderDetails() {
               icon={ingredient!.image}
               ingredientName={ingredient!.name}
               price={ingredient!.price}
-              quantity={-1}
+              quantity={
+                ingredientsInOrder.filter((x) => x._id === ingredient._id)
+                  .length
+              }
             />
           );
         })}
@@ -78,7 +79,13 @@ function OrderDetails() {
           <FormattedDate date={new Date(order!.createdAt)} />
         </p>
         <div>
-          <Price price={510} textSize="default" />
+          <Price
+            price={ingredientsInOrder.reduce(
+              (prev, current) => prev + current.price,
+              0
+            )}
+            textSize="default"
+          />
         </div>
       </div>
     </div>
