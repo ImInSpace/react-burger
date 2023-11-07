@@ -12,13 +12,14 @@ import { v4 as uuid } from "uuid";
 function OrderDetails() {
   const { id } = useParams();
 
+  const allIngredients = useSelector((store) => store.ingredients.ingredients);
+
   const order = useSelector((store) =>
     store.feed.message?.orders.find((order) => order.number.toString() === id)
   );
 
-  const allIngredients = useSelector((store) => store.ingredients.ingredients);
+  // Получаем список ингредиентов в заказе.
   let ingredientsInOrder: Array<TIngredient> = [];
-
   order?.ingredients.forEach((ingredientInOrder) => {
     ingredientsInOrder = [
       ...ingredientsInOrder,
@@ -26,11 +27,14 @@ function OrderDetails() {
     ];
   });
 
+  // Получаем список уникальных ингредиентов в заказе.
+
+  // Заказ не загрузился? Показываемся Loader.
   if (order === undefined) {
     return <Loader inverse={true} size="large" />;
   }
 
-  let status: string = "Выполнен";
+  let status: string = "";
 
   switch (order!.status) {
     case EOrderStatus.created:
