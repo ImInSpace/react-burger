@@ -22,6 +22,7 @@ function Ingredients({
               icon={icon}
               isCounterShown={true}
               number={ingredientIcons.length - index}
+              key={uuid()}
             />
           );
         }

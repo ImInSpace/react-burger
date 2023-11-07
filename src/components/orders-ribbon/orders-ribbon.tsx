@@ -18,6 +18,7 @@ function OrdersRibbon(): JSX.Element {
     (store) => store.ingredients.ingredients
   );
 
+  // Заказы не загрузились? Показываем загрузчик.
   if (orders === undefined) {
     return <Loader size="large" inverse={true} />;
   }
@@ -28,9 +29,10 @@ function OrdersRibbon(): JSX.Element {
         let ingredientsInOrder: Array<TIngredient> = [];
 
         order.ingredients.forEach((id) => {
-          ingredientsInOrder.push(
-            storeIngredients.find((ingredient) => ingredient._id === id)!
-          );
+          ingredientsInOrder = [
+            ...ingredientsInOrder,
+            storeIngredients.find((ingredient) => ingredient._id === id)!,
+          ];
         });
 
         return (
