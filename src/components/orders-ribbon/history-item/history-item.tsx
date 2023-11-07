@@ -25,16 +25,15 @@ function HistoryItem({
     store.feed.message?.orders.find((order) => order.number === orderNumber)
   );
   const location = useLocation();
-  let price: number = 0;
   const icons: Array<string> = ingredients!.map(
     (ingredient) => ingredient.image
   );
 
   // ToDo: Вынести функцию подсчета суммы в Utils, например.
-  ingredients!.map((ingredient) => {
-    if (ingredient.type === "bun") price += ingredient.price * 2;
-    else price += ingredient.price;
-  });
+  const price: number = ingredients?.reduce(
+    (cur, prev) => cur + prev.price,
+    0
+  )!;
 
   const selectFeed = () => {
     dispatch(selectFeedAction(currentOrder!));

@@ -32,7 +32,6 @@ export const feedReducer = (state = initialState, action: TWsActions) => {
       return { ...state, message: action.message };
     }
     case SELECT_FEED: {
-      console.log("Selected feed number: ", action.payload.number);
       return { ...state, selectedFeed: action.payload };
     }
     default:

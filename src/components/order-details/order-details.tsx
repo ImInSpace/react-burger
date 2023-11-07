@@ -7,6 +7,7 @@ import { EOrderStatus } from "../../utils/api-shape";
 import { useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
 import { TIngredient } from "../../services/types/data";
+import { v4 as uuid } from "uuid";
 
 function OrderDetails() {
   const { id } = useParams();
@@ -24,8 +25,6 @@ function OrderDetails() {
       allIngredients.find((ing) => ing._id === ingredientInOrder)!,
     ];
   });
-
-  console.log("ingredients in order: ", ingredientsInOrder);
 
   if (order === undefined) {
     return <Loader inverse={true} size="large" />;
@@ -60,7 +59,6 @@ function OrderDetails() {
       <p className="text text_type_main-medium mt-15">Состав:</p>
       <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
         {ingredientsInOrder.map((ingredient) => {
-          console.log("oops: ", ingredient);
           return (
             <IngredientPrice
               icon={ingredient!.image}
