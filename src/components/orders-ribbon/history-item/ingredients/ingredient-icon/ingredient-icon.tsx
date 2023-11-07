@@ -19,15 +19,17 @@ function IngredientIcon({
           <p
             className={styles.foregroundText + " text text_type_digits-default"}
           >
-            +3
+            +{number}
           </p>
         </>
       )}
-      <img className={styles.icon} src={icon}></img>
+      <img
+        className={styles.icon}
+        src={icon}
+        alt="Изображение ингредиента"
+      ></img>
     </div>
   );
-  {
-  }
 }
 
 export { IngredientIcon };

@@ -4,6 +4,8 @@ import styles from "./history-item.module.css";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TIngredient } from "../../../services/types/data";
 import { Link, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "../../../services/types";
+import { selectFeedAction } from "../../../services/actions/web-socket";
 
 interface IHistoryItemProps {
   orderNumber: number;
@@ -18,6 +20,10 @@ function HistoryItem({
   ingredients,
   createdAt,
 }: IHistoryItemProps): JSX.Element {
+  const dispatch = useDispatch();
+  const currentOrder = useSelector((store) =>
+    store.feed.message?.orders.find((order) => order.number === orderNumber)
+  );
   const location = useLocation();
   let price: number = 0;
   const icons: Array<string> = ingredients!.map(
@@ -29,11 +35,16 @@ function HistoryItem({
     else price += ingredient.price;
   });
 
+  const selectFeed = () => {
+    dispatch(selectFeedAction(currentOrder!));
+  };
+
   return (
     <Link
       to={`/feed/${orderNumber}`}
       state={{ backgroundLocation: location }}
       className={styles.link}
+      onClick={() => selectFeed()}
     >
       <div className={styles.container}>
         <div className={styles.orderNumberRow}>

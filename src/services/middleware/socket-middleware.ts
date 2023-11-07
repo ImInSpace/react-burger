@@ -20,11 +20,11 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
 
       if (socket) {
         socket.onopen = (event) => {
-          console.log("Connection opened");
+          // console.log("Connection opened");
         };
 
         socket.onerror = (event) => {
-          console.log("Connection error");
+          // console.log("Connection error");
         };
 
         socket.onmessage = (event) => {
@@ -35,7 +35,7 @@ export const socketMiddleware = (wsUrl: string): Middleware => {
         };
 
         socket.onclose = (event) => {
-          console.log("Connection close()");
+          // console.log("Connection close()");
         };
       }
 

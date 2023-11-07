@@ -1,10 +1,11 @@
-import { TWsResponseBody } from "../../utils/api-shape";
+import { TOrder, TWsResponseBody } from "../../utils/api-shape";
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_SUCCESS,
   WS_CONNECTION_ERROR,
   WS_CONNECTION_CLOSED,
   WS_GET_MESSAGE,
+  SELECT_FEED,
 } from "../constants";
 
 export interface IWsConnectionStartAction {
@@ -29,6 +30,11 @@ export interface IWsGetMessageAction {
   message: TWsResponseBody;
 }
 
+export interface ISelectFeedAction {
+  readonly type: typeof SELECT_FEED;
+  payload: TOrder;
+}
+
 export const wsConnectionStartAction = (): IWsConnectionStartAction => ({
   type: WS_CONNECTION_START,
 });
@@ -44,9 +50,15 @@ export const wsGetMessageAction = (
   message: message,
 });
 
+export const selectFeedAction = (selectedFeed: TOrder): ISelectFeedAction => ({
+  type: SELECT_FEED,
+  payload: selectedFeed,
+});
+
 export type TWsActions =
   | IWsConnectionStartAction
   | IWsConnectionSuccessAction
   | IWsConnectionErrorAction
   | IWsConnectionClosedAction
-  | IWsGetMessageAction;
+  | IWsGetMessageAction
+  | ISelectFeedAction;

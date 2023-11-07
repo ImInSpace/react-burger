@@ -10,7 +10,7 @@ export default function FeedModal(): JSX.Element {
   };
 
   return (
-    <Modal caption="Информация о заказе" closeHandler={onClose}>
+    <Modal caption="" closeHandler={onClose}>
       <OrderDetails />
     </Modal>
   );

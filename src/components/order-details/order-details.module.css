@@ -1,6 +1,6 @@
 .container {
   width: 640px;
-  height: 620px;
+  height: auto;
 
   margin: 0 auto;
 }
