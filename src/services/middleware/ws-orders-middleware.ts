@@ -12,6 +12,7 @@ import {
   wsOrdersGetMessageAction,
 } from "../actions/wsOrders";
 import { wsFeedConnectionClosedAction } from "../actions/wsFeed";
+import { WS_STATE_OPEN } from "../../constants";
 
 export const ordersSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -29,9 +30,12 @@ export const ordersSocketMiddleware = (): Middleware => {
       }
 
       // Грохаем подключение.
-      if (type === WS_ORDERS_CONNECTION_CLOSED && socket !== null) {
+      if (
+        type === WS_ORDERS_CONNECTION_CLOSED &&
+        socket?.readyState === WS_STATE_OPEN
+      ) {
+        socket?.close();
         wsFeedConnectionClosedAction();
-        socket.close();
       }
 
       if (socket) {

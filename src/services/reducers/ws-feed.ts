@@ -25,7 +25,6 @@ export const wsFeedReducer = (state = initialState, action: TWsFeedActions) => {
     case WS_FEED_CONNECTION_SUCCESS:
       return { ...state, isWsConnected: true, error: undefined };
     case WS_FEED_CONNECTION_CLOSED:
-      console.log("Подключение WS для ленты заказов закрыто.");
       return { ...state, isWsConnected: false, error: undefined };
     case WS_FEED_CONNECTION_ERROR:
       return { ...state, isWsConnected: false, error: action.payload };

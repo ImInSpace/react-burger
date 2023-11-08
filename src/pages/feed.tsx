@@ -3,7 +3,6 @@ import styles from "./orders-history.module.css";
 import { useDispatch, useSelector } from "../services/types";
 import { Feed } from "../components/feed/feed";
 import { OrdersDigest } from "../components/orders-digest/orders-digest";
-import { WS_URL } from "../constants";
 import {
   WS_FEED_CONNECTION_CLOSED,
   WS_FEED_CONNECTION_START,
@@ -11,11 +10,9 @@ import {
 import { Loader } from "../components/ui/loader/loader";
 
 export default function FeedPage() {
-  console.log("feed page");
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("useEffect of FeedPage");
     dispatch({ type: WS_FEED_CONNECTION_START });
 
     return () => {
@@ -25,7 +22,6 @@ export default function FeedPage() {
 
   // Получаем данные по заказам текущего пользователя.
   const orders = useSelector((store) => store.wsFeedReducer.message?.orders);
-  console.log("orders: ", orders);
 
   // Если данные о заказах не загрузились - показываем загрузчик.
   if (orders === undefined) {

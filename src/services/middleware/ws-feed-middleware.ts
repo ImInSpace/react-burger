@@ -4,7 +4,6 @@ import type { TAppActions } from "../actions";
 import { AppDispatch } from "../types";
 import {
   TWsFeedActions,
-  wsFeedConnectionClosedAction,
   wsFeedConnectionStartAction,
   wsFeedGetMessageAction,
 } from "../actions/wsFeed";
@@ -13,7 +12,7 @@ import {
   WS_FEED_CONNECTION_START,
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
-import { WS_URL } from "../../constants";
+import { WS_STATE_OPEN, WS_URL } from "../../constants";
 
 export const feedSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -28,29 +27,26 @@ export const feedSocketMiddleware = (): Middleware => {
         wsFeedConnectionStartAction();
       }
 
-      if (type === WS_FEED_CONNECTION_CLOSED) {
+      if (
+        type === WS_FEED_CONNECTION_CLOSED &&
+        socket?.readyState === WS_STATE_OPEN
+      ) {
         socket?.close();
-        wsFeedConnectionClosedAction();
+        wsFeedConnectionStartAction();
       }
 
       if (socket) {
-        socket.onopen = (event) => {
-          // console.log("ws feed connection opened");
-        };
+        socket.onopen = (event) => {};
 
-        socket.onerror = (event) => {
-          // console.log("ws feed connection error");
-        };
+        socket.onerror = (event) => {};
 
         socket.onmessage = (event) => {
-          // console.log("Get message()");
           const { data } = event;
           const message: TWsResponseBody = JSON.parse(data);
           dispatch(wsFeedGetMessageAction(message));
         };
 
         socket.onclose = (event) => {
-          console.log("on close middleware");
           socket?.close();
         };
       }

@@ -10,8 +10,6 @@ interface IFeedProps {
 }
 
 function Feed({ orders }: IFeedProps): JSX.Element {
-  console.log("feed: ");
-
   const storeIngredients = useSelector(
     (store) => store.ingredients.ingredients
   );

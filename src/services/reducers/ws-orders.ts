@@ -28,12 +28,10 @@ export const wsOrdersReducer = (
     case WS_ORDERS_CONNECTION_SUCCESS:
       return { ...state, isWsConnected: true, error: undefined };
     case WS_ORDERS_CONNECTION_CLOSED:
-      console.log("Подключение WS для заказов пользователя - закрыто.");
       return { ...state, isWsConnected: false, error: undefined };
     case WS_ORDERS_CONNECTION_ERROR:
       return { ...state, isWsConnected: false, error: action.payload };
     case WS_ORDERS_GET_MESSAGE: {
-      // console.log("reducer processing message: ", action.message);
       return { ...state, message: action.message };
     }
     case WS_ORDERS_SELECT: {

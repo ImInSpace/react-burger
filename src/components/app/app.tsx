@@ -19,8 +19,10 @@ import { OrderDetails } from "../order-details/order-details";
 import { EditProfile } from "../profile/edit-profile/edit-profile";
 import { OrdersWrapper } from "../ui/ws-wrappers/orders-wrapper";
 import FeedPage from "../../pages/feed";
-import { wsFeedConnectionStartAction } from "../../services/actions/wsFeed";
-import { WS_FEED_CONNECTION_START } from "../../services/constants";
+import {
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_START,
+} from "../../services/constants";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -29,9 +31,13 @@ function App(): JSX.Element {
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch({ type: WS_FEED_CONNECTION_START });
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch({ type: WS_FEED_CONNECTION_START });
+
+    return () => {
+      dispatch({ type: WS_FEED_CONNECTION_CLOSED });
+    };
+  }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;
@@ -76,6 +82,7 @@ function App(): JSX.Element {
         />
         <Route path="/ingredients/:id" element={<IngredientDetails />}></Route>
         <Route path="/feed/:id" element={<OrderDetails />}></Route>
+        <Route path="/profile/orders/:id" element={<OrderDetails />}></Route>
         <Route
           path="/reset-password"
           element={

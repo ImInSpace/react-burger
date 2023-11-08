@@ -30,3 +30,8 @@ export const HEADER_MENU_PROFILE = "Личный кабинет";
 export const ORDER_STATUS_CREATED: "created" = "created";
 export const ORDER_STATUS_PENDING: "pending" = "pending";
 export const ORDER_STATUS_DONE: "done" = "done";
+
+export const WS_STATE_CONNECTING = 0;
+export const WS_STATE_OPEN = 1;
+export const WS_STATE_CLOSING = 2;
+export const WS_STATE_CLOSED = 3;
