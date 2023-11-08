@@ -91,11 +91,6 @@ function App(): JSX.Element {
       {state?.backgroundLocation && (
         <Routes>
           <Route path="/ingredients/:id" element={<IngredientModal />} />
-        </Routes>
-      )}
-
-      {state?.backgroundLocation && (
-        <Routes>
           <Route path="/feed/:id" element={<FeedModal />} />
         </Routes>
       )}
