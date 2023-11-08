@@ -49,7 +49,7 @@ function EditProfile() {
     setIsSaveButtonsShown(false);
   };
 
-  const cancelChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const cancelChanges = () => {
     setValues({
       ...values,
       name: savedUserName,
@@ -97,7 +97,7 @@ function EditProfile() {
             htmlType="button"
             type="secondary"
             size="medium"
-            onClick={(e) => cancelChanges}
+            onClick={() => cancelChanges()}
           >
             Отменить
           </Button>

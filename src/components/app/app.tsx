@@ -19,6 +19,7 @@ import { wsConnectionStartAction } from "../../services/actions/web-socket";
 import FeedModal from "../ui/feed-modal/feed-modal";
 import { OrderDetails } from "../order-details/order-details";
 import { Feed } from "../feed/feed";
+import { EditProfile } from "../profile/edit-profile/edit-profile";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -62,6 +63,7 @@ function App(): JSX.Element {
           path="/profile"
           element={<RouteWrapper isProtected={true} element={<Profile />} />}
         >
+          <Route path="/profile" element={<EditProfile />} />
           <Route path="/profile/orders" element={<Feed />} />
         </Route>
         <Route
