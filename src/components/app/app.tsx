@@ -62,7 +62,7 @@ function App(): JSX.Element {
           element={<RouteWrapper isProtected={true} element={<Profile />} />}
         >
           <Route
-            path="/profile/history"
+            path="/profile/orders"
             element={
               <RouteWrapper isProtected={true} element={<OrdersHistory />} />
             }
