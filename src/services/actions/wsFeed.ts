@@ -10,7 +10,6 @@ import {
 
 export interface IWsFeedConnectionStartAction {
   readonly type: typeof WS_FEED_CONNECTION_START;
-  url: string;
 }
 
 export interface IWsFeedConnectionSuccessAction {
@@ -36,12 +35,10 @@ export interface IWsFeedSelectAction {
   payload: TOrder;
 }
 
-export const wsFeedConnectionStartAction = (
-  url: string
-): IWsFeedConnectionStartAction => ({
-  type: WS_FEED_CONNECTION_START,
-  url: url,
-});
+export const wsFeedConnectionStartAction =
+  (): IWsFeedConnectionStartAction => ({
+    type: WS_FEED_CONNECTION_START,
+  });
 
 export const wsFeedConnectionClosedAction =
   (): IWsFeedConnectionClosedAction => ({

@@ -14,13 +14,13 @@ import { AppHeader } from "../app-header/app-header";
 import { useDispatch } from "react-redux";
 import { loadIngredientsThunk } from "../../services/actions/ingredients";
 import { useEffect } from "react";
-import OrdersHistory from "../../pages/feed";
 import FeedModal from "../ui/feed-modal/feed-modal";
 import { OrderDetails } from "../order-details/order-details";
-import { Feed } from "../feed/feed";
 import { EditProfile } from "../profile/edit-profile/edit-profile";
+import { OrdersWrapper } from "../ui/ws-wrappers/orders-wrapper";
+import FeedPage from "../../pages/feed";
 import { wsFeedConnectionStartAction } from "../../services/actions/wsFeed";
-import { WS_URL } from "../../constants";
+import { WS_FEED_CONNECTION_START } from "../../services/constants";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -29,9 +29,9 @@ function App(): JSX.Element {
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(wsFeedConnectionStartAction(WS_URL));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch({ type: WS_FEED_CONNECTION_START });
+  // }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;
@@ -46,9 +46,7 @@ function App(): JSX.Element {
         />
         <Route
           path="/feed"
-          element={
-            <RouteWrapper isProtected={false} element={<OrdersHistory />} />
-          }
+          element={<RouteWrapper isProtected={false} element={<FeedPage />} />}
         />
         <Route
           path="/login"
@@ -65,7 +63,7 @@ function App(): JSX.Element {
           element={<RouteWrapper isProtected={true} element={<Profile />} />}
         >
           <Route path="/profile" element={<EditProfile />} />
-          <Route path="/profile/orders" element={<Feed />} />
+          <Route path="/profile/orders" element={<OrdersWrapper />} />
         </Route>
         <Route
           path="/forgot-password"

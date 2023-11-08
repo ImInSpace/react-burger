@@ -24,7 +24,9 @@ function FeedCard({
   const location = useLocation();
 
   const currentOrder = useSelector((store) =>
-    store.feed.message?.orders.find((order) => order.number === orderNumber)
+    store.wsFeedReducer.message?.orders.find(
+      (order) => order.number === orderNumber
+    )
   );
 
   const icons: Array<string> = ingredients!.map(

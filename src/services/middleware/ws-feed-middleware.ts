@@ -5,10 +5,15 @@ import { AppDispatch } from "../types";
 import {
   TWsFeedActions,
   wsFeedConnectionClosedAction,
+  wsFeedConnectionStartAction,
   wsFeedGetMessageAction,
 } from "../actions/wsFeed";
-import { WS_FEED_CONNECTION_START } from "../constants";
+import {
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_START,
+} from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
+import { WS_URL } from "../../constants";
 
 export const feedSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -18,14 +23,15 @@ export const feedSocketMiddleware = (): Middleware => {
       const { type } = action;
       const { dispatch } = store;
 
-      if (type === WS_FEED_CONNECTION_START && !socket) {
-        socket = new WebSocket(`${action.url}`);
+      if (type === WS_FEED_CONNECTION_START) {
+        socket = new WebSocket(`${WS_URL}/all`);
+        wsFeedConnectionStartAction();
       }
 
-      // if (type === WS_FEED_CONNECTION_CLOSED) {
-      //   socket?.close();
-      //   wsFeedConnectionClosedAction();
-      // }
+      if (type === WS_FEED_CONNECTION_CLOSED) {
+        socket?.close();
+        wsFeedConnectionClosedAction();
+      }
 
       if (socket) {
         socket.onopen = (event) => {

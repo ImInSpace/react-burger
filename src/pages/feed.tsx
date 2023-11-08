@@ -1,23 +1,36 @@
 import { useEffect } from "react";
 import styles from "./orders-history.module.css";
-import { useDispatch } from "../services/types";
-import {
-  wsFeedConnectionClosedAction,
-  wsFeedConnectionStartAction,
-} from "../services/actions/wsFeed";
+import { useDispatch, useSelector } from "../services/types";
 import { Feed } from "../components/feed/feed";
 import { OrdersDigest } from "../components/orders-digest/orders-digest";
 import { WS_URL } from "../constants";
-import { WS_FEED_CONNECTION_CLOSED } from "../services/constants";
+import {
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_START,
+} from "../services/constants";
+import { Loader } from "../components/ui/loader/loader";
 
 export default function FeedPage() {
+  console.log("feed page");
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(wsFeedConnectionStartAction(WS_URL));
-    // return () => {
-    //   dispatch({ type: WS_FEED_CONNECTION_CLOSED });
-    // };
+    console.log("useEffect of FeedPage");
+    dispatch({ type: WS_FEED_CONNECTION_START });
+
+    return () => {
+      dispatch({ type: WS_FEED_CONNECTION_CLOSED });
+    };
   }, [dispatch]);
+
+  // Получаем данные по заказам текущего пользователя.
+  const orders = useSelector((store) => store.wsFeedReducer.message?.orders);
+  console.log("orders: ", orders);
+
+  // Если данные о заказах не загрузились - показываем загрузчик.
+  if (orders === undefined) {
+    return <Loader inverse={true} size="large" />;
+  }
 
   return (
     <div className={styles.container}>
@@ -26,7 +39,7 @@ export default function FeedPage() {
       </p>
       <div className={styles.twoColumnsWrapper}>
         <div className={styles.halfContainer}>
-          <Feed />
+          <Feed orders={orders} />
         </div>
         <div className={styles.halfContainer}>
           <OrdersDigest />

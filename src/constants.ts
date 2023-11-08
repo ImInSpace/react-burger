@@ -1,5 +1,5 @@
 export const BASE_URL = "https://norma.nomoreparties.space/api";
-export const WS_URL = "wss://norma.nomoreparties.space/orders/all";
+export const WS_URL = "wss://norma.nomoreparties.space/orders";
 
 export const INGREDIENTS_URL = "/ingredients"; // prettier-ignore
 export const CREATE_ORDER_URL = "/orders";

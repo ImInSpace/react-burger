@@ -23,7 +23,7 @@ export interface IWsOrdersConnectionErrorAction {
   payload: Event;
 }
 
-export interface IWsOrdersConnectionClosedAction {
+export interface IWsOrdersConnectionCloseAction {
   readonly type: typeof WS_ORDERS_CONNECTION_CLOSED;
 }
 
@@ -44,6 +44,11 @@ export const wsOrdersConnectionStartAction = (
   type: WS_ORDERS_CONNECTION_START,
   payload: { url: url, token: token },
 });
+
+export const wsOrdersConnectionCloseAction =
+  (): IWsOrdersConnectionCloseAction => ({
+    type: WS_ORDERS_CONNECTION_CLOSED,
+  });
 
 export const wsOrdersConnectionSuccessAction =
   (): IWsOrdersConnectionSuccessAction => ({
@@ -68,6 +73,6 @@ export type TWsOrdersActions =
   | IWsOrdersConnectionStartAction
   | IWsOrdersConnectionSuccessAction
   | IWsOrdersConnectionErrorAction
-  | IWsOrdersConnectionClosedAction
+  | IWsOrdersConnectionCloseAction
   | IWsOrdersGetMessageAction
   | IWsOrdersSelectAction;

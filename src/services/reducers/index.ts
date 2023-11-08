@@ -7,7 +7,8 @@ import { forgotPasswordReducer } from "./forgot-password";
 import { registerReducer } from "./register";
 import { resetPasswordReducer } from "./reset-password";
 import { authReducer } from "./auth";
-import { feedReducer } from "./feed";
+import { wsFeedReducer } from "./ws-feed";
+import { wsOrdersReducer } from "./ws-orders";
 
 const rootReducer = combineReducers({
   ingredients: ingredientsReducer,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   resetPassword: resetPasswordReducer,
   register: registerReducer,
   auth: authReducer,
-  feed: feedReducer,
+  wsFeedReducer: wsFeedReducer,
+  wsOrders: wsOrdersReducer,
 });
 
 export { rootReducer };

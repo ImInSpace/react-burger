@@ -3,7 +3,7 @@ import type { Middleware, MiddlewareAPI } from "redux";
 import type { TAppActions } from "../actions";
 import { AppDispatch } from "../types";
 import {
-  WS_FEED_CONNECTION_START,
+  WS_ORDERS_CONNECTION_CLOSED,
   WS_ORDERS_CONNECTION_START,
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
@@ -11,8 +11,9 @@ import {
   TWsOrdersActions,
   wsOrdersGetMessageAction,
 } from "../actions/wsOrders";
+import { wsFeedConnectionClosedAction } from "../actions/wsFeed";
 
-export const feedSocketMiddleware = (): Middleware => {
+export const ordersSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
     let socket: WebSocket | null = null;
 
@@ -20,35 +21,36 @@ export const feedSocketMiddleware = (): Middleware => {
       const { type } = action;
       const { dispatch } = store;
 
-      if (type === WS_ORDERS_CONNECTION_START && !socket) {
+      // Создаем подключение с токеном пользователя.
+      if (type === WS_ORDERS_CONNECTION_START) {
         socket = new WebSocket(
           `${action.payload.url}?token=${action.payload.token}`
         );
       }
 
-      // if (type === WS_FEED_CONNECTION_CLOSED) {
-      //   socket?.close();
-      //   wsFeedConnectionClosedAction();
-      // }
+      // Грохаем подключение.
+      if (type === WS_ORDERS_CONNECTION_CLOSED && socket !== null) {
+        wsFeedConnectionClosedAction();
+        socket.close();
+      }
 
       if (socket) {
         socket.onopen = (event) => {
-          // console.log("ws feed connection opened");
+          // console.log("ws orders connection opened");
         };
 
         socket.onerror = (event) => {
-          // console.log("ws feed connection error");
+          // console.log("ws orders connection error");
         };
 
         socket.onmessage = (event) => {
-          // console.log("Get message()");
           const { data } = event;
           const message: TWsResponseBody = JSON.parse(data);
           dispatch(wsOrdersGetMessageAction(message));
         };
 
         socket.onclose = (event) => {
-          console.log("on close middleware");
+          // console.log("ws orders on close");
           socket?.close();
         };
       }

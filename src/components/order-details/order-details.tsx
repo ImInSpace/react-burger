@@ -23,7 +23,9 @@ function OrderDetails() {
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
   const order = useSelector((store) =>
-    store.feed.message?.orders.find((order) => order.number.toString() === id)
+    store.wsFeedReducer.message?.orders.find(
+      (order) => order.number.toString() === id
+    )
   );
 
   // Получаем список ингредиентов в заказе для вывода.
