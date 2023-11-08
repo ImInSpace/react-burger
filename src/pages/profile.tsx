@@ -39,8 +39,8 @@ export default function Profile(): JSX.Element {
               className={({ isActive }) =>
                 styles.container +
                 (isActive
-                  ? " text text_type_main-default " + styles.active
-                  : " text text_type_main-default text_color_inactive ")
+                  ? " text text_type_main-medium " + styles.active
+                  : " text text_type_main-medium text_color_inactive ")
               }
               end
               onClick={() => setHintText(profileHint)}
@@ -52,8 +52,8 @@ export default function Profile(): JSX.Element {
               className={({ isActive }) =>
                 styles.container +
                 (isActive
-                  ? " text text_type_main-default " + styles.active
-                  : " text text_type_main-default text_color_inactive ")
+                  ? " text text_type_main-medium " + styles.active
+                  : " text text_type_main-medium text_color_inactive ")
               }
               onClick={() => setHintText(ordersHint)}
             >
@@ -63,14 +63,15 @@ export default function Profile(): JSX.Element {
               to={"#"}
               className={
                 styles.container +
-                " text text_type_main-default text_color_inactive"
+                " text text_type_main-medium text_color_inactive"
               }
+              onClick={logout}
             >
               Выход
             </Link>
 
             <div className={styles.menuDescription}>
-              <p className="text text_type_main-default text_color_inactive mt-20">
+              <p className=" text text_type_main-default text_color_inactive mt-20">
                 {hintText}
               </p>
             </div>

@@ -15,28 +15,16 @@
 
 .menu {
   width: 320px;
-  height: 220px;
+  height: 320px;
+  display: grid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-}
-
-.menuCell {
-  width: 320px;
-  height: 64px;
-}
-
-.link {
-  color: white;
-  text-decoration: none;
-}
-
-.selectedMenu {
-  color: white;
+  justify-content: start;
+  align-items: start;
 }
 
 .subMenu {
-  width: 480px;
+  width: 680px;
 }
 
 .active {
