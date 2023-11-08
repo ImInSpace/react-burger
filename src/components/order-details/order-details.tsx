@@ -1,6 +1,6 @@
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../common/price/price";
-import { IngredientPrice } from "./ingredient-price/ingredient-price";
+import { CompoundRow } from "./compound-row/compound-row";
 import styles from "./order-details.module.css";
 import { useSelector } from "../../services/types";
 import { EOrderStatus } from "../../utils/api-shape";
@@ -8,6 +8,14 @@ import { useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
 import { TIngredient } from "../../services/types/data";
 import { v4 as uuid } from "uuid";
+
+// Элемент заказа.
+type TCompoundItem = {
+  name: string;
+  quantity: number;
+  price: number;
+  image: string;
+};
 
 function OrderDetails() {
   const { id } = useParams();
@@ -18,16 +26,34 @@ function OrderDetails() {
     store.feed.message?.orders.find((order) => order.number.toString() === id)
   );
 
-  // Получаем список ингредиентов в заказе.
-  let ingredientsInOrder: Array<TIngredient> = [];
+  // Получаем список ингредиентов в заказе для вывода.
+  let ingredientsInOrder: Array<TCompoundItem> = [];
   order?.ingredients.forEach((ingredientInOrder) => {
+    const tmp = allIngredients.find(
+      (ingredient) => ingredient._id === ingredientInOrder
+    )!;
+
+    if (ingredientsInOrder.some((x) => x.name === tmp.name)) {
+      ingredientsInOrder.map((x) => {
+        if (x.name === tmp.name) {
+          x.quantity++;
+        }
+        return x;
+      });
+      return;
+    }
+
     ingredientsInOrder = [
       ...ingredientsInOrder,
-      allIngredients.find((ing) => ing._id === ingredientInOrder)!,
+      {
+        name: tmp.name,
+        price: tmp.price,
+        image: tmp.image_mobile,
+        quantity: allIngredients.filter((x) => x._id === ingredientInOrder)
+          .length,
+      },
     ];
   });
-
-  // Получаем список уникальных ингредиентов в заказе.
 
   // Заказ не загрузился? Показываемся Loader.
   if (order === undefined) {
@@ -64,14 +90,11 @@ function OrderDetails() {
       <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
         {ingredientsInOrder.map((ingredient) => {
           return (
-            <IngredientPrice
+            <CompoundRow
               icon={ingredient!.image}
               ingredientName={ingredient!.name}
               price={ingredient!.price}
-              quantity={
-                ingredientsInOrder.filter((x) => x._id === ingredient._id)
-                  .length
-              }
+              quantity={ingredient.quantity}
               key={uuid()}
             />
           );
@@ -84,7 +107,7 @@ function OrderDetails() {
         <div>
           <Price
             price={ingredientsInOrder.reduce(
-              (prev, current) => prev + current.price,
+              (prev, current) => prev + current.price * current.quantity,
               0
             )}
             textSize="default"

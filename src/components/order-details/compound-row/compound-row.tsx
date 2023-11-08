@@ -1,20 +1,15 @@
 import { Price } from "../../common/price/price";
 import { IngredientIcon } from "../../orders-ribbon/history-item/ingredients/ingredient-icon/ingredient-icon";
-import styles from "./ingredient-price.module.css";
+import styles from "./compound-row.module.css";
 
-interface IIngredientPrice {
+interface ICompoundRow {
   icon: string;
   ingredientName: string;
   quantity: number;
   price: number;
 }
 
-function IngredientPrice({
-  icon,
-  ingredientName,
-  quantity,
-  price,
-}: IIngredientPrice) {
+function CompoundRow({ icon, ingredientName, quantity, price }: ICompoundRow) {
   return (
     <div className={styles.container}>
       <div className={styles.icon}>
@@ -30,4 +25,4 @@ function IngredientPrice({
   );
 }
 
-export { IngredientPrice };
+export { CompoundRow };
