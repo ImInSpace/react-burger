@@ -6,12 +6,22 @@ import { wsFeedConnectionStartAction } from "../../services/actions/wsFeed";
 import { Loader } from "../ui/loader/loader";
 import { FeedCard } from "./feed-card/feed-card";
 import { WS_URL } from "../../constants";
+import { useLocation } from "react-router-dom";
+import { wsOrdersConnectionStartAction } from "../../services/actions/wsOrders";
+import { getCookie } from "../../services/cookieManager";
 
 function Feed(): JSX.Element {
+  const location = useLocation();
   const dispatch = useDispatch();
 
+  // let wsConStr = WS_URL;
+  // if (location.pathname.includes("/orders")) {
+  //   wsConStr
+  // }
+
   useEffect(() => {
-    dispatch(wsFeedConnectionStartAction(WS_URL));
+    console.log(getCookie("token"));
+    dispatch(wsOrdersConnectionStartAction(WS_URL, getCookie("token")!));
   });
 
   const orders = useSelector((store) => store.feed.message?.orders);
