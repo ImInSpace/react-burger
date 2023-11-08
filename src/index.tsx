@@ -8,8 +8,7 @@ import { rootReducer } from "./services/reducers/index";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { socketMiddleware } from "./services/middleware/socket-middleware";
-import { WS_URL } from "./constants";
+import { feedSocketMiddleware } from "./services/middleware/ws-feed-middleware";
 
 const composeEnhancers =
   typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -17,7 +16,7 @@ const composeEnhancers =
     : compose;
 
 const enhancer = composeEnhancers(
-  applyMiddleware(thunk, socketMiddleware(WS_URL))
+  applyMiddleware(thunk, feedSocketMiddleware())
 );
 
 const store = createStore(rootReducer, enhancer);
@@ -34,7 +33,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

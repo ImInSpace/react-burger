@@ -1,11 +1,11 @@
 import { TOrder, TWsResponseBody } from "../../utils/api-shape";
-import { TWsActions } from "../actions/web-socket";
+import { TWsFeedActions } from "../actions/wsFeed";
 import {
-  WS_CONNECTION_SUCCESS,
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_ERROR,
-  WS_GET_MESSAGE,
-  SELECT_FEED,
+  WS_FEED_CONNECTION_SUCCESS,
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_ERROR,
+  WS_FEED_GET_MESSAGE,
+  WS_FEED_SELECT,
 } from "../constants";
 
 type TWsState = {
@@ -20,18 +20,19 @@ const initialState: TWsState = {
   message: null,
 };
 
-export const feedReducer = (state = initialState, action: TWsActions) => {
+export const feedReducer = (state = initialState, action: TWsFeedActions) => {
   switch (action.type) {
-    case WS_CONNECTION_SUCCESS:
+    case WS_FEED_CONNECTION_SUCCESS:
       return { ...state, isWsConnected: true, error: undefined };
-    case WS_CONNECTION_CLOSED:
+    case WS_FEED_CONNECTION_CLOSED:
+      console.log("Подключение WS для ленты заказов закрыто.");
       return { ...state, isWsConnected: false, error: undefined };
-    case WS_CONNECTION_ERROR:
+    case WS_FEED_CONNECTION_ERROR:
       return { ...state, isWsConnected: false, error: action.payload };
-    case WS_GET_MESSAGE: {
+    case WS_FEED_GET_MESSAGE: {
       return { ...state, message: action.message };
     }
-    case SELECT_FEED: {
+    case WS_FEED_SELECT: {
       return { ...state, selectedFeed: action.payload };
     }
     default:

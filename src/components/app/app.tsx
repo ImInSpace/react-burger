@@ -15,11 +15,12 @@ import { useDispatch } from "react-redux";
 import { loadIngredientsThunk } from "../../services/actions/ingredients";
 import { useEffect } from "react";
 import OrdersHistory from "../../pages/feed";
-import { wsConnectionStartAction } from "../../services/actions/web-socket";
 import FeedModal from "../ui/feed-modal/feed-modal";
 import { OrderDetails } from "../order-details/order-details";
 import { Feed } from "../feed/feed";
 import { EditProfile } from "../profile/edit-profile/edit-profile";
+import { wsFeedConnectionStartAction } from "../../services/actions/wsFeed";
+import { WS_URL } from "../../constants";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -29,8 +30,8 @@ function App(): JSX.Element {
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(wsConnectionStartAction());
-  });
+    dispatch(wsFeedConnectionStartAction(WS_URL));
+  }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;

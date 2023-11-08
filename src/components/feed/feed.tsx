@@ -2,15 +2,16 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "../../services/types";
 import { TIngredient } from "../../services/types/data";
 import styles from "./feed.module.css";
-import { wsConnectionStartAction } from "../../services/actions/web-socket";
+import { wsFeedConnectionStartAction } from "../../services/actions/wsFeed";
 import { Loader } from "../ui/loader/loader";
 import { FeedCard } from "./feed-card/feed-card";
+import { WS_URL } from "../../constants";
 
 function Feed(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(wsConnectionStartAction());
+    dispatch(wsFeedConnectionStartAction(WS_URL));
   });
 
   const orders = useSelector((store) => store.feed.message?.orders);

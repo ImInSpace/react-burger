@@ -5,7 +5,7 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 import { TIngredient } from "../../../services/types/data";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../services/types";
-import { selectFeedAction } from "../../../services/actions/web-socket";
+import { wsFeedSelectFeedAction } from "../../../services/actions/wsFeed";
 
 interface IFeedCardProps {
   orderNumber: number;
@@ -37,7 +37,7 @@ function FeedCard({
   )!;
 
   const selectFeed = () => {
-    dispatch(selectFeedAction(currentOrder!));
+    dispatch(wsFeedSelectFeedAction(currentOrder!));
   };
 
   return (

@@ -2,40 +2,50 @@ import type { Middleware, MiddlewareAPI } from "redux";
 
 import type { TAppActions } from "../actions";
 import { AppDispatch } from "../types";
-import { TWsActions, wsGetMessageAction } from "../actions/web-socket";
-import { WS_CONNECTION_START } from "../constants";
+import {
+  TWsFeedActions,
+  wsFeedConnectionClosedAction,
+  wsFeedGetMessageAction,
+} from "../actions/wsFeed";
+import { WS_FEED_CONNECTION_START } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
+export const feedSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
     let socket: WebSocket | null = null;
 
-    return (next) => (action: TWsActions) => {
+    return (next) => (action: TWsFeedActions) => {
       const { type } = action;
       const { dispatch } = store;
 
-      if (type === WS_CONNECTION_START && !socket) {
-        socket = new WebSocket(`${wsUrl}`);
+      if (type === WS_FEED_CONNECTION_START && !socket) {
+        socket = new WebSocket(`${action.url}`);
       }
+
+      // if (type === WS_FEED_CONNECTION_CLOSED) {
+      //   socket?.close();
+      //   wsFeedConnectionClosedAction();
+      // }
 
       if (socket) {
         socket.onopen = (event) => {
-          // console.log("Connection opened");
+          // console.log("ws feed connection opened");
         };
 
         socket.onerror = (event) => {
-          // console.log("Connection error");
+          // console.log("ws feed connection error");
         };
 
         socket.onmessage = (event) => {
           // console.log("Get message()");
           const { data } = event;
           const message: TWsResponseBody = JSON.parse(data);
-          dispatch(wsGetMessageAction(message));
+          dispatch(wsFeedGetMessageAction(message));
         };
 
         socket.onclose = (event) => {
-          // console.log("Connection close()");
+          console.log("on close middleware");
+          socket?.close();
         };
       }
 

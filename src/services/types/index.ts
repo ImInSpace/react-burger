@@ -25,3 +25,8 @@ export type AppDispatch<TReturnType = void> = (
 
 export const useDispatch: () => AppDispatch = dispatchHook;
 export const useSelector: TypedUseSelectorHook<TRootState> = selectorHook;
+
+export type TWsConnection = {
+  url: string;
+  token?: string;
+};
