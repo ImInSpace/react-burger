@@ -14,13 +14,14 @@
 }
 
 .menu {
+  margin-top: 80px;
   width: 320px;
   height: 320px;
   display: grid;
   display: flex;
   flex-direction: column;
   justify-content: start;
-  align-items: start;
+  gap: 24px;
 }
 
 .subMenu {
@@ -30,4 +31,8 @@
 .active {
   text-decoration: none;
   color: white;
+}
+
+.link {
+  text-decoration: none;
 }

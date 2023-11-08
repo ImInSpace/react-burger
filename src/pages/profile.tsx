@@ -29,6 +29,9 @@ export default function Profile(): JSX.Element {
     dispatch(logoutThunk(logoutBody));
   };
 
+  const activeLinkStyle = `text text_type_main-medium ${styles.active}`;
+  const inactiveLinkStyle = `text text_type_main-medium text_color_inactive ${styles.link}`;
+
   return (
     <>
       <div className={styles.root}>
@@ -37,10 +40,7 @@ export default function Profile(): JSX.Element {
             <NavLink
               to={"/profile"}
               className={({ isActive }) =>
-                styles.container +
-                (isActive
-                  ? " text text_type_main-medium " + styles.active
-                  : " text text_type_main-medium text_color_inactive ")
+                isActive ? activeLinkStyle : inactiveLinkStyle
               }
               end
               onClick={() => setHintText(profileHint)}
@@ -50,23 +50,13 @@ export default function Profile(): JSX.Element {
             <NavLink
               to={"/profile/orders"}
               className={({ isActive }) =>
-                styles.container +
-                (isActive
-                  ? " text text_type_main-medium " + styles.active
-                  : " text text_type_main-medium text_color_inactive ")
+                isActive ? activeLinkStyle : inactiveLinkStyle
               }
               onClick={() => setHintText(ordersHint)}
             >
               История заказов
             </NavLink>
-            <Link
-              to={"#"}
-              className={
-                styles.container +
-                " text text_type_main-medium text_color_inactive"
-              }
-              onClick={logout}
-            >
+            <Link to={"#"} className={inactiveLinkStyle} onClick={logout}>
               Выход
             </Link>
 
