@@ -69,7 +69,7 @@ export default function Profile(): JSX.Element {
           </div>
           <div className={styles.subMenu}>
             {/* {activeMenu[0] && <EditProfile />} */}
-            {/* <Outlet /> */}
+            <Outlet />
           </div>
         </div>
       </div>
