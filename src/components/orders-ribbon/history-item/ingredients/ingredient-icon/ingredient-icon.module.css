@@ -17,7 +17,6 @@
   width: 75%;
   height: 75%;
   object-fit: cover;
-  overflow: hidden;
 }
 
 .ingredientForeground {
@@ -35,10 +34,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 4;
+  /* z-index: 1; */
 }
 
 .foregroundText {
   position: absolute;
-  z-index: 5;
+  /* z-index: 1; */
+}
+
+.liftUp {
+  z-index: 1;
 }

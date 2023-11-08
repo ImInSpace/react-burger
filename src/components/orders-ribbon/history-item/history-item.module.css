@@ -59,13 +59,10 @@
   background-color: #f2f2f3;
   opacity: 0.1;
   border-radius: 100px;
-
-  position: relative;
 }
 
 .ingredientPlusText {
   color: white;
-  position: absolute;
 }
 
 .price {

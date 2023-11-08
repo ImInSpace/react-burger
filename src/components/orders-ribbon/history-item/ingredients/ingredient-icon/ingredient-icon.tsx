@@ -1,4 +1,5 @@
 import styles from "./ingredient-icon.module.css";
+import cn from "classnames";
 
 interface IIngredientIcon {
   icon: string;
@@ -15,7 +16,12 @@ function IngredientIcon({
     <div className={styles.ingredient}>
       {isCounterShown && (
         <>
-          <div className={styles.ingredientForeground}></div>
+          <div
+            className={cn(
+              styles.ingredientForeground,
+              styles.liftUp && isCounterShown
+            )}
+          ></div>
           <p
             className={styles.foregroundText + " text text_type_digits-default"}
           >

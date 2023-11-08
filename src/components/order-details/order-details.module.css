@@ -3,6 +3,9 @@
   height: auto;
 
   margin: 0 auto;
+
+  position: relative;
+  z-index: 999;
 }
 
 .number {
