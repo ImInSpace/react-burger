@@ -15,7 +15,7 @@ function Bun({ bunInfo, bunPosition }: IBunProps): JSX.Element | null {
     <ConstructorRow showDragIcon={false}>
       <ConstructorElement
         type={bunPosition}
-        text={bunInfo.name + (bunPosition === "top" ? "верх" : "низ")}
+        text={bunInfo.name + (bunPosition === "top" ? " (верх)" : " (низ)")}
         price={bunInfo.price}
         thumbnail={bunInfo.image}
         isLocked={true}
