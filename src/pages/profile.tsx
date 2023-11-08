@@ -4,9 +4,16 @@ import { logoutThunk } from "../services/actions/auth";
 import { getCookie } from "../services/cookieManager";
 import { ILogoutRequestBody } from "../utils/api-shape";
 import { Link, NavLink, Outlet } from "react-router-dom";
+import { useState } from "react";
 
 export default function Profile(): JSX.Element {
+  const ordersHint =
+    "В этом разделе вы можете просмотреть свою историю заказов";
+  const profileHint =
+    "В этом разделе вы можете изменить свои персональные данные";
+
   const dispatch = useDispatch();
+  const [hintText, setHintText] = useState(profileHint);
 
   const logout = () => {
     const refreshToken = getCookie("refreshToken");
@@ -36,6 +43,7 @@ export default function Profile(): JSX.Element {
                   : " text text_type_main-default text_color_inactive ")
               }
               end
+              onClick={() => setHintText(profileHint)}
             >
               Профиль
             </NavLink>
@@ -47,6 +55,7 @@ export default function Profile(): JSX.Element {
                   ? " text text_type_main-default " + styles.active
                   : " text text_type_main-default text_color_inactive ")
               }
+              onClick={() => setHintText(ordersHint)}
             >
               История заказов
             </NavLink>
@@ -56,19 +65,17 @@ export default function Profile(): JSX.Element {
                 styles.container +
                 " text text_type_main-default text_color_inactive"
               }
-              onClick={() => logout()}
             >
               Выход
             </Link>
 
             <div className={styles.menuDescription}>
               <p className="text text_type_main-default text_color_inactive mt-20">
-                В этом разделе вы можете изменить свои персональные данные
+                {hintText}
               </p>
             </div>
           </div>
           <div className={styles.subMenu}>
-            {/* {activeMenu[0] && <EditProfile />} */}
             <Outlet />
           </div>
         </div>
