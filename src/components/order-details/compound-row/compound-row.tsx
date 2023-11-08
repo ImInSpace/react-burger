@@ -1,5 +1,5 @@
 import { Price } from "../../common/price/price";
-import { IngredientIcon } from "../../orders-ribbon/history-item/ingredients/ingredient-icon/ingredient-icon";
+import { IngredientIcon } from "../../feed/feed-card/ingredients/ingredient-icon/ingredient-icon";
 import styles from "./compound-row.module.css";
 
 interface ICompoundRow {

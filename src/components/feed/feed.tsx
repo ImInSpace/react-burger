@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "../../services/types";
 import { TIngredient } from "../../services/types/data";
-import { HistoryItem } from "./history-item/history-item";
-import styles from "./orders-ribbon.module.css";
+import styles from "./feed.module.css";
 import { wsConnectionStartAction } from "../../services/actions/web-socket";
 import { Loader } from "../ui/loader/loader";
+import { FeedCard } from "./feed-card/feed-card";
 
-function OrdersRibbon(): JSX.Element {
+function Feed(): JSX.Element {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,7 +36,7 @@ function OrdersRibbon(): JSX.Element {
         });
 
         return (
-          <HistoryItem
+          <FeedCard
             burgerName={order.name}
             orderNumber={order.number}
             ingredients={ingredientsInOrder!}
@@ -49,4 +49,4 @@ function OrdersRibbon(): JSX.Element {
   );
 }
 
-export { OrdersRibbon };
+export { Feed };

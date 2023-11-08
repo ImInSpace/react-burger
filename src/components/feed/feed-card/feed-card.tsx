@@ -1,25 +1,25 @@
 import { Price } from "../../common/price/price";
 import { Ingredients } from "./ingredients/ingredients";
-import styles from "./history-item.module.css";
+import styles from "./feed-card.module.css";
 import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
 import { TIngredient } from "../../../services/types/data";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../services/types";
 import { selectFeedAction } from "../../../services/actions/web-socket";
 
-interface IHistoryItemProps {
+interface IFeedCardProps {
   orderNumber: number;
   burgerName: string;
   ingredients: Array<TIngredient> | null;
   createdAt: string;
 }
 
-function HistoryItem({
+function FeedCard({
   orderNumber,
   burgerName,
   ingredients,
   createdAt,
-}: IHistoryItemProps): JSX.Element {
+}: IFeedCardProps): JSX.Element {
   const dispatch = useDispatch();
   const currentOrder = useSelector((store) =>
     store.feed.message?.orders.find((order) => order.number === orderNumber)
@@ -67,4 +67,4 @@ function HistoryItem({
   );
 }
 
-export { HistoryItem };
+export { FeedCard };
