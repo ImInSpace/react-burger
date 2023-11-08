@@ -21,15 +21,16 @@ function FeedCard({
   createdAt,
 }: IFeedCardProps): JSX.Element {
   const dispatch = useDispatch();
+  const location = useLocation();
+
   const currentOrder = useSelector((store) =>
     store.feed.message?.orders.find((order) => order.number === orderNumber)
   );
-  const location = useLocation();
+
   const icons: Array<string> = ingredients!.map(
     (ingredient) => ingredient.image
   );
 
-  // ToDo: Вынести функцию подсчета суммы в Utils, например.
   const price: number = ingredients?.reduce(
     (cur, prev) => cur + prev.price,
     0
@@ -41,7 +42,7 @@ function FeedCard({
 
   return (
     <Link
-      to={`/feed/${orderNumber}`}
+      to={`${location.pathname}/${orderNumber}`}
       state={{ backgroundLocation: location }}
       className={styles.link}
       onClick={() => selectFeed()}

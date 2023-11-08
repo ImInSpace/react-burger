@@ -88,6 +88,7 @@ function App(): JSX.Element {
         <Routes>
           <Route path="/ingredients/:id" element={<IngredientModal />} />
           <Route path="/feed/:id" element={<FeedModal />} />
+          <Route path="/profile/orders/:id" element={<FeedModal />} />
         </Routes>
       )}
     </>
