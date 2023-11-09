@@ -14,7 +14,7 @@ import {
   WS_FEED_CONNECTION_START,
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
-import { WS_URL } from "../../constants";
+import { WS_STATE_CLOSED, WS_URL } from "../../constants";
 
 export const feedSocketMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -25,7 +25,8 @@ export const feedSocketMiddleware = (): Middleware => {
       const { dispatch } = store;
 
       if (type === WS_FEED_CONNECTION_START) {
-        socket = new WebSocket(`${WS_URL}/all`);
+        if (socket === null || socket.readyState === WS_STATE_CLOSED)
+          socket = new WebSocket(`${WS_URL}/all`);
       }
 
       if (type === WS_FEED_CONNECTION_CLOSED) {
