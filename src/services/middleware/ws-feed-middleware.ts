@@ -6,7 +6,7 @@ import {
   TWsFeedActions,
   wsFeedConnectionClosedAction,
   wsFeedConnectionErrorAction,
-  wsFeedConnectionStartAction,
+  wsFeedConnectionSuccessAction,
   wsFeedGetMessageAction,
 } from "../actions/wsFeed";
 import {
@@ -35,11 +35,11 @@ export const feedSocketMiddleware = (): Middleware => {
 
       if (socket) {
         socket.onopen = (event) => {
-          wsFeedConnectionStartAction();
+          dispatch(wsFeedConnectionSuccessAction());
         };
 
         socket.onerror = (event) => {
-          wsFeedConnectionErrorAction(event);
+          dispatch(wsFeedConnectionErrorAction(event));
         };
 
         socket.onmessage = (event) => {
@@ -49,7 +49,7 @@ export const feedSocketMiddleware = (): Middleware => {
         };
 
         socket.onclose = (event) => {
-          wsFeedConnectionClosedAction();
+          dispatch(wsFeedConnectionClosedAction());
         };
       }
 
