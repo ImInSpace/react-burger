@@ -19,6 +19,8 @@ function Feed({ orders }: IFeedProps): JSX.Element {
     return <Loader size="large" inverse={true} />;
   }
 
+  console.log("orders: ", orders);
+
   return (
     <div className={styles.container + "  custom-scroll pr-2"}>
       {orders?.map((order) => {
@@ -35,11 +37,10 @@ function Feed({ orders }: IFeedProps): JSX.Element {
 
         return (
           <FeedCard
+            order={order}
             burgerName={order.name}
-            orderNumber={order.number}
             ingredients={ingredientsInOrder!}
             key={order._id}
-            createdAt={order.createdAt}
           />
         );
       })}

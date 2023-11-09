@@ -7,33 +7,30 @@ import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../services/types";
 import { wsFeedSelectFeedAction } from "../../../services/actions/wsFeed";
 import { useMemo } from "react";
+import { TOrder } from "../../../utils/api-shape";
 
 interface IFeedCardProps {
-  orderNumber: number;
+  order: TOrder;
   burgerName: string;
   ingredients: Array<TIngredient> | null;
-  createdAt: string;
 }
 
 function FeedCard({
-  orderNumber,
+  order,
   burgerName,
   ingredients,
-  createdAt,
 }: IFeedCardProps): JSX.Element {
   const dispatch = useDispatch();
   const location = useLocation();
 
   const currentOrder = useSelector((store) =>
     store.wsFeedReducer.message?.orders.find(
-      (order) => order.number === orderNumber
+      (order) => order.number === order.number
     )
   );
 
   const tmp = ingredients?.map((x) => {
-    if (x === undefined) {
-      console.log("orderNumber: ", orderNumber);
-    } else {
+    if (x !== undefined) {
       return x;
     }
   });
@@ -48,16 +45,16 @@ function FeedCard({
 
   return (
     <Link
-      to={`${location.pathname}/${orderNumber}`}
+      to={`${location.pathname}/${order.number}`}
       state={{ backgroundLocation: location }}
       className={styles.link}
       onClick={() => selectFeed()}
     >
       <div className={styles.container}>
         <div className={styles.orderNumberRow}>
-          <p className="text text_type_main-default">{`#0${orderNumber}`}</p>
+          <p className="text text_type_main-default">{`#0${order.number}`}</p>
           <p className={styles.time}>
-            <FormattedDate date={new Date(createdAt)} />
+            <FormattedDate date={new Date(order.createdAt)} />
           </p>
         </div>
         <div className={styles.burgerName}>

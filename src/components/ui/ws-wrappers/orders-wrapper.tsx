@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "../../../services/types";
-import { wsOrdersConnectionStartAction } from "../../../services/actions/wsOrders";
-import { WS_URL } from "../../../constants";
-import { getCookie } from "../../../services/cookieManager";
+import { useSelector } from "../../../services/types";
 import { Feed } from "../../feed/feed";
 import { Loader } from "../loader/loader";
-import { WS_ORDERS_CONNECTION_CLOSED } from "../../../services/constants";
+import {
+  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_CONNECTION_START,
+} from "../../../services/constants";
+import { useDispatch } from "react-redux";
 
 // Обёртка для вывода Feed в профиле. Использует другое подключение Middleware.
 function OrdersWrapper() {
@@ -13,12 +14,7 @@ function OrdersWrapper() {
 
   // Подключаемся к Web-Socket Middleware с токеном пользователя.
   useEffect(() => {
-    dispatch(
-      wsOrdersConnectionStartAction(
-        WS_URL,
-        getCookie("token")!.replace("Bearer ", "")
-      )
-    );
+    dispatch({ type: WS_ORDERS_CONNECTION_START });
 
     // Отключаемся от сокета, когда уходим.
     return () => {

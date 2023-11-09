@@ -15,6 +15,7 @@ import {
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
 import { WS_STATE_CLOSED, WS_URL } from "../../constants";
+import { getCookie } from "../cookieManager";
 
 export const wsOrdersMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
@@ -26,7 +27,9 @@ export const wsOrdersMiddleware = (): Middleware => {
 
       if (type === WS_ORDERS_CONNECTION_START) {
         if (socket === null || socket.readyState === WS_STATE_CLOSED)
-          socket = new WebSocket(`${WS_URL}/all`);
+          socket = new WebSocket(
+            `${WS_URL}?token=${getCookie("token")?.replace("Bearer ", "")}`
+          );
       }
 
       if (type === WS_ORDERS_CONNECTION_CLOSED) {
