@@ -6,6 +6,7 @@ import { TIngredient } from "../../../services/types/data";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "../../../services/types";
 import { wsFeedSelectFeedAction } from "../../../services/actions/wsFeed";
+import { useMemo } from "react";
 
 interface IFeedCardProps {
   orderNumber: number;
@@ -29,14 +30,13 @@ function FeedCard({
     )
   );
 
-  const icons: Array<string> = ingredients!.map(
-    (ingredient) => ingredient.image
-  );
+  const icons: Array<string> = useMemo(() => {
+    return ingredients!.map((ingredient) => ingredient.image);
+  }, [ingredients]);
 
-  const price: number = ingredients?.reduce(
-    (cur, prev) => cur + prev.price,
-    0
-  )!;
+  const price: number = useMemo(() => {
+    return ingredients?.reduce((cur, prev) => cur + prev.price, 0)!;
+  }, [ingredients]);
 
   const selectFeed = () => {
     dispatch(wsFeedSelectFeedAction(currentOrder!));
