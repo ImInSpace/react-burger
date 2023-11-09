@@ -90,14 +90,14 @@ function OrderDetails() {
       </p>
       <p className="text text_type_main-medium mt-15">Состав:</p>
       <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
-        {ingredientsInOrder.map((ingredient) => {
+        {ingredientsInOrder.map((ingredient, index) => {
           return (
             <CompoundRow
               icon={ingredient!.image}
               ingredientName={ingredient!.name}
               price={ingredient!.price}
               quantity={ingredient.quantity}
-              key={uuid()}
+              key={order.number + index}
             />
           );
         })}

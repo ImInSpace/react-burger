@@ -30,10 +30,6 @@ function FeedCard({
     )
   );
 
-  const icons: Array<string> = useMemo(() => {
-    return ingredients!.map((ingredient) => ingredient.image);
-  }, [ingredients]);
-
   const price: number = useMemo(() => {
     return ingredients?.reduce((cur, prev) => cur + prev.price, 0)!;
   }, [ingredients]);
@@ -60,7 +56,7 @@ function FeedCard({
           <p className="text text_type_main-medium">{burgerName}</p>
         </div>
         <div className={styles.ingredients}>
-          <Ingredients iconsUrl={icons} />
+          <Ingredients order={currentOrder!} />
           <div className={styles.price}>
             <Price price={price} textSize="default" />
           </div>
