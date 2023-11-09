@@ -12,12 +12,6 @@ import { OrderDetails } from "../order-details/order-details";
 import { EditProfile } from "../profile/edit-profile/edit-profile";
 import { OrdersWrapper } from "../ui/ws-wrappers/orders-wrapper";
 import FeedPage from "../../pages/feed/feed";
-import {
-  WS_FEED_CONNECTION_CLOSED,
-  WS_FEED_CONNECTION_START,
-  WS_ORDERS_CONNECTION_CLOSED,
-  WS_ORDERS_CONNECTION_START,
-} from "../../services/constants";
 import HomePage from "../../pages/home/home";
 import LoginPage from "../../pages/login/login";
 import RegisterPage from "../../pages/register/register";
@@ -25,6 +19,12 @@ import Profile from "../../pages/profile/profile";
 import ForgotPasswordPage from "../../pages/forgot-password/forgot-password";
 import ResetPasswordPage from "../../pages/reset-password/reset-password";
 import NotFound404Page from "../../pages/not-found/not-found404";
+import {
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_START,
+  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_CONNECTION_START,
+} from "../../services/constants";
 
 function App(): JSX.Element {
   const dispatch = useDispatch();
@@ -33,21 +33,21 @@ function App(): JSX.Element {
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch({ type: WS_FEED_CONNECTION_START });
+  useEffect(() => {
+    dispatch({ type: WS_FEED_CONNECTION_START });
 
-  //   return () => {
-  //     dispatch({ type: WS_FEED_CONNECTION_CLOSED });
-  //   };
-  // }, [dispatch]);
+    return () => {
+      dispatch({ type: WS_FEED_CONNECTION_CLOSED });
+    };
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch({ type: WS_ORDERS_CONNECTION_START });
+  useEffect(() => {
+    dispatch({ type: WS_ORDERS_CONNECTION_START });
 
-  //   return () => {
-  //     dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
-  //   };
-  // }, [dispatch]);
+    return () => {
+      dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
+    };
+  }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;
