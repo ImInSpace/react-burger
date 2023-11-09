@@ -15,14 +15,14 @@ function Ingredients({
     <div className={styles.container}>
       {ingredientIcons.map((icon, index) => {
         if (index < iconsLimit)
-          return <IngredientIcon icon={icon} key={uuid()} />;
+          return <IngredientIcon icon={icon} key={index} />;
         if (index === iconsLimit) {
           return (
             <IngredientIcon
               icon={icon}
               isCounterShown={true}
               number={ingredientIcons.length - index}
-              key={uuid()}
+              key={index}
             />
           );
         }
