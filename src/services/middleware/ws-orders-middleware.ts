@@ -30,10 +30,7 @@ export const ordersSocketMiddleware = (): Middleware => {
       }
 
       // Грохаем подключение.
-      if (
-        type === WS_ORDERS_CONNECTION_CLOSED &&
-        socket?.readyState === WS_STATE_OPEN
-      ) {
+      if (type === WS_ORDERS_CONNECTION_CLOSED) {
         socket?.close();
         wsFeedConnectionClosedAction();
       }

@@ -22,6 +22,8 @@ import FeedPage from "../../pages/feed";
 import {
   WS_FEED_CONNECTION_CLOSED,
   WS_FEED_CONNECTION_START,
+  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_CONNECTION_START,
 } from "../../services/constants";
 
 function App(): JSX.Element {
@@ -38,6 +40,14 @@ function App(): JSX.Element {
       dispatch({ type: WS_FEED_CONNECTION_CLOSED });
     };
   }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch({ type: WS_ORDERS_CONNECTION_START });
+
+  //   return () => {
+  //     dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;
