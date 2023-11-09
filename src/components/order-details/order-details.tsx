@@ -2,12 +2,18 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 import { Price } from "../common/price/price";
 import { CompoundRow } from "./compound-row/compound-row";
 import styles from "./order-details.module.css";
-import { useSelector } from "../../services/types";
-import { EOrderStatus } from "../../utils/api-shape";
-import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "../../services/types";
+import { EOrderStatus, TOrder } from "../../utils/api-shape";
+import { useLocation, useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
-import { TIngredient } from "../../services/types/data";
-import { v4 as uuid } from "uuid";
+import { OrderNumber } from "../create-order/order-number/order-number";
+import { useEffect } from "react";
+import {
+  WS_FEED_CONNECTION_CLOSED,
+  WS_FEED_CONNECTION_START,
+  WS_ORDERS_CONNECTION_CLOSED,
+  WS_ORDERS_CONNECTION_START,
+} from "../../services/constants";
 
 // Элемент заказа.
 type TCompoundItem = {
@@ -18,15 +24,51 @@ type TCompoundItem = {
 };
 
 function OrderDetails() {
+  const location = useLocation();
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch({ type: WS_FEED_CONNECTION_START });
+
+  //   return () => {
+  //     dispatch({ type: WS_FEED_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch]);
+
+  // useEffect(() => {
+  //   dispatch({ type: WS_ORDERS_CONNECTION_START });
+
+  //   return () => {
+  //     dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch]);
 
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
-  const order = useSelector((store) =>
-    store.wsFeedReducer.message?.orders.find(
-      (order) => order.number.toString() === id
-    )
-  );
+  const feedOrders = useSelector((store) => {
+    return store.wsFeedReducer.message?.orders;
+  });
+  console.log("feed orders: ", feedOrders);
+
+  const userOrders = useSelector((store) => {
+    return store.wsOrders.message?.orders;
+  });
+  console.log("user orders: ", userOrders);
+
+  let order: TOrder | null = null;
+
+  if (location.pathname.includes("orders")) {
+    order = userOrders!.find((order) => order.number.toString() === id)!;
+  } else {
+    order = feedOrders!.find((order) => order.number.toString() === id)!;
+  }
+
+  // const order = useSelector((store) =>
+  //   store.wsFeedReducer.message?.orders.find(
+  //     (order) => order.number.toString() === id
+  //   )
+  // );
 
   // Получаем список ингредиентов в заказе для вывода.
   let ingredientsInOrder: Array<TCompoundItem> = [];
@@ -97,7 +139,7 @@ function OrderDetails() {
               ingredientName={ingredient!.name}
               price={ingredient!.price}
               quantity={ingredient.quantity}
-              key={order.number + index}
+              key={order!.number + index}
             />
           );
         })}

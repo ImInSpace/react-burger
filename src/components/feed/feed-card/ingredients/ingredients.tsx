@@ -12,7 +12,6 @@ function Ingredients({ order }: IIngredientsProps): JSX.Element {
   const iconsLimit: number = 5;
 
   const ingredients = useSelector((store) => store.ingredients.ingredients);
-  console.log("order: ", order);
 
   const ingredientsInOrder = order.ingredients.map((id) => {
     const temp = ingredients.find((ing) => ing._id === id);

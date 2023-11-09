@@ -33,21 +33,21 @@ function App(): JSX.Element {
     dispatch(loadIngredientsThunk());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch({ type: WS_FEED_CONNECTION_START });
+  // useEffect(() => {
+  //   dispatch({ type: WS_FEED_CONNECTION_START });
 
-    return () => {
-      dispatch({ type: WS_FEED_CONNECTION_CLOSED });
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     dispatch({ type: WS_FEED_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch]);
 
-  useEffect(() => {
-    dispatch({ type: WS_ORDERS_CONNECTION_START });
+  // useEffect(() => {
+  //   dispatch({ type: WS_ORDERS_CONNECTION_START });
 
-    return () => {
-      dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
-    };
-  }, [dispatch]);
+  //   return () => {
+  //     dispatch({ type: WS_ORDERS_CONNECTION_CLOSED });
+  //   };
+  // }, [dispatch]);
 
   let location = useLocation();
   let state = location.state;

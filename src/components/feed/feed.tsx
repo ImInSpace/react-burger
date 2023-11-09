@@ -19,8 +19,6 @@ function Feed({ orders }: IFeedProps): JSX.Element {
     return <Loader size="large" inverse={true} />;
   }
 
-  console.log("orders: ", orders);
-
   return (
     <div className={styles.container + "  custom-scroll pr-2"}>
       {orders?.map((order) => {
