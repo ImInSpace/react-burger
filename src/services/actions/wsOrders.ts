@@ -45,15 +45,22 @@ export const wsOrdersConnectionStartAction = (
   payload: { url: url, token: token },
 });
 
+export const wsOrdersConnectionSuccessAction =
+  (): IWsOrdersConnectionSuccessAction => ({
+    type: WS_ORDERS_CONNECTION_SUCCESS,
+  });
+
 export const wsOrdersConnectionCloseAction =
   (): IWsOrdersConnectionCloseAction => ({
     type: WS_ORDERS_CONNECTION_CLOSED,
   });
 
-export const wsOrdersConnectionSuccessAction =
-  (): IWsOrdersConnectionSuccessAction => ({
-    type: WS_ORDERS_CONNECTION_SUCCESS,
-  });
+export const wsOrdersConnectionErrorAction = (
+  event: Event
+): IWsOrdersConnectionErrorAction => ({
+  type: WS_ORDERS_CONNECTION_ERROR,
+  payload: event,
+});
 
 export const wsOrdersGetMessageAction = (
   message: TWsResponseBody

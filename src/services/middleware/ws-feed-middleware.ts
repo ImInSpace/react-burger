@@ -16,7 +16,7 @@ import {
 import { TWsResponseBody } from "../../utils/api-shape";
 import { WS_STATE_CLOSED, WS_URL } from "../../constants";
 
-export const feedSocketMiddleware = (): Middleware => {
+export const wsFeedMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
     let socket: WebSocket | null = null;
 

@@ -30,9 +30,17 @@ function FeedCard({
     )
   );
 
+  const tmp = ingredients?.map((x) => {
+    if (x === undefined) {
+      console.log("orderNumber: ", orderNumber);
+    } else {
+      return x;
+    }
+  });
+
   const price: number = useMemo(() => {
-    return ingredients?.reduce((cur, prev) => cur + prev.price, 0)!;
-  }, [ingredients]);
+    return tmp?.reduce((cur, prev) => cur + prev!.price, 0)!;
+  }, [tmp]);
 
   const selectFeed = () => {
     dispatch(wsFeedSelectFeedAction(currentOrder!));

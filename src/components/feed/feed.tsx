@@ -25,6 +25,8 @@ function Feed({ orders }: IFeedProps): JSX.Element {
         let ingredientsInOrder: Array<TIngredient> = [];
 
         order.ingredients.forEach((id) => {
+          if (!storeIngredients.some((x) => x._id === id)) return;
+
           ingredientsInOrder = [
             ...ingredientsInOrder,
             storeIngredients.find((ingredient) => ingredient._id === id)!,

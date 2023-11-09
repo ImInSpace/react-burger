@@ -3,18 +3,20 @@ import type { Middleware, MiddlewareAPI } from "redux";
 import type { TAppActions } from "../actions";
 import { AppDispatch } from "../types";
 import {
+  TWsOrdersActions,
+  wsOrdersConnectionCloseAction,
+  wsOrdersConnectionErrorAction,
+  wsOrdersConnectionSuccessAction,
+  wsOrdersGetMessageAction,
+} from "../actions/wsOrders";
+import {
   WS_ORDERS_CONNECTION_CLOSED,
   WS_ORDERS_CONNECTION_START,
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
-import {
-  TWsOrdersActions,
-  wsOrdersGetMessageAction,
-} from "../actions/wsOrders";
-import { wsFeedConnectionClosedAction } from "../actions/wsFeed";
-import { WS_STATE_OPEN } from "../../constants";
+import { WS_STATE_CLOSED, WS_URL } from "../../constants";
 
-export const ordersSocketMiddleware = (): Middleware => {
+export const wsOrdersMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
     let socket: WebSocket | null = null;
 
@@ -22,26 +24,22 @@ export const ordersSocketMiddleware = (): Middleware => {
       const { type } = action;
       const { dispatch } = store;
 
-      // Создаем подключение с токеном пользователя.
       if (type === WS_ORDERS_CONNECTION_START) {
-        socket = new WebSocket(
-          `${action.payload.url}?token=${action.payload.token}`
-        );
+        if (socket === null || socket.readyState === WS_STATE_CLOSED)
+          socket = new WebSocket(`${WS_URL}/all`);
       }
 
-      // Грохаем подключение.
       if (type === WS_ORDERS_CONNECTION_CLOSED) {
         socket?.close();
-        wsFeedConnectionClosedAction();
       }
 
       if (socket) {
         socket.onopen = (event) => {
-          // console.log("ws orders connection opened");
+          dispatch(wsOrdersConnectionSuccessAction());
         };
 
         socket.onerror = (event) => {
-          // console.log("ws orders connection error");
+          dispatch(wsOrdersConnectionErrorAction(event));
         };
 
         socket.onmessage = (event) => {
@@ -51,8 +49,7 @@ export const ordersSocketMiddleware = (): Middleware => {
         };
 
         socket.onclose = (event) => {
-          // console.log("ws orders on close");
-          socket?.close();
+          dispatch(wsOrdersConnectionCloseAction());
         };
       }
 
