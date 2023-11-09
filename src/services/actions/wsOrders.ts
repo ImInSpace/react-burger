@@ -7,11 +7,9 @@ import {
   WS_ORDERS_GET_MESSAGE,
   WS_ORDERS_SELECT,
 } from "../constants";
-import { TWsConnection } from "../types";
 
 export interface IWsOrdersConnectionStartAction {
   readonly type: typeof WS_ORDERS_CONNECTION_START;
-  payload: TWsConnection;
 }
 
 export interface IWsOrdersConnectionSuccessAction {
@@ -37,23 +35,27 @@ export interface IWsOrdersSelectAction {
   payload: TOrder;
 }
 
-export const wsOrdersConnectionStartAction = (
-  url: string,
-  token: string
-): IWsOrdersConnectionStartAction => ({
-  type: WS_ORDERS_CONNECTION_START,
-  payload: { url: url, token: token },
-});
-
-export const wsOrdersConnectionCloseAction =
-  (): IWsOrdersConnectionCloseAction => ({
-    type: WS_ORDERS_CONNECTION_CLOSED,
+export const wsOrdersConnectionStartAction =
+  (): IWsOrdersConnectionStartAction => ({
+    type: WS_ORDERS_CONNECTION_START,
   });
 
 export const wsOrdersConnectionSuccessAction =
   (): IWsOrdersConnectionSuccessAction => ({
     type: WS_ORDERS_CONNECTION_SUCCESS,
   });
+
+export const wsOrdersConnectionCloseAction =
+  (): IWsOrdersConnectionCloseAction => ({
+    type: WS_ORDERS_CONNECTION_CLOSED,
+  });
+
+export const wsOrdersConnectionErrorAction = (
+  event: Event
+): IWsOrdersConnectionErrorAction => ({
+  type: WS_ORDERS_CONNECTION_ERROR,
+  payload: event,
+});
 
 export const wsOrdersGetMessageAction = (
   message: TWsResponseBody

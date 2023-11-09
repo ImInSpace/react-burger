@@ -25,6 +25,8 @@ function Feed({ orders }: IFeedProps): JSX.Element {
         let ingredientsInOrder: Array<TIngredient> = [];
 
         order.ingredients.forEach((id) => {
+          if (!storeIngredients.some((x) => x._id === id)) return;
+
           ingredientsInOrder = [
             ...ingredientsInOrder,
             storeIngredients.find((ingredient) => ingredient._id === id)!,
@@ -33,11 +35,10 @@ function Feed({ orders }: IFeedProps): JSX.Element {
 
         return (
           <FeedCard
+            order={order}
             burgerName={order.name}
-            orderNumber={order.number}
             ingredients={ingredientsInOrder!}
             key={order._id}
-            createdAt={order.createdAt}
           />
         );
       })}

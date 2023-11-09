@@ -3,11 +3,9 @@ import { Price } from "../common/price/price";
 import { CompoundRow } from "./compound-row/compound-row";
 import styles from "./order-details.module.css";
 import { useSelector } from "../../services/types";
-import { EOrderStatus } from "../../utils/api-shape";
-import { useParams } from "react-router-dom";
+import { EOrderStatus, TOrder } from "../../utils/api-shape";
+import { useLocation, useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
-import { TIngredient } from "../../services/types/data";
-import { v4 as uuid } from "uuid";
 
 // Элемент заказа.
 type TCompoundItem = {
@@ -18,15 +16,30 @@ type TCompoundItem = {
 };
 
 function OrderDetails() {
+  const location = useLocation();
   const { id } = useParams();
 
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
-  const order = useSelector((store) =>
-    store.wsFeedReducer.message?.orders.find(
-      (order) => order.number.toString() === id
-    )
-  );
+  const feedOrders = useSelector((store) => {
+    return store.wsFeedReducer.message?.orders;
+  });
+
+  const userOrders = useSelector((store) => {
+    return store.wsOrders.message?.orders;
+  });
+
+  if (!userOrders || !feedOrders) {
+    return <Loader inverse={true} size="large" />;
+  }
+
+  let order: TOrder | null = null;
+
+  if (location.pathname.includes("orders")) {
+    order = userOrders!.find((order) => order.number.toString() === id)!;
+  } else {
+    order = feedOrders!.find((order) => order.number.toString() === id)!;
+  }
 
   // Получаем список ингредиентов в заказе для вывода.
   let ingredientsInOrder: Array<TCompoundItem> = [];
@@ -90,14 +103,14 @@ function OrderDetails() {
       </p>
       <p className="text text_type_main-medium mt-15">Состав:</p>
       <div className={"mt-6 pr-6 custom-scroll " + styles.ingredients}>
-        {ingredientsInOrder.map((ingredient) => {
+        {ingredientsInOrder.map((ingredient, index) => {
           return (
             <CompoundRow
               icon={ingredient!.image}
               ingredientName={ingredient!.name}
               price={ingredient!.price}
               quantity={ingredient.quantity}
-              key={uuid()}
+              key={order!.number + index}
             />
           );
         })}

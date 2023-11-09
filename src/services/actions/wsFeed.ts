@@ -21,7 +21,7 @@ export interface IWsFeedConnectionErrorAction {
   payload: Event;
 }
 
-export interface IWsFeedConnectionClosedAction {
+export interface IWsFeedConnectionCloseAction {
   readonly type: typeof WS_FEED_CONNECTION_CLOSED;
 }
 
@@ -41,13 +41,18 @@ export const wsFeedConnectionStartAction =
   });
 
 export const wsFeedConnectionClosedAction =
-  (): IWsFeedConnectionClosedAction => ({
+  (): IWsFeedConnectionCloseAction => ({
     type: WS_FEED_CONNECTION_CLOSED,
   });
 
 export const wsFeedConnectionSuccessAction =
   (): IWsFeedConnectionSuccessAction => ({
     type: WS_FEED_CONNECTION_SUCCESS,
+  });
+
+export const wsFeedConnectionCloseAction =
+  (): IWsFeedConnectionCloseAction => ({
+    type: WS_FEED_CONNECTION_CLOSED,
   });
 
 export const wsFeedGetMessageAction = (
@@ -64,10 +69,17 @@ export const wsFeedSelectFeedAction = (
   payload: selectedFeed,
 });
 
+export const wsFeedConnectionErrorAction = (
+  eventData: Event
+): IWsFeedConnectionErrorAction => ({
+  type: WS_FEED_CONNECTION_ERROR,
+  payload: eventData,
+});
+
 export type TWsFeedActions =
   | IWsFeedConnectionStartAction
   | IWsFeedConnectionSuccessAction
   | IWsFeedConnectionErrorAction
-  | IWsFeedConnectionClosedAction
+  | IWsFeedConnectionCloseAction
   | IWsFeedGetMessageAction
   | IWsFeedSelectAction;

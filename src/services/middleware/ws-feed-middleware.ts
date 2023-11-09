@@ -4,7 +4,9 @@ import type { TAppActions } from "../actions";
 import { AppDispatch } from "../types";
 import {
   TWsFeedActions,
-  wsFeedConnectionStartAction,
+  wsFeedConnectionClosedAction,
+  wsFeedConnectionErrorAction,
+  wsFeedConnectionSuccessAction,
   wsFeedGetMessageAction,
 } from "../actions/wsFeed";
 import {
@@ -12,9 +14,9 @@ import {
   WS_FEED_CONNECTION_START,
 } from "../constants";
 import { TWsResponseBody } from "../../utils/api-shape";
-import { WS_STATE_OPEN, WS_URL } from "../../constants";
+import { WS_STATE_CLOSED, WS_URL } from "../../constants";
 
-export const feedSocketMiddleware = (): Middleware => {
+export const wsFeedMiddleware = (): Middleware => {
   return ((store: MiddlewareAPI<AppDispatch, TAppActions>) => {
     let socket: WebSocket | null = null;
 
@@ -23,22 +25,22 @@ export const feedSocketMiddleware = (): Middleware => {
       const { dispatch } = store;
 
       if (type === WS_FEED_CONNECTION_START) {
-        socket = new WebSocket(`${WS_URL}/all`);
-        wsFeedConnectionStartAction();
+        if (socket === null || socket.readyState === WS_STATE_CLOSED)
+          socket = new WebSocket(`${WS_URL}/all`);
       }
 
-      if (
-        type === WS_FEED_CONNECTION_CLOSED &&
-        socket?.readyState === WS_STATE_OPEN
-      ) {
+      if (type === WS_FEED_CONNECTION_CLOSED) {
         socket?.close();
-        wsFeedConnectionStartAction();
       }
 
       if (socket) {
-        socket.onopen = (event) => {};
+        socket.onopen = (event) => {
+          dispatch(wsFeedConnectionSuccessAction());
+        };
 
-        socket.onerror = (event) => {};
+        socket.onerror = (event) => {
+          dispatch(wsFeedConnectionErrorAction(event));
+        };
 
         socket.onmessage = (event) => {
           const { data } = event;
@@ -47,7 +49,7 @@ export const feedSocketMiddleware = (): Middleware => {
         };
 
         socket.onclose = (event) => {
-          socket?.close();
+          dispatch(wsFeedConnectionClosedAction());
         };
       }
 

@@ -1,13 +1,13 @@
 import { useEffect } from "react";
-import styles from "./orders-history.module.css";
-import { useDispatch, useSelector } from "../services/types";
-import { Feed } from "../components/feed/feed";
-import { OrdersDigest } from "../components/orders-digest/orders-digest";
+import styles from "./feed.module.css";
+import { useDispatch, useSelector } from "../../services/types";
+import { Feed } from "../../components/feed/feed";
+import { OrdersDigest } from "../../components/orders-digest/orders-digest";
 import {
   WS_FEED_CONNECTION_CLOSED,
   WS_FEED_CONNECTION_START,
-} from "../services/constants";
-import { Loader } from "../components/ui/loader/loader";
+} from "../../services/constants";
+import { Loader } from "../../components/ui/loader/loader";
 
 export default function FeedPage() {
   const dispatch = useDispatch();

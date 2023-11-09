@@ -8,9 +8,9 @@ import { useState } from "react";
 import cn from "classnames";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { loginThunk } from "../services/actions/auth";
 import { useNavigate } from "react-router-dom";
-import { ILoginForm } from "../utils/api-shape";
+import { loginThunk } from "../../services/actions/auth";
+import { ILoginForm } from "../../utils/api-shape";
 
 export default function LoginPage(): JSX.Element {
   const navigate = useNavigate();

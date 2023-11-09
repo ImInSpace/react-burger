@@ -8,8 +8,8 @@ import {
 import { useState, useRef, SyntheticEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { resetPasswordThunk } from "../services/actions/reset-password";
-import { IResetPasswordForm } from "../utils/api-shape";
+import { IResetPasswordForm } from "../../utils/api-shape";
+import { resetPasswordThunk } from "../../services/actions/reset-password";
 
 export default function ResetPasswordPage(): JSX.Element {
   const dispatch = useDispatch();
