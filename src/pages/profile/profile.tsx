@@ -1,10 +1,10 @@
 import styles from "./profile.module.css";
 import { useDispatch } from "react-redux";
-import { logoutThunk } from "../services/actions/auth";
-import { getCookie } from "../services/cookieManager";
-import { ILogoutRequestBody } from "../utils/api-shape";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { useState } from "react";
+import { getCookie } from "../../services/cookieManager";
+import { ILogoutRequestBody } from "../../utils/api-shape";
+import { logoutThunk } from "../../services/actions/auth";
 
 export default function Profile(): JSX.Element {
   const ordersHint =

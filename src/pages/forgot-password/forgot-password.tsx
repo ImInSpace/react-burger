@@ -7,8 +7,8 @@ import {
 import { useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { forgotPasswordThunk } from "../services/actions/forgot-password";
-import { IForgotPasswordRequestBody } from "../utils/api-shape";
+import { forgotPasswordThunk } from "../../services/actions/forgot-password";
+import { IForgotPasswordRequestBody } from "../../utils/api-shape";
 
 export default function ForgotPasswordPage(): JSX.Element {
   const [email, setEmail] = useState("");
