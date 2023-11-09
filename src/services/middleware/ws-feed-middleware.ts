@@ -25,6 +25,7 @@ export const wsFeedMiddleware = (): Middleware => {
       const { dispatch } = store;
 
       if (type === WS_FEED_CONNECTION_START) {
+        console.log("feed connection middleware");
         if (socket === null || socket.readyState === WS_STATE_CLOSED)
           socket = new WebSocket(`${WS_URL}/all`);
       }
