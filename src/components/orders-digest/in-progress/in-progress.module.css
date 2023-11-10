@@ -1,0 +1,10 @@
+.orders {
+  margin-top: 24px;
+  height: 152px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.numbers_list {
+  list-style: none;
+}

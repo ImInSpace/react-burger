@@ -1,3 +1,10 @@
+import { TIngredient, TUser } from "../services/types/data";
+import {
+  ORDER_STATUS_CREATED,
+  ORDER_STATUS_PENDING,
+  ORDER_STATUS_DONE,
+} from "../constants";
+
 export interface IIngredientDataShape {
   _id: string;
   name: string;
@@ -15,7 +22,7 @@ export interface IResponseResult {
 }
 
 export interface IIngredientsResponse extends IResponseResult {
-  data: IIngredientDataShape;
+  data: ReadonlyArray<TIngredient>;
 }
 
 export interface IRegistrationRequestForm {
@@ -120,15 +127,40 @@ export interface IUpdateTokenRequestBody {
   token: string;
 }
 
-export interface IUpdateTokenResponseBody extends IResponseResult {
+export interface ITokens {
   accessToken: string;
   refreshToken: string;
 }
 
+export interface IUpdateTokenResponseBody extends IResponseResult, ITokens {}
+
 export interface ILogoutResponseBody extends IResponseResult, IMessage {}
 
 export interface IGetUserResponseBody extends IResponseResult {
-  user: IUser;
+  user: TUser;
 }
 
 interface IGetUserRequest extends IToken {}
+
+export enum EOrderStatus {
+  created = "created",
+  pending = "pending",
+  done = "done",
+}
+
+export type TOrder = {
+  ingredients: ReadonlyArray<string>;
+  _id: string;
+  status: EOrderStatus;
+  number: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TWsResponseBody = {
+  success: boolean;
+  orders: ReadonlyArray<TOrder>;
+  total: number;
+  totalToday: number;
+};

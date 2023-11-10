@@ -1,6 +1,31 @@
 .container {
-  width: 720px;
-  margin: 0px auto;
+  width: 640px;
+  height: auto;
 
+  margin: 0 auto;
+
+  position: relative;
+  z-index: 999;
+}
+
+.number {
   text-align: center;
+}
+
+.status {
+  margin-top: 12px;
+  color: #0cc;
+}
+
+.ingredients {
+  height: 340px;
+
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

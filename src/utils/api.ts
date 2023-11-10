@@ -135,7 +135,7 @@ const patchUser = (patchForm: IPatchForm) => {
         const refreshTokenBody: IRefreshTokenRequest = {
           token: getCookie("refreshToken")!,
         };
-        return updateToken(refreshTokenBody).then((json) => {
+        return updateTokenRequest(refreshTokenBody).then((json) => {
           if (json.success) {
             setCookie("token", json.accessToken);
             setCookie("refreshToken", json.refreshToken);
@@ -148,7 +148,7 @@ const patchUser = (patchForm: IPatchForm) => {
     });
 };
 
-export const updateToken = (
+export const updateTokenRequest = (
   body: IRefreshTokenRequest | undefined
 ): Promise<IUpdateTokenResponseBody> => {
   return request(Constants.REFRESH_TOKEN_URL, {
@@ -190,7 +190,7 @@ const getUser = async () => {
         const refreshTokenBody: IRefreshTokenRequest = {
           token: getCookie("refreshToken")!,
         };
-        return updateToken(refreshTokenBody).then((json) => {
+        return updateTokenRequest(refreshTokenBody).then((json) => {
           if (json.success) {
             setCookie("token", json.accessToken);
             setCookie("refreshToken", json.refreshToken);

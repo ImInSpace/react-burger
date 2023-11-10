@@ -1,10 +1,9 @@
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { getUserActionGen } from "../../services/actions/auth";
-import { getCookie } from "../../services/cookieManager";
+import { getUserThunk } from "../../services/actions/auth";
 import { Loader } from "../ui/loader/loader";
+import { useSelector } from "../../services/types";
 
 interface IRouterWrapperProps {
   isProtected: boolean;
@@ -19,12 +18,10 @@ function RouteWrapper({
   const location = useLocation();
 
   useEffect(() => {
-    // @ts-ignore
-    dispatch(getUserActionGen());
+    dispatch(getUserThunk());
   }, [dispatch]);
 
   const { getUserRequest, getUserError, email } = useSelector(
-    // @ts-ignore
     (store) => store.auth
   );
 

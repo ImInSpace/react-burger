@@ -2,8 +2,8 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import styles from "./price.module.css";
 
 interface IPriceProps {
-  price: number;
-  textSize: "default" | "medium" | "large";
+  price: number | string;
+  textSize: "default" | "medium" | "large" | "small";
 }
 
 function Price({ price, textSize }: IPriceProps): JSX.Element {

@@ -1,12 +1,11 @@
 import styles from "./burger-constructor.module.css";
 import { Bun } from "./bun/bun";
 import { Ingredient } from "./ingredient/ingredient";
-import { useSelector } from "react-redux";
 import { useDrop } from "react-dnd";
 import { IIngredientDataShape } from "../../utils/api-shape";
-import { useDispatch } from "react-redux";
 import { addIngredient } from "../../services/actions/ingredients";
 import { IDragObject } from "../../utils/common-types";
+import { useDispatch, useSelector } from "../../services/types";
 
 function BurgerConstructor(): JSX.Element {
   const dispatch = useDispatch();
@@ -30,7 +29,6 @@ function BurgerConstructor(): JSX.Element {
   });
 
   const constructorIngredients = useSelector(
-    // @ts-ignore
     (store) => store.ingredients.constructorIngredients
   );
 
@@ -52,7 +50,7 @@ function BurgerConstructor(): JSX.Element {
           return (
             <Ingredient
               ingredientInfo={ingredientInfo}
-              key={ingredientInfo.key} // Добавить это свойство динамически.
+              key={ingredientInfo.key}
               index={index}
             />
           );

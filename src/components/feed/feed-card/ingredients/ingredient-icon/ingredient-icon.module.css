@@ -1,0 +1,47 @@
+.ingredient {
+  width: 64px;
+  height: 64px;
+
+  border-radius: 100px;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+}
+
+.icon {
+  width: 75%;
+  height: 75%;
+  object-fit: cover;
+}
+
+.ingredientForeground {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+
+  border-radius: 100px;
+  border: 2px solid var(--button-normal, #801ab2);
+  background: var(--interface-bg, #131316);
+
+  background-color: black;
+  opacity: 0.3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* z-index: 1; */
+}
+
+.foregroundText {
+  position: absolute;
+  /* z-index: 1; */
+}
+
+.liftUp {
+  z-index: 1;
+}

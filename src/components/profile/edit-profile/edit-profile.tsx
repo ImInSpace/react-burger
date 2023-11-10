@@ -7,14 +7,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./edit-profile.module.css";
 import { getUser, patchUser } from "../../../utils/api";
-import { useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import { IPatchForm } from "../../../utils/api-shape";
+import { useSelector } from "../../../services/types";
 
 function EditProfile() {
-  // @ts-ignore
   const savedUserName = useSelector<string>((store) => store.auth.name);
-  // @ts-ignore
   const savedEmail = useSelector((store) => store.auth.email);
 
   const [isSaveButtonsShown, setIsSaveButtonsShown] = useState(false);
@@ -51,7 +49,7 @@ function EditProfile() {
     setIsSaveButtonsShown(false);
   };
 
-  const cancelChanges = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const cancelChanges = () => {
     setValues({
       ...values,
       name: savedUserName,
@@ -99,7 +97,7 @@ function EditProfile() {
             htmlType="button"
             type="secondary"
             size="medium"
-            onClick={(e) => cancelChanges}
+            onClick={() => cancelChanges()}
           >
             Отменить
           </Button>

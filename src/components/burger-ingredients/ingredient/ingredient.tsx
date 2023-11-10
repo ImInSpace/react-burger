@@ -2,11 +2,11 @@ import styles from "./ingredient.module.css";
 import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Price } from "../../common/price/price";
 import { useDrag } from "react-dnd";
-import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router";
 import { IIngredientDataShape } from "../../../utils/api-shape";
+import { useSelector } from "../../../services/types";
 
 interface IIngredientProps {
   ingredientInfo: IIngredientDataShape;
@@ -15,7 +15,6 @@ interface IIngredientProps {
 function Ingredient({ ingredientInfo }: IIngredientProps): JSX.Element {
   const location = useLocation();
   const { ingredients, bun } = useSelector(
-    // @ts-ignore
     (store) => store.ingredients.constructorIngredients
   );
 

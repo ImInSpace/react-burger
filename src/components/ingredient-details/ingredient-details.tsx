@@ -1,15 +1,14 @@
+import { useSelector } from "../../services/types";
 import { IIngredientDataShape } from "../../utils/api-shape";
 import styles from "./ingredient-details.module.css";
 import { IngredientImage } from "./ingredient-image/ingredient-image";
 import { IngredientTitle } from "./ingredient-title/ingredient-title";
 import { Macronutrients } from "./macronutrients/macronutrients";
-import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 
 function IngredientDetails() {
   const { id } = useParams();
 
-  // @ts-ignore
   const { ingredients } = useSelector((store) => store.ingredients);
   let selectedIngredient = ingredients.find(
     (ingredient: IIngredientDataShape) => ingredient._id === id

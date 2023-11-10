@@ -1,18 +1,18 @@
 import { Modal } from "../modal/modal";
 import { useDispatch } from "react-redux";
-import { CLOSE_ORDER_MODAL } from "../../../services/actions/order";
-import { OrderDetails } from "../../order-details/order-details";
+import { CreateOrder } from "../../create-order/create-order";
+import { closeOrderModalAction } from "../../../services/actions/order";
 
 export default function OrderModal(): JSX.Element {
   const dispatch = useDispatch();
 
   const onClose = () => {
-    dispatch({ type: CLOSE_ORDER_MODAL });
+    dispatch(closeOrderModalAction());
   };
 
   return (
     <Modal caption="" closeHandler={onClose}>
-      <OrderDetails />
+      <CreateOrder />
     </Modal>
   );
 }

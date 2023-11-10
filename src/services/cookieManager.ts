@@ -8,6 +8,10 @@ export function getCookie(name: string): string | undefined {
 }
 
 export function setCookie(name: string, value: string, options?: any): void {
+  // if (value.includes("Bearer")) {
+  //   value = value.replace("Bearer ", "");
+  // }
+
   options = {
     path: "/",
     ...options,

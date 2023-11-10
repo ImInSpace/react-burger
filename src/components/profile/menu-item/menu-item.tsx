@@ -1,6 +1,5 @@
 import styles from "./menu-item.module.css";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import cn from "classnames";
 
 interface IMenuItemProps {
@@ -28,11 +27,5 @@ function MenuItem(props: IMenuItemProps) {
     </div>
   );
 }
-
-MenuItem.propTypes = {
-  link: PropTypes.string.isRequired,
-  caption: PropTypes.string.isRequired,
-  isActive: PropTypes.bool.isRequired,
-};
 
 export { MenuItem };
