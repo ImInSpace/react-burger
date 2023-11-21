@@ -52,6 +52,7 @@
     "@testing-library/react": "^14.1.0",
     "@types/uuid": "^9.0.0",
     "cypress": "^13.5.1",
+    "eslint-plugin-cypress": "^2.15.1",
     "fetch-mock": "^9.11.0",
     "jest": "^27.5.1",
     "react-test-renderer": "^18.2.0",
