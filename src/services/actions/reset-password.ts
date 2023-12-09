@@ -32,9 +32,7 @@ export const passwordResetFailedAction = (
   message: message,
 });
 
-export const passwordResetSuccessAction = (
-  message: string
-): IPasswordResetSuccessAction => ({
+export const passwordResetSuccessAction = (): IPasswordResetSuccessAction => ({
   type: PASSWORD_RESET_SUCCESS,
 });
 
