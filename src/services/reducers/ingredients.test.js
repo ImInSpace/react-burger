@@ -1,7 +1,6 @@
 import { ingredientsReducer } from "./ingredients";
 import * as Constants from "../constants";
 import { TIngredient } from "../types/data";
-import { NavigateFunction } from "react-router-dom";
 
 describe("ingredients reducer tests", () => {
   it("should return the initial state", () => {
@@ -268,75 +267,162 @@ describe("ingredients reducer tests", () => {
     });
   });
 
-  //   it("Should close ingredients details.", () => {
-  //     jest.mock("react-router-dom");
+  it("Should close ingredients details.", () => {
+    jest.mock("react-router-dom");
 
-  //     const initialState = {
-  //       ingredients: [
-  //         {
-  //           _id: "_id",
-  //           name: "name",
-  //           type: "bun",
-  //           proteins: 1,
-  //           fat: 2,
-  //           carbohydrates: 3,
-  //           calories: 4,
-  //           price: 5,
-  //           image: "image",
-  //           image_mobile: "image_mobile",
-  //         },
-  //       ],
-  //       constructorIngredients: {
-  //         bun: {},
-  //         ingredients: [],
-  //       },
-  //       selectedIngredient: {
-  //         _id: "_id",
-  //         name: "name",
-  //         type: "bun",
-  //         proteins: 1,
-  //         fat: 2,
-  //         carbohydrates: 3,
-  //         calories: 4,
-  //         price: 5,
-  //         image: "image",
-  //         image_mobile: "image_mobile",
-  //       },
+    const initialState = {
+      ingredients: [
+        {
+          _id: "_id",
+          name: "name",
+          type: "bun",
+          proteins: 1,
+          fat: 2,
+          carbohydrates: 3,
+          calories: 4,
+          price: 5,
+          image: "image",
+          image_mobile: "image_mobile",
+        },
+      ],
+      constructorIngredients: {
+        bun: {},
+        ingredients: [],
+      },
+      selectedIngredient: {
+        _id: "_id",
+        name: "name",
+        type: "bun",
+        proteins: 1,
+        fat: 2,
+        carbohydrates: 3,
+        calories: 4,
+        price: 5,
+        image: "image",
+        image_mobile: "image_mobile",
+      },
 
-  //       getIngredientsRequest: false,
-  //       getIngredientsError: false,
-  //       error: "",
-  //     };
+      getIngredientsRequest: false,
+      getIngredientsError: false,
+      error: "",
+    };
 
-  //     expect(
-  //       ingredientsReducer(initialState, {
-  //         type: Constants.CLOSE_INGREDIENTS_DETAILS,
-  //         // navigateHook = NavigateH
-  //       })
-  //     ).toEqual({
-  //       ingredients: [
-  //         {
-  //           _id: "_id",
-  //           name: "name",
-  //           type: "bun",
-  //           proteins: 1,
-  //           fat: 2,
-  //           carbohydrates: 3,
-  //           calories: 4,
-  //           price: 5,
-  //           image: "image",
-  //           image_mobile: "image_mobile",
-  //         },
-  //       ],
-  //       constructorIngredients: {
-  //         bun: {},
-  //         ingredients: [],
-  //       },
-  //       selectedIngredient: null,
+    expect(
+      ingredientsReducer(initialState, {
+        type: Constants.CLOSE_INGREDIENTS_DETAILS,
+      })
+    ).toEqual({
+      ingredients: [
+        {
+          _id: "_id",
+          name: "name",
+          type: "bun",
+          proteins: 1,
+          fat: 2,
+          carbohydrates: 3,
+          calories: 4,
+          price: 5,
+          image: "image",
+          image_mobile: "image_mobile",
+        },
+      ],
+      constructorIngredients: {
+        bun: {},
+        ingredients: [],
+      },
+      selectedIngredient: null,
 
-  //       getIngredientsRequest: false,
-  //       getIngredientsError: false,
-  //       error: "",
-  //     });
-  //   });
+      getIngredientsRequest: false,
+      getIngredientsError: false,
+      error: "",
+    });
+  });
+
+  it("Should reorder ingredients.", () => {
+    const initialState = {
+      ingredients: [],
+      constructorIngredients: {
+        bun: {},
+        ingredients: [
+          {
+            key: "key1",
+            _id: "_id1",
+            name: "name1",
+            type: "main",
+            proteins: 1,
+            fat: 2,
+            carbohydrates: 3,
+            calories: 4,
+            price: 5,
+            image: "image",
+            image_mobile: "image_mobile",
+          },
+          {
+            key: "key2",
+            _id: "_id2",
+            name: "name2",
+            type: "main",
+            proteins: 12,
+            fat: 22,
+            carbohydrates: 32,
+            calories: 42,
+            price: 52,
+            image: "image2",
+            image_mobile: "image_mobile2",
+          },
+        ],
+      },
+      selectedIngredient: null,
+
+      getIngredientsRequest: false,
+      getIngredientsError: false,
+      error: "",
+    };
+
+    expect(
+      ingredientsReducer(initialState, {
+        type: Constants.REORDER_INGREDIENTS,
+        dragIndex: 0,
+        hoverIndex: 1,
+      })
+    ).toEqual({
+      ingredients: [],
+      constructorIngredients: {
+        bun: {},
+        ingredients: [
+          {
+            key: "key2",
+            _id: "_id2",
+            name: "name2",
+            type: "main",
+            proteins: 12,
+            fat: 22,
+            carbohydrates: 32,
+            calories: 42,
+            price: 52,
+            image: "image2",
+            image_mobile: "image_mobile2",
+          },
+          {
+            key: "key1",
+            _id: "_id1",
+            name: "name1",
+            type: "main",
+            proteins: 1,
+            fat: 2,
+            carbohydrates: 3,
+            calories: 4,
+            price: 5,
+            image: "image",
+            image_mobile: "image_mobile",
+          },
+        ],
+      },
+      selectedIngredient: null,
+
+      getIngredientsRequest: false,
+      getIngredientsError: false,
+      error: "",
+    });
+  });
 });
