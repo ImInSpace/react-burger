@@ -37,6 +37,7 @@ const registerReducer = (
         ...state,
         request: false,
         success: false,
+        message: action.message
       };
     }
     default:
