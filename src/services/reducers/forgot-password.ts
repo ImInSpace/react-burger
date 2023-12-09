@@ -33,7 +33,6 @@ const forgotPasswordReducer = (
         ...state,
         request: false,
         success: true,
-        message: action.message,
       };
     }
     case PASSWORD_FORGOT_FAILED: {
@@ -41,6 +40,7 @@ const forgotPasswordReducer = (
         ...state,
         request: false,
         success: false,
+        message: action.message,
       };
     }
     default:

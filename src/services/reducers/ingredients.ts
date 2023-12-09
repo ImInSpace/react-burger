@@ -18,7 +18,7 @@ type TIngredientsState = {
 
   getIngredientsRequest: boolean;
   getIngredientsError: boolean;
-  error: "";
+  error: string;
 };
 
 const initialIngredientsState: TIngredientsState = {

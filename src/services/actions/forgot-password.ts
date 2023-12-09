@@ -19,7 +19,6 @@ export interface IForgotPasswordFailed {
 
 export interface IForgotPasswordSuccess {
   readonly type: typeof PASSWORD_FORGOT_SUCCESS;
-  message: string;
 }
 
 export const forgotPasswordAction = (): IForgotPassword => ({
@@ -30,14 +29,11 @@ export const forgotPasswordFailedAction = (
   error: string
 ): IForgotPasswordFailed => ({
   type: PASSWORD_FORGOT_FAILED,
-  message : error,
+  message: error,
 });
 
-export const forgotPasswordSuccess = (
-  message: string
-): IForgotPasswordSuccess => ({
+export const forgotPasswordSuccess = (): IForgotPasswordSuccess => ({
   type: PASSWORD_FORGOT_SUCCESS,
-  message: message,
 });
 
 export function forgotPasswordThunk(
@@ -49,7 +45,7 @@ export function forgotPasswordThunk(
     forgotPasswordRequest(requestBody)
       .then((response) => {
         redirectCallback("/reset-password");
-        dispatch(forgotPasswordSuccess(response.message));
+        dispatch(forgotPasswordSuccess());
       })
       .catch((err) => dispatch(forgotPasswordFailedAction(err)));
   };
