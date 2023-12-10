@@ -1,0 +1,9 @@
+{
+  "token": "fake-token",
+  "refreshToken": "fake-refresh-token",
+
+  "user": {
+    "email": "fake@yandex.ru",
+    "name": "fake-name"
+  }
+}

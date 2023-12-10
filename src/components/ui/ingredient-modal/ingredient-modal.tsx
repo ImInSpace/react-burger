@@ -10,7 +10,7 @@ export default function IngredientModal(): JSX.Element {
   };
 
   return (
-    <Modal data-cy="modalka" caption="Детали ингредиента" closeHandler={onClose}>
+    <Modal caption="Детали ингредиента" closeHandler={onClose}>
       <IngredientDetails />
     </Modal>
   );

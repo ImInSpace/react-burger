@@ -37,6 +37,7 @@ export default function LoginPage(): JSX.Element {
         {/* prettier-ignore */}
         <p className="text text_type_main-medium">Вход</p>
         <EmailInput
+          data-cy="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           name={"email"}
@@ -44,13 +45,19 @@ export default function LoginPage(): JSX.Element {
           extraClass="mt-6"
         />
         <PasswordInput
+          data-cy="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
           name={"password"}
           extraClass="mt-6"
         />
         <div className={styles.loginButton}>
-          <Button htmlType="submit" type="primary" size="medium">
+          <Button
+            data-cy="btn-login"
+            htmlType="submit"
+            type="primary"
+            size="medium"
+          >
             Войти
           </Button>
         </div>

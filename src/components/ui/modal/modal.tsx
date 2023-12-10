@@ -34,7 +34,12 @@ function Modal({ caption, closeHandler, children }: IModalProps): JSX.Element {
   return ReactDOM.createPortal(
     <>
       <ModalOverlay closeHandler={close} />
-      <div className={styles.modal} onKeyDown={close} ref={modalDivRef}>
+      <div
+        className={styles.modal}
+        onKeyDown={close}
+        ref={modalDivRef}
+        data-cy="modal"
+      >
         <ModalHeader caption={caption} closeHandler={close} />
         {children}
       </div>
