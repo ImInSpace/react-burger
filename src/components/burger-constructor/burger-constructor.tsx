@@ -40,6 +40,7 @@ function BurgerConstructor(): JSX.Element {
         (isHover ? styles.border : "")
       }
       ref={dropTarget}
+      data-cy="burger-constructor"
     >
       <Bun bunInfo={constructorIngredients.bun} bunPosition={"top"} />
       {constructorIngredients.ingredients?.map(

@@ -5,7 +5,13 @@ interface IModalOverlayProps {
 }
 
 function ModalOverlay({ closeHandler }: IModalOverlayProps): JSX.Element {
-  return <div className={styles.overlay} onClick={closeHandler}></div>;
+  return (
+    <div
+      className={styles.overlay}
+      onClick={closeHandler}
+      data-cy="modal"
+    ></div>
+  );
 }
 
 export { ModalOverlay };
