@@ -1,6 +1,7 @@
 describe("drag-n-drop tests", () => {
   beforeEach(() => {
     cy.visit("/");
+    cy.intercept("GET", "ingredients", { fixture: "ingredients.json" });
   });
 
   it("should drag ingredients to burger constructor.", () => {
