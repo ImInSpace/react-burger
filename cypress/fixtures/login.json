@@ -3,7 +3,7 @@
   "refreshToken": "fake-refresh-token",
 
   "user": {
-    "email": "fake@yandex.ru",
-    "name": "fake-name"
+    "email": "user@yandex.ru",
+    "name": "password"
   }
 }

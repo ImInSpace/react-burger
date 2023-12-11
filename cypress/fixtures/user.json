@@ -1,4 +1,4 @@
 {
-  "email": "fake-email",
-  "name": "fake-name"
+  "success": true,
+  "user": { "email": "fake-user@yandex.ru", "name": "FakeUserName" }
 }
