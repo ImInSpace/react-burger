@@ -1,6 +1,7 @@
-describe("modal window tests", () => {
+describe("Modal window tests", () => {
   beforeEach(() => {
     cy.visit("/");
+    cy.intercept("GET", "ingredients", { fixture: "ingredients.json" });
   });
 
   it("should open ingredient modal", () => {
@@ -29,5 +30,8 @@ describe("modal window tests", () => {
 
     // Нажимаем на кнопку закрытия.
     cy.get('[data-cy="close-btn"]').click();
+
+    // Проверям, что модалка закрылась.
+    cy.get('[data-cy="modal"]').should("not.exist");
   });
 });
