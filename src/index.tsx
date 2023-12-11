@@ -7,7 +7,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { rootReducer } from "./services/reducers/index";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { wsFeedMiddleware } from "./services/middleware/ws-feed-middleware";
 import { wsOrdersMiddleware } from "./services/middleware/ws-orders-middleware";
 
@@ -27,9 +27,9 @@ const root = ReactDOM.createRoot(document.getElementById("root") as Element);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <App />
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </React.StrictMode>
 );
