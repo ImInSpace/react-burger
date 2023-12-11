@@ -14,10 +14,6 @@ export default function FeedPage() {
 
   useEffect(() => {
     dispatch({ type: WS_FEED_CONNECTION_START });
-
-    return () => {
-      dispatch({ type: WS_FEED_CONNECTION_CLOSED });
-    };
   }, [dispatch]);
 
   // Получаем данные по заказам текущего пользователя.
