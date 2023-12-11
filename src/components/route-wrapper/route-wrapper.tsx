@@ -18,7 +18,7 @@ function RouteWrapper({
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(getUserThunk());
+    if (isProtected) dispatch(getUserThunk());
   }, [dispatch]);
 
   const { getUserRequest, getUserError, email } = useSelector(

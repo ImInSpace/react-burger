@@ -14,26 +14,26 @@ export interface IPasswordResetAction {
 
 export interface IPasswordResetFailedAction {
   readonly type: typeof PASSWORD_RESET_FAILED;
+  message: string;
 }
 
 export interface IPasswordResetSuccessAction {
   readonly type: typeof PASSWORD_RESET_SUCCESS;
-  message: string;
 }
 
 export const passwordResetAction = (): IPasswordResetAction => ({
   type: PASSWORD_RESET_REQUEST,
 });
 
-export const passwordResetFailedAction = (): IPasswordResetFailedAction => ({
+export const passwordResetFailedAction = (
+  message: string
+): IPasswordResetFailedAction => ({
   type: PASSWORD_RESET_FAILED,
+  message: message,
 });
 
-export const passwordResetSuccessAction = (
-  message: string
-): IPasswordResetSuccessAction => ({
+export const passwordResetSuccessAction = (): IPasswordResetSuccessAction => ({
   type: PASSWORD_RESET_SUCCESS,
-  message: message,
 });
 
 export function resetPasswordThunk(
@@ -45,9 +45,9 @@ export function resetPasswordThunk(
     resetPassword(resetPasswordForm)
       .then((res) => {
         redirectHook("/login");
-        dispatch(passwordResetSuccessAction(res.message));
+        dispatch(passwordResetSuccessAction());
       })
-      .catch((err) => dispatch(passwordResetFailedAction()));
+      .catch((err) => dispatch(passwordResetFailedAction(err)));
   };
 }
 

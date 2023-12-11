@@ -7,7 +7,7 @@ import { createStore, compose, applyMiddleware } from "redux";
 import { rootReducer } from "./services/reducers/index";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter, BrowserRouter } from "react-router-dom";
 import { wsFeedMiddleware } from "./services/middleware/ws-feed-middleware";
 import { wsOrdersMiddleware } from "./services/middleware/ws-orders-middleware";
 

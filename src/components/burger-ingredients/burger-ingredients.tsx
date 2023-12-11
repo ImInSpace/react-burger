@@ -88,7 +88,7 @@ function BurgerIngredients() {
   };
 
   return (
-    <div>
+    <div data-cy="ingredients">
       {/* prettier-ignore */}
       <p className="text text_type_main-large mt-10 mb-5">Соберите бургер</p>
       <Tabs current={currentTab} onTabClickHandler={tabClickHandler} />

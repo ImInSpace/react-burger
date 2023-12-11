@@ -14,6 +14,7 @@ export interface IRegisterAction {
 
 export interface IRegisterFailedAction {
   readonly type: typeof REGISTER_FAILED;
+  message: string;
 }
 
 export interface IRegisterSuccessAction {
@@ -24,8 +25,11 @@ export const registerAction = (): IRegisterAction => ({
   type: REGISTER_REQUEST,
 });
 
-export const registerFailedAction = (): IRegisterFailedAction => ({
+export const registerFailedAction = (
+  message: string
+): IRegisterFailedAction => ({
   type: REGISTER_FAILED,
+  message: message,
 });
 
 export const registerSuccessAction = (): IRegisterSuccessAction => ({
@@ -44,7 +48,7 @@ export function registerThunk(
         dispatch(registerSuccessAction());
       })
       .catch((err) => {
-        dispatch(registerFailedAction());
+        dispatch(registerFailedAction(err));
       });
   };
 }

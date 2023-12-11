@@ -34,14 +34,14 @@ const resetPasswordReducer = (
         ...state,
         request: false,
         success: true,
-        message: action.message,
       };
     }
     case PASSWORD_RESET_FAILED: {
       return {
         ...state,
         request: false,
-        success: true,
+        success: false,
+        message: action.message,
       };
     }
     default:

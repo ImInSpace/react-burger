@@ -48,7 +48,7 @@ function CreateOrderBtn(): JSX.Element {
   });
 
   return (
-    <div className={styles.container + " mt-5 mr-4"}>
+    <div className={styles.container + " mt-5 mr-4"} data-cy="btn-create-order">
       <div className="mr-5">
         <Price price={sum} textSize="medium" />
       </div>

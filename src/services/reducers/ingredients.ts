@@ -18,7 +18,7 @@ type TIngredientsState = {
 
   getIngredientsRequest: boolean;
   getIngredientsError: boolean;
-  error: "";
+  error: string;
 };
 
 const initialIngredientsState: TIngredientsState = {
@@ -102,8 +102,6 @@ const ingredientsReducer = (
       };
     }
     case CLOSE_INGREDIENTS_DETAILS: {
-      action.navigateHook(-1);
-
       return {
         ...state,
         selectedIngredient: null,

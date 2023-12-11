@@ -71,6 +71,7 @@ const authReducer = (
         ...state,
         loginRequest: false,
         loginError: true,
+        message: action.message,
       };
     }
     case GET_USER_REQUEST: {
@@ -115,6 +116,7 @@ const authReducer = (
         ...state,
         logoutRequest: false,
         logoutError: true,
+        message: action.message,
       };
     }
     default:

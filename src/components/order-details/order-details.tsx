@@ -2,10 +2,12 @@ import { FormattedDate } from "@ya.praktikum/react-developer-burger-ui-component
 import { Price } from "../common/price/price";
 import { CompoundRow } from "./compound-row/compound-row";
 import styles from "./order-details.module.css";
-import { useSelector } from "../../services/types";
+import { useDispatch, useSelector } from "../../services/types";
 import { EOrderStatus, TOrder } from "../../utils/api-shape";
 import { useLocation, useParams } from "react-router-dom";
 import { Loader } from "../ui/loader/loader";
+import { WS_FEED_CONNECTION_START } from "../../services/constants";
+import { useEffect } from "react";
 
 // Элемент заказа.
 type TCompoundItem = {
@@ -18,28 +20,34 @@ type TCompoundItem = {
 function OrderDetails() {
   const location = useLocation();
   const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const isFeedPage = (): boolean => {
+    return window.location.pathname.includes("/feed/");
+  };
+
+  const isOrdersPage = (): boolean => {
+    return window.location.pathname.includes("/orders/");
+  };
+
+  useEffect(() => {
+    dispatch({ type: WS_FEED_CONNECTION_START });
+  }, [dispatch]);
 
   const allIngredients = useSelector((store) => store.ingredients.ingredients);
 
-  const feedOrders = useSelector((store) => {
-    return store.wsFeedReducer.message?.orders;
+  const orders = useSelector((store) => {
+    if (isFeedPage()) return store.wsFeedReducer.message?.orders;
+    else if (isOrdersPage()) return store.wsOrders.message?.orders;
   });
 
-  const userOrders = useSelector((store) => {
-    return store.wsOrders.message?.orders;
-  });
-
-  if (!userOrders || !feedOrders) {
+  if (orders == null || orders === undefined) {
     return <Loader inverse={true} size="large" />;
   }
 
   let order: TOrder | null = null;
 
-  if (location.pathname.includes("orders")) {
-    order = userOrders!.find((order) => order.number.toString() === id)!;
-  } else {
-    order = feedOrders!.find((order) => order.number.toString() === id)!;
-  }
+  order = orders!.find((order) => order.number.toString() === id)!;
 
   // Получаем список ингредиентов в заказе для вывода.
   let ingredientsInOrder: Array<TCompoundItem> = [];
